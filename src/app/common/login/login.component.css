@@ -1,0 +1,34 @@
+
+
+.login-background{
+   background-color: #448aff;
+   height: 100vh;
+}
+
+.login-box {
+    margin-top: 100px;
+    height: auto;
+    background: white;
+    text-align: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    border-radius: 5px;
+}
+
+
+.login-title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+}
+
+
+.login-text {
+    text-align: left;
+    padding-left: 0px;
+    color: #A2A4A4;
+}
+
+.form-group{
+    text-align: left;
+}
