@@ -4,10 +4,11 @@ import { ProductCategoryComponent } from './product-category/product-category.co
 import { ProductsComponent } from './products/products.component';
 import { TaxSlotComponent } from './tax-slot/tax-slot.component';
 import { UnitComponent } from './unit/unit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     CommonModule,
-   
+    ReactiveFormsModule
    
   ],
   declarations: [

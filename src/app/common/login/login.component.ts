@@ -44,11 +44,11 @@ export class LoginComponent implements OnInit {
       this._commonService.login(loginFormData).subscribe((data:any) => {
         if(data){
           this.decodedToken = decodeToken(data.access_token);
-          console.log(this.decodedToken);         
+         // console.log(this.decodedToken);         
           localStorage.setItem('fullname', this.decodedToken.FullName);
           localStorage.setItem('roles',this.decodedToken.role)
           this._toastrService.success('Logged in successfully!');
-          this._router.navigate(['/admin/products'])
+          this._router.navigate(['/admin/products-category'])
         }else{
           this._toastrService.info('Logging in. Please hold on!');
         }

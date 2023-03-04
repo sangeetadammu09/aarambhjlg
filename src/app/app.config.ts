@@ -8,6 +8,13 @@ export const APP_DI_CONFIG: any = {
     User:{
       Login : "/User/Login", 
     },
+    ProductCategory:{
+      GetAllProductCategory : "/ProductCategory/GetAllProductCategory",
+      AddProductCategory : "/ProductCategory/AddCategory",
+      UpdateCategory : "/ProductCategory/UpdateCategory",
+      DeleteProductCategory : "/ProductCategory/DeleteProductCategory",
+
+    }
     
   }
   
