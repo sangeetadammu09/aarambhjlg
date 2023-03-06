@@ -1,0 +1,19 @@
+.navbar-one{
+    border-top: 1px solid #e9ecef;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.dropdown-menu:li {
+    text-align: left;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; 
+    color: black;
+ }
+
+ .dropdown .username, .navbar-light .navbar-nav .nav-link {
+    font-size:17px !important;
+    color: black !important;
+ }

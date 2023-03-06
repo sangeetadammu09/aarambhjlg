@@ -102,7 +102,7 @@ export class ProductCategoryComponent implements OnInit {
   submitUpdateProductCategory(){
     this.submitted = true;
      if(this.editProdCategoryForm.valid){
-      //  console.log(this.editProdCategoryForm.value)
+       console.log(this.editProdCategoryForm.value)
         var addProductCategoryData = new FormData();
         addProductCategoryData.append('CategoryId','');
         addProductCategoryData.append('CategoryName',this.editProdCategoryForm.controls['categoryName'].value);
