@@ -13,25 +13,29 @@ export class ProductCategoryComponent implements OnInit {
   productCategoryList: any;
   addProdCategoryForm!: FormGroup;
   submitted: boolean = false;
-  @ViewChild('labelImport') labelImport!: ElementRef;
+  @ViewChild('addPhoto') addPhoto!: ElementRef;
+  @ViewChild('updatePhoto') updatePhoto!: ElementRef;
   @ViewChild('closeaddProdBtn') closeaddProdBtn: any;
   @ViewChild('closeeditProdBtn') closeeditProdBtn:any;
-  categoryFile: any;
+  @ViewChild('closeDeleteProdBtn') closeDeleteProdBtn:any;
+  addcategoryFile: any;
+  editCategoryFile: any;
   addProdCategory:boolean = false;
   editProdCategory:boolean = false;
   editProdCategoryForm: FormGroup;
+  deleteProdCategoryItem: any;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addProdCategoryForm = this._formBuilder.group({
       categoryId: [],
       categoryName: ['', Validators.required],
-      file:[,Validators.required]
+      categoryPhoto:[,Validators.required]
     })
 
     this.editProdCategoryForm = this._formBuilder.group({
       categoryId: [],
       categoryName: ['', Validators.required],
-      file:[,Validators.required]
+      categoryPhoto:[,Validators.required]
     })
   }
 
@@ -55,9 +59,9 @@ export class ProductCategoryComponent implements OnInit {
     this.editProdCategory = false
   }
 
-  onFileChange(file: any) {
-    this.labelImport.nativeElement.innerText = file.target.files[0].name;
-    this.categoryFile = file.target.files[0];
+  onAddFileChange(file: any) {
+    this.addPhoto.nativeElement.innerText = file.target.files[0].name;
+    this.addcategoryFile = file.target.files[0];
    
   }
 
@@ -67,9 +71,9 @@ export class ProductCategoryComponent implements OnInit {
      if(this.addProdCategoryForm.valid){
       //  console.log(this.addProdCategoryForm.value)
         var addProductCategoryData = new FormData();
-        addProductCategoryData.append('CategoryId','');
+        addProductCategoryData.append('CategoryId',JSON.parse('0'));
         addProductCategoryData.append('CategoryName',this.addProdCategoryForm.controls['categoryName'].value);
-        addProductCategoryData.append('file',this.categoryFile);
+        addProductCategoryData.append('CategoryPhoto',this.addcategoryFile);
         this._adminService.addProductCategory(addProductCategoryData).subscribe((data:any) => {
           if(data){
             this._toastrService.success('Product Category added successfully!');
@@ -92,10 +96,20 @@ export class ProductCategoryComponent implements OnInit {
     this.editProdCategory = true;
     this.editProdCategoryForm.patchValue({
       categoryId : item.categoryId,
-      categoryName : item.categoryName
+      categoryName : item.categoryName,
+      //categoryPhoto : item.categoryPhoto
     })
+    //this.updatePhoto.nativeElement.innerText =  item.categoryPhoto;
+    this.editProdCategoryForm.controls['categoryPhoto'].setValue('helo')
+    
   }
 
+  
+  onEditFileChange(file: any) {
+    this.updatePhoto.nativeElement.innerText = file.target.files[0].name;
+    this.editCategoryFile = file.target.files[0];
+   
+  }
 
 
   
@@ -104,9 +118,9 @@ export class ProductCategoryComponent implements OnInit {
      if(this.editProdCategoryForm.valid){
        console.log(this.editProdCategoryForm.value)
         var addProductCategoryData = new FormData();
-        addProductCategoryData.append('CategoryId','');
+        addProductCategoryData.append('CategoryId',this.editProdCategoryForm.controls['categoryId'].value);
         addProductCategoryData.append('CategoryName',this.editProdCategoryForm.controls['categoryName'].value);
-        addProductCategoryData.append('file',this.categoryFile);
+        addProductCategoryData.append('CategoryPhoto',this.editCategoryFile);
         this._adminService.updateProductCategory(addProductCategoryData).subscribe((data:any) => {
           if(data){
             this._toastrService.success('Product Category updated successfully!');
@@ -119,6 +133,19 @@ export class ProductCategoryComponent implements OnInit {
         console.log('invalid form')
       }  
 
+  }
+
+
+  showdeleteProdCategoryModal(item:any){
+      this.deleteProdCategoryItem = item.categoryId;
+  }
+
+
+  deleteProdCategory(){
+      this._adminService.deleteProductCategory(this.deleteProdCategoryItem).subscribe((data:any) =>{
+        console.log(data)
+        this.closeDeleteProdBtn.nativeElement.click();
+      })
   }
 
 }

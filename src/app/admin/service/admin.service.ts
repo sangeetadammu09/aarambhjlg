@@ -21,8 +21,8 @@ export class AdminService {
     return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ProductCategory.UpdateCategory,data)
   }
 
-  deleteProductCategory(data:any){
-    return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ProductCategory.DeleteProductCategory,data)
+  deleteProductCategory(id:any){
+    return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ProductCategory.DeleteProductCategory+`/${id}`)
   }
 
 }

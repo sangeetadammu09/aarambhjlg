@@ -9,7 +9,8 @@ import { AdminLayoutModule } from './admin/layout/admin-layout/admin-layout.modu
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,11 @@ import { HttpClientModule } from '@angular/common/http';
     }),
    
   ],
-  providers: [],
+  providers: [    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+   },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
