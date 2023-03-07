@@ -24,6 +24,7 @@ export class ProductCategoryComponent implements OnInit {
   editProdCategory:boolean = false;
   editProdCategoryForm: FormGroup;
   deleteProdCategoryItem: any;
+  p = 1;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addProdCategoryForm = this._formBuilder.group({
@@ -75,7 +76,9 @@ export class ProductCategoryComponent implements OnInit {
         addProductCategoryData.append('CategoryName',this.addProdCategoryForm.controls['categoryName'].value);
         addProductCategoryData.append('CategoryPhoto',this.addcategoryFile);
         this._adminService.addProductCategory(addProductCategoryData).subscribe((data:any) => {
-          if(data){
+          console.log(data.status);
+          //console.log(data.headers.get('X-Custom-Header'));
+          if(data.status == 200){
             this._toastrService.success('Product Category added successfully!');
             this.closeaddProdBtn.nativeElement.click();
             this.getAllProductCategories();
@@ -144,7 +147,11 @@ export class ProductCategoryComponent implements OnInit {
   deleteProdCategory(){
       this._adminService.deleteProductCategory(this.deleteProdCategoryItem).subscribe((data:any) =>{
         console.log(data)
-        this.closeDeleteProdBtn.nativeElement.click();
+        if(data.status == 200){
+          this.getAllProductCategories();
+          this.closeDeleteProdBtn.nativeElement.click();
+        }
+       
       })
   }
 

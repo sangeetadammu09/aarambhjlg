@@ -1,17 +1,17 @@
-<div class="wrapper ">
+<div class="wrapper">
     <div class="container">
         <div class="row">
             <div class="col-lg-10">
                 <h3 class="mb-2 mt-2">List of Product Category</h3>
             </div>
-            <div class="col-lg-2 mb-2 mt-2">
+            <div class="col-lg-2 mb-3 mt-2">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#addeditProdCategoryModal"
                 (click)="showaddProdCategoryModal()">Add Category</button>
             </div>
             
          </div>
-         <div class="row table-card">
-            <table class="table">
+         <div class="row table-card mb-3">
+            <table class="table prduct-table">
                 <thead class="thead-secondary">
                   <tr>
                     <th scope="col">S No.</th>
@@ -21,7 +21,7 @@
                     <th scope="col">Delete</th>
                   </tr>
                 </thead>
-                <tbody *ngFor="let item of productCategoryList; let i = index">
+                <tbody *ngFor="let item of productCategoryList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index ">
                   <tr>
                     <td>{{i}}</td>
                     <td> <img src="{{item.categoryPhoto}}" alt="{{item.categoryName}}" height="100px" width="100px"></td>
@@ -40,7 +40,16 @@
                     </td> 
                   </tr>        
                 </tbody>
+               
+                
             </table>
+            <div class="d-flex justify-content-end">
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+            <!--Including the pagination control.-->
+                <!-- <div class="d-flex justify-content-end">
+                    <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)"></pagination-controls>
+                </div> -->
          </div>
         
     </div>
