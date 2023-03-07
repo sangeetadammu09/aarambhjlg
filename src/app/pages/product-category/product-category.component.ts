@@ -25,6 +25,7 @@ export class ProductCategoryComponent implements OnInit {
   editProdCategoryForm: FormGroup;
   deleteProdCategoryItem: any;
   p = 1;
+  productsFound: boolean = false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addProdCategoryForm = this._formBuilder.group({
@@ -51,7 +52,14 @@ export class ProductCategoryComponent implements OnInit {
   getAllProductCategories(){
     this._adminService.getAllProductCategory().subscribe((data) => {
       console.log(data,'product category')
-      this.productCategoryList = data
+     if(data.length > 0){
+    //  this.productsFound = true;
+       this.productCategoryList = data
+      }else{
+        this.productCategoryList = [];
+       // this.productsFound = false;
+      }
+      
     })
   }
 

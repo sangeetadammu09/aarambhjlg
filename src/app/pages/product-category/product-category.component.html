@@ -10,7 +10,7 @@
             </div>
             
          </div>
-         <div class="row table-card mb-3">
+         <div class="row table-card mb-3" *ngIf="productCategoryList.length != 0">
             <table class="table prduct-table">
                 <thead class="thead-secondary">
                   <tr>
@@ -51,6 +51,10 @@
                     <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)"></pagination-controls>
                 </div> -->
          </div>
+
+         <div class="row table-card mb-3" *ngIf="productCategoryList.length == 0">
+            <p class="text-center">No product category found</p>
+          </div>
         
     </div>
 </div>
