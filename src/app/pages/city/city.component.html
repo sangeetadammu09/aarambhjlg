@@ -2,37 +2,39 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-10">
-                <h3 class="mb-2 mt-2">List of Product Category</h3>
+                <h3 class="mb-2 mt-2">List of Citys</h3>
             </div>
             <div class="col-lg-2 mb-3 mt-2">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#addeditProdCategoryModal"
-                (click)="showaddProdCategoryModal()">Add Category</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#addeditCityModal"
+                (click)="showaddCityModal()">Add City</button>
             </div>
             
          </div>
-         <div class="row table-card mb-3" *ngIf="productCategoryList.length != 0">
+         <div class="row table-card mb-3" *ngIf="CityList.length != 0">
             <table class="table prduct-table">
                 <thead class="thead-secondary">
                   <tr>
                     <th scope="col">S No.</th>
-                    <th scope="col">Image</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Registration Fees</th>
+                  
                     <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
                   </tr>
                 </thead>
-                <tbody *ngFor="let item of productCategoryList | paginate: { itemsPerPage: 5, currentPage: p }; let i = index ">
+                <tbody *ngFor="let item of CityList | paginate: { itemsPerPage: 5, currentPage: p }; let i = index ">
                   <tr>
-                    <td>{{i}}</td>
-                    <td><img src="{{item.categoryPhoto}}" alt="{{item.categoryName}}" height="100px" width="100px"></td>
-                    <td>{{item.categoryName}}</td> 
-                    <td (click)="showeditProdCategoryModal(item)" data-toggle="modal" data-target="#addeditProdCategoryModal">
+                    <td>{{item.cityId}}</td>
+                    <td>{{item.cityName}}</td> 
+                    <td>{{item.registrationFees}}</td>
+                    
+                    <td (click)="showeditCityModal(item)" data-toggle="modal" data-target="#addeditCityModal">
                         <svg enable-background="new 0 0 19 19" height="19px" id="Layer_1" version="1.1" viewBox="0 0 19 19" width="19px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <g><path d="M8.44,7.25C8.348,7.342,8.277,7.447,8.215,7.557L8.174,7.516L8.149,7.69   C8.049,7.925,8.014,8.183,8.042,8.442l-0.399,2.796l2.797-0.399c0.259,0.028,0.517-0.007,0.752-0.107l0.174-0.024l-0.041-0.041   c0.109-0.062,0.215-0.133,0.307-0.225l5.053-5.053l-3.191-3.191L8.44,7.25z" fill="#231F20"/>
                             <path d="M18.183,1.568l-0.87-0.87c-0.641-0.641-1.637-0.684-2.225-0.097l-0.797,0.797l3.191,3.191l0.797-0.798   C18.867,3.205,18.824,2.209,18.183,1.568z" fill="#231F20"/><path d="M15,9.696V17H2V2h8.953l1.523-1.42c0.162-0.161,0.353-0.221,0.555-0.293   c0.043-0.119,0.104-0.18,0.176-0.287H0v19h17V7.928L15,9.696z" fill="#231F20"/>
                         </g></svg>
                     </td>     
-                    <td  (click)="showdeleteProdCategoryModal(item)" data-toggle="modal"  data-target="#deleteProdCategoryModal">
+                    <td  (click)="showdeleteCityModal(item)" data-toggle="modal"  data-target="#deleteCityModal">
                         <svg enable-background="new 0 0 19 19" height="19px" id="Layer_1" version="1.1" viewBox="0 0 26 29" width="26px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <g><path d="M1.035,9l3.49,17.478C4.525,27.854,5.643,29,7.019,29H13h5.981c1.376,0,2.493-1.146,2.493-2.522L24.965,9   H13H1.035z" fill="#231F20"/>
                             <path d="M23.524,3H21V2.824C21,1.264,19.736,0,18.176,0H7.824C6.264,0,5,1.264,5,2.824V3H2.476   C0.946,3,0,3.939,0,5.468V7h7.824h10.352H26V5.468C26,3.939,25.053,3,23.524,3z" fill="#231F20"/>
@@ -53,63 +55,70 @@
                 </div> -->
          </div>
 
-         <div class="row card mb-3" *ngIf="productCategoryList.length == 0">
-            <p class="text-center">No product category found</p>
+         <div class="row card mb-3" *ngIf="CityList.length == 0">
+            <p class="text-center">No City found</p>
           </div>
-         
+        
     </div>
 </div>
 
-<!-- add/edit product catergory modal -->
-<div class="modal fade" id="addeditProdCategoryModal" tabindex="-1" role="dialog">
+<!-- add/edit City modal -->
+<div class="modal fade" id="addeditCityModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel" *ngIf="addProdCategory && !editProdCategory">Add Product Category</h5>
-          <h5 class="modal-title" id="exampleModalLabel" *ngIf="editProdCategory && !addProdCategory">Edit Product Category</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeaddProdBtn  *ngIf="addProdCategory && !editProdCategory">
+          <h5 class="modal-title" id="exampleModalLabel" *ngIf="addCity && !editCity">Add City</h5>
+          <h5 class="modal-title" id="exampleModalLabel" *ngIf="editCity && !addCity">Edit City</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeaddCityBtn  *ngIf="addCity && !editCity">
             <span aria-hidden="true">&times;</span>
           </button>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeeditProdBtn *ngIf="editProdCategory && !addProdCategory">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeeditCityBtn *ngIf="editCity && !addCity">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
 
-        <div class="modal-body" *ngIf="addProdCategory && !editProdCategory">
-            <form [formGroup]="addProdCategoryForm" (ngSubmit)="submitNewProductCategory()">
+        <div class="modal-body" *ngIf="addCity && !editCity">
+            <form [formGroup]="addCityForm" (ngSubmit)="submitNewCity()">
                 <div class="form-group">
-                    <label class="form-control-label">Category Name</label>
-                    <input type="text" class="form-control" formControlName="categoryName" name="categoryName"  
-                    [ngClass]="{'is-invalid':(submitted && f['categoryName'].errors) ||(f['categoryName'].errors && f['categoryName'].touched) }">
-                        <div *ngIf="(submitted && f['categoryName'].errors) ||(f['categoryName'].errors && f['categoryName'].touched)" class="invalid-feedback">
-                            <div *ngIf="f['categoryName'].errors['required']">
-                                Category Name is required
+                    <label class="form-control-label">Name</label>
+                    <input type="text" class="form-control" formControlName="CityName" name="CityName"  
+                    [ngClass]="{'is-invalid':(submitted && f['CityName'].errors) ||(f['CityName'].errors && f['CityName'].touched) }">
+                        <div *ngIf="(submitted && f['CityName'].errors) ||(f['CityName'].errors && f['CityName'].touched)" class="invalid-feedback">
+                            <div *ngIf="f['CityName'].errors['required']">
+                                Name is required
                             </div>
-                        </div>
-                    </div>
-                <div class="form-group">
-                    <label class="form-control-label">Category Image</label>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile" formControlName="categoryPhoto" name="categoryPhoto" 
-                        (change)="onAddFileChange($event)" 
-                        [ngClass]="{'is-invalid':(submitted && f['categoryPhoto'].errors) ||(f['categoryPhoto'].errors && f['categoryPhoto'].touched) }">
-                        <label class="custom-file-label" for="customFile" #addPhoto >{{addcategoryPhotoName}}</label>
-                        <div *ngIf="(submitted && f['categoryPhoto'].errors) ||(f['categoryPhoto'].errors && f['categoryPhoto'].touched)" class="invalid-feedback">
-                            <div *ngIf="f['categoryPhoto'].errors['required']">
-                                File is required
-                            </div>
-                        </div>
-                    </div>
-                    
+                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label">Code</label>
+                    <input type="text" class="form-control" formControlName="CityCode" name="CityCode"  
+                    [ngClass]="{'is-invalid':(submitted && f['CityCode'].errors) ||(f['CityCode'].errors && f['CityCode'].touched) }">
+                        <div *ngIf="(submitted && f['CityCode'].errors) ||(f['CityCode'].errors && f['CityCode'].touched)" class="invalid-feedback">
+                            <div *ngIf="f['CityCode'].errors['required']">
+                                Code is required
+                            </div>
+                     </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">Base City</label>
+                    <input type="text" class="form-control" formControlName="basicCity" name="basicCity"  
+                    [ngClass]="{'is-invalid':(submitted && f['basicCity'].errors) ||(f['basicCity'].errors && f['basicCity'].touched) }">
+                        <div *ngIf="(submitted && f['basicCity'].errors) ||(f['basicCity'].errors && f['basicCity'].touched)" class="invalid-feedback">
+                            <div *ngIf="f['basicCity'].errors['required']">
+                                Basic City is required
+                            </div>
+                     </div>
+                </div>
+             
+
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Save</button>
                   </div>
             </form>
         </div>
 
-        <div class="modal-body" *ngIf="editProdCategory && !addProdCategory">
-            <form [formGroup]="editProdCategoryForm" (ngSubmit)="submitUpdateProductCategory()">
+        <div class="modal-body" *ngIf="editCity && !addCity">
+            <form [formGroup]="editCityForm" (ngSubmit)="submitUpdateCity()">
                 <div class="form-group">
                     <label class="form-control-label">Category Name</label>
                     <input type="text" class="form-control" formControlName="categoryName" name="categoryName"  
@@ -120,16 +129,7 @@
                             </div>
                         </div>
                     </div>
-                <div class="form-group">
-                    <label class="form-control-label">Category Image</label>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile" formControlName="categoryPhoto" name="categoryPhoto" 
-                        (change)="onEditFileChange($event)">
-                        <label class="custom-file-label" for="customFile" #updatePhoto >{{editcategoryPhotoName}}</label>
-                        
-                    </div>
-                    
-                </div>
+               
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Save</button>
                   </div>
@@ -141,24 +141,26 @@
 </div>
 
 
-<div class="modal fade" id="deleteProdCategoryModal" tabindex="-1" role="dialog">
+<div class="modal fade" id="deleteCityModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
          
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeDeleteProdBtn>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeDeleteCityBtn>
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-             <p>Are you sure you want to delete this product?</p>
+             <p>Are you sure you want to delete this city?</p>
              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" (click)="deleteProdCategory()">Yes</button>
+                <button type="submit" class="btn btn-primary" (click)="deleteCity()">Yes</button>
               </div>
         </div>
       </div>
     </div>
 </div>
+
+
 
 

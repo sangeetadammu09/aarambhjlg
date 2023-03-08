@@ -10,7 +10,7 @@
 }
 
 .thead-secondary{
-    background-color: grey !important;
+    background-color: #448aff !important;
 }
 
 .prduct-table{
@@ -35,4 +35,10 @@ table thead tr th{
 
 .pagination-custom{
     border-top: 1px solid rgb(219, 219, 219);
+}
+
+.dropdown-item:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: #448aff;
 }

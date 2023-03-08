@@ -7,6 +7,9 @@ import { UnitComponent } from './unit/unit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxTablePaginationModule } from 'ngx-table-pagination';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CityComponent } from './city/city.component';
+import { ExpenseTypeComponent } from './expense-type/expense-type.component';
+import { InstallmentsComponent } from './installments/installments.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,6 +22,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     UnitComponent,
     TaxSlotComponent,
     ProductsComponent,
+    CityComponent,
+    ExpenseTypeComponent,
+    InstallmentsComponent,
   ]
 })
 

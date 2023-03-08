@@ -34,11 +34,29 @@ export class AdminService {
    }
  
    updateUnit(data:any){
-     return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Unit.UpdateCategory,data,{observe: 'response'})
+     return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Unit.UpdateUnit,data,{observe: 'response'})
    }
  
    deleteUnit(id:any){
      return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Unit.DeleteUnit+`/${id}`,{observe: 'response'})
+   }
+
+   //city apis
+
+   getAllCity(){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.City.GetAllCity)
+   }
+ 
+   addCity(data:any){
+     return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.City.AddCity,data,{observe: 'response'})
+   }
+ 
+   updateCity(data:any){
+     return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.City.UpdateCity,data,{observe: 'response'})
+   }
+ 
+   deleteCity(id:any){
+     return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.City.DeleteCity+`/${id}`,{observe: 'response'})
    }
 
 }

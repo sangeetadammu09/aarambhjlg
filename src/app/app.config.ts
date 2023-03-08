@@ -12,15 +12,19 @@ export const APP_DI_CONFIG: any = {
       GetAllProductCategory : "/ProductCategory/GetAllProductCategory",
       AddProductCategory : "/ProductCategory/AddCategory",
       UpdateCategory : "/ProductCategory/UpdateCategory",
-      DeleteProductCategory : "/ProductCategory/DeleteProductCategory",
-
+      DeleteProductCategory : "/ProductCategory/DeleteProductCategory"
     },
     Unit:{
       GetAllUnits : "/Unit/GetAllUnits",
       AddUnit : "/Unit/AddUnit",
       UpdateCategory : "/Unit/UpdateUnit",
-      DeleteUnit : "/Unit/DeleteUnit",
-
+      DeleteUnit : "/Unit/DeleteUnit"
+    },
+    City:{
+      GetAllCity : "/City/GetAllCity",
+      AddCity : "/City/AddCity",
+      UpdateCategory : "/City/UpdateCity",
+      DeleteCity : "/City/DeleteCity"
     }
     
   }

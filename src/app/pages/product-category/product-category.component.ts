@@ -39,7 +39,7 @@ export class ProductCategoryComponent implements OnInit {
     this.editProdCategoryForm = this._formBuilder.group({
       categoryId: [],
       categoryName: ['', Validators.required],
-      categoryPhoto:[,Validators.required]
+      categoryPhoto:[]
     })
   }
 
@@ -112,8 +112,8 @@ export class ProductCategoryComponent implements OnInit {
 
   showeditProdCategoryModal(item:any){
     console.log(item)
-    var tempStr = item.categoryPhoto
-    var tempStrVal = tempStr.indexOf("CategoryImages/")
+    // var tempStr = item.categoryPhoto
+    // var tempStrVal = tempStr.indexOf("CategoryImages/")
     this.addProdCategory = false;
     this.editProdCategory = true;
     this.editProdCategoryForm.patchValue({
@@ -121,7 +121,7 @@ export class ProductCategoryComponent implements OnInit {
       categoryName : item.categoryName,
      // categoryPhoto : item.categoryPhoto
     })
-    this.editcategoryPhotoName=  tempStr.substring(tempStrVal+15, tempStr.length);
+   // this.editcategoryPhotoName=  tempStr.substring(tempStrVal+15, tempStr.length);
     //this.editProdCategoryForm.controls['categoryPhoto'].setValue('helo')
     
   }
@@ -138,10 +138,10 @@ export class ProductCategoryComponent implements OnInit {
   submitUpdateProductCategory(){
     this.submitted = true;
     console.log(this.editProdCategoryForm.value)
-    if(this.editProdCategoryForm.controls['categoryPhoto'].value == null){
-      this.editProdCategoryForm.controls['categoryPhoto'].setValue("https://jlg.examfirst.in/Images/CategoryImages/17454759682023-03-06.png")
-      this.editCategoryFile = "https://jlg.examfirst.in/Images/CategoryImages/17454759682023-03-06.png"
-    }
+    // if(this.editProdCategoryForm.controls['categoryPhoto'].value == null){
+    //   this.editProdCategoryForm.controls['categoryPhoto'].setValue("https://jlg.examfirst.in/Images/CategoryImages/17454759682023-03-06.png")
+    //   this.editCategoryFile = "https://jlg.examfirst.in/Images/CategoryImages/17454759682023-03-06.png"
+    // }
      if(this.editProdCategoryForm.valid){
        console.log(this.editProdCategoryForm.value)
        
