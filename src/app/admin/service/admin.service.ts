@@ -59,4 +59,24 @@ export class AdminService {
      return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.City.DeleteCity+`/${id}`,{observe: 'response'})
    }
 
+
+   //expense type
+
+   getAllExpenseType(){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ExpenseType.GetAllExpenseType)
+   }
+ 
+   addExpenseType(data:any){
+     return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ExpenseType.AddExpenseType,data,{observe: 'response'})
+   }
+ 
+   updateExpenseType(data:any){
+     return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ExpenseType.UpdateExpenseType,data,{observe: 'response'})
+   }
+ 
+   deleteExpenseType(id:any){
+     return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ExpenseType.DeleteExpenseType+`/${id}`,{observe: 'response'})
+   }
+
+
 }

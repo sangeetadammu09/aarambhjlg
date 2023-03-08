@@ -16,16 +16,12 @@ export class CityComponent implements OnInit {
   @ViewChild('closeaddCityBtn') closeaddCityBtn: any;
   @ViewChild('closeeditCityBtn') closeeditCityBtn:any;
   @ViewChild('closeDeleteCityBtn') closeDeleteCityBtn:any;
-  addcategoryFile: any;
-  editCategoryFile: any;
   addCity:boolean = false;
   editCity:boolean = false;
   editCityForm: FormGroup;
   deleteCityItem: any;
   p = 1;
   productsFound: boolean = false;
-  editcategoryPhotoName = "Select File"
-  addcategoryPhotoName = "Select File";
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addCityForm = this._formBuilder.group({

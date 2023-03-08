@@ -25,6 +25,12 @@ export const APP_DI_CONFIG: any = {
       AddCity : "/City/AddCity",
       UpdateCity : "/City/UpdateCity",
       DeleteCity : "/City/DeleteCity"
+    },
+    ExpenseType:{
+      GetAllExpenseType : "/ExpenseTypes/GetAllExpenseType",
+      AddExpenseType : "/ExpenseTypes/AddExpenseType",
+      UpdateExpenseType : "/ExpenseTypes/UpdateExpenseType",
+      DeleteExpenseType : "/ExpenseTypes/DeleteExpenseType"
     }
     
   }
