@@ -23,7 +23,7 @@ export const APP_DI_CONFIG: any = {
     City:{
       GetAllCity : "/City/GetAllCity",
       AddCity : "/City/AddCity",
-      UpdateCategory : "/City/UpdateCity",
+      UpdateCity : "/City/UpdateCity",
       DeleteCity : "/City/DeleteCity"
     }
     

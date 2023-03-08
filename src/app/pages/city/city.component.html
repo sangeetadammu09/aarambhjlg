@@ -81,35 +81,27 @@
             <form [formGroup]="addCityForm" (ngSubmit)="submitNewCity()">
                 <div class="form-group">
                     <label class="form-control-label">Name</label>
-                    <input type="text" class="form-control" formControlName="CityName" name="CityName"  
-                    [ngClass]="{'is-invalid':(submitted && f['CityName'].errors) ||(f['CityName'].errors && f['CityName'].touched) }">
-                        <div *ngIf="(submitted && f['CityName'].errors) ||(f['CityName'].errors && f['CityName'].touched)" class="invalid-feedback">
-                            <div *ngIf="f['CityName'].errors['required']">
+                    <input type="text" class="form-control" formControlName="cityName" name="cityName"  
+                    [ngClass]="{'is-invalid':(submitted && f['cityName'].errors) ||(f['cityName'].errors && f['cityName'].touched) }">
+                        <div *ngIf="(submitted && f['cityName'].errors) ||(f['cityName'].errors && f['cityName'].touched)" class="invalid-feedback">
+                            <div *ngIf="f['cityName'].errors['required']">
                                 Name is required
                             </div>
                      </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label">Code</label>
-                    <input type="text" class="form-control" formControlName="CityCode" name="CityCode"  
-                    [ngClass]="{'is-invalid':(submitted && f['CityCode'].errors) ||(f['CityCode'].errors && f['CityCode'].touched) }">
-                        <div *ngIf="(submitted && f['CityCode'].errors) ||(f['CityCode'].errors && f['CityCode'].touched)" class="invalid-feedback">
-                            <div *ngIf="f['CityCode'].errors['required']">
-                                Code is required
+                    <label class="form-control-label">Registration Fees</label>
+                    <input type="text" class="form-control" formControlName="registrationFees" name="registrationFees"  
+                    [ngClass]="{'is-invalid':(submitted && f['registrationFees'].errors) ||(f['registrationFees'].errors && f['registrationFees'].touched) }">
+                        <div *ngIf="(submitted && f['registrationFees'].errors) ||(f['registrationFees'].errors && f['registrationFees'].touched)" class="invalid-feedback">
+                            <div *ngIf="f['registrationFees'].errors['required']">
+                                Registration Fees is required
                             </div>
+                            <div *ngIf="f['registrationFees'].errors['pattern']">
+                                Only Number accepted
+                              </div>
                      </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label">Base City</label>
-                    <input type="text" class="form-control" formControlName="basicCity" name="basicCity"  
-                    [ngClass]="{'is-invalid':(submitted && f['basicCity'].errors) ||(f['basicCity'].errors && f['basicCity'].touched) }">
-                        <div *ngIf="(submitted && f['basicCity'].errors) ||(f['basicCity'].errors && f['basicCity'].touched)" class="invalid-feedback">
-                            <div *ngIf="f['basicCity'].errors['required']">
-                                Basic City is required
-                            </div>
-                     </div>
-                </div>
-             
 
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Save</button>
@@ -119,16 +111,30 @@
 
         <div class="modal-body" *ngIf="editCity && !addCity">
             <form [formGroup]="editCityForm" (ngSubmit)="submitUpdateCity()">
+
                 <div class="form-group">
-                    <label class="form-control-label">Category Name</label>
-                    <input type="text" class="form-control" formControlName="categoryName" name="categoryName"  
-                    [ngClass]="{'is-invalid':(submitted && g['categoryName'].errors) ||(g['categoryName'].errors && g['categoryName'].touched) }">
-                        <div *ngIf="(submitted && g['categoryName'].errors) ||(g['categoryName'].errors && g['categoryName'].touched)" class="invalid-feedback">
-                            <div *ngIf="g['categoryName'].errors['required']">
-                                Category Name is required
+                    <label class="form-control-label">Name</label>
+                    <input type="text" class="form-control" formControlName="cityName" name="cityName"  
+                    [ngClass]="{'is-invalid':(submitted && g['cityName'].errors) ||(g['cityName'].errors && g['cityName'].touched) }">
+                        <div *ngIf="(submitted && g['cityName'].errors) ||(g['cityName'].errors && g['cityName'].touched)" class="invalid-feedback">
+                            <div *ngIf="g['cityName'].errors['required']">
+                                Name is required
                             </div>
-                        </div>
-                    </div>
+                     </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">Registration Fees</label>
+                    <input type="text" class="form-control" formControlName="registrationFees" name="registrationFees"  
+                    [ngClass]="{'is-invalid':(submitted && g['registrationFees'].errors) ||(g['registrationFees'].errors && g['registrationFees'].touched) }">
+                        <div *ngIf="(submitted && g['registrationFees'].errors) ||(g['registrationFees'].errors && g['registrationFees'].touched)" class="invalid-feedback">
+                            <div *ngIf="g['registrationFees'].errors['required']">
+                                Registration Fees is required
+                            </div>
+                            <div *ngIf="g['registrationFees'].errors['pattern']">
+                                Only Number accepted
+                              </div>
+                     </div>
+                </div>
                
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Save</button>

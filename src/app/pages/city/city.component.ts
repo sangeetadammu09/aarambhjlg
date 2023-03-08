@@ -31,14 +31,14 @@ export class CityComponent implements OnInit {
     this.addCityForm = this._formBuilder.group({
       cityId: [],
       cityName: ['', Validators.required],
-      registrationFees:[,Validators.required],
+      registrationFees:[,[Validators.required,  Validators.pattern("^[0-9]*$"),]],
      
     })
 
     this.editCityForm = this._formBuilder.group({
       cityId: [],
       cityName: ['', Validators.required],
-      registrationFees:[,Validators.required],
+      registrationFees:[,[Validators.required,  Validators.pattern("^[0-9]*$"),]],
     })
   }
 
@@ -126,7 +126,7 @@ export class CityComponent implements OnInit {
        var updateCityData :any = {};
        updateCityData.cityId = this.editCityForm.controls['cityId'].value;
        updateCityData.cityName = this.editCityForm.controls['cityName'].value;
-       updateCityData.registrationFees = this.editCityForm.controls['cityCode'].value;
+       updateCityData.registrationFees = this.editCityForm.controls['registrationFees'].value;
         this._adminService.updateCity(updateCityData).subscribe((data:any) => {
           if(data){
             this._toastrService.success('City updated successfully!');
@@ -143,7 +143,7 @@ export class CityComponent implements OnInit {
 
 
   showdeleteCityModal(item:any){
-      this.deleteCityItem = item.categoryId;
+      this.deleteCityItem = item.cityId;
   }
 
 
@@ -151,6 +151,7 @@ export class CityComponent implements OnInit {
       this._adminService.deleteCity(this.deleteCityItem).subscribe((data:any) =>{
         console.log(data)
         if(data.status == 200){
+          this._toastrService.success('City delete successfully!');
           this.getAllCitys();
           this.closeDeleteCityBtn.nativeElement.click();
         }
