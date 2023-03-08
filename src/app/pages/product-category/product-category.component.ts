@@ -10,7 +10,7 @@ import { AdminService } from 'src/app/admin/service/admin.service';
 })
 export class ProductCategoryComponent implements OnInit {
 
-  productCategoryList: any;
+  productCategoryList: any =[];
   addProdCategoryForm!: FormGroup;
   submitted: boolean = false;
   @ViewChild('addPhoto') addPhoto!: ElementRef;
@@ -26,6 +26,8 @@ export class ProductCategoryComponent implements OnInit {
   deleteProdCategoryItem: any;
   p = 1;
   productsFound: boolean = false;
+  editcategoryPhotoName = "Select File"
+  addcategoryPhotoName = "Select File";
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addProdCategoryForm = this._formBuilder.group({
@@ -66,11 +68,18 @@ export class ProductCategoryComponent implements OnInit {
   showaddProdCategoryModal(){
     this.addProdCategory = true;
     this.editProdCategory = false
+    this.submitted = false;
+    this.addProdCategoryForm.reset();
+    this.addProdCategoryForm.markAsUntouched();
+    this.addProdCategoryForm.markAsPristine();
+    this.addcategoryPhotoName = ''
   }
 
   onAddFileChange(file: any) {
-    this.addPhoto.nativeElement.innerText = file.target.files[0].name;
+
+    this.addcategoryPhotoName = file.target.files[0].name;
     this.addcategoryFile = file.target.files[0];
+    console.log(this.addcategoryFile)
    
   }
 
@@ -103,15 +112,17 @@ export class ProductCategoryComponent implements OnInit {
 
   showeditProdCategoryModal(item:any){
     console.log(item)
+    var tempStr = item.categoryPhoto
+    var tempStrVal = tempStr.indexOf("CategoryImages/")
     this.addProdCategory = false;
     this.editProdCategory = true;
     this.editProdCategoryForm.patchValue({
       categoryId : item.categoryId,
       categoryName : item.categoryName,
-      //categoryPhoto : item.categoryPhoto
+     // categoryPhoto : item.categoryPhoto
     })
-    //this.updatePhoto.nativeElement.innerText =  item.categoryPhoto;
-    this.editProdCategoryForm.controls['categoryPhoto'].setValue('helo')
+    this.editcategoryPhotoName=  tempStr.substring(tempStrVal+15, tempStr.length);
+    //this.editProdCategoryForm.controls['categoryPhoto'].setValue('helo')
     
   }
 
@@ -126,8 +137,14 @@ export class ProductCategoryComponent implements OnInit {
   
   submitUpdateProductCategory(){
     this.submitted = true;
+    console.log(this.editProdCategoryForm.value)
+    if(this.editProdCategoryForm.controls['categoryPhoto'].value == null){
+      this.editProdCategoryForm.controls['categoryPhoto'].setValue("https://jlg.examfirst.in/Images/CategoryImages/17454759682023-03-06.png")
+      this.editCategoryFile = "https://jlg.examfirst.in/Images/CategoryImages/17454759682023-03-06.png"
+    }
      if(this.editProdCategoryForm.valid){
        console.log(this.editProdCategoryForm.value)
+       
         var addProductCategoryData = new FormData();
         addProductCategoryData.append('CategoryId',this.editProdCategoryForm.controls['categoryId'].value);
         addProductCategoryData.append('CategoryName',this.editProdCategoryForm.controls['categoryName'].value);

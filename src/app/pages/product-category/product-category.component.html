@@ -21,10 +21,10 @@
                     <th scope="col">Delete</th>
                   </tr>
                 </thead>
-                <tbody *ngFor="let item of productCategoryList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index ">
+                <tbody *ngFor="let item of productCategoryList | paginate: { itemsPerPage: 5, currentPage: p }; let i = index ">
                   <tr>
                     <td>{{i}}</td>
-                    <td> <img src="{{item.categoryPhoto}}" alt="{{item.categoryName}}" height="100px" width="100px"></td>
+                    <td><img src="{{item.categoryPhoto}}" alt="{{item.categoryName}}" height="100px" width="100px"></td>
                     <td>{{item.categoryName}}</td> 
                     <td (click)="showeditProdCategoryModal(item)" data-toggle="modal" data-target="#addeditProdCategoryModal">
                         <svg enable-background="new 0 0 19 19" height="19px" id="Layer_1" version="1.1" viewBox="0 0 19 19" width="19px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -40,12 +40,13 @@
                     </td> 
                   </tr>        
                 </tbody>
-               
                 
             </table>
-            <div class="d-flex justify-content-end">
+            <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
                 <pagination-controls (pageChange)="p = $event"></pagination-controls>
             </div>
+          
+            
             <!--Including the pagination control.-->
                 <!-- <div class="d-flex justify-content-end">
                     <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)"></pagination-controls>
@@ -92,7 +93,7 @@
                         <input type="file" class="custom-file-input" id="customFile" formControlName="categoryPhoto" name="categoryPhoto" 
                         (change)="onAddFileChange($event)" 
                         [ngClass]="{'is-invalid':(submitted && f['categoryPhoto'].errors) ||(f['categoryPhoto'].errors && f['categoryPhoto'].touched) }">
-                        <label class="custom-file-label" for="customFile" #addPhoto >Choose file</label>
+                        <label class="custom-file-label" for="customFile" #addPhoto >{{addcategoryPhotoName}}</label>
                         <div *ngIf="(submitted && f['categoryPhoto'].errors) ||(f['categoryPhoto'].errors && f['categoryPhoto'].touched)" class="invalid-feedback">
                             <div *ngIf="f['categoryPhoto'].errors['required']">
                                 File is required
@@ -125,7 +126,7 @@
                         <input type="file" class="custom-file-input" id="customFile" formControlName="categoryPhoto" name="categoryPhoto" 
                         (change)="onEditFileChange($event)" 
                         [ngClass]="{'is-invalid':(submitted && g['categoryPhoto'].errors) ||(g['categoryPhoto'].errors && g['categoryPhoto'].touched) }">
-                        <label class="custom-file-label" for="customFile" #updatePhoto >Choose file</label>
+                        <label class="custom-file-label" for="customFile" #updatePhoto >{{editcategoryPhotoName}}</label>
                         <div *ngIf="(submitted && g['categoryPhoto'].errors) ||(g['categoryPhoto'].errors && g['categoryPhoto'].touched)" class="invalid-feedback">
                             <div *ngIf="g['categoryPhoto'].errors['required']">
                                 Image is required

@@ -14,6 +14,13 @@ export const APP_DI_CONFIG: any = {
       UpdateCategory : "/ProductCategory/UpdateCategory",
       DeleteProductCategory : "/ProductCategory/DeleteProductCategory",
 
+    },
+    Unit:{
+      GetAllUnits : "/Unit/GetAllUnits",
+      AddUnit : "/Unit/AddUnit",
+      UpdateCategory : "/Unit/UpdateUnit",
+      DeleteUnit : "/Unit/DeleteUnit",
+
     }
     
   }

@@ -25,4 +25,20 @@ export class AdminService {
     return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ProductCategory.DeleteProductCategory+`/${id}`,{observe: 'response'})
   }
 
+  getAllUnits(){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Unit.GetAllUnits)
+   }
+ 
+   addUnit(data:any){
+     return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Unit.AddUnit,data,{observe: 'response'})
+   }
+ 
+   updateUnit(data:any){
+     return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Unit.UpdateCategory,data,{observe: 'response'})
+   }
+ 
+   deleteUnit(id:any){
+     return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Unit.DeleteUnit+`/${id}`,{observe: 'response'})
+   }
+
 }
