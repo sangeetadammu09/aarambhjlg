@@ -15,14 +15,14 @@
     font-size: 15px;
 }
 
+.btn-primary:hover,.btn-primary:active, .btn-primary:focus  {
+    background-color: #6076ad !important;
+}
+
 
 .fa{
     cursor: pointer;
 }
-
-
-
-    
 
     .label-red{
        color:red;

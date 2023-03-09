@@ -79,4 +79,63 @@ export class AdminService {
    }
 
 
+   //installment
+
+   getAllInstallment(){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Installment.GetAllInstallment)
+   }
+ 
+   addInstallment(data:any){
+     return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Installment.AddInstallment,data,{observe: 'response'})
+   }
+ 
+   updateInstallment(data:any){
+     return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Installment.UpdateInstallment,data,{observe: 'response'})
+   }
+ 
+   deleteInstallment(id:any){
+     return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Installment.DeleteInstallment+`/${id}`,{observe: 'response'})
+   }
+
+
+   //tax slot
+
+   getAllTaxSlot(){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.TaxSlot.GetAllTaxSlot)
+   }
+ 
+   addTaxSlot(data:any){
+     return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.TaxSlot.AddTaxSlot,data,{observe: 'response'})
+   }
+ 
+   updateTaxSlot(data:any){
+     return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.TaxSlot.UpdateTaxSlot,data,{observe: 'response'})
+   }
+ 
+   deleteTaxSlot(id:any){
+     return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.TaxSlot.DeleteTaxSlot+`/${id}`,{observe: 'response'})
+   }
+
+
+   //product brand
+
+   getAllProductBrand(){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ProductBrand.GetAllProductBrand)
+   }
+ 
+   addProductBrand(data:any){
+     return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ProductBrand.AddProductBrand,data,{observe: 'response'})
+   }
+ 
+   updateProductBrand(data:any){
+     return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ProductBrand.UpdateProductBrand,data,{observe: 'response'})
+   }
+ 
+   deleteProductBrand(id:any){
+     return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ProductBrand.DeleteProductBrand+`/${id}`,{observe: 'response'})
+   }
+
+
+
+
 }

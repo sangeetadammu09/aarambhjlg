@@ -31,6 +31,24 @@ export const APP_DI_CONFIG: any = {
       AddExpenseType : "/ExpenseTypes/AddExpenseType",
       UpdateExpenseType : "/ExpenseTypes/UpdateExpenseType",
       DeleteExpenseType : "/ExpenseTypes/DeleteExpenseType"
+    },
+    Installment:{
+      GetAllInstallment : "/Installment/GetAllInstallment",
+      AddInstallment : "/Installment/AddInstallment",
+      UpdateInstallment : "/Installment/UpdateInstallment",
+      DeleteInstallment : "/Installment/DeleteInstallment"
+    },
+    TaxSlot:{
+      GetAllTaxSlot : "/TaxSlot/GetAllTaxSlots",
+      AddTaxSlot : "/TaxSlot/AddTaxSlot",
+      UpdateTaxSlot : "/TaxSlot/UpdateTaxSlot",
+      DeleteTaxSlot : "/TaxSlot/DeleteTaxSlot"
+    },
+    ProductBrand:{
+      GetAllProductBrand : "/ProductBrands/GetAllProductBrand",
+      AddProductBrand : "/ProductBrands/AddProductBrand",
+      UpdateProductBrand : "/ProductBrands/UpdateProductBrand",
+      DeleteProductBrand : "/ProductBrands/DeleteProductBrand"
     }
     
   }

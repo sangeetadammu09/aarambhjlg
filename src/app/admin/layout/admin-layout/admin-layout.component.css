@@ -6,13 +6,20 @@
     background-color: white;
 }
 
-.sidebar, .sidebar .sidebar-wrapper{
+/* @media screen and (max-width: 991px){
+.sidebar, .bootstrap-navbar {
     width: 220px !important;
 }
 
 .main-panel {
     position: relative;
     float: right;
-    width: calc(100% - 220px);
+     width: calc(100% - 220px);
     
 }
+} */
+
+.sidebar, .sidebar .sidebar-wrapper{
+    /* width: 220px !important; */
+}
+

@@ -9,6 +9,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CityComponent } from './city/city.component';
 import { ExpenseTypeComponent } from './expense-type/expense-type.component';
 import { InstallmentsComponent } from './installments/installments.component';
+import { ProductBrandComponent } from './product-brand/product-brand.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -24,6 +25,7 @@ import { InstallmentsComponent } from './installments/installments.component';
     CityComponent,
     ExpenseTypeComponent,
     InstallmentsComponent,
+    ProductBrandComponent,
   ]
 })
 

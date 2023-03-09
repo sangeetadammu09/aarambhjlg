@@ -3,10 +3,10 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { AdminLayoutComponent } from './admin-layout.component';
-import { FooterComponent } from '../../shared/footer/footer.component';
-import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { PagesModule } from 'src/app/pages/pages.module';
-import { SidebarComponent } from '../../shared/sidebar/sidebar.component';
+import { NavbarModule } from '../../shared/navbar/navbar.module';
+import { FooterModule } from '../../shared/footer/footer.module';
+import { SidebarModule } from '../../shared/sidebar/sidebar.module';
 
 
 @NgModule({
@@ -14,13 +14,14 @@ import { SidebarComponent } from '../../shared/sidebar/sidebar.component';
     CommonModule,
     PagesModule,
     RouterModule.forChild(AdminLayoutRoutes),
+    NavbarModule,
+    FooterModule,
+    SidebarModule
  
   ],
   declarations: [
     AdminLayoutComponent,
-    NavbarComponent,
-    FooterComponent,
-    SidebarComponent
+  
   ]
 })
 

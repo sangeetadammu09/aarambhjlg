@@ -10,7 +10,7 @@
         </button>
       </div>
      
-      <span><p class="text-black">{{userTypeName}}</p></span>
+      <span><p class="text-black">{{userRoles}}</p></span>
     </div>
     <button class="navbar-toggler" type="button" (click)="collapse()"
       [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
@@ -32,7 +32,7 @@
       <ul class="navbar-nav">
        
         <li class="nav-item">
-              <span class="d-md-block"><p class="text-black ml-2">Hello, {{userName}}</p></span>
+              <span class="d-md-block"><p class="text-black ml-2">Welcome, {{userName}}</p></span>
         </li>
         <li class="nav-item">
               <span class="d-md-block" (click)="logoutUser()">

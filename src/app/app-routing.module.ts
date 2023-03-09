@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
-import { AdminLayoutComponent } from './Admin/layouts/admin-layout/admin-layout.component';
-import { LoginComponent } from './Common/login/login.component';
-import { RegisterComponent } from './Common/register/register.component';
+import { AdminLayoutComponent } from './admin/layout/admin-layout/admin-layout.component';
+import { LoginComponent } from './common/login/login.component';
+import { RegisterComponent } from './common/register/register.component';
+
 import { AuthGuard } from './guard/auth.guard';
 
 export const AppRoutes: Routes = [
@@ -14,7 +15,7 @@ export const AppRoutes: Routes = [
     canActivate:[AuthGuard],
     children: [
         {
-      path: '',loadChildren: () => import('./Admin/layouts/admin-layout/admin-layout.module').then(x => x.AdminLayoutModule)
+      path: '',loadChildren: () => import('./admin/layout/admin-layout/admin-layout.module').then(x => x.AdminLayoutModule)
   }]},
   
 
