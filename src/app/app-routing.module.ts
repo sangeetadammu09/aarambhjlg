@@ -1,29 +1,25 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { AdminLayoutComponent } from './admin/layout/admin-layout/admin-layout.component';
-import { LoginComponent } from './common/login/login.component';
-import { RegisterComponent } from './common/register/register.component';
+import { Routes } from '@angular/router';
+import { AdminLayoutComponent } from './Admin/layouts/admin-layout/admin-layout.component';
+import { LoginComponent } from './Common/login/login.component';
+import { RegisterComponent } from './Common/register/register.component';
+import { AuthGuard } from './guard/auth.guard';
 
-const routes: Routes = [{path: '', redirectTo: 'login',pathMatch: 'full'}, 
-{path:'',component:LoginComponent},
-{path:'register',component:RegisterComponent},
-{
-  path: 'admin',
-  component: AdminLayoutComponent,
-  children: [
-      {path: '',loadChildren: () => 
-      import('./admin/layout/admin-layout/admin-layout.module').then(x => x.AdminLayoutModule)
-}]},
+export const AppRoutes: Routes = [
+  {path: '', redirectTo: 'login',pathMatch: 'full'}, 
+  {path:'',component:LoginComponent},
+  {path:'register',component:RegisterComponent},
+  {
+    path: 'admin',
+    component: AdminLayoutComponent,
+    canActivate:[AuthGuard],
+    children: [
+        {
+      path: '',loadChildren: () => import('./Admin/layouts/admin-layout/admin-layout.module').then(x => x.AdminLayoutModule)
+  }]},
+  
 
-
-{
-  path: '**',
-  redirectTo: 'login'
-}
+  {
+    path: '**',
+    redirectTo: 'login'
+  }
 ]
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }

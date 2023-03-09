@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { decodeToken } from '../../utils/token';
 import { CommonService } from '../service/common.service';
-import { decodeToken, isTokenValid } from '../../utils/token';
+
 
 @Component({
   selector: 'app-login',

@@ -1,19 +1,12 @@
-.navbar-one{
-    border-top: 1px solid #e9ecef;
-    border-bottom: 1px solid #e9ecef;
+.navbar-transparent{
+    background-color:  #6076ad !important;
 }
 
-.dropdown-menu:li {
-    text-align: left;
+.fa-bell:before{
+    color:black !important;
 }
 
-.dropdown:hover .dropdown-menu {
-    display: block;
-    margin-top: 0; 
-    color: black;
- }
-
- .dropdown .username, .navbar-light .navbar-nav .nav-link {
-    font-size:17px !important;
-    color: black !important;
- }
+.ml-2{
+    margin-right: 10px;
+    margin-top: 10px;
+}

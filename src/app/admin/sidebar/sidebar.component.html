@@ -1,0 +1,25 @@
+
+<div class="sidebar-wrapper">
+    <div class="text-center mt-3  justify-content-center ">
+        <h5 class="mb-0 ">AarambhJLG</h5>
+      </div>
+ 
+
+    <ul class="nav">
+ 
+        <li class="nav-item menu-li" *ngFor="let menuItem of menuItems" routerLinkActive="active" >
+            <a data-toggle="collapse" [attr.data-target]="'#' + menuItem.url"><i [ngClass]="'fa ' + menuItem.icon"></i> 
+                <span [ngClass]=" menuItem.submenuList.length > 0 ? 'dropdown-toggle menu-title' : 'menu-title'" 
+                >{{menuItem.parentMenu}}</span></a>
+            <div class="collapse" id="{{menuItem.url}}" aria-expanded="false"  *ngIf="menuItem.submenuList.length > 0">
+                <ul class="flex-column pl-2 nav" *ngFor="let submenuItem of menuItem.submenuList">
+                    <li class="nav-item sub-menu-li"><a class="nav-link py-0"  [routerLink]="[submenuItem.url]">
+                        <span  class="menu-title">{{submenuItem.menu}}</span></a></li>
+                </ul>
+            </div>
+        </li>
+     
+    </ul>
+
+    
+</div>

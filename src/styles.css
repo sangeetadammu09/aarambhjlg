@@ -1,16 +1,71 @@
 /* You can add global styles to this file, and also import other style files */
+/* *{
+    font-family: C, sans-serif;
+} */
+
+
+.ngx-pagination .current {
+    padding: 0.1875rem 0.625rem;
+    background: #6076ad !important;
+}
+
+.btn-primary {
+    background-color: #6076ad !important;
+    text-transform: capitalize !important;
+    font-size: 15px;
+}
+
+
+.fa{
+    cursor: pointer;
+}
+
+
+
+    
+
+    .label-red{
+       color:red;
+       font-size: 20px; 
+    }
+
+    .text-black{
+        text-transform: capitalize;
+        font-size: 18px!important;
+        font-weight: 500!important;
+        font-family: Montserrat,Helvetica Neue,Arial,sans-serif;
+    }
+
+    .p-dropdown{
+        width: 100%
+    }
+
+    .p-inputtext{
+        padding: 0.38rem 0.75rem !important;
+    }
+
+    .invalid-feedback {
+        font-size: 90% !important;
+    }
+
+    .document-body{
+        height:80vh;
+        overflow-y: scroll;
+      }
+
+      /* You can add global styles to this file, and also import other style files */
 .bg-light{
-    background: #448aff !important;
+    background: #6076ad !important;
     color:#000;
 }
 
 .btn-primary{
-    background-color: #448aff !important;
-    border-color:  #448aff !important;
+    background-color: #6076ad !important;
+    border-color:  #6076ad !important;
 }
 
 .thead-secondary{
-    background-color: #448aff !important;
+    background-color: #6076ad !important;
 }
 
 .prduct-table{
@@ -40,5 +95,6 @@ table thead tr th{
 .dropdown-item:hover {
     color: #fff;
     text-decoration: none;
-    background-color: #448aff;
+    background-color: #6076ad;
 }
+

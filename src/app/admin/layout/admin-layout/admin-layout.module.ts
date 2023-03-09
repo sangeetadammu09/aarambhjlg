@@ -6,6 +6,7 @@ import { AdminLayoutComponent } from './admin-layout.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { PagesModule } from 'src/app/pages/pages.module';
+import { SidebarComponent } from '../../shared/sidebar/sidebar.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { PagesModule } from 'src/app/pages/pages.module';
     AdminLayoutComponent,
     NavbarComponent,
     FooterComponent,
+    SidebarComponent
   ]
 })
 

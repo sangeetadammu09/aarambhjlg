@@ -1,3 +1,18 @@
-.content{
+/* .content{
     background-color: #f4f3ef;
+} */
+
+.main-panel, .sidebar{
+    background-color: white;
+}
+
+.sidebar, .sidebar .sidebar-wrapper{
+    width: 220px !important;
+}
+
+.main-panel {
+    position: relative;
+    float: right;
+    width: calc(100% - 220px);
+    
 }

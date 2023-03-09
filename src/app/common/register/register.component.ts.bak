@@ -1,0 +1,73 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { CommonService } from '../service/common.service';
+
+@Component({
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
+})
+export class RegisterComponent implements OnInit {
+
+  registerForm: FormGroup;
+  submitted!:boolean;
+  userTypes: any;
+
+  constructor(private formBuilder: FormBuilder, private commonService: CommonService, 
+    private router: Router, private toastService : ToastrService) { 
+
+    this.registerForm = this.formBuilder.group({
+      userId : ['3fa85f64-5717-4562-b3fc-2c963f66afa6'],
+      name : ['', Validators.required],
+      email_Id :['', [Validators.required, Validators.email,]],
+      mobile :['',[Validators.required,  Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"),]],
+      // mobile :['',[Validators.required,  Validators.pattern('^[0-9.,]*$'),Validators.minLength(10),
+      // Validators.maxLength(10),]],
+      password : ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
+      isInActive :[true],
+      user_Type_Id :['', Validators.required],
+      device_Token: [''],
+      device_Type: [3]
+    })
+
+  }
+
+  ngOnInit(): void {
+    this.getAllUserTypes();
+  }
+
+  registerUser(){
+      this.commonService.register(this.registerForm.value).subscribe(data => {
+        console.log(data);
+        if(data.statusCode == "200" && data.message == "User Registered Successfully"){
+          this.toastService.success(data.message);
+     
+          this.router.navigate(['/'])
+<<<<<<< HEAD
+        }
+        else if(data.statusCode == "200" && data.message == "Email Already Exist"){
+=======
+        }else if(data.statusCode == "200" && data.message == "User Already Exist"){
+>>>>>>> fb67847df66c2ba0af969e1c26a1af43432d54ac
+          this.toastService.error(data.message);
+        }else if (data.statusCode == "200" && data.message == "Email Already Exist"){
+          this.toastService.error(data.message);
+        }
+        else if(data.statusCode == "200" && data.message == "Invalid User and Password"){
+          this.toastService.error(data.message);
+        } 
+      })
+  }
+
+  getAllUserTypes(){
+    this.commonService.getAllUserTypes().subscribe(data => {
+     console.log(data);
+      this.userTypes = data.result;
+    })
+  }
+
+  get f() {return this.registerForm.controls;}
+
+}
