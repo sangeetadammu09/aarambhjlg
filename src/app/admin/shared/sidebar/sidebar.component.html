@@ -11,8 +11,9 @@
  
         <li class="nav-item menu-li" *ngFor="let menuItem of menuItems" routerLinkActive="active" >
             <a data-toggle="collapse" [attr.data-target]="'#' + menuItem.url"><i [ngClass]="'fa ' + menuItem.icon"></i> 
-                <span [ngClass]=" menuItem.submenuList.length > 0 ? 'dropdown-toggle menu-title' : 'menu-title'">
-                    {{menuItem.parentMenu}}</span></a>
+                <span [ngClass]=" menuItem.submenuList.length > 0 ? 'dropdown-toggle menu-title' : 'menu-title'" 
+                    [routerLink]="[menuItem.url]">
+                    {{menuItem.parentMenu}} </span></a>
             <div class="collapse" id="{{menuItem.url}}" aria-expanded="false"  *ngIf="menuItem.submenuList.length > 0">
                 <ul class="flex-column pl-2 nav" *ngFor="let submenuItem of menuItem.submenuList">
                     <li class="nav-item sub-menu-li"><a class="nav-link py-0"  [routerLink]="[submenuItem.url]">

@@ -135,7 +135,35 @@ export class AdminService {
      return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ProductBrand.DeleteProductBrand+`/${id}`,{observe: 'response'})
    }
 
+   //product
 
+   getAllProduct(pageNo:any,pageSize:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.GetAllProduct+`?pageNo=${pageNo}&pageSize=${pageSize}`)
+   }
+
+   getAllProductByCity(){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.GetAllProductByCity)
+   }
+ 
+   addProduct(data:any){
+     return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.AddProduct,data,{observe: 'response'})
+   }
+
+   addProductPrice(data:any){
+    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.AddProductPrice,data,{observe: 'response'})
+  }
+
+   addProductImages(data:any){
+      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.AddProductImages,data,{observe: 'response'})
+    }
+ 
+   updateProduct(data:any){
+     return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.UpdateProduct,data,{observe: 'response'})
+   }
+ 
+   deleteProduct(id:any){
+     return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.DeleteProduct+`/${id}`,{observe: 'response'})
+   }
 
 
 }

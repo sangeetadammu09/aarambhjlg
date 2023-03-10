@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit{
     private nativeElement: Node;
     private toggleButton:any;
     private sidebarVisible: boolean;
-    userName = localStorage.getItem('fullName');
+    userName = localStorage.getItem('fullname');
     userRoles = localStorage.getItem('roles');
 
     public isCollapsed = true;

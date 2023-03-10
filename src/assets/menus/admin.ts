@@ -6,7 +6,7 @@ export const AdminList = {
         {
             id: 1,
             parentMenu: 'Admin Master',
-            icon : 'fa-user',
+            icon : 'fa-user-circle',
             isActive: true,
             url: 'admin-master',
             submenuList: [
@@ -28,20 +28,15 @@ export const AdminList = {
                     url: 'installments',
                     isActive: true, 
                 },
+                
                 {
                     id: 4,
-                    menu: 'Products',
-                    url: 'products',
-                    isActive: true, 
-                },
-                {
-                    id: 5,
                     menu: 'Product Brand',
                     url: 'product-brand',
                     isActive: true, 
                 }, 
                 {
-                    id: 6,
+                    id: 5,
                     menu: 'Product Category',
                     url: 'product-category',
                     isActive: true, 
@@ -65,6 +60,14 @@ export const AdminList = {
                  
             ]
           },
+          {
+            id: 2,
+            parentMenu: 'Products',
+            icon : 'fa-list',
+            isActive: true, 
+            url: 'products',
+            submenuList: []
+        },
 
     ],
     message: null,

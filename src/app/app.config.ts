@@ -49,7 +49,17 @@ export const APP_DI_CONFIG: any = {
       AddProductBrand : "/ProductBrands/AddProductBrand",
       UpdateProductBrand : "/ProductBrands/UpdateProductBrand",
       DeleteProductBrand : "/ProductBrands/DeleteProductBrand"
+    },
+    Product:{
+      GetAllProduct : "/Product/GetAllProduct",
+      GetAllProductByCity : "/Product/GetAllProductByCity",
+      AddProduct : "/Product/AddProduct",
+      AddProductPrice : "/Product/AddProductPrice",
+      AddProductImages : "/Product/AddProductImages",
+      UpdateProduct : "/Product/UpdateProduct",
+      DeleteProduct : "/Product/DeleteProduct"
     }
+    
     
   }
   

@@ -69,3 +69,12 @@
     font-size: 15px;
     font-weight: 500;
 }
+
+.fa{
+    color: black !important;
+}
+
+.fa:hover{
+    color: white !important;
+}
+
