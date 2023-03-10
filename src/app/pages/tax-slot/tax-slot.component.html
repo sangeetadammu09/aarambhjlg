@@ -24,7 +24,7 @@
                     <th scope="col">Delete</th>
                   </tr>
                 </thead>
-                <tbody *ngFor="let item of TaxSlotList | paginate: { itemsPerPage: 5, currentPage: p }; let i = index ">
+                <tbody *ngFor="let item of TaxSlotList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index ">
                   <tr>
                     <td>{{item.taxId}}</td>
                     <td>{{item.taxName}}</td> 

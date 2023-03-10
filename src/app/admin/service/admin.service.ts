@@ -165,5 +165,28 @@ export class AdminService {
      return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.DeleteProduct+`/${id}`,{observe: 'response'})
    }
 
+   //branch
+   //product brand
+
+   getAllBranch(){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Branch.GetAllBranches)
+   }
+ 
+   addBranch(data:any){
+     return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Branch.AddBranch,data,{observe: 'response'})
+   }
+ 
+   updateBranch(data:any){
+     return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Branch.UpdateBranch,data,{observe: 'response'})
+   }
+ 
+   deleteBranch(id:any){
+     return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Branch.DeleteBranch+`/${id}`,{observe: 'response'})
+   }
+
+   getAllManager(){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.GetAllManager)
+   }
+
 
 }

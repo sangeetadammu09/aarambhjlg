@@ -22,7 +22,7 @@
                     <th scope="col">Delete</th>
                   </tr>
                 </thead>
-                <tbody *ngFor="let item of CityList | paginate: { itemsPerPage: 5, currentPage: p }; let i = index ">
+                <tbody *ngFor="let item of CityList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index ">
                   <tr>
                     <td>{{item.cityId}}</td>
                     <td>{{item.cityName}}</td> 

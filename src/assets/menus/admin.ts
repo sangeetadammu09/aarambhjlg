@@ -11,6 +11,12 @@ export const AdminList = {
             url: 'admin-master',
             submenuList: [
                 {
+                    id: 0,
+                    menu: 'Branch',
+                    url: 'branch',
+                    isActive: true, 
+                },
+                {
                     id: 1,
                     menu: 'City',
                     url: 'city',

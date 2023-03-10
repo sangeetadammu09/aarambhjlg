@@ -20,26 +20,68 @@ export class ProductsComponent implements OnInit {
   editProduct:boolean = false;
   editProductForm: FormGroup;
   deleteProductItem: any;
-  p = 1;
   productsFound: boolean = false;
+  page = 1;
+  total = 20;
+  pageSize = 10;
+  productCategoryList: any;
+  addProductTitle ="Add Product";
+ 
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addProductForm = this._formBuilder.group({
       productId: [],
       productName: ['', Validators.required],
-      registrationFees:[,[Validators.required,  Validators.pattern("^[0-9]*$"),]],
-     
+      hsnCode: ['', Validators.required],
+      catId: [, Validators.required],
+      unitId: [, Validators.required],
+      saleTaxId: [, Validators.required],
+      barcode: ['', Validators.required],
+      description: ['', Validators.required],
+      purchaseTaxId: [, Validators.required],
+      discountId: [, Validators.required],
+      barcodeStatus: ['', Validators.required],
+      productEnglishName: ['', Validators.required],
+      isDiscountApplicable: ['', Validators.required],
+      createdBy: ['', Validators.required],
+      createdDate: ['', Validators.required],
+      updatedBy: ['', Validators.required],
+      updatedDate: ['', Validators.required],
+      mfd: ['', Validators.required],
+      expiryDate: ['', Validators.required],
+      batchNo: ['', Validators.required]     
     })
 
     this.editProductForm = this._formBuilder.group({
       productId: [],
       productName: ['', Validators.required],
-      registrationFees:[,[Validators.required,  Validators.pattern("^[0-9]*$"),]],
+      hsnCode: ['', Validators.required],
+      catId: [, Validators.required],
+      unitId: [, Validators.required],
+      saleTaxId: [, Validators.required],
+      barcode: ['', Validators.required],
+      description: ['', Validators.required],
+      purchaseTaxId: [, Validators.required],
+      discountId: [, Validators.required],
+      barcodeStatus: ['', Validators.required],
+      productEnglishName: ['', Validators.required],
+      isDiscountApplicable: ['', Validators.required],
+      createdBy: ['', Validators.required],
+      createdDate: ['', Validators.required],
+      updatedBy: ['', Validators.required],
+      updatedDate: ['', Validators.required],
+      mfd: ['', Validators.required],
+      expiryDate: ['', Validators.required],
+      batchNo: ['', Validators.required]     
     })
+
+    
+
   }
 
   ngOnInit(): void {
     this.getAllProducts()
+    this.getAllProductCategories()
   }
 
   get f(){ return this.addProductForm.controls}
@@ -48,13 +90,14 @@ export class ProductsComponent implements OnInit {
 
   getAllProducts(){
     var paginationObj :any ={};
-    paginationObj.pageNo =1;
-    paginationObj.pageSize = 10;
+    paginationObj.pageNo =this.page;
+    paginationObj.pageSize = this.pageSize;
     this._adminService.getAllProduct(paginationObj.pageNo,paginationObj.pageSize).subscribe((data) => {
       console.log(data,'all Products')
      if(data.length > 0){
     //  this.productsFound = true;
        this.productList = data;
+       //this.total = data.total;
       }else{
         this.productList = [];
        // this.productsFound = false;
@@ -63,16 +106,45 @@ export class ProductsComponent implements OnInit {
     })
   }
 
+  getAllProductCategories(){
+    this._adminService.getAllProductCategory().subscribe((data) => {
+      console.log(data,'product category')
+     if(data.length > 0){
+       this.productCategoryList = data
+      }else{
+        this.productCategoryList = [];
+      }
+      
+    })
+  }
+
+  handlePageChange(event: number){
+    console.log(event)
+    this.page = event;
+    this.getAllProducts();
+}
+
   showaddProductModal(){
-    this.addProduct = true;
-    this.editProduct = false
     this.submitted = false;
     this.addProductForm.reset();
     this.addProductForm.markAsUntouched();
     this.addProductForm.markAsPristine();
+    this.addProductForm.controls['catId'].setValue('')
+    this.addProductForm.controls['unitId'].setValue('')
+    this.addProductForm.controls['saleTaxId'].setValue('')
+    this.addProductForm.controls['purchaseTaxId'].setValue('')
     
   }
 
+  addProdTab(){
+    this.addProductTitle ="Add Product";
+  }
+
+  uploadProdImages(){
+    this.addProductTitle ="Upload Product Images";
+  }
+
+ 
   submitNewProduct(){
     this.submitted = true;
      if(this.addProductForm.valid){
@@ -80,8 +152,25 @@ export class ProductsComponent implements OnInit {
         var addProductData :any = {};
         addProductData.productId = 0;
         addProductData.productName = this.addProductForm.controls['productName'].value;
-        addProductData.registrationFees = this.addProductForm.controls['registrationFees'].value;
-       
+        addProductData.hsnCode = this.addProductForm.controls['hsnCode'].value;
+        addProductData.catId= this.addProductForm.controls['catId'].value;
+        addProductData.unitId = this.addProductForm.controls['unitId'].value;
+        addProductData.saleTaxId = this.addProductForm.controls['saleTaxId'].value;
+        addProductData.barcode = this.addProductForm.controls['barcode'].value;
+        addProductData.description = this.addProductForm.controls['description'].value;
+        addProductData.purchaseTaxId = this.addProductForm.controls['purchaseTaxId'].value;
+        addProductData.discountId = this.addProductForm.controls['discountId'].value;
+        addProductData.barcodeStatus = this.addProductForm.controls['barcodeStatus'].value;
+        addProductData.productEnglishName = this.addProductForm.controls['productEnglishName'].value;
+        addProductData.isDiscountApplicable = this.addProductForm.controls['isDiscountApplicable'].value;
+        addProductData.createdBy = this.addProductForm.controls['createdBy'].value;
+        addProductData.createdDate = this.addProductForm.controls['createdDate'].value;
+        addProductData.updatedBy = this.addProductForm.controls['updatedBy'].value;
+        addProductData.updatedDate = this.addProductForm.controls['updatedDate'].value;
+        addProductData.mfd = this.addProductForm.controls['mfd'].value;
+        addProductData.expiryDate = this.addProductForm.controls['expiryDate'].value;
+        addProductData.batchNo = "";
+
         this._adminService.addProduct(addProductData).subscribe((data:any) => {
           console.log(data.status);
           //console.log(data.headers.get('X-Custom-Header'));
@@ -105,9 +194,26 @@ export class ProductsComponent implements OnInit {
     this.addProduct = false;
     this.editProduct = true;
     this.editProductForm.patchValue({
-      productId : item.productId,
-      productName : item.productName,
-      registrationFees : item.registrationFees
+      productId: item.productId,
+      productName: item.productName,
+      hsnCode: item.hsnCode,
+      catId: item.catId,
+      unitId: item.unitId,
+      saleTaxId: item.saleTaxId,
+      barcode: item.barcode,
+      description: item.description,
+      purchaseTaxId: item.purchaseTaxId,
+      discountId: item.discountId,
+      barcodeStatus: item.barcodeStatus,
+      productEnglishName: item.productEnglishName,
+      isDiscountApplicable: item.isDiscountApplicable,
+      createdBy: item.createdBy,
+      createdDate: item.createdDate,
+      updatedBy: item.updatedBy,
+      updatedDate: item.updatedDate,
+      mfd: item.mfd,
+      expiryDate: item.expiryDate,
+      batchNo: item.batchNo,     
     })
     
   }

@@ -10,6 +10,7 @@ import { CityComponent } from './city/city.component';
 import { ExpenseTypeComponent } from './expense-type/expense-type.component';
 import { InstallmentsComponent } from './installments/installments.component';
 import { ProductBrandComponent } from './product-brand/product-brand.component';
+import { BranchComponent } from './branch/branch.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -26,6 +27,7 @@ import { ProductBrandComponent } from './product-brand/product-brand.component';
     ExpenseTypeComponent,
     InstallmentsComponent,
     ProductBrandComponent,
+    BranchComponent,
   ]
 })
 

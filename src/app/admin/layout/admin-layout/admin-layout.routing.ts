@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { BranchComponent } from 'src/app/pages/branch/branch.component';
 import { CityComponent } from 'src/app/pages/city/city.component';
 import { ExpenseTypeComponent } from 'src/app/pages/expense-type/expense-type.component';
 import { InstallmentsComponent } from 'src/app/pages/installments/installments.component';
@@ -16,6 +17,7 @@ export const AdminLayoutRoutes: Routes = [
      { path:'tax-slot', component: TaxSlotComponent },
      { path:'products', component: ProductsComponent },
      { path:'city', component: CityComponent },
+     { path:'branch', component: BranchComponent },
      { path:'expense-type', component: ExpenseTypeComponent },
      { path:'installments', component: InstallmentsComponent },
    

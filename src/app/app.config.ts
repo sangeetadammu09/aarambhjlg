@@ -7,6 +7,7 @@ export const APP_DI_CONFIG: any = {
   endPoints: {
     User:{
       Login : "/User/Login", 
+      GetAllManager : "/User/GetAllManager"
     },
     ProductCategory:{
       GetAllProductCategory : "/ProductCategory/GetAllProductCategory",
@@ -58,7 +59,13 @@ export const APP_DI_CONFIG: any = {
       AddProductImages : "/Product/AddProductImages",
       UpdateProduct : "/Product/UpdateProduct",
       DeleteProduct : "/Product/DeleteProduct"
-    }
+    },
+    Branch:{
+      GetAllBranches : "/Branch/GetAllBranches",
+      AddBranch : "/Branch/AddBranch",
+      UpdateBranch : "/Branch/UpdateBranch",
+      DeleteBranch : "/Branch/DeleteBranch"
+    },
     
     
   }
