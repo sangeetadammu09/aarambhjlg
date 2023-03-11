@@ -107,14 +107,18 @@
                 </div>
                 
                 <div class="row">
-                <div class="form-group col-lg-6">
-                    <label class="form-control-label">Cty</label>
-                    <input type="text" class="form-control" formControlName="cityId" name="cityId"  
-                    [ngClass]="{'is-invalid':(submitted && f['cityId'].errors) ||(f['cityId'].errors && f['cityId'].touched) }">
-                        <div *ngIf="(submitted && f['cityId'].errors) ||(f['cityId'].errors && f['cityId'].touched)" class="invalid-feedback">
-                            <div *ngIf="f['cityId'].errors['required']">City is required</div> 
-                     </div>
-                </div>
+                    <div class="form-group col-lg-6">
+                        <label class="form-control-label">Cty</label>
+                        <select class="custom-select"  formControlName="cityId" name="cityId" id="cityId"
+                        [ngClass]="{'is-invalid':(submitted && f['cityId'].errors) ||(f['cityId'].errors && f['cityId'].touched) }">
+                        <option value="" [selected]="''">Choose..</option>
+                            <option *ngFor="let item of cityList" [ngValue]="item.cityId">
+                                {{item.cityName }}</option>
+                          </select>
+                            <div *ngIf="(submitted && f['cityId'].errors) ||(f['cityId'].errors && f['cityId'].touched)" class="invalid-feedback">
+                                <div *ngIf="f['cityId'].errors['required']">City is required</div> 
+                         </div>
+                    </div>
                 <div class="form-group col-lg-6">
                     <label class="form-control-label">Address</label>
                     <input type="text" class="form-control" formControlName="branchAddress" name="branchAddress"  
@@ -131,7 +135,7 @@
                     <select class="custom-select"  formControlName="managerId" name="managerId" id="managerId"
                     [ngClass]="{'is-invalid':(submitted && f['managerId'].errors) ||(f['managerId'].errors && f['managerId'].touched) }">
                     <option value="" [selected]="''">Choose..</option>
-                        <option *ngFor="let item of managerList" [ngValue]="item">
+                        <option *ngFor="let item of managerList" [ngValue]="item.userId">
                             {{item.fullName }}</option>
                         
                       </select>
@@ -190,8 +194,12 @@
                 <div class="row">
                 <div class="form-group col-lg-6">
                     <label class="form-control-label">Cty</label>
-                    <input type="text" class="form-control" formControlName="cityId" name="cityId"  
+                    <select class="custom-select"  formControlName="cityId" name="cityId" id="cityId"
                     [ngClass]="{'is-invalid':(submitted && g['cityId'].errors) ||(g['cityId'].errors && g['cityId'].touched) }">
+                    <option value="" [selected]="''">Choose..</option>
+                        <option *ngFor="let item of cityList" [ngValue]="item.cityId">
+                            {{item.cityName }}</option>
+                      </select>
                         <div *ngIf="(submitted && g['cityId'].errors) ||(g['cityId'].errors && g['cityId'].touched)" class="invalid-feedback">
                             <div *ngIf="g['cityId'].errors['required']">City is required</div> 
                      </div>
@@ -211,23 +219,24 @@
                     <select class="custom-select"  formControlName="managerId" name="managerId" id="managerId"
                     [ngClass]="{'is-invalid':(submitted && f['managerId'].errors) ||(f['managerId'].errors && f['managerId'].touched) }">
                     <option value="" [selected]="''">Choose..</option>
-                        <option *ngFor="let item of managerList" [ngValue]="item">
+                        <option *ngFor="let item of managerList" [ngValue]="item.userId">
                             {{item.fullName }}</option>
                       </select>
                     <div *ngIf="(submitted && g['managerId'].errors) ||(g['managerId'].errors && g['managerId'].touched)" class="invalid-feedback">
                         <div *ngIf="g['managerId'].errors['required']">Manager is required</div> 
                      </div>
                 </div>
+                
                 <div class="form-group col-lg-6">
                     <label class="form-control-label">Status</label><br/>
                     <div class="form-check form-check-inline">
-                    <label class="form-check-label" for="active">
+                    <label class="form-check-label p-0" for="active">
                     <input class="form-check-input" type="radio" formControlName="isActive" name="isActive" id="status" value="true"
                     [ngClass]="{'is-invalid':(submitted && g['isActive'].errors) ||(g['isActive'].errors && g['isActive'].touched) }">Active
                     </label>
                     </div>
                     <div class="form-check form-check-inline">
-                    <label class="form-check-label" for="inactive">
+                    <label class="form-check-label p-0" for="inactive">
                     <input class="form-check-input" type="radio" formControlName="isActive" name="isActive" id="status" value="false"
                     [ngClass]="{'is-invalid':(submitted && g['isActive'].errors) ||(g['isActive'].errors && g['isActive'].touched) }">Inactive
                     </label>

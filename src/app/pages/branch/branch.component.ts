@@ -24,6 +24,8 @@ export class BranchComponent implements OnInit {
   productsFound: boolean = false;
   managerList: any;
   todayDate = new Date().toJSON();
+  cityList: any;
+  selectedBranchItem: any;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addBranchForm = this._formBuilder.group({
@@ -54,6 +56,7 @@ export class BranchComponent implements OnInit {
   ngOnInit(): void {
     this.getAllBranches()
     this.getAllManager()
+    this.getAllCitys()
     
   }
 
@@ -69,6 +72,20 @@ export class BranchComponent implements OnInit {
        this.branchList = data;
       }else{
         this.branchList = [];
+       // this.productsFound = false;
+      }
+      
+    })
+  }
+
+  getAllCitys(){
+    this._adminService.getAllCity().subscribe((data) => {
+      console.log(data,'all Citys')
+     if(data.length > 0){
+    //  this.productsFound = true;
+       this.cityList = data;
+      }else{
+        this.cityList = [];
        // this.productsFound = false;
       }
       
@@ -96,6 +113,7 @@ export class BranchComponent implements OnInit {
     this.addBranchForm.markAsPristine();
     this.addBranchForm.controls['isActive'].setValue('true');
     this.addBranchForm.controls['managerId'].setValue('')
+    this.addBranchForm.controls['cityId'].setValue('')
     
   }
 
@@ -109,11 +127,11 @@ export class BranchComponent implements OnInit {
         addBranchData.branchCode = this.addBranchForm.controls['branchCode'].value;
         addBranchData.cityId = this.addBranchForm.controls['cityId'].value;
         addBranchData.branchAddress = this.addBranchForm.controls['branchAddress'].value;
-        addBranchData.managerId = (this.addBranchForm.controls['managerId'].value).userId;
-        addBranchData.isActive = this.addBranchForm.controls['isActive'].value;
-        addBranchData.createdBy = '';
+        addBranchData.managerId = this.addBranchForm.controls['managerId'].value;
+        addBranchData.isActive = JSON.parse(this.addBranchForm.controls['isActive'].value);
+        addBranchData.createdBy = 0;
         addBranchData.createdDate = this.todayDate;
-        addBranchData.updatedBy = '';
+        addBranchData.updatedBy = 0;
         addBranchData.updatedDate = this.todayDate;
         this._adminService.addBranch(addBranchData).subscribe((data:any) => {
           console.log(data.status);
@@ -133,19 +151,20 @@ export class BranchComponent implements OnInit {
 
   showeditBranchModal(item:any){
     console.log(item)
+    this.selectedBranchItem = item;
     this.addBranch = false;
     this.editBranch = true;
     this.editBranchForm.patchValue({
       branchId : item.branchId,
       branchName : item.branchName,
       branchCode : item.branchCode,
-      cityId : item.cityName,
+      cityId : item.cityId,
       branchAddress : item.branchAddress,
-     // managerId : {userId: 5, fullName: 'Anjali'},
-      isActive : item.isActive,
+      managerId : item.managerId,
+      isActive : JSON.stringify(item.isActive),
     })
 
-    this.editBranchForm.controls['managerId'].setValue(5)
+   // this.editBranchForm.controls['managerId'].setValue({userId: 5, fullName: 'Anjali'})
     
   }
 
@@ -161,11 +180,11 @@ export class BranchComponent implements OnInit {
         updateBranchData.cityId = this.editBranchForm.controls['cityId'].value;
         updateBranchData.branchAddress = this.editBranchForm.controls['branchAddress'].value;
         updateBranchData.managerId = this.editBranchForm.controls['managerId'].value;
-        updateBranchData.isActive = this.editBranchForm.controls['isActive'].value;
-        updateBranchData.createdBy = this.editBranchForm.controls['createdBy'].value;
-        updateBranchData.createdDate = this.editBranchForm.controls['createdDate'].value;
-        updateBranchData.updatedBy = this.editBranchForm.controls['updatedBy'].value;
-        updateBranchData.updatedDate = this.editBranchForm.controls['updatedDate'].value
+        updateBranchData.isActive = JSON.parse(this.editBranchForm.controls['isActive'].value);
+        updateBranchData.createdBy = this.selectedBranchItem.createdBy;
+        updateBranchData.createdDate = this.selectedBranchItem.createdDate;
+        updateBranchData.updatedBy = this.selectedBranchItem.updatedBy == null ? 0 : this.selectedBranchItem.updatedBy;
+        updateBranchData.updatedDate = this.todayDate;
         this._adminService.updateBranch(updateBranchData).subscribe((data:any) => {
           if(data){
             this._toastrService.success('Branch updated successfully!');
