@@ -66,7 +66,7 @@ export class BranchComponent implements OnInit {
 
   getAllBranches(){
     this._adminService.getAllBranch().subscribe((data) => {
-      console.log(data,'all Branchs')
+    //  console.log(data,'all Branchs')
      if(data.length > 0){
     //  this.productsFound = true;
        this.branchList = data;
@@ -80,7 +80,7 @@ export class BranchComponent implements OnInit {
 
   getAllCitys(){
     this._adminService.getAllCity().subscribe((data) => {
-      console.log(data,'all Citys')
+    //  console.log(data,'all Citys')
      if(data.length > 0){
     //  this.productsFound = true;
        this.cityList = data;
@@ -94,7 +94,7 @@ export class BranchComponent implements OnInit {
 
   getAllManager(){
     this._adminService.getAllManager().subscribe((data) => {
-      console.log(data,'all Managers')
+     // console.log(data,'all Managers')
      if(data.length > 0){
        this.managerList = data;
       }else{
@@ -150,7 +150,7 @@ export class BranchComponent implements OnInit {
   }
 
   showeditBranchModal(item:any){
-    console.log(item)
+    console.log(item,item.managerId)
     this.selectedBranchItem = item;
     this.addBranch = false;
     this.editBranch = true;
@@ -160,11 +160,11 @@ export class BranchComponent implements OnInit {
       branchCode : item.branchCode,
       cityId : item.cityId,
       branchAddress : item.branchAddress,
-      managerId : item.managerId,
+      //managerId : item.managerId,
       isActive : JSON.stringify(item.isActive),
     })
 
-   // this.editBranchForm.controls['managerId'].setValue({userId: 5, fullName: 'Anjali'})
+    this.editBranchForm.controls['managerId'].setValue(item.managerId)
     
   }
 
