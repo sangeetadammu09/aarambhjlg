@@ -35,8 +35,17 @@ export class UserComponent implements OnInit {
   addUserDocumentForm: any;
   adduserDocumentName: any;
   userDocumentFile: any;
-  userDocumentName: any ="Choose File";
+  aadhaarFrontDocumentName: any ="Choose File";
+  aadhaarBackDocumentName: any ="Choose File";
+  photoDocumentName: any ="Choose File";
+  addressDocumentName: any ="Choose File";
   viewMode = 'tab1';
+  addedUserId: any;
+  aadhaarFrontFile: any;
+  aadhaarBackFile: any;
+  photoFile: any;
+  addressFile: any;
+  userDocument: any;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addUserForm = this._formBuilder.group({
@@ -59,9 +68,11 @@ export class UserComponent implements OnInit {
     })
 
     this.addUserDocumentForm = this._formBuilder.group({
-      userId : [,Validators.required],
-      documentName : [],
-      file : [,Validators.required]
+      userId : [],
+      aadhaarFrontDocument:[],
+      aadhaarBackDocument:[],
+      photoDocument:[],
+      addressDocument:[]
     })
 
     this.editUserForm = this._formBuilder.group({
@@ -193,9 +204,11 @@ export class UserComponent implements OnInit {
         addUserData.isDeleted = false;
 
         this._adminService.addUser(addUserData).subscribe((data:any) => {
-          console.log(data.status);
+       //   console.log(data.status);
           //console.log(data.headers.get('X-Custom-Header'));
           if(data.status == 200){
+           
+            this.addedUserId = data.body;
             this._toastrService.success('User added successfully!');
             this.viewMode = 'tab2';
            // this.closeaddUserBtn.nativeElement.click();
@@ -211,45 +224,92 @@ export class UserComponent implements OnInit {
 
   }
 
-  uploadUserDocument(file: any) {
-    this.userDocumentFile='';
-    this.userDocumentName = file.target.files[0].name;
-    if(this.userDocumentName.includes('.png') || this.userDocumentName.includes('.jpg')) {
-      this.userDocumentFile = file.target.files[0];
+ uploadAadhaarFrontDocument(file: any) {
+    this.aadhaarFrontFile='';
+    this.aadhaarFrontDocumentName = file.target.files[0].name;
+    if(this.aadhaarFrontDocumentName.includes('.png') || this.aadhaarFrontDocumentName.includes('.jpg')) {
+      this.aadhaarFrontFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
     }
-   // console.log(this.userDocumentFile)
+  
+   
+  }
+
+  uploadAadhaarBackDocument(file: any) {
+    this.aadhaarBackFile='';
+    this.aadhaarBackDocumentName = file.target.files[0].name;
+    if(this.aadhaarBackDocumentName.includes('.png') || this.aadhaarBackDocumentName.includes('.jpg')) {
+      this.aadhaarBackFile = file.target.files[0];
+    }else{
+      this._toastrService.error('Only PNG or JPG document is allowed')
+    }
+  
+   
+  }
+
+  uploadPhotoDocument(file: any) {
+    this.photoFile='';
+    this.photoDocumentName = file.target.files[0].name;
+    if(this.photoDocumentName.includes('.png') || this.photoDocumentName.includes('.jpg')) {
+      this.photoFile = file.target.files[0];
+    }else{
+      this._toastrService.error('Only PNG or JPG document is allowed')
+    }
+  
+   
+  }
+
+  uploadAddressDocument(file: any) {
+    this.addressFile='';
+    this.addressDocumentName = file.target.files[0].name;
+    if(this.addressDocumentName.includes('.png') || this.addressDocumentName.includes('.jpg')) {
+      this.addressFile = file.target.files[0];
+    }else{
+      this._toastrService.error('Only PNG or JPG document is allowed')
+    }
+   
    
   }
 
   submitUserDocument(){
-
-    this.submitted = true;
-    if(this.addUserDocumentForm.valid){
-     //  console.log(this.addUserForm.value)
+    console.log(this.addressFile,this.aadhaarFrontFile,this.aadhaarBackFile,this.photoFile)
+    if(this.aadhaarFrontFile != undefined && this.aadhaarBackFile == undefined && this.addressFile == undefined && this.photoFile == undefined){
+       this.userDocument =  this.aadhaarFrontDocumentName;
+       this.userDocumentFile = this.aadhaarFrontFile
+    }else if(this.aadhaarFrontFile == undefined && this.aadhaarBackFile != undefined && this.addressFile == undefined && this.photoFile == undefined){
+      this.userDocument =  this.aadhaarBackDocumentName;
+      this.userDocumentFile = this.aadhaarBackFile;
+   }else if(this.aadhaarFrontFile == undefined && this.aadhaarBackFile == undefined && this.addressFile != undefined && this.photoFile == undefined){
+    this.userDocument =  this.addressDocumentName;
+    this.userDocumentFile = this.addressFile;
+   }else if(this.aadhaarFrontFile == undefined && this.aadhaarBackFile == undefined && this.addressFile == undefined && this.photoFile != undefined){
+    this.userDocument =  this.photoFile;
+    this.userDocumentFile = this.photoFile;
+   }else{
+    this._toastrService.warning("Please upload one document at a time")
+   }
+   
+    if(this.addedUserId){
        var addUserDocumentData = new FormData();
-       addUserDocumentData.append('UserId',this.addUserDocumentForm.controls['userId'].value);
-       addUserDocumentData.append('DocumentName',this.userDocumentName);
+       addUserDocumentData.append('UserId',this.addedUserId);
+       addUserDocumentData.append('DocumentName',this.userDocument);
        addUserDocumentData.append('file',this.userDocumentFile);    
 
        this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
-         console.log(data.status);
-         //console.log(data.headers.get('X-Custom-Header'));
          if(data.status == 200){
+          
            this._toastrService.success('Documents added successfully!');
            this.closeaddUserBtn.nativeElement.click();
            this.getAllUsers();
          } 
        },(error:any) => {
         if(error.status == 500){
-        this._toastrService.error('Please upload correct data');
+        this._toastrService.error('Please upload correct documents');
         }
        })
         
-     }else{
-       console.log('invalid form')
-     }  
+    } 
   }
 
 
