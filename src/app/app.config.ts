@@ -7,7 +7,11 @@ export const APP_DI_CONFIG: any = {
   endPoints: {
     User:{
       Login : "/User/Login", 
-      GetAllManager : "/User/GetAllManager"
+      GetAllManager : "/User/GetAllManager",
+      GetAllUser : "/User/GetAllUser",
+      AddUser : "/User/AddSystemUser",
+      AddUserDocuments : "/User/AddUserDocuments",
+      AddUserRole : "/User/AddUserRole",
     },
     ProductCategory:{
       GetAllProductCategory : "/ProductCategory/GetAllProductCategory",

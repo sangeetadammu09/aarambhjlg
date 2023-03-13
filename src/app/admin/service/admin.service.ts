@@ -166,7 +166,6 @@ export class AdminService {
    }
 
    //branch
-   //product brand
 
    getAllBranch(){
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Branch.GetAllBranches)
@@ -187,6 +186,26 @@ export class AdminService {
    getAllManager(){
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.GetAllManager)
    }
+
+
+   //user
+
+   getAllUser(pageNo:any,pageSize:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.GetAllUser+`?pageNo=${pageNo}&pageSize=${pageSize}`)
+   }
+ 
+   addUser(data:any){
+     return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.AddUser,data,{observe: 'response'})
+   }
+ 
+   addUserDocuments(data:any){
+     return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.AddUserDocuments,data,{observe: 'response'})
+   }
+ 
+  //  deleteUser(id:any){
+  //    return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.DeleteUser+`/${id}`,{observe: 'response'})
+  //  }
+
 
 
 }

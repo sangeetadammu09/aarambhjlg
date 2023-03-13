@@ -73,7 +73,15 @@ export const AdminList = {
             isActive: true, 
             url: 'products',
             submenuList: []
-        },
+          },
+          {
+            id: 3,
+            parentMenu: 'Users',
+            icon : 'fa-user-circle',
+            isActive: true, 
+            url: 'users',
+            submenuList: []
+          },
 
     ],
     message: null,

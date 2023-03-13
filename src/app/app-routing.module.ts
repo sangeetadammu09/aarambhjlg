@@ -8,7 +8,7 @@ import { AuthGuard } from './guard/auth.guard';
 export const AppRoutes: Routes = [
   {path: '', redirectTo: 'login',pathMatch: 'full'}, 
   {path:'',component:LoginComponent},
-  {path:'register',component:RegisterComponent},
+  //{path:'register',component:RegisterComponent},
   {
     path: 'admin',
     component: AdminLayoutComponent,

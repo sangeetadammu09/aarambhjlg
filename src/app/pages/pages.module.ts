@@ -11,6 +11,7 @@ import { ExpenseTypeComponent } from './expense-type/expense-type.component';
 import { InstallmentsComponent } from './installments/installments.component';
 import { ProductBrandComponent } from './product-brand/product-brand.component';
 import { BranchComponent } from './branch/branch.component';
+import { UserComponent } from './user/user.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -28,6 +29,7 @@ import { BranchComponent } from './branch/branch.component';
     InstallmentsComponent,
     ProductBrandComponent,
     BranchComponent,
+    UserComponent,
   ]
 })
 
