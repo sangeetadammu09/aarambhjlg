@@ -93,8 +93,8 @@
                   <li class="tab-slider--trigger" [class.active]="viewMode == 'tab1'" rel="tab1" (click)="viewMode ='tab1';addProdTab()">Add User</li>
                   <li class="tab-slider--trigger" [class.active]="viewMode == 'tab2'" rel="tab2" (click)="viewMode ='tab2';uploadProdImages()">Upload User Documents</li>
                 </ul>
-              </div>
-              <div class="tab-slider--container" [ngSwitch]="viewMode">
+            </div>
+            <div class="tab-slider--container" [ngSwitch]="viewMode">
                 <div id="tab1" class="tab-slider--body" *ngSwitchCase="'tab1'">
                     <form [formGroup]="addUserForm" (ngSubmit)="submitNewUser()">
                         <div class="row">
@@ -286,8 +286,7 @@
                           </div>
                     </form>
                 </div>
-              </div>
-           
+            </div>
         </div>
       </div>
     </div>

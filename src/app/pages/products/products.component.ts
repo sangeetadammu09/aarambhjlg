@@ -26,6 +26,10 @@ export class ProductsComponent implements OnInit {
   pageSize = 10;
   productCategoryList: any;
   addProductTitle ="Add Product";
+  viewMode = 'tab1';
+  unitList: any;
+  taxSlotList: any;
+  todayDate = new Date().toJSON();
  
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
@@ -36,20 +40,13 @@ export class ProductsComponent implements OnInit {
       catId: [, Validators.required],
       unitId: [, Validators.required],
       saleTaxId: [, Validators.required],
-      barcode: ['', Validators.required],
+      barcode: [],
       description: ['', Validators.required],
-      purchaseTaxId: [, Validators.required],
-      discountId: [, Validators.required],
-      barcodeStatus: ['', Validators.required],
-      productEnglishName: ['', Validators.required],
-      isDiscountApplicable: ['', Validators.required],
-      createdBy: ['', Validators.required],
-      createdDate: ['', Validators.required],
-      updatedBy: ['', Validators.required],
-      updatedDate: ['', Validators.required],
-      mfd: ['', Validators.required],
-      expiryDate: ['', Validators.required],
-      batchNo: ['', Validators.required]     
+      barcodeStatus: [],
+      productEngName: ['', Validators.required],
+      createdBy: [],
+      createdDate: [''],
+
     })
 
     this.editProductForm = this._formBuilder.group({
@@ -59,20 +56,12 @@ export class ProductsComponent implements OnInit {
       catId: [, Validators.required],
       unitId: [, Validators.required],
       saleTaxId: [, Validators.required],
-      barcode: ['', Validators.required],
+      barcode: [],
       description: ['', Validators.required],
-      purchaseTaxId: [, Validators.required],
-      discountId: [, Validators.required],
-      barcodeStatus: ['', Validators.required],
-      productEnglishName: ['', Validators.required],
-      isDiscountApplicable: ['', Validators.required],
-      createdBy: ['', Validators.required],
-      createdDate: ['', Validators.required],
-      updatedBy: ['', Validators.required],
-      updatedDate: ['', Validators.required],
-      mfd: ['', Validators.required],
-      expiryDate: ['', Validators.required],
-      batchNo: ['', Validators.required]     
+      barcodeStatus: [],
+      productEngName: ['', Validators.required],
+      createdBy: [],
+      createdDate: [''], 
     })
 
     
@@ -80,8 +69,10 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllProducts()
-    this.getAllProductCategories()
+    this.getAllProducts();
+    this.getAllProductCategories();
+    this.getAllUnits();
+    this.getAllTaxSlots();
   }
 
   get f(){ return this.addProductForm.controls}
@@ -93,11 +84,11 @@ export class ProductsComponent implements OnInit {
     paginationObj.pageNo =this.page;
     paginationObj.pageSize = this.pageSize;
     this._adminService.getAllProduct(paginationObj.pageNo,paginationObj.pageSize).subscribe((data) => {
-      console.log(data,'all Products')
-     if(data.length > 0){
+    //  console.log(data,'all Products')
+     if(data.products.length > 0){
     //  this.productsFound = true;
-       this.productList = data;
-       //this.total = data.total;
+       this.productList = data.products;
+       this.total = data.pages.totalCount;
       }else{
         this.productList = [];
        // this.productsFound = false;
@@ -108,7 +99,7 @@ export class ProductsComponent implements OnInit {
 
   getAllProductCategories(){
     this._adminService.getAllProductCategory().subscribe((data) => {
-      console.log(data,'product category')
+      //console.log(data,'product category')
      if(data.length > 0){
        this.productCategoryList = data
       }else{
@@ -117,9 +108,37 @@ export class ProductsComponent implements OnInit {
       
     })
   }
+  
+  getAllUnits(){
+    this._adminService.getAllUnits().subscribe((data) => {
+    //  console.log(data,'all units')
+     if(data.length > 0){
+    //  this.productsFound = true;
+       this.unitList = data;
+      }else{
+        this.unitList = [];
+       // this.productsFound = false;
+      }
+      
+    })
+  }
+
+  getAllTaxSlots(){
+    this._adminService.getAllTaxSlot().subscribe((data) => {
+     // console.log(data,'all TaxSlots')
+     if(data.length > 0){
+    //  this.productsFound = true;
+       this.taxSlotList = data;
+      }else{
+        this.taxSlotList = [];
+       // this.productsFound = false;
+      }
+      
+    })
+  }
 
   handlePageChange(event: number){
-    console.log(event)
+    //console.log(event)
     this.page = event;
     this.getAllProducts();
 }
@@ -132,7 +151,6 @@ export class ProductsComponent implements OnInit {
     this.addProductForm.controls['catId'].setValue('')
     this.addProductForm.controls['unitId'].setValue('')
     this.addProductForm.controls['saleTaxId'].setValue('')
-    this.addProductForm.controls['purchaseTaxId'].setValue('')
     
   }
 
@@ -147,8 +165,9 @@ export class ProductsComponent implements OnInit {
  
   submitNewProduct(){
     this.submitted = true;
+   
      if(this.addProductForm.valid){
-      //  console.log(this.addProductForm.value)
+       console.log(this.addProductForm.value)
         var addProductData :any = {};
         addProductData.productId = 0;
         addProductData.productName = this.addProductForm.controls['productName'].value;
@@ -158,25 +177,19 @@ export class ProductsComponent implements OnInit {
         addProductData.saleTaxId = this.addProductForm.controls['saleTaxId'].value;
         addProductData.barcode = this.addProductForm.controls['barcode'].value;
         addProductData.description = this.addProductForm.controls['description'].value;
-        addProductData.purchaseTaxId = this.addProductForm.controls['purchaseTaxId'].value;
-        addProductData.discountId = this.addProductForm.controls['discountId'].value;
-        addProductData.barcodeStatus = this.addProductForm.controls['barcodeStatus'].value;
-        addProductData.productEnglishName = this.addProductForm.controls['productEnglishName'].value;
-        addProductData.isDiscountApplicable = this.addProductForm.controls['isDiscountApplicable'].value;
+        addProductData.barcodeStatus = this.addProductForm.controls['barcode'].value == null ? 0 : 1;
+        addProductData.productEngName = this.addProductForm.controls['productEngName'].value;
         addProductData.createdBy = this.addProductForm.controls['createdBy'].value;
-        addProductData.createdDate = this.addProductForm.controls['createdDate'].value;
-        addProductData.updatedBy = this.addProductForm.controls['updatedBy'].value;
-        addProductData.updatedDate = this.addProductForm.controls['updatedDate'].value;
-        addProductData.mfd = this.addProductForm.controls['mfd'].value;
-        addProductData.expiryDate = this.addProductForm.controls['expiryDate'].value;
-        addProductData.batchNo = "";
+        addProductData.createdDate = this.todayDate;
+        
 
         this._adminService.addProduct(addProductData).subscribe((data:any) => {
           console.log(data.status);
           //console.log(data.headers.get('X-Custom-Header'));
           if(data.status == 200){
             this._toastrService.success('Product added successfully!');
-            this.closeaddProductBtn.nativeElement.click();
+           // this.closeaddProductBtn.nativeElement.click();
+            this.viewMode = 'tab2';
             this.getAllProducts();
           }
         })
@@ -205,7 +218,7 @@ export class ProductsComponent implements OnInit {
       purchaseTaxId: item.purchaseTaxId,
       discountId: item.discountId,
       barcodeStatus: item.barcodeStatus,
-      productEnglishName: item.productEnglishName,
+      productEngName: item.productEngName,
       isDiscountApplicable: item.isDiscountApplicable,
       createdBy: item.createdBy,
       createdDate: item.createdDate,

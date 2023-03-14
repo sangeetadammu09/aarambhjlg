@@ -22,9 +22,7 @@
                     <th scope="col">SalesTax</th>
                     <th scope="col">Bar Code</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Discount</th>
                     
-                  
                     <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
                   </tr>
@@ -35,14 +33,12 @@
                     <td>{{item.productId}}</td>
                     <td>{{item.productName}}</td> 
                     <td>{{item.hsnCode}}</td>
-                    <td>{{item.catId}}</td>
-                    <td>{{item.unitId}}</td>
-                    <td>{{item.saleTaxId}}</td>
+                    <td>{{item.categoryName}}</td>
+                    <td>{{item.unitName}}</td>
+                    <td>{{item.saleTaxSlot}}</td>
                     <td>{{item.barcode}}</td>
                     <td>{{item.description}}</td>
-                    <td *ngIf="item.isDiscountApplicable == true">Yes </td>
-                    <td *ngIf="item.isDiscountApplicable == false"> No </td>
-                    
+                   
                     <td (click)="showeditProductModal(item)" data-toggle="modal" data-target="#addeditProductModal">
                         <svg enable-background="new 0 0 19 19" height="19px" id="Layer_1" version="1.1" viewBox="0 0 19 19" width="19px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <g><path d="M8.44,7.25C8.348,7.342,8.277,7.447,8.215,7.557L8.174,7.516L8.149,7.69   C8.049,7.925,8.014,8.183,8.042,8.442l-0.399,2.796l2.797-0.399c0.259,0.028,0.517-0.007,0.752-0.107l0.174-0.024l-0.041-0.041   c0.109-0.062,0.215-0.133,0.307-0.225l5.053-5.053l-3.191-3.191L8.44,7.25z" fill="#231F20"/>
@@ -89,169 +85,137 @@
           </button>    
         </div>
         <div class="modal-body" >
-            <ul class="nav nav-tabs" id="myTab">
-                <li class="nav-item">
-                  <a class="nav-link active" data-toggle="tab" href="#tabOne" (click)="addProdTab()">Add Product</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#tabTwo" (click)="uploadProdImages()">Upload Product Images</a> 
-                </li>
-              </ul>
-              <div class="tab-content pt-3" id="myTabContent">
-                <div class="tab-pane fade active show" id="tabOne"><!-- add product form -->
-                    <div class="col-lg-12 mb-3 mt-3">
-                        <form [formGroup]="addProductForm" (ngSubmit)="submitNewProduct()">
-                            <div class="row">
-                                <div class="form-group col-lg-6">
-                                    <label class="form-control-label">Name</label>
-                                    <input type="text" class="form-control" formControlName="productEnglishName" name="productEnglishName"  
-                                    [ngClass]="{'is-invalid':(submitted && f['productEnglishName'].errors) ||(f['productEnglishName'].errors && f['productEnglishName'].touched) }">
-                                        <div *ngIf="(submitted && f['productEnglishName'].errors) ||(f['productEnglishName'].errors && f['productEnglishName'].touched)" class="invalid-feedback">
-                                            <div *ngIf="f['productEnglishName'].errors['required']">
-                                                Name is required
-                                            </div>
-                                     </div>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label class="form-control-label">Name(Marathi)</label>
-                                    <input type="text" class="form-control" formControlName="productName" name="productName"  
-                                    [ngClass]="{'is-invalid':(submitted && f['productName'].errors) ||(f['productName'].errors && f['productName'].touched) }">
-                                        <div *ngIf="(submitted && f['productName'].errors) ||(f['productName'].errors && f['productName'].touched)" class="invalid-feedback">
-                                            <div *ngIf="f['productName'].errors['required']">
-                                                Name(Marathi) is required
-                                            </div>
-                                     </div>
-                                </div>
-                                
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-lg-6">
-                                    <label class="form-control-label">Category</label>
-                                    <select class="custom-select"  formControlName="catId" name="catId" id="catId"
-                                    [ngClass]="{'is-invalid':(submitted && f['catId'].errors) ||(f['catId'].errors && f['catId'].touched) }">
-                                    <option value="" [selected]="''">Choose...</option>
-                                        <option *ngFor="let item of productCategoryList" [ngValue]="item.categoryId">
-                                            {{item.categoryName }}</option>
-                                    </select>
-                                      <div *ngIf="(submitted && f['catId'].errors) ||(f['catId'].errors && f['catId'].touched)" class="invalid-feedback">
-                                            <div *ngIf="f['catId'].errors['required']">
-                                                Category is required
-                                            </div>
-                                     </div>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label class="form-control-label">Unit</label>
-                                    <select class="custom-select"  formControlName="unitId" name="unitId" id="unitId"
-                                    [ngClass]="{'is-invalid':(submitted && f['unitId'].errors) ||(f['unitId'].errors && f['unitId'].touched) }">
-                                    <option value="" [selected]="''">Choose..</option>
-                                        <option *ngFor="let item of productCategoryList" [ngValue]="item.categoryId">
-                                            {{item.categoryName }}</option>
-                                        
-                                      </select>
-                                        <div *ngIf="(submitted && f['unitId'].errors) ||(f['unitId'].errors && f['unitId'].touched)" class="invalid-feedback">
-                                            <div *ngIf="f['unitId'].errors['required']">
-                                                Unit is required
-                                            </div>
-                                     </div>
-                                </div>
-                            </div>
-
-                            
-                            <div class="row">
-                                <div class="form-group col-lg-6">
-                                    <label class="form-control-label">HSN Code</label>
-                                    <input type="text" class="form-control" formControlName="hsnCode" name="hsnCode"  
-                                    [ngClass]="{'is-invalid':(submitted && f['hsnCode'].errors) ||(f['hsnCode'].errors && f['hsnCode'].touched) }">
-                                        <div *ngIf="(submitted && f['hsnCode'].errors) ||(f['hsnCode'].errors && f['hsnCode'].touched)" class="invalid-feedback">
-                                            <div *ngIf="f['hsnCode'].errors['required']">
-                                                HSN Code is required
-                                            </div>
-                                     </div>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label class="form-control-label">Bar Code
-                                    <span class="barcode-check">
-                                        <input class="form-check-input" type="checkbox" value="">
-                                        <label class="form-check-label" for="flexCheckChecked">AutoGenerate</label>
-                                    </span> 
-                                    </label>
-                                    
-                                    <input type="text" class="form-control" formControlName="barcode" name="barcode"  
-                                    [ngClass]="{'is-invalid':(submitted && f['barcode'].errors) ||(f['barcode'].errors && f['barcode'].touched) }">
-                                        <div *ngIf="(submitted && f['barcode'].errors) ||(f['barcode'].errors && f['barcode'].touched)" class="invalid-feedback">
-                                            <div *ngIf="f['barcode'].errors['required']">
-                                                Bar Code is required
-                                            </div>
-                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="form-group col-lg-6">
-                                    <label class="form-control-label">Sales Tax Group</label>
-                                    <select class="custom-select"  formControlName="saleTaxId" name="saleTaxId" id="saleTaxId"
-                                    [ngClass]="{'is-invalid':(submitted && f['saleTaxId'].errors) ||(f['saleTaxId'].errors && f['saleTaxId'].touched) }">
-                                    <option value="" [selected]="''">Choose...</option>
-                                        <option *ngFor="let item of productCategoryList" [ngValue]="item.categoryId">
-                                            {{item.categoryName }}</option>
-                                    </select>
-                                    <div *ngIf="(submitted && f['saleTaxId'].errors) ||(f['saleTaxId'].errors && f['saleTaxId'].touched)" class="invalid-feedback">
-                                        <div *ngIf="f['saleTaxId'].errors['required']">
-                                                Sales Tax Group is required
+              <div class="tab-slider--nav">
+                <ul class="tab-slider--tabs">
+                  <li class="tab-slider--trigger" [class.active]="viewMode == 'tab1'" rel="tab1" (click)="viewMode ='tab1';addProdTab()">Add Product</li>
+                  <li class="tab-slider--trigger" [class.active]="viewMode == 'tab2'" rel="tab2" (click)="viewMode ='tab2';uploadProdImages()">Upload Product Images</li>
+                </ul>
+               </div>
+            <div class="tab-slider--container" [ngSwitch]="viewMode">
+                <div id="tab1" class="tab-slider--body" *ngSwitchCase="'tab1'">
+                    <form [formGroup]="addProductForm" (ngSubmit)="submitNewProduct()">
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Name</label>
+                                <input type="text" class="form-control" formControlName="productEngName" name="productEngName"  
+                                [ngClass]="{'is-invalid':(submitted && f['productEngName'].errors) ||(f['productEngName'].errors && f['productEngName'].touched) }">
+                                    <div *ngIf="(submitted && f['productEngName'].errors) ||(f['productEngName'].errors && f['productEngName'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['productEngName'].errors['required']">
+                                            Name is required
                                         </div>
-                                     </div>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label class="form-control-label">Purchase Tax Group</label>
-                                    <select class="custom-select"  formControlName="purchaseTaxId" name="purchaseTaxId" id="purchaseTaxId"
-                                    [ngClass]="{'is-invalid':(submitted && f['purchaseTaxId'].errors) ||(f['purchaseTaxId'].errors && f['purchaseTaxId'].touched) }">
-                                    <option value="" [selected]="''">Choose...</option>
-                                        <option *ngFor="let item of productCategoryList" [ngValue]="item.categoryId">
-                                            {{item.categoryName }}</option>
-                                    </select>
-                                        <div *ngIf="(submitted && f['purchaseTaxId'].errors) ||(f['purchaseTaxId'].errors && f['purchaseTaxId'].touched)" class="invalid-feedback">
-                                            <div *ngIf="f['purchaseTaxId'].errors['required']">
-                                                Purchase Tax Group is required
-                                            </div>
-                                     </div>
-                                </div>
+                                 </div>
                             </div>
-
-                            <div class="row">
-                                
-                                <div class="form-group col-lg-6">
-                                    <label class="form-control-label">Discount</label>
-                                    <input type="text" class="form-control" formControlName="discountId" name="discountId"  
-                                    [ngClass]="{'is-invalid':(submitted && f['discountId'].errors) ||(f['discountId'].errors && f['discountId'].touched) }">
-                                        <div *ngIf="(submitted && f['discountId'].errors) ||(f['discountId'].errors && f['discountId'].touched)" class="invalid-feedback">
-                                            <div *ngIf="f['discountId'].errors['required']">
-                                                Discount is required
-                                            </div>
-                                     </div>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label class="form-control-label">Description</label>
-                                    <textarea formControlName="description" name="description"  class="form-control"  id="description" cols="30" rows="10"
-                                    [ngClass]="{'is-invalid':(submitted && f['description'].errors) ||(f['description'].errors && f['description'].touched) }"
-                                    ></textarea>
-                                    <div *ngIf="(submitted && f['description'].errors) ||(f['description'].errors && f['description'].touched)" class="invalid-feedback">
-                                            <div *ngIf="f['description'].errors['required']">
-                                                Description is required
-                                            </div>
-                                    </div>
-                                </div>
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Name(Marathi)</label>
+                                <input type="text" class="form-control" formControlName="productName" name="productName"  
+                                [ngClass]="{'is-invalid':(submitted && f['productName'].errors) ||(f['productName'].errors && f['productName'].touched) }">
+                                    <div *ngIf="(submitted && f['productName'].errors) ||(f['productName'].errors && f['productName'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['productName'].errors['required']">
+                                            Name(Marathi) is required
+                                        </div>
+                                 </div>
                             </div>
                             
-            
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Save</button>
-                              </div>
-                        </form>
-                    </div>  
-                   <!-- add product form -->
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Category</label>
+                                <select class="custom-select"  formControlName="catId" name="catId" id="catId"
+                                [ngClass]="{'is-invalid':(submitted && f['catId'].errors) ||(f['catId'].errors && f['catId'].touched) }">
+                                <option value="" [selected]="''">Choose...</option>
+                                    <option *ngFor="let item of productCategoryList" [ngValue]="item.categoryId">
+                                        {{item.categoryName }}</option>
+                                </select>
+                                  <div *ngIf="(submitted && f['catId'].errors) ||(f['catId'].errors && f['catId'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['catId'].errors['required']">
+                                            Category is required
+                                        </div>
+                                 </div>
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Unit</label>
+                                <select class="custom-select"  formControlName="unitId" name="unitId" id="unitId"
+                                [ngClass]="{'is-invalid':(submitted && f['unitId'].errors) ||(f['unitId'].errors && f['unitId'].touched) }">
+                                <option value="" [selected]="''">Choose..</option>
+                                    <option *ngFor="let item of unitList" [ngValue]="item.unitId">
+                                        {{item.unitName }}</option>
+                                    
+                                  </select>
+                                    <div *ngIf="(submitted && f['unitId'].errors) ||(f['unitId'].errors && f['unitId'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['unitId'].errors['required']">
+                                            Unit is required
+                                        </div>
+                                 </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">HSN Code</label>
+                                <input type="text" class="form-control" formControlName="hsnCode" name="hsnCode"  
+                                [ngClass]="{'is-invalid':(submitted && f['hsnCode'].errors) ||(f['hsnCode'].errors && f['hsnCode'].touched) }">
+                                    <div *ngIf="(submitted && f['hsnCode'].errors) ||(f['hsnCode'].errors && f['hsnCode'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['hsnCode'].errors['required']">
+                                            HSN Code is required
+                                        </div>
+                                 </div>
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Bar Code
+                                <span class="barcode-check">
+                                    <input class="form-check-input" type="checkbox" value="">
+                                    <label class="form-check-label" for="flexCheckChecked">AutoGenerate</label>
+                                </span> 
+                                </label>
+                                
+                                <input type="text" class="form-control" formControlName="barcode" name="barcode"  
+                                [ngClass]="{'is-invalid':(submitted && f['barcode'].errors) ||(f['barcode'].errors && f['barcode'].touched) }">
+                                    <div *ngIf="(submitted && f['barcode'].errors) ||(f['barcode'].errors && f['barcode'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['barcode'].errors['required']">
+                                            Bar Code is required
+                                        </div>
+                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Sales Tax Group</label>
+                                <select class="custom-select"  formControlName="saleTaxId" name="saleTaxId" id="saleTaxId"
+                                [ngClass]="{'is-invalid':(submitted && f['saleTaxId'].errors) ||(f['saleTaxId'].errors && f['saleTaxId'].touched) }">
+                                <option value="" [selected]="''">Choose...</option>
+                                    <option *ngFor="let item of taxSlotList" [ngValue]="item.taxId">
+                                        {{item.taxName }}</option>
+                                </select>
+                                <div *ngIf="(submitted && f['saleTaxId'].errors) ||(f['saleTaxId'].errors && f['saleTaxId'].touched)" class="invalid-feedback">
+                                    <div *ngIf="f['saleTaxId'].errors['required']">
+                                            Sales Tax Group is required
+                                    </div>
+                                 </div>
+                            </div>                    
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Description</label>
+                                <textarea formControlName="description" name="description"  class="form-control"  id="description" cols="30" rows="10"
+                                [ngClass]="{'is-invalid':(submitted && f['description'].errors) ||(f['description'].errors && f['description'].touched) }"
+                                ></textarea>
+                                <div *ngIf="(submitted && f['description'].errors) ||(f['description'].errors && f['description'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['description'].errors['required']">
+                                            Description is required
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+        
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                          </div>
+                    </form>
                 </div>
-                <div class="tab-pane fade" id="tabTwo">Tab Two Content</div>
-              </div>
+                <div id="tab2" class="tab-slider--body" *ngSwitchCase="'tab2'">
+                    
+                </div>
+            </div>
    
         </div>
       </div>
@@ -304,9 +268,6 @@
       </div>
     </div>
 </div> -->
-
-
-
 
 <div class="modal fade" id="deleteProductModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
