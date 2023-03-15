@@ -32,7 +32,7 @@
              
                 <tbody *ngFor="let item of userList| paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: total } ; let i = index ">
                   <tr>
-                    <td>{{item.userId}}</td>
+                    <td>{{pageSize*(page-1)+i+1}}</td>
                     <td>{{item.username}}</td>
                     <td>{{item.fullName}}</td> 
                     <td>{{item.email}}</td>

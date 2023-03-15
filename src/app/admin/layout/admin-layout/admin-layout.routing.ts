@@ -5,6 +5,7 @@ import { ExpenseTypeComponent } from 'src/app/pages/expense-type/expense-type.co
 import { InstallmentsComponent } from 'src/app/pages/installments/installments.component';
 import { ProductBrandComponent } from 'src/app/pages/product-brand/product-brand.component';
 import { ProductCategoryComponent } from 'src/app/pages/product-category/product-category.component';
+import { ProductPriceComponent } from 'src/app/pages/product-price/product-price.component';
 import { ProductsComponent } from 'src/app/pages/products/products.component';
 import { TaxSlotComponent } from 'src/app/pages/tax-slot/tax-slot.component';
 import { UnitComponent } from 'src/app/pages/unit/unit.component';
@@ -14,10 +15,11 @@ export const AdminLayoutRoutes: Routes = [
     
      { path:'product-category', component: ProductCategoryComponent },
      { path:'product-brand', component: ProductBrandComponent },
+     { path:'product-price', component: ProductPriceComponent },
      { path:'unit', component: UnitComponent },
      { path:'users', component: UserComponent },
      { path:'tax-slot', component: TaxSlotComponent },
-     { path:'products', component: ProductsComponent },
+     { path:'product-list', component: ProductsComponent },
      { path:'city', component: CityComponent },
      { path:'branch', component: BranchComponent },
      { path:'expense-type', component: ExpenseTypeComponent },

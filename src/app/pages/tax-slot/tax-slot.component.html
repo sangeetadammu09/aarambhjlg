@@ -26,7 +26,7 @@
                 </thead>
                 <tbody *ngFor="let item of TaxSlotList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index ">
                   <tr>
-                    <td>{{item.taxId}}</td>
+                    <td>{{10*(p-1)+i+1}}</td>
                     <td>{{item.taxName}}</td> 
                     <td>{{item.cgstPercent}}</td>
                     <td>{{item.sgstPercent}}</td>

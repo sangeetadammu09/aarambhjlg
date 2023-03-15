@@ -80,14 +80,13 @@ export class ProductsComponent implements OnInit {
 
 
   getAllProducts(){
-    var paginationObj :any ={};
-    paginationObj.pageNo =this.page;
-    paginationObj.pageSize = this.pageSize;
-    this._adminService.getAllProduct(paginationObj.pageNo,paginationObj.pageSize).subscribe((data) => {
+    this._adminService.getAllProduct(this.page,this.pageSize).subscribe((data) => {
     //  console.log(data,'all Products')
      if(data.products.length > 0){
-    //  this.productsFound = true;
-       this.productList = data.products;
+      var productArray = data.products;
+      this.productList = productArray
+      //.map((item:any, indexNo:any) => ({indexNo, ...item}));
+      console.log(this.productList)
        this.total = data.pages.totalCount;
       }else{
         this.productList = [];
@@ -207,6 +206,7 @@ export class ProductsComponent implements OnInit {
     this.addProduct = false;
     this.editProduct = true;
     this.editProductForm.patchValue({
+     
       productId: item.productId,
       productName: item.productName,
       hsnCode: item.hsnCode,
@@ -215,18 +215,10 @@ export class ProductsComponent implements OnInit {
       saleTaxId: item.saleTaxId,
       barcode: item.barcode,
       description: item.description,
-      purchaseTaxId: item.purchaseTaxId,
-      discountId: item.discountId,
       barcodeStatus: item.barcodeStatus,
       productEngName: item.productEngName,
-      isDiscountApplicable: item.isDiscountApplicable,
       createdBy: item.createdBy,
-      createdDate: item.createdDate,
-      updatedBy: item.updatedBy,
-      updatedDate: item.updatedDate,
-      mfd: item.mfd,
-      expiryDate: item.expiryDate,
-      batchNo: item.batchNo,     
+      createdDate: item.createdDate
     })
     
   }
@@ -242,9 +234,19 @@ export class ProductsComponent implements OnInit {
      if(this.editProductForm.valid){
     
        var updateProductData :any = {};
-       updateProductData.productId = this.editProductForm.controls['productId'].value;
-       updateProductData.productName = this.editProductForm.controls['productName'].value;
-       updateProductData.registrationFees = this.editProductForm.controls['registrationFees'].value;
+       updateProductData.productId = 0;
+        updateProductData.productName = this.editProductForm.controls['productName'].value;
+        updateProductData.hsnCode = this.editProductForm.controls['hsnCode'].value;
+        updateProductData.catId= this.editProductForm.controls['catId'].value;
+        updateProductData.unitId = this.editProductForm.controls['unitId'].value;
+        updateProductData.saleTaxId = this.editProductForm.controls['saleTaxId'].value;
+        updateProductData.barcode = this.editProductForm.controls['barcode'].value;
+        updateProductData.description = this.editProductForm.controls['description'].value;
+        updateProductData.barcodeStatus = this.editProductForm.controls['barcode'].value;
+        updateProductData.productEngName = this.editProductForm.controls['productEngName'].value;
+        updateProductData.createdBy = this.editProductForm.controls['createdBy'].value == null ? 0 : this.editProductForm.controls['createdBy'].value;
+        updateProductData.createdDate =  this.editProductForm.controls['createdDate'].value;;
+      
         this._adminService.updateProduct(updateProductData).subscribe((data:any) => {
           if(data){
             this._toastrService.success('Product updated successfully!');

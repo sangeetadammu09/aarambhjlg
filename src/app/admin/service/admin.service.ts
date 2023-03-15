@@ -135,6 +135,25 @@ export class AdminService {
      return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ProductBrand.DeleteProductBrand+`/${id}`,{observe: 'response'})
    }
 
+   //product city
+
+   getAllProductPrice(pageNo:any,pageSize:any,cityId:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ProductPrice.GetAllProductPriceByCity+`?pageNo=${pageNo}&pageSize=${pageSize}&cityId=${cityId}`)
+   }
+ 
+   addProductPrice(data:any){
+     return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ProductPrice.AddProductPrice,data,{observe: 'response'})
+   }
+ 
+   updateProductPrice(data:any){
+     return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ProductPrice.UpdateProductPrice,data,{observe: 'response'})
+   }
+ 
+   deleteProductPrice(id:any){
+     return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ProductPrice.DeleteProductPrice+`/${id}`,{observe: 'response'})
+   }
+
+
    //product
 
    getAllProduct(pageNo:any,pageSize:any){
@@ -148,10 +167,6 @@ export class AdminService {
    addProduct(data:any){
      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.AddProduct,data,{observe: 'response'})
    }
-
-   addProductPrice(data:any){
-    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.AddProductPrice,data,{observe: 'response'})
-  }
 
    addProductImages(data:any){
       return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.AddProductImages,data,{observe: 'response'})

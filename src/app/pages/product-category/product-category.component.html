@@ -23,7 +23,7 @@
                 </thead>
                 <tbody *ngFor="let item of productCategoryList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index ">
                   <tr>
-                    <td>{{i}}</td>
+                    <td>{{10*(p-1)+i+1}}</td>
                     <td><img src="{{item.categoryPhoto}}" alt="{{item.categoryName}}" height="100px" width="100px"></td>
                     <td>{{item.categoryName}}</td> 
                     <td (click)="showeditProdCategoryModal(item)" data-toggle="modal" data-target="#addeditProdCategoryModal">

@@ -68,11 +68,24 @@ export const AdminList = {
           },
           {
             id: 2,
-            parentMenu: 'Products',
+            parentMenu: 'Product',
             icon : 'fa-list',
             isActive: true, 
-            url: 'products',
-            submenuList: []
+            url: 'product',
+            submenuList: [ 
+                {
+                id: 0,
+                menu: 'Product List',
+                url: 'product-list',
+                isActive: true, 
+               },
+               {
+                id: 1,
+                menu: 'Product Price',
+                url: 'product-price',
+                isActive: true, 
+               }
+        ]
           },
           {
             id: 3,

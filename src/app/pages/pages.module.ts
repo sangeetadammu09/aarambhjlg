@@ -12,6 +12,7 @@ import { InstallmentsComponent } from './installments/installments.component';
 import { ProductBrandComponent } from './product-brand/product-brand.component';
 import { BranchComponent } from './branch/branch.component';
 import { UserComponent } from './user/user.component';
+import { ProductPriceComponent } from './product-price/product-price.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -30,6 +31,7 @@ import { UserComponent } from './user/user.component';
     ProductBrandComponent,
     BranchComponent,
     UserComponent,
+    ProductPriceComponent,
   ]
 })
 
