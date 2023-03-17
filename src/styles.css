@@ -204,6 +204,13 @@ input[type=radio] {
 /* media */
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
+    .prduct-table {
+        background-color: white;
+        display: block;
+        width: 100%;
+        overflow: scroll;
+        padding-bottom: 10px;
+    }
     
   }
   
