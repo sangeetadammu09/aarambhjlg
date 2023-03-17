@@ -10,6 +10,52 @@
     color : white !important;
 }
 
-.text-white{
-    font-size :18px !important;
+.username{
+    color : white;
+    text-transform: capitalize;
+    font-size: 18px!important;
+    font-weight: 500!important;
+    font-family: Montserrat,Helvetica Neue,Arial,sans-serif;
 }
+
+/* media */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .username {
+        color : black;
+    }
+  }
+  
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: 600px) and (max-width: 767px) {
+    .username {
+        color : black;
+    }
+  }
+  
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px)and (max-width: 991px) {
+    .username {
+        color : black;
+    }
+  } 
+  
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .username {
+        color : white
+    }
+    .table-responsive {
+        overflow: hidden !important;
+    }
+  } 
+  
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) {
+    .username {
+        color : white;
+    }
+    .table-responsive {
+        overflow: hidden !important;
+    }
+  }

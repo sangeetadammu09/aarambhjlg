@@ -51,7 +51,7 @@ export class ProductBrandComponent implements OnInit {
 
   getAllProductBrands(){
     this._adminService.getAllProductBrand().subscribe((data) => {
-     // console.log(data,'all ProductBrands')
+      //console.log(data,'all ProductBrands')
      if(data.length > 0){
     //  this.productsFound = true;
        this.productBrandList = data;

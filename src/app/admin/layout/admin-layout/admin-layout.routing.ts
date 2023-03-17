@@ -17,7 +17,7 @@ export const AdminLayoutRoutes: Routes = [
      { path:'product-brand', component: ProductBrandComponent },
      { path:'product-price', component: ProductPriceComponent },
      { path:'unit', component: UnitComponent },
-     { path:'users', component: UserComponent },
+     { path:'user-list', component: UserComponent },
      { path:'tax-slot', component: TaxSlotComponent },
      { path:'product-list', component: ProductsComponent },
      { path:'city', component: CityComponent },

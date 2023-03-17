@@ -6,9 +6,18 @@
     background-color: white;
 }
 
+/* .main-panel {
+    width: calc(100% - 220px);
+} */
+
 /* @media screen and (max-width: 991px){
-.sidebar, .bootstrap-navbar {
+ .sidebar, .bootstrap-navbar {
     width: 220px !important;
+}
+
+.nav-open .main-panel {
+    right: none;
+    transform: translate3d(220px, 0, 0);
 }
 
 .main-panel {
@@ -17,9 +26,9 @@
      width: calc(100% - 220px);
     
 }
-} */
+}
 
 .sidebar, .sidebar .sidebar-wrapper{
-    /* width: 220px !important; */
-}
+     width: 220px !important;
+} */
 

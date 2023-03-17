@@ -34,29 +34,16 @@ export const AdminList = {
                     url: 'installments',
                     isActive: true, 
                 },
-                
+                           
                 {
                     id: 4,
-                    menu: 'Product Brand',
-                    url: 'product-brand',
-                    isActive: true, 
-                }, 
-                {
-                    id: 5,
-                    menu: 'Product Category',
-                    url: 'product-category',
-                    isActive: true, 
-                }, 
-                
-                {
-                    id: 6,
                     menu: 'Tax Slot',
                     url: 'tax-slot',
                     isActive: true, 
                 },  
                 
                 {
-                    id: 7,
+                    id: 5,
                     menu: 'Unit',
                     url: 'unit',
                     isActive: true, 
@@ -84,7 +71,19 @@ export const AdminList = {
                 menu: 'Product Price',
                 url: 'product-price',
                 isActive: true, 
-               }
+               },
+               {
+                id: 2,
+                menu: 'Product Brand',
+                url: 'product-brand',
+                isActive: true, 
+            }, 
+            {
+                id: 3,
+                menu: 'Product Category',
+                url: 'product-category',
+                isActive: true, 
+            }, 
         ]
           },
           {
@@ -93,7 +92,14 @@ export const AdminList = {
             icon : 'fa-user-circle',
             isActive: true, 
             url: 'users',
-            submenuList: []
+            submenuList: [
+                {
+                    id: 0,
+                    menu: 'User List',
+                    url: 'user-list',
+                    isActive: true, 
+                   },
+            ]
           },
 
     ],
