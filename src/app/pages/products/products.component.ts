@@ -30,6 +30,7 @@ export class ProductsComponent implements OnInit {
   unitList: any;
   taxSlotList: any;
   todayDate = new Date().toJSON();
+  productBrandList: any;
  
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
@@ -39,6 +40,7 @@ export class ProductsComponent implements OnInit {
       hsnCode: ['', Validators.required],
       catId: [, Validators.required],
       unitId: [, Validators.required],
+      brandId:[, Validators.required],
       saleTaxId: [, Validators.required],
       barcode: [],
       description: ['', Validators.required],
@@ -54,6 +56,7 @@ export class ProductsComponent implements OnInit {
       productName: ['', Validators.required],
       hsnCode: ['', Validators.required],
       catId: [, Validators.required],
+      brandId:[, Validators.required],
       unitId: [, Validators.required],
       saleTaxId: [, Validators.required],
       barcode: [],
@@ -73,6 +76,7 @@ export class ProductsComponent implements OnInit {
     this.getAllProductCategories();
     this.getAllUnits();
     this.getAllTaxSlots();
+    this.getAllProductBrands();
   }
 
   get f(){ return this.addProductForm.controls}
@@ -86,10 +90,24 @@ export class ProductsComponent implements OnInit {
       var productArray = data.products;
       this.productList = productArray
       //.map((item:any, indexNo:any) => ({indexNo, ...item}));
-      console.log(this.productList)
+    //  console.log(this.productList)
        this.total = data.pages.totalCount;
       }else{
         this.productList = [];
+       // this.productsFound = false;
+      }
+      
+    })
+  }
+
+  getAllProductBrands(){
+    this._adminService.getAllProductBrand().subscribe((data) => {
+     // console.log(data,'all ProductBrands')
+     if(data.length > 0){
+    //  this.productsFound = true;
+       this.productBrandList = data;
+      }else{
+        this.productBrandList = [];
        // this.productsFound = false;
       }
       
@@ -150,6 +168,7 @@ export class ProductsComponent implements OnInit {
     this.addProductForm.controls['catId'].setValue('')
     this.addProductForm.controls['unitId'].setValue('')
     this.addProductForm.controls['saleTaxId'].setValue('')
+    this.addProductForm.controls['brandId'].setValue('')
     
   }
 
@@ -173,6 +192,7 @@ export class ProductsComponent implements OnInit {
         addProductData.hsnCode = this.addProductForm.controls['hsnCode'].value;
         addProductData.catId= this.addProductForm.controls['catId'].value;
         addProductData.unitId = this.addProductForm.controls['unitId'].value;
+        addProductData.brandId = this.addProductForm.controls['brandId'].value;
         addProductData.saleTaxId = this.addProductForm.controls['saleTaxId'].value;
         addProductData.barcode = this.addProductForm.controls['barcode'].value;
         addProductData.description = this.addProductForm.controls['description'].value;
@@ -205,14 +225,14 @@ export class ProductsComponent implements OnInit {
     console.log(item)
     this.addProduct = false;
     this.editProduct = true;
-    this.editProductForm.patchValue({
-     
+    this.editProductForm.patchValue({    
       productId: item.productId,
       productName: item.productName,
       hsnCode: item.hsnCode,
       catId: item.catId,
       unitId: item.unitId,
       saleTaxId: item.saleTaxId,
+      brandId: item.brandId,
       barcode: item.barcode,
       description: item.description,
       barcodeStatus: item.barcodeStatus,
@@ -240,6 +260,7 @@ export class ProductsComponent implements OnInit {
         updateProductData.catId= this.editProductForm.controls['catId'].value;
         updateProductData.unitId = this.editProductForm.controls['unitId'].value;
         updateProductData.saleTaxId = this.editProductForm.controls['saleTaxId'].value;
+        updateProductData.brandId = this.editProductForm.controls['brandId'].value;
         updateProductData.barcode = this.editProductForm.controls['barcode'].value;
         updateProductData.description = this.editProductForm.controls['description'].value;
         updateProductData.barcodeStatus = this.editProductForm.controls['barcode'].value;

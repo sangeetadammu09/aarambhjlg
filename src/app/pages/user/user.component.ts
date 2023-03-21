@@ -62,6 +62,8 @@ export class UserComponent implements OnInit {
   educationDocFile:any;
   releavingLetterFile:any;
   previousSalarySlipsFile:any;
+  voterFile: any;
+  voterDocumentName: any;
 
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
@@ -290,7 +292,9 @@ export class UserComponent implements OnInit {
         }
         )
          
-     }
+      }else{
+        this._toastrService.error('No user found');
+      }
    }else{
     this._toastrService.error('Please upload Aadhaar Front');
   }
@@ -328,12 +332,13 @@ export class UserComponent implements OnInit {
          }
         })
          
-     }
+     }else{
+      this._toastrService.error('No user found');
+    }
    }else{
     this._toastrService.error("Please upload Aadhaar Back")
    }
   }
-
 
   uploadPhotoDocument(file: any) {
     this.photoFile='';
@@ -368,10 +373,12 @@ export class UserComponent implements OnInit {
          }
         })
          
-     }
-   }else{
-    this._toastrService.error("Please upload Photo")
-   }
+      }else{
+        this._toastrService.error('No user found');
+      }
+      }else{
+        this._toastrService.error("Please upload Photo")
+      }
   }
 
   uploadAddressDocument(file: any) {
@@ -407,12 +414,54 @@ export class UserComponent implements OnInit {
          }
         })
          
-     }
+      }else{
+        this._toastrService.error('No user found');
+      }
    }else{
     this._toastrService.error("Please upload Address Document")
    }
   }
 
+  uploadVoterDocument(file: any) {
+    this.voterFile='';
+    this.voterDocumentName = file.target.files[0].name;
+    if(this.voterDocumentName.includes('.png') || this.voterDocumentName.includes('.jpg')) {
+      this.voterFile = file.target.files[0];
+    }else{
+      this._toastrService.error('Only PNG or JPG document is allowed')
+    }
+  }
+
+  submitVoterDoc(){
+    if(this.voterFile != undefined){
+      this.userDocument =  this.voterDocumentName;
+      this.userDocumentFile = this.voterFile;
+      if(this.addedUserId){
+        var addUserDocumentData = new FormData();
+        addUserDocumentData.append('UserId',this.addedUserId);
+        addUserDocumentData.append('DocumentName',this.userDocument);
+        addUserDocumentData.append('file',this.userDocumentFile);    
+ 
+        this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
+          if(data.status == 200){
+           
+            this._toastrService.success('Voter/PAN added successfully!');
+            this.closeaddUserBtn.nativeElement.click();
+            this.getAllUsers();
+          } 
+        },(error:any) => {
+         if(error.status == 500){
+         this._toastrService.error('Please upload Voter/PAN');
+         }
+        })
+         
+      }else{
+        this._toastrService.error('No user found');
+      }
+      }else{
+        this._toastrService.error("Please upload Voter/PAN")
+      }
+  }
 
 
   // showeditUserModal(item:any){
@@ -509,10 +558,12 @@ export class UserComponent implements OnInit {
          }
         })
          
-     }
-    }else{
-      this._toastrService.error("Please upload Resume")
-    }
+     }else{
+      this._toastrService.error('No user found');
+      }
+      }else{
+        this._toastrService.error("Please upload Resume")
+      }
 
   }
 
@@ -549,7 +600,9 @@ export class UserComponent implements OnInit {
          this._toastrService.error('Please upload driving license');
          }
         })   
-     }
+     }else{
+      this._toastrService.error('No user found');
+    }
     }else{
       this._toastrService.warning("Please upload driving license")
     }
@@ -587,7 +640,9 @@ export class UserComponent implements OnInit {
          this._toastrService.error('Please upload joining letter');
          }
         })   
-     }
+     }else{
+      this._toastrService.error('No user found');
+    }
     }else{
       this._toastrService.warning("Please upload joining letter")
     }
@@ -626,7 +681,9 @@ export class UserComponent implements OnInit {
          this._toastrService.error('Please upload bank passbook');
          }
         })   
-     }
+     }else{
+      this._toastrService.error('No user found');
+    }
     }else{
       this._toastrService.warning("Please upload bank passbook")
     }
@@ -666,7 +723,9 @@ export class UserComponent implements OnInit {
          this._toastrService.error('Please upload education document');
          }
         })   
-     }
+     }else{
+      this._toastrService.error('No user found');
+    }
     }else{
       this._toastrService.warning("Please upload education document")
     }
@@ -706,7 +765,9 @@ export class UserComponent implements OnInit {
          this._toastrService.error('Please upload releaving letter');
          }
         })   
-     }
+     }else{
+      this._toastrService.error('No user found');
+    }
     }else{
       this._toastrService.warning("Please upload releaving letter")
     }
@@ -745,7 +806,9 @@ export class UserComponent implements OnInit {
          this._toastrService.error('Please upload previous salary slips');
          }
         })   
-     }
+     }else{
+      this._toastrService.error('No user found');
+    }
     }else{
       this._toastrService.warning("Please upload previous salary slips")
     }
