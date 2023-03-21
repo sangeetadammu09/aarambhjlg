@@ -46,6 +46,23 @@ export class UserComponent implements OnInit {
   photoFile: any;
   addressFile: any;
   userDocument: any;
+  addJKycDocumentForm: FormGroup;
+
+  familyPhotoName:any;
+  drivingLicenseName:any;
+  joiningLetterName:any;
+  bankPassbookName:any;
+  educationDocName:any;
+  releavingLetterName:any;
+  previousSalarySlipsName:any;
+  familyPhotoFile:any;
+  drivingLicenseFile:any;
+  joiningLetterFile:any;
+  bankPassbookFile:any;
+  educationDocFile:any;
+  releavingLetterFile:any;
+  previousSalarySlipsFile:any;
+
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addUserForm = this._formBuilder.group({
@@ -73,6 +90,17 @@ export class UserComponent implements OnInit {
       aadhaarBackDocument:[],
       photoDocument:[],
       addressDocument:[]
+    })
+
+    this.addJKycDocumentForm = this._formBuilder.group({
+      userId : [],
+      familyPhoto:[],
+      drivingLicense:[],
+      joiningLetter:[],
+      bankPassbook:[],
+      educationDocument:[],
+      releavingLetter:[],
+      previousSalarySlips : []
     })
 
     this.editUserForm = this._formBuilder.group({
@@ -164,13 +192,15 @@ export class UserComponent implements OnInit {
 
   addProdTab(){
     this.addUserTitle ="Add User";
-   
   }
 
   uploadProdImages(){
     this.addUserTitle ="Upload User Documents";
-    
   }
+
+  uploadKycDocument(){
+    this.addUserTitle ="Upload KYC Documents";
+  } 
 
   changeDateOfBirth(event:any){
     //  console.log(event.target.value, 'event')
@@ -180,7 +210,6 @@ export class UserComponent implements OnInit {
 
   }
 
- 
   submitNewUser(){
     this.submitted = true;
      if(this.addUserForm.valid){
@@ -224,7 +253,7 @@ export class UserComponent implements OnInit {
 
   }
 
- uploadAadhaarFrontDocument(file: any) {
+  uploadAadhaarFrontDocument(file: any) {
     this.aadhaarFrontFile='';
     this.aadhaarFrontDocumentName = file.target.files[0].name;
     if(this.aadhaarFrontDocumentName.includes('.png') || this.aadhaarFrontDocumentName.includes('.jpg')) {
@@ -232,8 +261,39 @@ export class UserComponent implements OnInit {
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
     }
-  
-   
+  }
+
+  submitAFDocument(){
+    console.log('submitAFDocument',this.aadhaarFrontFile)
+    if(this.aadhaarFrontFile != undefined){
+      this.userDocument =  this.aadhaarFrontDocumentName;
+      this.userDocumentFile = this.aadhaarFrontFile;
+      if(this.addedUserId){
+        console.log(this.addedUserId)
+        var addUserDocumentData = new FormData();
+        addUserDocumentData.append('UserId',this.addedUserId);
+        addUserDocumentData.append('DocumentName',this.userDocument);
+        addUserDocumentData.append('file',this.userDocumentFile);    
+ 
+        this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
+          if(data.status == 200){
+           
+            this._toastrService.success('Aadhaar Front  added successfully!');
+           this.closeaddUserBtn.nativeElement.click();
+           this.getAllUsers();
+          } 
+        }
+        ,(error:any) => {
+         if(error.status == 500){
+         this._toastrService.error('Please upload Aadhaar Front');
+         }
+        }
+        )
+         
+     }
+   }else{
+    this._toastrService.error('Please upload Aadhaar Front');
+  }
   }
 
   uploadAadhaarBackDocument(file: any) {
@@ -244,9 +304,36 @@ export class UserComponent implements OnInit {
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
     }
-  
-   
   }
+
+  submitABDocument(){
+    if(this.aadhaarBackFile != undefined){
+      this.userDocument =  this.aadhaarBackDocumentName;
+      this.userDocumentFile = this.aadhaarBackFile;
+      if(this.addedUserId){
+        var addUserDocumentData = new FormData();
+        addUserDocumentData.append('UserId',this.addedUserId);
+        addUserDocumentData.append('DocumentName',this.userDocument);
+        addUserDocumentData.append('file',this.userDocumentFile);    
+ 
+        this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
+          if(data.status == 200){        
+            this._toastrService.success('Aadhaar Back added successfully!');
+            this.closeaddUserBtn.nativeElement.click();
+            this.getAllUsers();
+          } 
+        },(error:any) => {
+         if(error.status == 500){
+         this._toastrService.error('Please upload Aadhaar Back');
+         }
+        })
+         
+     }
+   }else{
+    this._toastrService.error("Please upload Aadhaar Back")
+   }
+  }
+
 
   uploadPhotoDocument(file: any) {
     this.photoFile='';
@@ -256,8 +343,35 @@ export class UserComponent implements OnInit {
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
     }
-  
-   
+  }
+
+  submitPhoto(){
+    if(this.photoFile != undefined){
+      this.userDocument =  this.photoDocumentName;
+      this.userDocumentFile = this.photoFile;
+      if(this.addedUserId){
+        var addUserDocumentData = new FormData();
+        addUserDocumentData.append('UserId',this.addedUserId);
+        addUserDocumentData.append('DocumentName',this.userDocument);
+        addUserDocumentData.append('file',this.userDocumentFile);    
+ 
+        this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
+          if(data.status == 200){
+           
+            this._toastrService.success('Photo added successfully!');
+            this.closeaddUserBtn.nativeElement.click();
+            this.getAllUsers();
+          } 
+        },(error:any) => {
+         if(error.status == 500){
+         this._toastrService.error('Please upload Photo');
+         }
+        })
+         
+     }
+   }else{
+    this._toastrService.error("Please upload Photo")
+   }
   }
 
   uploadAddressDocument(file: any) {
@@ -268,48 +382,35 @@ export class UserComponent implements OnInit {
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
     }
-   
-   
   }
 
-  submitUserDocument(){
-    console.log(this.addressFile,this.aadhaarFrontFile,this.aadhaarBackFile,this.photoFile)
-    if(this.aadhaarFrontFile != undefined && this.aadhaarBackFile == undefined && this.addressFile == undefined && this.photoFile == undefined){
-       this.userDocument =  this.aadhaarFrontDocumentName;
-       this.userDocumentFile = this.aadhaarFrontFile
-    }else if(this.aadhaarFrontFile == undefined && this.aadhaarBackFile != undefined && this.addressFile == undefined && this.photoFile == undefined){
-      this.userDocument =  this.aadhaarBackDocumentName;
-      this.userDocumentFile = this.aadhaarBackFile;
-   }else if(this.aadhaarFrontFile == undefined && this.aadhaarBackFile == undefined && this.addressFile != undefined && this.photoFile == undefined){
-    this.userDocument =  this.addressDocumentName;
-    this.userDocumentFile = this.addressFile;
-   }else if(this.aadhaarFrontFile == undefined && this.aadhaarBackFile == undefined && this.addressFile == undefined && this.photoFile != undefined){
-    this.userDocument =  this.photoFile;
-    this.userDocumentFile = this.photoFile;
+  submitAddress(){
+    if(this.addressFile != undefined){
+      this.userDocument =  this.addressDocumentName;
+      this.userDocumentFile = this.addressFile;
+      if(this.addedUserId){
+        var addUserDocumentData = new FormData();
+        addUserDocumentData.append('UserId',this.addedUserId);
+        addUserDocumentData.append('DocumentName',this.userDocument);
+        addUserDocumentData.append('file',this.userDocumentFile);    
+ 
+        this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
+          if(data.status == 200){
+           
+            this._toastrService.success('Address Document added successfully!');
+            this.closeaddUserBtn.nativeElement.click();
+            this.getAllUsers();
+          } 
+        },(error:any) => {
+         if(error.status == 500){
+         this._toastrService.error('Please upload Address Document');
+         }
+        })
+         
+     }
    }else{
-    this._toastrService.warning("Please upload one document at a time")
+    this._toastrService.error("Please upload Address Document")
    }
-   
-    if(this.addedUserId){
-       var addUserDocumentData = new FormData();
-       addUserDocumentData.append('UserId',this.addedUserId);
-       addUserDocumentData.append('DocumentName',this.userDocument);
-       addUserDocumentData.append('file',this.userDocumentFile);    
-
-       this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
-         if(data.status == 200){
-          
-           this._toastrService.success('Documents added successfully!');
-           this.closeaddUserBtn.nativeElement.click();
-           this.getAllUsers();
-         } 
-       },(error:any) => {
-        if(error.status == 500){
-        this._toastrService.error('Please upload correct documents');
-        }
-       })
-        
-    } 
   }
 
 
@@ -373,6 +474,282 @@ export class UserComponent implements OnInit {
   // showdeleteUserModal(item:any){
   //     this.deleteUserItem = item.userId;
   // }
+
+  uploadFamilyPhotoDoc(file:any){
+    this.familyPhotoFile='';
+    this.familyPhotoName = file.target.files[0].name;
+    if(this.familyPhotoName.includes('.pdf')) {
+      this.familyPhotoFile = file.target.files[0];
+    }else{
+      this._toastrService.error('Only PDF document is allowed')
+    }
+
+  }
+
+  submitFamilyPhoto(){
+    if(this.familyPhotoFile != undefined){
+      this.userDocument =  this.familyPhotoName;
+      this.userDocumentFile = this.familyPhotoFile;
+      if(this.addedUserId){
+        var addUserDocumentData = new FormData();
+        addUserDocumentData.append('UserId',this.addedUserId);
+        addUserDocumentData.append('DocumentName',this.userDocument);
+        addUserDocumentData.append('file',this.userDocumentFile);    
+ 
+        this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
+          if(data.status == 200){
+           
+            this._toastrService.success('Resume added successfully!');
+            this.closeaddUserBtn.nativeElement.click();
+            this.getAllUsers();
+          } 
+        },(error:any) => {
+         if(error.status == 500){
+         this._toastrService.error('Please upload Resume');
+         }
+        })
+         
+     }
+    }else{
+      this._toastrService.error("Please upload Resume")
+    }
+
+  }
+
+  uploadDrivingLicenseDoc(file:any){
+    this.drivingLicenseFile='';
+    this.drivingLicenseName = file.target.files[0].name;
+    if(this.drivingLicenseName.includes('.png') || this.drivingLicenseName.includes('.jpg')) {
+      this.drivingLicenseFile = file.target.files[0];
+    }else{
+      this._toastrService.error('Only PNG or JPG document is allowed')
+    }
+
+  }
+
+  submitDrivingLicense(){
+    if(this.drivingLicenseFile != undefined){
+      this.userDocument =  this.drivingLicenseName;
+      this.userDocumentFile = this.drivingLicenseFile;
+      if(this.addedUserId){
+        var addUserDocumentData = new FormData();
+        addUserDocumentData.append('UserId',this.addedUserId);
+        addUserDocumentData.append('DocumentName',this.userDocument);
+        addUserDocumentData.append('file',this.userDocumentFile);    
+ 
+        this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
+          if(data.status == 200){
+           
+            this._toastrService.success('Driving License added successfully!');
+            this.closeaddUserBtn.nativeElement.click();
+            this.getAllUsers();
+          } 
+        },(error:any) => {
+         if(error.status == 500){
+         this._toastrService.error('Please upload driving license');
+         }
+        })   
+     }
+    }else{
+      this._toastrService.warning("Please upload driving license")
+    }
+  }
+
+  uploadJoiningLetterDoc(file:any){
+    this.joiningLetterFile='';
+    this.joiningLetterName = file.target.files[0].name;
+    if(this.joiningLetterName.includes('.pdf')) {
+      this.joiningLetterFile = file.target.files[0];
+    }else{
+      this._toastrService.error('Only PDF is allowed')
+    }
+  }
+
+  submitJoiningLetter(){
+    if(this.joiningLetterFile != undefined){
+      this.userDocument =  this.joiningLetterName;
+      this.userDocumentFile = this.joiningLetterFile;
+      if(this.addedUserId){
+        var addUserDocumentData = new FormData();
+        addUserDocumentData.append('UserId',this.addedUserId);
+        addUserDocumentData.append('DocumentName',this.userDocument);
+        addUserDocumentData.append('file',this.userDocumentFile);    
+ 
+        this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
+          if(data.status == 200){
+           
+            this._toastrService.success('Joining Letter added successfully!');
+            this.closeaddUserBtn.nativeElement.click();
+            this.getAllUsers();
+          } 
+        },(error:any) => {
+         if(error.status == 500){
+         this._toastrService.error('Please upload joining letter');
+         }
+        })   
+     }
+    }else{
+      this._toastrService.warning("Please upload joining letter")
+    }
+
+  }
+
+  uploadBankPassbookDoc(file:any){
+    this.bankPassbookFile='';
+    this.bankPassbookName = file.target.files[0].name;
+    if(this.bankPassbookName.includes('.png') || this.bankPassbookName.includes('.jpg')) {
+      this.bankPassbookFile = file.target.files[0];
+    }else{
+      this._toastrService.error('Only PNG or JPG document is allowed')
+    }
+  }
+
+  submitBankPassbook(){
+    if(this.bankPassbookFile != undefined){
+      this.userDocument =  this.bankPassbookName;
+      this.userDocumentFile = this.bankPassbookFile;
+      if(this.addedUserId){
+        var addUserDocumentData = new FormData();
+        addUserDocumentData.append('UserId',this.addedUserId);
+        addUserDocumentData.append('DocumentName',this.userDocument);
+        addUserDocumentData.append('file',this.userDocumentFile);    
+ 
+        this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
+          if(data.status == 200){
+           
+            this._toastrService.success('Bank Passbook added successfully!');
+            this.closeaddUserBtn.nativeElement.click();
+            this.getAllUsers();
+          } 
+        },(error:any) => {
+         if(error.status == 500){
+         this._toastrService.error('Please upload bank passbook');
+         }
+        })   
+     }
+    }else{
+      this._toastrService.warning("Please upload bank passbook")
+    }
+
+  }
+
+  uploadEducationDoc(file:any){
+    this.educationDocFile='';
+    this.educationDocName = file.target.files[0].name;
+    if(this.educationDocName.includes('.pdf')) {
+      this.educationDocFile = file.target.files[0];
+    }else{
+      this._toastrService.error('Only PDF document is allowed')
+    }
+
+  }
+
+  submitEducationDoc(){
+    if(this.educationDocFile != undefined){
+      this.userDocument =  this.educationDocName;
+      this.userDocumentFile = this.educationDocFile;
+      if(this.addedUserId){
+        var addUserDocumentData = new FormData();
+        addUserDocumentData.append('UserId',this.addedUserId);
+        addUserDocumentData.append('DocumentName',this.userDocument);
+        addUserDocumentData.append('file',this.userDocumentFile);    
+ 
+        this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
+          if(data.status == 200){
+           
+            this._toastrService.success('Education document added successfully!');
+            this.closeaddUserBtn.nativeElement.click();
+            this.getAllUsers();
+          } 
+        },(error:any) => {
+         if(error.status == 500){
+         this._toastrService.error('Please upload education document');
+         }
+        })   
+     }
+    }else{
+      this._toastrService.warning("Please upload education document")
+    }
+
+  }
+
+  uploadReleavingLetter(file:any){
+    this.releavingLetterFile='';
+    this.releavingLetterName = file.target.files[0].name;
+    if(this.releavingLetterName.includes('.pdf')) {
+      this.releavingLetterFile = file.target.files[0];
+    }else{
+      this._toastrService.error('Only PDF document is allowed')
+    }
+
+  }
+
+  submitReleavingLetter(){
+    if(this.releavingLetterFile != undefined){
+      this.userDocument =  this.releavingLetterName;
+      this.userDocumentFile = this.releavingLetterFile;
+      if(this.addedUserId){
+        var addUserDocumentData = new FormData();
+        addUserDocumentData.append('UserId',this.addedUserId);
+        addUserDocumentData.append('DocumentName',this.userDocument);
+        addUserDocumentData.append('file',this.userDocumentFile);    
+ 
+        this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
+          if(data.status == 200){
+           
+            this._toastrService.success('Releaving Letter added successfully!');
+            this.closeaddUserBtn.nativeElement.click();
+            this.getAllUsers();
+          } 
+        },(error:any) => {
+         if(error.status == 500){
+         this._toastrService.error('Please upload releaving letter');
+         }
+        })   
+     }
+    }else{
+      this._toastrService.warning("Please upload releaving letter")
+    }
+  }
+
+  uploadpreviousSalarySlips(file:any){
+    this.previousSalarySlipsFile='';
+    this.previousSalarySlipsName = file.target.files[0].name;
+    if(this.previousSalarySlipsName.includes('.pdf')) {
+      this.previousSalarySlipsFile = file.target.files[0];
+    }else{
+      this._toastrService.error('Only PDF document is allowed')
+    }
+
+  }
+
+  submitpreviousSalarySlips(){
+    if(this.previousSalarySlipsFile != undefined){
+      this.userDocument =  this.previousSalarySlipsName;
+      this.userDocumentFile = this.previousSalarySlipsFile;
+      if(this.addedUserId){
+        var addUserDocumentData = new FormData();
+        addUserDocumentData.append('UserId',this.addedUserId);
+        addUserDocumentData.append('DocumentName',this.userDocument);
+        addUserDocumentData.append('file',this.userDocumentFile);    
+ 
+        this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
+          if(data.status == 200){
+           
+            this._toastrService.success('Previous Salary Slips added successfully!');
+          //  this.closeaddUserBtn.nativeElement.click();
+            this.getAllUsers();
+          } 
+        },(error:any) => {
+         if(error.status == 500){
+         this._toastrService.error('Please upload previous salary slips');
+         }
+        })   
+     }
+    }else{
+      this._toastrService.warning("Please upload previous salary slips")
+    }
+  }
 
 
   deleteUser(){

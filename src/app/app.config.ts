@@ -11,6 +11,7 @@ export const APP_DI_CONFIG: any = {
       GetAllUser : "/User/GetAllUser",
       AddUser : "/User/AddSystemUser",
       AddUserDocuments : "/User/AddUserDocuments",
+      AddUserOtherDocuments : "/User/AddUserOtherDocuments",
       AddUserRole : "/User/AddUserRole",
     },
     ProductCategory:{

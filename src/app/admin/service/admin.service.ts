@@ -216,6 +216,10 @@ export class AdminService {
    addUserDocuments(data:any){
      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.AddUserDocuments,data,{observe: 'response'})
    }
+
+   addUserOtherDocuments(data:any){
+    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.AddUserOtherDocuments,data,{observe: 'response'})
+  }
  
   //  deleteUser(id:any){
   //    return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.DeleteUser+`/${id}`,{observe: 'response'})
