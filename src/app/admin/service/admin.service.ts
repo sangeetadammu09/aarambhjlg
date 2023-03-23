@@ -225,6 +225,25 @@ export class AdminService {
   //    return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.DeleteUser+`/${id}`,{observe: 'response'})
   //  }
 
+    //user role
+
+    getAllUserRole(pageNo:any,pageSize:any){
+      return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.GetAllUserRole+`?pageNo=${pageNo}&pageSize=${pageSize}`)
+     }
+   
+    addUserRole(data:any){
+       return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.AddUserRole,data,{observe: 'response'})
+     }
+
+    updateUserRole(id:any){
+     return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.UpdateUserRole+`/${id}`,{observe: 'response'})
+    }
+
+    deleteUserRole(id:any){
+      return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.DeleteUserRole+`/${id}`,{observe: 'response'})
+    }
+   
+    
 
 
 }
