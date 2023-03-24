@@ -16,6 +16,9 @@ export const APP_DI_CONFIG: any = {
       AddUserRole : "/User/AddUserRole",
       UpdateUserRole : "/User/UpdateUserRole",
       DeleteUserRole : "/User/DeleteUserRole",
+      GetUsersListByCity: "/User/GetUsersListByCity",
+      GetUsersByCity: "/User/GetUsersByCity",
+      GetAllRoles: "/User/GetAllRoles",
     },
     ProductCategory:{
       GetAllProductCategory : "/ProductCategory/GetAllProductCategory",

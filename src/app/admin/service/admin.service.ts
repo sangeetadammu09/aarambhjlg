@@ -227,6 +227,20 @@ export class AdminService {
 
     //user role
 
+    getAllUsersListByCity(cityId:any){
+      return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.GetUsersListByCity+`?cityId=${cityId}`)
+     }
+
+     getAllUsersByCity(cityId:any){
+      return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.GetUsersByCity+`?cityId=${cityId}`)
+     }
+
+
+    getAllRoles(){
+      return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.GetAllRoles)
+     }
+   
+
     getAllUserRole(pageNo:any,pageSize:any){
       return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.GetAllUserRole+`?pageNo=${pageNo}&pageSize=${pageSize}`)
      }
@@ -239,8 +253,8 @@ export class AdminService {
      return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.UpdateUserRole+`/${id}`,{observe: 'response'})
     }
 
-    deleteUserRole(id:any){
-      return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.DeleteUserRole+`/${id}`,{observe: 'response'})
+    deleteUserRole(data:any){
+      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.DeleteUserRole,data,{observe: 'response'})
     }
    
     

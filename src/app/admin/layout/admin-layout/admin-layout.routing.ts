@@ -10,6 +10,7 @@ import { ProductsComponent } from 'src/app/pages/products/products.component';
 import { TaxSlotComponent } from 'src/app/pages/tax-slot/tax-slot.component';
 import { UnitComponent } from 'src/app/pages/unit/unit.component';
 import { UserComponent } from 'src/app/pages/user/user.component';
+import { UserroleComponent } from 'src/app/pages/userrole/userrole.component';
 
 export const AdminLayoutRoutes: Routes = [
     
@@ -18,6 +19,7 @@ export const AdminLayoutRoutes: Routes = [
      { path:'product-price', component: ProductPriceComponent },
      { path:'unit', component: UnitComponent },
      { path:'user-list', component: UserComponent },
+     { path:'user-role', component: UserroleComponent },
      { path:'tax-slot', component: TaxSlotComponent },
      { path:'product-list', component: ProductsComponent },
      { path:'city', component: CityComponent },

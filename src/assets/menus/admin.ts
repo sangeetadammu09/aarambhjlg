@@ -98,7 +98,13 @@ export const AdminList = {
                     menu: 'User List',
                     url: 'user-list',
                     isActive: true, 
-                   },
+                },
+                {
+                    id: 1,
+                    menu: 'User Role',
+                    url: 'user-role',
+                    isActive: true, 
+                }
             ]
           },
 

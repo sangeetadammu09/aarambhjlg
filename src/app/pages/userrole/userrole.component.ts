@@ -23,15 +23,18 @@ export class UserroleComponent implements OnInit {
   total = 20;
   pageSize = 10;
   productsFound: boolean = false;
+  userList: any;
+  cityId = localStorage.getItem('userCity');
+  roleList: any;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addUserRoleForm = this._formBuilder.group({
-      roleId: [],
+      roleId: ['', Validators.required],
       userId: ['', Validators.required],
     })
 
     this.editUserRoleForm = this._formBuilder.group({
-      roleId: [],
+      roleId: ['', Validators.required],
       userId: ['', Validators.required],
     })
   }
@@ -45,18 +48,15 @@ export class UserroleComponent implements OnInit {
 
 
   getAllUserRoles(){
+    this._adminService.getAllUsersByCity(this.cityId).subscribe((data) => {
+   //   console.log(data,'all UserRoles')
+     if(data.length > 0){
+       this.userRoleList = data;
 
-    // this._adminService.getAllUserRole().subscribe((data) => {
-    //   console.log(data,'all UserRoles')
-    //  if(data.length > 0){
-    // //  this.productsFound = true;
-    //    this.userRoleList = data;
-    //   }else{
-    //     this.userRoleList = [];
-    //    // this.productsFound = false;
-    //   }
-      
-    // })
+      }else{
+        this.userRoleList = [];
+      } 
+    })
   }
 
   showaddUserRoleModal(){
@@ -66,6 +66,18 @@ export class UserroleComponent implements OnInit {
     this.addUserRoleForm.reset();
     this.addUserRoleForm.markAsUntouched();
     this.addUserRoleForm.markAsPristine();
+    this.addUserRoleForm.controls['roleId'].setValue('')
+    this.addUserRoleForm.controls['userId'].setValue('')
+    this._adminService.getAllUsersListByCity(this.cityId).subscribe((data:any) => {
+         this.userList = data;
+    })
+    this._adminService.getAllRoles().subscribe((data:any) => {
+      console.log(data)
+      if(data.length > 0){
+      this.roleList = data;
+      }
+    })
+    
     
   }
 
@@ -74,14 +86,13 @@ export class UserroleComponent implements OnInit {
      if(this.addUserRoleForm.valid){
       //  console.log(this.addUserRoleForm.value)
         var addUserRoleData :any = {};
-        addUserRoleData.roleId = 0;
+        addUserRoleData.roleId = this.addUserRoleForm.controls['roleId'].value;
         addUserRoleData.userId = this.addUserRoleForm.controls['userId'].value;
        
         this._adminService.addUserRole(addUserRoleData).subscribe((data:any) => {
           console.log(data.status);
-          //console.log(data.headers.get('X-Custom-Header'));
           if(data.status == 200){
-            this._toastrService.success('UserRole added successfully!');
+            this._toastrService.success('User Role added successfully!');
             this.closeaddUserRoleBtn.nativeElement.click();
             this.getAllUserRoles();
           }
@@ -93,23 +104,16 @@ export class UserroleComponent implements OnInit {
 
   }
 
-
-
   showeditUserRoleModal(item:any){
     console.log(item)
     this.addUserRole = false;
     this.editUserRole = true;
     this.editUserRoleForm.patchValue({
-      UserRoleId : item.UserRoleId,
-      UserRoleName : item.UserRoleName,
-      registrationFees : item.registrationFees
+      roleId : item.roleId,
+      userId : item.usersInfo.userId,
     })
     
   }
-
-
-
-
   
   submitUpdateUserRole(){
     this.submitted = true;
@@ -136,7 +140,8 @@ export class UserroleComponent implements OnInit {
 
 
   showdeleteUserRoleModal(item:any){
-      this.deleteUserRoleItem = item.UserRoleId;
+    console.log(item)
+      this.deleteUserRoleItem = item;
   }
 
 
@@ -147,7 +152,7 @@ export class UserroleComponent implements OnInit {
           this._toastrService.success('UserRole delete successfully!');
           this.getAllUserRoles();
           this.closeDeleteUserRoleBtn.nativeElement.click();
-        }
+       }
        
       })
   }
