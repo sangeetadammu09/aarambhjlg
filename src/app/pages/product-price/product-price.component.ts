@@ -111,12 +111,22 @@ export class ProductPriceComponent implements OnInit {
 
   onRowEditInit(product: any) {
     this.rowEdit = true;
-    console.log(product)
+    
 }
 
 
   submitNewProductPrice(product: any){
-     if(product){
+     if(product.productId == undefined){
+      this._toastrService.error('Product Name is required');
+     }else if(product.reginalName == undefined){
+      this._toastrService.error('Regional Name is required');
+     }else if(product.mrp == undefined){
+      this._toastrService.error('MRP is required');
+     }else if(product.jlgSalePrice == undefined){
+      this._toastrService.error('JLG Sales Price is required');
+     }else if(product.stock == undefined){
+      this._toastrService.error('Stock is required');
+     }else{
         var addProductPriceData :any = {};
         addProductPriceData.productPriceId = 0;
         addProductPriceData.productId = product.productId;
@@ -125,7 +135,7 @@ export class ProductPriceComponent implements OnInit {
         addProductPriceData.mrp = product.mrp;
         addProductPriceData.jlgSalePrice = product.jlgSalePrice;
         addProductPriceData.stock = product.stock;
-       // console.log(addProductPriceData,'addddddddd')
+       console.log(addProductPriceData,'addddddddd')
         this._adminService.addProductPrice(addProductPriceData).subscribe((data:any) => {
           console.log(data.status);
       
@@ -137,8 +147,6 @@ export class ProductPriceComponent implements OnInit {
           }
         })
          
-      }else{
-        console.log('invalid form')
       }  
 
   }
