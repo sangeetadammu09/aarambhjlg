@@ -27,18 +27,21 @@ export class ProductPriceComponent implements OnInit {
   cityList: any;
   clonedProducts: any;
   totalRecords: any;
+  cityId = localStorage.getItem('userCity');
+  rowEdit :boolean = false;
+  productObj :any;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
-    this.addProductPriceForm = this._formBuilder.group({
-      productPriceId: [],
-      productId: [, Validators.required],
-      cityId: [, Validators.required],
-      reginalName:  ['', Validators.required] ,
-      mrp:  [, Validators.required],
-      jlgSalePrice:  [, Validators.required],
-      stock:  [, Validators.required]
+    // this.addProductPriceForm = this._formBuilder.group({
+    //   productPriceId: [],
+    //   productId: [, Validators.required],
+    //   cityId: [, Validators.required],
+    //   reginalName:  ['', Validators.required] ,
+    //   mrp:  [, Validators.required],
+    //   jlgSalePrice:  [, Validators.required],
+    //   stock:  [, Validators.required]
      
-    })
+    // })
 
     this.editProductPriceForm = this._formBuilder.group({
       productPriceId: [],
@@ -65,8 +68,9 @@ export class ProductPriceComponent implements OnInit {
       if(data){
      //  this.productsFound = true;
         this.productPriceList = data.products;
-        this.totalRecords = data.pages.totalCount;
-        console.log(this.productPriceList,'all ProductPrices')
+        this.total = data.pages.totalCount;
+        console.log(this.productPriceList,'all ProductPrices', this.rowEdit)
+
        }else{
          this.productPriceList = [];
         // this.productsFound = false;
@@ -75,24 +79,10 @@ export class ProductPriceComponent implements OnInit {
      })
   }
 
-  handlePageChange(event: any){
-    console.log(event)
-    var eventFirst:any = event.first;
-    this.page = eventFirst+1;
-    this.pageSize= event.rows;
-    this._adminService.getProducts(this.page,this.pageSize).subscribe((data) => {    
-     if(data){
-    //  this.productsFound = true;
-       this.productPriceList = data.products;
-       this.totalRecords = data.pages.totalCount;
-       console.log(this.productPriceList,'all ProductPrices')
-      }else{
-        this.productPriceList = [];
-       // this.productsFound = false;
-      }
-      
-    })
-}
+  handlePageChange(event: number){
+    this.page = event;
+    this.getAllProductPrices();
+  }
 
   getAllCitys(){
     this._adminService.getAllCity().subscribe((data) => {
@@ -120,6 +110,7 @@ export class ProductPriceComponent implements OnInit {
   }
 
   onRowEditInit(product: any) {
+    this.rowEdit = true;
     console.log(product)
 }
 
@@ -129,18 +120,19 @@ export class ProductPriceComponent implements OnInit {
         var addProductPriceData :any = {};
         addProductPriceData.productPriceId = 0;
         addProductPriceData.productId = product.productId;
-        addProductPriceData.cityId = product.cityId;
+        addProductPriceData.cityId = this.cityId;
         addProductPriceData.reginalName = product.reginalName;
         addProductPriceData.mrp = product.mrp;
         addProductPriceData.jlgSalePrice = product.jlgSalePrice;
         addProductPriceData.stock = product.stock;
-        console.log(addProductPriceData,'addddddddd')
+       // console.log(addProductPriceData,'addddddddd')
         this._adminService.addProductPrice(addProductPriceData).subscribe((data:any) => {
           console.log(data.status);
       
           if(data.status == 200){
             this._toastrService.success('Product Price added successfully!');
-            this.closeaddProductPriceBtn.nativeElement.click();
+            this.rowEdit = false;
+          //  this.closeaddProductPriceBtn.nativeElement.click();
             this.getAllProductPrices();
           }
         })

@@ -58,12 +58,6 @@
             <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
                 <pagination-controls previousLabel="Prev"nextLabel="Next" [responsive]="true" (pageChange)="handlePageChange($event)"></pagination-controls>
             </div>
-          
-            
-            <!--Including the pagination control.-->
-                <!-- <div class="d-flex justify-content-end">
-                    <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)"></pagination-controls>
-                </div> -->
          </div>
 
          <div class="row card mb-3" *ngIf="productList.length == 0">

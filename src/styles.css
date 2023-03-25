@@ -205,7 +205,7 @@ input[type=radio] {
 }
 
 .p-datatable .p-datatable-thead > tr > th {
-    text-align: center !important;
+    /* text-align: center !important; */
     padding: 0.5rem 1rem;
     background-color: #6076ad;
 }
