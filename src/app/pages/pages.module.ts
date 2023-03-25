@@ -14,11 +14,12 @@ import { BranchComponent } from './branch/branch.component';
 import { UserComponent } from './user/user.component';
 import { ProductPriceComponent } from './product-price/product-price.component';
 import { UserroleComponent } from './userrole/userrole.component';
+import { CustomSharedModule } from '../shared.module';
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,CustomSharedModule
    
   ],
   declarations: [

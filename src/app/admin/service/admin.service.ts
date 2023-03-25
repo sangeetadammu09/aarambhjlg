@@ -160,6 +160,10 @@ export class AdminService {
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.GetAllProduct+`?pageNo=${pageNo}&pageSize=${pageSize}`)
    }
 
+   getProducts(pageNo:any,pageSize:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.GetProducts+`?pageNo=${pageNo}&pageSize=${pageSize}`)
+   }
+
    getAllProductByCity(){
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.GetAllProductByCity)
    }
