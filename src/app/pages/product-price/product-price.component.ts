@@ -30,18 +30,10 @@ export class ProductPriceComponent implements OnInit {
   cityId = localStorage.getItem('userCity');
   rowEdit :boolean = false;
   productObj :any;
+  searchProductPrice : any;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
-    // this.addProductPriceForm = this._formBuilder.group({
-    //   productPriceId: [],
-    //   productId: [, Validators.required],
-    //   cityId: [, Validators.required],
-    //   reginalName:  ['', Validators.required] ,
-    //   mrp:  [, Validators.required],
-    //   jlgSalePrice:  [, Validators.required],
-    //   stock:  [, Validators.required]
-     
-    // })
+    
 
     this.editProductPriceForm = this._formBuilder.group({
       productPriceId: [],
@@ -64,7 +56,7 @@ export class ProductPriceComponent implements OnInit {
 
 
   getAllProductPrices(){
-    this._adminService.getProducts(this.page,this.pageSize).subscribe((data) => {    
+    this._adminService.getProducts(this.page,this.pageSize,this.cityId,'').subscribe((data) => {    
       if(data){
      //  this.productsFound = true;
         this.productPriceList = data.products;
@@ -82,6 +74,25 @@ export class ProductPriceComponent implements OnInit {
   handlePageChange(event: number){
     this.page = event;
     this.getAllProductPrices();
+  }
+
+
+  getProductPriceVal(event:any){
+    console.log(event.target.value)
+    var searchTerm = event.target.value;
+    this._adminService.getProducts(this.page,this.pageSize,this.cityId,searchTerm).subscribe((data) => {    
+      if(data){
+     //  this.productsFound = true;
+        this.productPriceList = data.products;
+        this.total = data.pages.totalCount;
+        console.log(this.productPriceList,'all ProductPrices', this.rowEdit)
+
+       }else{
+         this.productPriceList = [];
+        // this.productsFound = false;
+       }
+       
+     })
   }
 
   getAllCitys(){
