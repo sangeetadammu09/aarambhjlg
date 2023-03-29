@@ -7,6 +7,7 @@ export const APP_DI_CONFIG: any = {
   endPoints: {
     User:{
       Login : "/User/Login", 
+      RefreshToken: "/User/RefreshToken",
       GetAllManager : "/User/GetAllManager",
       GetAllUser : "/User/GetAllUser",
       AddUser : "/User/AddSystemUser",
@@ -19,6 +20,7 @@ export const APP_DI_CONFIG: any = {
       GetUsersListByCity: "/User/GetUsersListByCity",
       GetUsersByCity: "/User/GetUsersByCity",
       GetAllRoles: "/User/GetAllRoles",
+      GetAllUserDetails : "/User/GetUserAllDetails"
     },
     ProductCategory:{
       GetAllProductCategory : "/ProductCategory/GetAllProductCategory",

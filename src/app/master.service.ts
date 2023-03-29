@@ -7,8 +7,7 @@ export class MasterService {
 
   constructor() { }
 
-  isLoggedIn()
-  {
+  isLoggedIn(){
     return localStorage.getItem('userToken') != null;
   }
 }

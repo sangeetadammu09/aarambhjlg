@@ -45,15 +45,18 @@ export class LoginComponent implements OnInit {
 
       this._commonService.login(loginFormData).subscribe((data:any) => {
         if(data){
+          console.log(data)
           this.decodedToken = decodeToken(data.access_token);
-          console.log(this.decodedToken); 
-         localStorage.setItem('userToken', data.access_token);        
+          //console.log(this.decodedToken); 
+         localStorage.setItem('userToken', data.access_token);  
+         localStorage.setItem('refreshToken', data.refreshToken);        
          localStorage.setItem('fullname', this.decodedToken.FullName);
          localStorage.setItem('userCity', this.decodedToken.CityId);
-          localStorage.setItem('roles',this.decodedToken.role);
-          
+         localStorage.setItem('userId', this.decodedToken.UserId);
+         localStorage.setItem('roles',this.decodedToken.role);
+         
           this._toastrService.success('Logged in successfully!');
-          this._router.navigate(['/admin/product-category'])
+          this._router.navigate(['/admin/user-list'])
         }else{
           this._toastrService.info('Logging in. Please hold on!');
         }

@@ -64,6 +64,10 @@ export class UserComponent implements OnInit {
   previousSalarySlipsFile:any;
   voterFile: any;
   voterDocumentName: any;
+  cityId = localStorage.getItem('userCity');
+  userId = localStorage.getItem('userId');
+  userDetailsObj: any = {};
+  userDocuments: any = [];
 
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
@@ -127,7 +131,7 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllUsers()
+    this.getAllUserDetails()
     this.getAllCitys()
     
   }
@@ -150,29 +154,27 @@ export class UserComponent implements OnInit {
     })
   }
 
-  getAllUsers(){
+  getAllUserDetails(){
     var paginationObj :any ={};
     paginationObj.pageNo =this.page;
     paginationObj.pageSize = this.pageSize;
-    this._adminService.getAllUser(paginationObj.pageNo,paginationObj.pageSize).subscribe((data) => {
-      console.log(data,'all Users')
-     if(data.length > 0){
-    //  this.usersFound = true;
-       this.userList = data;
-       //this.total = data.total;
-      }else{
-        this.userList = [];
-       // this.usersFound = false;
-      }
-      
-    })
+    this._adminService.getAllUsersByCity(this.cityId).subscribe((data) => {
+      //   console.log(data,'all UserRoles')
+        if(data.length > 0){
+          this.userList = data;
+   
+         }else{
+           this.userList = [];
+         } 
+       })
+   
   }
 
 
   handlePageChange(event: number){
     console.log(event)
     this.page = event;
-    this.getAllUsers();
+    this.getAllUserDetails();
 }
 
   showaddUserModal(){
@@ -244,7 +246,7 @@ export class UserComponent implements OnInit {
             this.viewMode = 'tab2';
            // this.closeaddUserBtn.nativeElement.click();
           
-            this.getAllUsers();
+            this.getAllUserDetails();
           }
         })
          
@@ -282,7 +284,7 @@ export class UserComponent implements OnInit {
            
             this._toastrService.success('Aadhaar Front  added successfully!');
            this.closeaddUserBtn.nativeElement.click();
-           this.getAllUsers();
+           this.getAllUserDetails();
           } 
         }
         ,(error:any) => {
@@ -324,7 +326,7 @@ export class UserComponent implements OnInit {
           if(data.status == 200){        
             this._toastrService.success('Aadhaar Back added successfully!');
             this.closeaddUserBtn.nativeElement.click();
-            this.getAllUsers();
+            this.getAllUserDetails();
           } 
         },(error:any) => {
          if(error.status == 500){
@@ -365,7 +367,7 @@ export class UserComponent implements OnInit {
            
             this._toastrService.success('Photo added successfully!');
             this.closeaddUserBtn.nativeElement.click();
-            this.getAllUsers();
+            this.getAllUserDetails();
           } 
         },(error:any) => {
          if(error.status == 500){
@@ -406,7 +408,7 @@ export class UserComponent implements OnInit {
            
             this._toastrService.success('Address Document added successfully!');
             this.closeaddUserBtn.nativeElement.click();
-            this.getAllUsers();
+            this.getAllUserDetails();
           } 
         },(error:any) => {
          if(error.status == 500){
@@ -447,7 +449,7 @@ export class UserComponent implements OnInit {
            
             this._toastrService.success('Voter/PAN added successfully!');
             this.closeaddUserBtn.nativeElement.click();
-            this.getAllUsers();
+            this.getAllUserDetails();
           } 
         },(error:any) => {
          if(error.status == 500){
@@ -463,66 +465,6 @@ export class UserComponent implements OnInit {
       }
   }
 
-
-  // showeditUserModal(item:any){
-  //   console.log(item)
-  //   this.addUser = false;
-  //   this.editUser = true;
-  //   this.editUserForm.patchValue({
-  //     userId: item.userId,
-  //     userName: item.userName,
-  //     hsnCode: item.hsnCode,
-  //     catId: item.catId,
-  //     unitId: item.unitId,
-  //     saleTaxId: item.saleTaxId,
-  //     barcode: item.barcode,
-  //     description: item.description,
-  //     purchaseTaxId: item.purchaseTaxId,
-  //     discountId: item.discountId,
-  //     barcodeStatus: item.barcodeStatus,
-  //     userEnglishName: item.userEnglishName,
-  //     isDiscountApplicable: item.isDiscountApplicable,
-  //     createdBy: item.createdBy,
-  //     createdDate: item.createdDate,
-  //     updatedBy: item.updatedBy,
-  //     updatedDate: item.updatedDate,
-  //     mfd: item.mfd,
-  //     expiryDate: item.expiryDate,
-  //     batchNo: item.batchNo,     
-  //   })
-    
-  // }
-
-
-  
-  // submitUpdateUser(){
-  //   this.submitted = true;
-  //   console.log(this.editUserForm.value)
-   
-  //    if(this.editUserForm.valid){
-    
-  //      var updateUserData :any = {};
-  //      updateUserData.userId = this.editUserForm.controls['userId'].value;
-  //      updateUserData.userName = this.editUserForm.controls['userName'].value;
-  //      updateUserData.registrationFees = this.editUserForm.controls['registrationFees'].value;
-  //       this._adminService.updateUser(updateUserData).subscribe((data:any) => {
-  //         if(data){
-  //           this._toastrService.success('User updated successfully!');
-  //           this.closeeditUserBtn.nativeElement.click();
-  //           this.getAllUsers();
-  //         }
-  //       })
-         
-  //     }else{
-  //       console.log('invalid form')
-  //     }  
-
-  // }
-
-
-  // showdeleteUserModal(item:any){
-  //     this.deleteUserItem = item.userId;
-  // }
 
   uploadFamilyPhotoDoc(file:any){
     this.familyPhotoFile='';
@@ -550,7 +492,7 @@ export class UserComponent implements OnInit {
            
             this._toastrService.success('Resume added successfully!');
             this.closeaddUserBtn.nativeElement.click();
-            this.getAllUsers();
+            this.getAllUserDetails();
           } 
         },(error:any) => {
          if(error.status == 500){
@@ -593,7 +535,7 @@ export class UserComponent implements OnInit {
            
             this._toastrService.success('Driving License added successfully!');
             this.closeaddUserBtn.nativeElement.click();
-            this.getAllUsers();
+            this.getAllUserDetails();
           } 
         },(error:any) => {
          if(error.status == 500){
@@ -633,7 +575,7 @@ export class UserComponent implements OnInit {
            
             this._toastrService.success('Joining Letter added successfully!');
             this.closeaddUserBtn.nativeElement.click();
-            this.getAllUsers();
+            this.getAllUserDetails();
           } 
         },(error:any) => {
          if(error.status == 500){
@@ -674,7 +616,7 @@ export class UserComponent implements OnInit {
            
             this._toastrService.success('Bank Passbook added successfully!');
             this.closeaddUserBtn.nativeElement.click();
-            this.getAllUsers();
+            this.getAllUserDetails();
           } 
         },(error:any) => {
          if(error.status == 500){
@@ -716,7 +658,7 @@ export class UserComponent implements OnInit {
            
             this._toastrService.success('Education document added successfully!');
             this.closeaddUserBtn.nativeElement.click();
-            this.getAllUsers();
+            this.getAllUserDetails();
           } 
         },(error:any) => {
          if(error.status == 500){
@@ -758,7 +700,7 @@ export class UserComponent implements OnInit {
            
             this._toastrService.success('Releaving Letter added successfully!');
             this.closeaddUserBtn.nativeElement.click();
-            this.getAllUsers();
+            this.getAllUserDetails();
           } 
         },(error:any) => {
          if(error.status == 500){
@@ -799,7 +741,7 @@ export class UserComponent implements OnInit {
            
             this._toastrService.success('Previous Salary Slips added successfully!');
           //  this.closeaddUserBtn.nativeElement.click();
-            this.getAllUsers();
+            this.getAllUserDetails();
           } 
         },(error:any) => {
          if(error.status == 500){
@@ -820,12 +762,26 @@ export class UserComponent implements OnInit {
   //       console.log(data)
   //       if(data.status == 200){
   //         this._toastrService.success('User delete successfully!');
-  //         this.getAllUsers();
+  //         this.getAllUserDetails();
   //         this.closeDeleteUserBtn.nativeElement.click();
   //       }
        
   //     })
    }
+
+   showUserModal(item:any){
+   // console.log(item)
+    this._adminService.getAllUserDetails(item.usersInfo.userId).subscribe((data:any) =>{
+      if(data){
+        this.userDetailsObj = data;
+        this.userDocuments = data.documents;
+        console.log(this.userDetailsObj)
+      }
+     
+    })
+    
+   }
+
 
 }
 

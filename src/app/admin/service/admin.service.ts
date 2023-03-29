@@ -212,6 +212,10 @@ export class AdminService {
    getAllUser(pageNo:any,pageSize:any){
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.GetAllUser+`?pageNo=${pageNo}&pageSize=${pageSize}`)
    }
+
+   getAllUserDetails(userId : any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.GetAllUserDetails+`?userId=${userId}`)
+   }
  
    addUser(data:any){
      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.AddUser,data,{observe: 'response'})
