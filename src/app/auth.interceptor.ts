@@ -1,60 +1,76 @@
 import { Injectable } from '@angular/core';
 import {HttpRequest,HttpHandler,HttpEvent,HttpInterceptor, HttpErrorResponse} from '@angular/common/http';
-import { catchError, Observable, switchMap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, filter, finalize, Observable, switchMap, take, throwError } from 'rxjs';
 import { CommonService } from './common/service/common.service';
+import { MasterService } from './master.service';
 
+const TOKEN_HEADER_KEY = 'Authorization';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   
-  token :any = localStorage.getItem('userToken');
-  refreshToken :any = localStorage.getItem('refreshToken');
-  refresh: boolean = false;
-  constructor(private _commonService: CommonService) {}
-
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> { 
+  isRefreshingToken: boolean = false;
+  private isRefreshing = false;
+  private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  //  const jwtToken = JSON.parse(atob(this.token.split('.')[1]));
+    //  const expires = new Date(jwtToken.exp * 1000);
+    //  const timeout = expires.getTime() - Date.now();
     
-   // console.log('setting token from interceptor', token) 
-   if (this.token) {
-     // If we have a token, we set it to the header 
-     request = request.clone({
-        setHeaders: {Authorization: `Bearer ${this.token}`}
-     });
+  constructor(private _commonService: CommonService, private masterService: MasterService) {}
+
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<Object>> {
+    let authReq = req;
+    const token = this.masterService.getToken();
+    console.log(token,'logged token')
+    if (token != null) {
+      authReq = this.addTokenHeader(req, token);
+    }
+
+    return next.handle(authReq).pipe(catchError(error => {
+      if (error instanceof HttpErrorResponse && error.status === 401) {
+        return this.handle401Error(authReq, next);
+      }
+
+      return throwError(error);
+    }));
   }
 
-  return next.handle(request).pipe(catchError((err) => {
-   	 if (err instanceof HttpErrorResponse) {
-         console.log(err)
-       	 if (err.status === 401 && !this.refresh) {
-          this.refresh = true;
-       	 // redirect user to the login page
-         var refreshTokenObj = new FormData();
-         refreshTokenObj.append('accessToken',this.token);
-         refreshTokenObj.append('refreshToken',this.refreshToken);
-         this._commonService.refreshToken(refreshTokenObj).pipe(
-           switchMap((res: any) => {
-             console.log(res,"res");
-              const newAccessToken = res.accessToken
-             const newRefreshToken = res.refreshToken
-             
-             localStorage.setItem('newAccessToken',newAccessToken);
-             localStorage.setItem('newRefreshToken',newRefreshToken);
-             return next.handle(request.clone({
-               setHeaders: {
-                 Authorization: `Bearer ${newAccessToken}`
-               }
-             }));
-           })
-         ) as Observable<HttpEvent<any>>;
-     	}
+  private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
+    if (!this.isRefreshing) {
+      this.isRefreshing = true;
+      this.refreshTokenSubject.next(null);
 
- 	 }
-    this.refresh = false;
-    return throwError(() => err);
-	})
-   )
+      const token :any= this.masterService.getToken();
+      const refreshToken:any = this.masterService.getRefreshToken();
+      var refreshTokenObj = new FormData();
+      refreshTokenObj.append('accessToken',token);
+      refreshTokenObj.append('refreshToken',refreshToken);
+
+      if (token)    
+        return this._commonService.refreshToken(refreshTokenObj).pipe(switchMap((token: any) => {
+            this.isRefreshing = false;
+            console.log(token.body.access_token,'token in isRefreshing')
+            this.masterService.saveToken(token.access_token);
+            this.refreshTokenSubject.next(token.access_token);
+            
+            return next.handle(this.addTokenHeader(request, token.access_token));
+          }),
+          catchError((err) => {
+            this.isRefreshing = false;
+            this.masterService.signOut();
+            return throwError(err);
+          })
+        );
+    }
+
+    return this.refreshTokenSubject.pipe(filter(token => token !== null),take(1),
+      switchMap((token) => next.handle(this.addTokenHeader(request, token)))
+    );
   }
 
- 
+  private addTokenHeader(request: HttpRequest<any>, token: string) {
+    console.log(token,'token in addtokenheader')
+    return request.clone({ headers: request.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token) });
+  }
 
 }
 

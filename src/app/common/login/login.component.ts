@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { decodeToken } from '../../utils/token';
 import { CommonService } from '../service/common.service';
+import { MasterService } from 'src/app/master.service';
 
 
 
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
    loginText = "Login"
 
   constructor( private _router: Router, private _fb: FormBuilder,private _toastrService: ToastrService, 
-    private _commonService: CommonService) { 
+    private _commonService: CommonService, private masterService: MasterService) { 
      this.loginForm = this._fb.group({
         username : ['', Validators.required],
         password : ['', Validators.required]
@@ -48,6 +49,16 @@ export class LoginComponent implements OnInit {
        //   console.log(data)
           this.decodedToken = decodeToken(data.access_token);
           //console.log(this.decodedToken); 
+          const userData :any = {}
+          userData.fullname = this.decodedToken.FullName;
+          userData.userCity = this.decodedToken.CityId;
+          userData.userId = this.decodedToken.UserId;
+          userData.roles = this.decodedToken.role;
+
+          this.masterService.saveToken(data.access_token);
+          this.masterService.saveRefreshToken(data.refreshToken);
+          //this.masterService.saveUser(data);
+  
          localStorage.setItem('userToken', data.access_token);  
          localStorage.setItem('refreshToken', data.refreshToken);        
          localStorage.setItem('fullname', this.decodedToken.FullName);
