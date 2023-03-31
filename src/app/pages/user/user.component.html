@@ -436,7 +436,7 @@
         </div>
 
         <div class="modal-body">
-            <table class="table prduct-table">
+            <!-- <table class="table prduct-table">
                 <thead class="thead-secondary">
                   <tr>
                     <th scope="col">S No.</th>
@@ -454,7 +454,7 @@
                 <tbody>
                   <tr>
                     <td>1</td>
-                    <td>{{userDetailsObj.fullName}}</td> 
+                    <td></td> 
                     <td>{{userDetailsObj.email}}</td>
                     <td>{{userDetailsObj.mobileNo}}</td>
                     <td>{{userDetailsObj.dateOfBirth | date : "dd-mm-yyyy"}}</td>
@@ -465,7 +465,33 @@
                   </tr>        
                 </tbody>
                 
-            </table>
+            </table> -->
+            <div class="card p-3 mb-2">
+                <div class="card-title">
+                    <h5>User Details</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex flex-row align-items-center">
+                            <div class="icon"> <i class="bx bxl-mailchimp"></i> </div>
+                            <div class="ms-2 c-details">
+                                 <div>
+                                    <p><span class="card-title">Name</span> <span>{{userDetailsObj.fullName}}</span> </p>
+                                    <p> <span class="card-title">Email</span></p>
+                                    <p> <span class="card-title">Contact</span></p>
+                                    <p> <span class="card-title">DOB</span></p>
+                                    <p> <span class="card-title">Family</span></p>
+                                    <p> <span class="card-title">Address</span></p>
+                                    <p> <span class="card-title">City</span></p> 
+                   
+                                 </div>
+                                <h6 class="mb-0">Mailchimp</h6> <span>1 days ago</span>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+               
+            </div>
             <div *ngFor="let userDoc of userDocuments">
                 <hr/>
                 <h6> {{userDoc.documentName}}</h6>

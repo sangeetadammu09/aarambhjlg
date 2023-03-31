@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
 
       this._commonService.login(loginFormData).subscribe((data:any) => {
         if(data){
-          console.log(data)
+       //   console.log(data)
           this.decodedToken = decodeToken(data.access_token);
           //console.log(this.decodedToken); 
          localStorage.setItem('userToken', data.access_token);  
