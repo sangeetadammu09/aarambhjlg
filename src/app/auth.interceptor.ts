@@ -20,7 +20,7 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<Object>> {
     let authReq = req;
     const token = this.masterService.getToken();
-    console.log(token,'logged token')
+  //  console.log(token,'logged token')
     if (token != null) {
       authReq = this.addTokenHeader(req, token);
     }
@@ -35,7 +35,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-    if (!this.isRefreshing) {
+    if (this.isRefreshing == false){
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
 
@@ -46,13 +46,14 @@ export class AuthInterceptor implements HttpInterceptor {
       refreshTokenObj.append('refreshToken',refreshToken);
 
       if (token)    
-        return this._commonService.refreshToken(refreshTokenObj).pipe(switchMap((token: any) => {
+        return this._commonService.refreshToken(refreshTokenObj).pipe(switchMap((newtoken: any) => {
             this.isRefreshing = false;
-            console.log(token.body.access_token,'token in isRefreshing')
-            this.masterService.saveToken(token.access_token);
-            this.refreshTokenSubject.next(token.access_token);
+           // console.log(newtoken.body.access_token,'newtoken in isRefreshing')
+            let newToken = newtoken.body.access_token;
+            this.masterService.saveToken(newToken);
+            this.refreshTokenSubject.next(newToken);
             
-            return next.handle(this.addTokenHeader(request, token.access_token));
+            return next.handle(this.addTokenHeader(request, newToken));
           }),
           catchError((err) => {
             this.isRefreshing = false;
@@ -60,7 +61,7 @@ export class AuthInterceptor implements HttpInterceptor {
             return throwError(err);
           })
         );
-    }
+   }
 
     return this.refreshTokenSubject.pipe(filter(token => token !== null),take(1),
       switchMap((token) => next.handle(this.addTokenHeader(request, token)))
@@ -68,7 +69,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private addTokenHeader(request: HttpRequest<any>, token: string) {
-    console.log(token,'token in addtokenheader')
+  //  console.log(token,'token in addtokenheader')
     return request.clone({ headers: request.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token) });
   }
 
