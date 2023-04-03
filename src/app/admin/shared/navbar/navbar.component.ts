@@ -1,6 +1,7 @@
 import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location} from '@angular/common';
+import { AdminList } from 'src/assets/menus/admin';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class NavbarComponent implements OnInit{
     private sidebarVisible: boolean;
     userName = localStorage.getItem('fullname');
     userRoles = localStorage.getItem('roles');
+    public menuItems: any;
 
     public isCollapsed = true;
     @ViewChild("navbar-cmp", {static: false}) button:any;
@@ -36,7 +38,15 @@ export class NavbarComponent implements OnInit{
         this.router.events.subscribe((event) => {
           this.sidebarClose();
        });
+      this.getMenuList();
     }
+
+    getMenuList() {
+      // this.menuItems =  MenuList.data;
+      this.menuItems =  AdminList.data;
+      console.log(this.menuItems);
+      
+  }
 
    
     sidebarToggle() {
@@ -45,7 +55,8 @@ export class NavbarComponent implements OnInit{
         } else {
             this.sidebarClose();
         }
-      }
+    }
+
       sidebarOpen() {
           const toggleButton = this.toggleButton;
           const html = document.getElementsByTagName('html')[0];
@@ -60,6 +71,7 @@ export class NavbarComponent implements OnInit{
           }
           this.sidebarVisible = true;
       };
+
       sidebarClose() {
           const html = document.getElementsByTagName('html')[0];
           const mainPanel =  <HTMLElement>document.getElementsByClassName('main-panel')[0];
@@ -68,7 +80,7 @@ export class NavbarComponent implements OnInit{
               mainPanel.style.position = '';
             }, 500);
           }
-          this.toggleButton.classList.remove('toggled');
+         // this.toggleButton.classList.remove('toggled');
           this.sidebarVisible = false;
           html.classList.remove('nav-open');
       };
