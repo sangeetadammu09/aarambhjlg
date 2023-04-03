@@ -2,6 +2,8 @@ import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/co
 import { Router } from '@angular/router';
 import { Location} from '@angular/common';
 import { AdminList } from 'src/assets/menus/admin';
+import { CommonService } from 'src/app/common/service/common.service';
+import { MasterService } from 'src/app/master.service';
 
 
 @Component({
@@ -24,7 +26,8 @@ export class NavbarComponent implements OnInit{
     public isCollapsed = true;
     @ViewChild("navbar-cmp", {static: false}) button:any;
 
-    constructor(location:Location, private renderer : Renderer2, private element : ElementRef, private router: Router) {
+    constructor(location:Location, private renderer : Renderer2, private element : ElementRef,
+       private router: Router, private _commonService: CommonService, private masterService: MasterService) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
@@ -98,11 +101,24 @@ export class NavbarComponent implements OnInit{
 
       }
 
+      // logoutUser(){
+      //   console.log('user logged out')
+      //   localStorage.clear();
+      //   this.router.navigate(['/'])
+      // }
 
-      logoutUser(){
-        console.log('user logged out')
-        localStorage.clear();
-        this.router.navigate(['/'])
+      logout(){
+        const token :any= this.masterService.getToken();
+        const refreshToken:any = this.masterService.getRefreshToken();
+        var logoutTokenObj = new FormData();
+        logoutTokenObj.append('accessToken',token);
+        logoutTokenObj.append('refreshToken',refreshToken);
+  
+         this._commonService.logout(logoutTokenObj).subscribe((result:any) => {
+          console.log(result);
+          localStorage.clear();
+          this.router.navigate(['/'])
+         })
       }
 
 }

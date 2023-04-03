@@ -15,6 +15,10 @@ export class CommonService {
    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.Login,data)
   }
 
+  logout(data:any){
+    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.Logout,data)
+   }
+
   refreshToken(data:any){
     return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.RefreshToken,data,{observe: 'response'})
   }

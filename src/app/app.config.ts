@@ -7,6 +7,7 @@ export const APP_DI_CONFIG: any = {
   endPoints: {
     User:{
       Login : "/User/Login", 
+      Logout : "/User/Logout", 
       RefreshToken: "/User/RefreshToken",
       GetAllManager : "/User/GetAllManager",
       GetAllUser : "/User/GetAllUser",
