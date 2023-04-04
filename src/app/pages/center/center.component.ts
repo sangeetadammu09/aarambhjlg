@@ -27,6 +27,7 @@ export class CenterComponent implements OnInit {
   salesOfficerList: any;
   relationOfficerList: any;
   salesManagerList: any;
+  todayDate = new Date().toJSON();
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addCenterForm = this._formBuilder.group({
@@ -43,6 +44,7 @@ export class CenterComponent implements OnInit {
     })
 
     this.editCenterForm = this._formBuilder.group({
+      centerId :[],
       centerName: ['', Validators.required],
       centerNo: ['', Validators.required],
       centerAddress: ['', Validators.required],
@@ -51,7 +53,9 @@ export class CenterComponent implements OnInit {
       roId: [, Validators.required],
       smId: [, Validators.required],
       createdBy: [, Validators.required],
-      createdDate: []
+      createdDate: [],
+      updatedBy: [],
+      updatedDate:[]
     })
   }
 
@@ -152,9 +156,16 @@ export class CenterComponent implements OnInit {
      if(this.addCenterForm.valid){
       //  console.log(this.addCenterForm.value)
         var addCenterData :any = {};
-        addCenterData.CenterId = 0;
-        addCenterData.CenterName = this.addCenterForm.controls['CenterName'].value;
-        addCenterData.registrationFees = this.addCenterForm.controls['registrationFees'].value;
+        addCenterData.centerId = 0;
+        addCenterData.centerName = this.addCenterForm.controls['centerName'].value;
+        addCenterData.centerNo = this.addCenterForm.controls['centerNo'].value;
+        addCenterData.centerAddress = this.addCenterForm.controls['centerAddress'].value;
+        addCenterData.cityId = this.addCenterForm.controls['cityId'].value;
+        addCenterData.soId = this.addCenterForm.controls['soId'].value;
+        addCenterData.roId = this.addCenterForm.controls['roId'].value;
+        addCenterData.smId = this.addCenterForm.controls['smId'].value;
+        addCenterData.createdBy = 0;
+        addCenterData.createdDate = this.todayDate;
        
         this._adminService.addCenter(addCenterData).subscribe((data:any) => {
           console.log(data.status);
@@ -177,9 +188,16 @@ export class CenterComponent implements OnInit {
     this.addCenter = false;
     this.editCenter = true;
     this.editCenterForm.patchValue({
-      CenterId : item.CenterId,
-      CenterName : item.CenterName,
-      registrationFees : item.registrationFees
+      centerId : item.centerId,
+      centerName: item.centerName ,
+      centerNo: item.centerNo,
+      centerAddress: item.centerAddress,
+      cityId: item.cityId,
+      soId: item.soId,
+      roId: item.roId,
+      smId: item.smId,
+      createdBy: item.createdBy,
+      createdDate: item.createdDate,
     })
     
   }
@@ -192,9 +210,18 @@ export class CenterComponent implements OnInit {
      if(this.editCenterForm.valid){
     
        var updateCenterData :any = {};
-       updateCenterData.CenterId = this.editCenterForm.controls['CenterId'].value;
-       updateCenterData.CenterName = this.editCenterForm.controls['CenterName'].value;
-       updateCenterData.registrationFees = this.editCenterForm.controls['registrationFees'].value;
+        updateCenterData.centerId =  this.editCenterForm.controls['centerId'].value;
+        updateCenterData.centerName = this.editCenterForm.controls['centerName'].value;
+        updateCenterData.centerNo = this.editCenterForm.controls['centerNo'].value;
+        updateCenterData.centerAddress = this.editCenterForm.controls['centerAddress'].value;
+        updateCenterData.cityId = this.editCenterForm.controls['cityId'].value;
+        updateCenterData.soId = this.editCenterForm.controls['soId'].value;
+        updateCenterData.roId = this.editCenterForm.controls['roId'].value;
+        updateCenterData.smId = this.editCenterForm.controls['smId'].value;
+        updateCenterData.createdBy = this.editCenterForm.controls['createdBy'].value;
+        updateCenterData.createdDate = this.editCenterForm.controls['createdDate'].value;
+        updateCenterData.updatedBy = 0;
+        updateCenterData.updatedDate = this.todayDate;
         this._adminService.updateCenter(updateCenterData).subscribe((data:any) => {
           if(data){
             this._toastrService.success('Center updated successfully!');
