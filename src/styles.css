@@ -219,6 +219,10 @@ input[type=radio] {
     width: 130px;
 }
 
+.mt-button{
+    margin-top: 4% !important;
+}
+
 
 /* media */
 /* Extra small devices (phones, 600px and down) */
@@ -230,6 +234,9 @@ input[type=radio] {
         overflow: scroll;
         padding-bottom: 10px;
     }
+    .mt-button{
+        margin-top: 1% !important;
+    }
     
   }
   
@@ -240,6 +247,10 @@ input[type=radio] {
   
   /* Medium devices (landscape tablets, 768px and up) */
   @media only screen and (min-width: 768px)and (max-width: 991px) {
+    .mt-button{
+        margin-top: 1% !important;
+        margin-bottom: 1% !important;
+    }
     
   } 
   

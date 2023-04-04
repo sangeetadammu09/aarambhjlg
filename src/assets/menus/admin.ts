@@ -107,6 +107,21 @@ export const AdminList = {
                 }
             ]
           },
+          {
+            id: 3,
+            parentMenu: 'Center',
+            icon : 'fa-building',
+            isActive: true, 
+            url: 'center',
+            submenuList: [
+                {
+                    id: 0,
+                    menu: 'Center List',
+                    url: 'center-list',
+                    isActive: true, 
+                }
+            ]
+          },
 
     ],
     message: null,

@@ -233,8 +233,8 @@
                                 </div>
                                 
                             </div>
-                            <div class="col-lg-4 mt-3">
-                                <button class="btn btn-primary btn-md" type="button" (click)="submitAFDocument()">Upload</button>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableAFDocumentBtn" (click)="submitAFDocument()">Upload</button>
                             </div>
                         </div>
                         <div class="row">
@@ -248,8 +248,8 @@
                                 </div>
                                 
                             </div>
-                            <div class="col-lg-4 mt-3">
-                                <button class="btn btn-primary btn-md" type="button"  (click)="submitABDocument()">Upload</button>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button"  [disabled]="disableABDocumentBtn" (click)="submitABDocument()">Upload</button>
                             </div>
                         </div>
                         <div class="row">
@@ -264,8 +264,8 @@
                                 </div>
                                 
                             </div>
-                            <div class="col-lg-4 mt-3">
-                                <button class="btn btn-primary btn-md" type="button" (click)="submitPhoto()">Upload</button>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button" [disabled]="disablePhotoDocumentBtn" (click)="submitPhoto()">Upload</button>
                             </div>
                         </div>
                         <div class="row">
@@ -279,8 +279,8 @@
                                 </div>
                                 
                             </div>
-                            <div class="col-lg-4 mt-3">
-                                <button class="btn btn-primary btn-md" type="button" (click)="submitAddress()">Upload</button>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableAddressDocumentBtn" (click)="submitAddress()">Upload</button>
                             </div>
                         </div>
 
@@ -295,8 +295,8 @@
                                 </div>
                                 
                             </div>
-                            <div class="col-lg-4 mt-3">
-                                <button class="btn btn-primary btn-md" type="button" (click)="submitVoterDoc()">Upload</button>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableVoterDocumentBtn" (click)="submitVoterDoc()">Upload</button>
                             </div>
                         </div>
 
@@ -318,8 +318,8 @@
                                 </div>
                                 
                             </div>
-                            <div class="col-lg-4 mt-3">
-                                <button class="btn btn-primary btn-md" type="button" (click)="submitFamilyPhoto()">Upload</button>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableFamilyDocumentBtn" (click)="submitFamilyPhoto()">Upload</button>
                             </div>
                         </div>
                         <div class="row">
@@ -332,8 +332,8 @@
                                 </div>
                                 
                             </div>
-                            <div class="col-lg-4 mt-3">
-                                <button class="btn btn-primary btn-md" type="button" (click)="submitDrivingLicense()">Upload</button>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableDLDocumentBtn" (click)="submitDrivingLicense()">Upload</button>
                             </div>
                         </div>
                         <div class="row">
@@ -348,8 +348,8 @@
                                 </div>
                                 
                             </div>
-                            <div class="col-lg-4 mt-3">
-                                <button class="btn btn-primary btn-md" type="button" (click)="submitJoiningLetter()">Upload</button>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableJoiningLetterBtn" (click)="submitJoiningLetter()">Upload</button>
                             </div>
                         </div>
                         <div class="row">
@@ -363,8 +363,8 @@
                                 </div>
                                 
                             </div>
-                            <div class="col-lg-4 mt-3">
-                                <button class="btn btn-primary btn-md" type="button" (click)="submitBankPassbook()">Upload</button>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button" [disabled]="disablePassbookBtn" (click)="submitBankPassbook()">Upload</button>
                             </div>
                         </div>
                         <div class="row">
@@ -378,8 +378,8 @@
                                 </div>
                                 
                             </div>
-                            <div class="col-lg-4 mt-3">
-                                <button class="btn btn-primary btn-md"type="button" (click)="submitEducationDoc()">Upload</button>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md"type="button" [disabled]="disableEducationBtn" (click)="submitEducationDoc()">Upload</button>
                             </div>
                         </div>
                         <div class="row">
@@ -393,8 +393,8 @@
                                 </div>
                                 
                             </div>
-                            <div class="col-lg-4 mt-3">
-                                <button class="btn btn-primary btn-md" type="button" (click)="submitReleavingLetter()">Upload</button>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableReleavingLetterBtn" (click)="submitReleavingLetter()">Upload</button>
                             </div>
                         </div>
                         <div class="row">
@@ -408,8 +408,9 @@
                                 </div>
                                 
                             </div>
-                            <div class="col-lg-4 mt-3">
-                                <button class="btn btn-primary btn-md" type="button" (click)="submitpreviousSalarySlips()">Upload</button>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button" [disabled]="disablepreviousSalarySlipsBtn"
+                                (click)="submitpreviousSalarySlips()">Upload</button>
                             </div>
                         </div>
                         <div class="row">

@@ -68,6 +68,18 @@ export class UserComponent implements OnInit {
   userId = localStorage.getItem('userId');
   userDetailsObj: any = {};
   userDocuments: any = [];
+  disableAFDocumentBtn: boolean = false;
+  disableABDocumentBtn: boolean = false;
+  disablePhotoDocumentBtn: boolean = false;
+  disableAddressDocumentBtn: boolean = false;
+  disableVoterDocumentBtn: boolean = false;
+  disableFamilyDocumentBtn: boolean = false;
+  disableDLDocumentBtn: boolean = false;
+  disableJoiningLetterBtn: boolean = false;
+  disablePassbookBtn: boolean = false;
+  disableEducationBtn: boolean = false;
+  disableReleavingLetterBtn: boolean = false;
+  disablepreviousSalarySlipsBtn: boolean = false;
 
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
@@ -283,7 +295,8 @@ export class UserComponent implements OnInit {
           if(data.status == 200){
            
             this._toastrService.success('Aadhaar Front  added successfully!');
-           this.closeaddUserBtn.nativeElement.click();
+          // this.closeaddUserBtn.nativeElement.click();
+            this.disableAFDocumentBtn = true;
            this.getAllUserDetails();
           } 
         }
@@ -325,7 +338,8 @@ export class UserComponent implements OnInit {
         this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
           if(data.status == 200){        
             this._toastrService.success('Aadhaar Back added successfully!');
-            this.closeaddUserBtn.nativeElement.click();
+           // this.closeaddUserBtn.nativeElement.click();
+           this.disableABDocumentBtn = true;
             this.getAllUserDetails();
           } 
         },(error:any) => {
@@ -366,7 +380,8 @@ export class UserComponent implements OnInit {
           if(data.status == 200){
            
             this._toastrService.success('Photo added successfully!');
-            this.closeaddUserBtn.nativeElement.click();
+           // this.closeaddUserBtn.nativeElement.click();
+           this.disablePhotoDocumentBtn = true;
             this.getAllUserDetails();
           } 
         },(error:any) => {
@@ -407,7 +422,8 @@ export class UserComponent implements OnInit {
           if(data.status == 200){
            
             this._toastrService.success('Address Document added successfully!');
-            this.closeaddUserBtn.nativeElement.click();
+          //  this.closeaddUserBtn.nativeElement.click();
+          this.disableAddressDocumentBtn = true;
             this.getAllUserDetails();
           } 
         },(error:any) => {
@@ -448,7 +464,8 @@ export class UserComponent implements OnInit {
           if(data.status == 200){
            
             this._toastrService.success('Voter/PAN added successfully!');
-            this.closeaddUserBtn.nativeElement.click();
+         //   this.closeaddUserBtn.nativeElement.click();
+         this.disableVoterDocumentBtn = true;
             this.getAllUserDetails();
           } 
         },(error:any) => {
@@ -490,8 +507,9 @@ export class UserComponent implements OnInit {
         this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
           if(data.status == 200){
            
-            this._toastrService.success('Resume added successfully!');
-            this.closeaddUserBtn.nativeElement.click();
+            this._toastrService.success('Family Photo added successfully!');
+          //  this.closeaddUserBtn.nativeElement.click();
+          this.disableFamilyDocumentBtn = true;
             this.getAllUserDetails();
           } 
         },(error:any) => {
@@ -534,7 +552,8 @@ export class UserComponent implements OnInit {
           if(data.status == 200){
            
             this._toastrService.success('Driving License added successfully!');
-            this.closeaddUserBtn.nativeElement.click();
+         //   this.closeaddUserBtn.nativeElement.click();
+         this.disableDLDocumentBtn  = true;
             this.getAllUserDetails();
           } 
         },(error:any) => {
@@ -574,7 +593,8 @@ export class UserComponent implements OnInit {
           if(data.status == 200){
            
             this._toastrService.success('Joining Letter added successfully!');
-            this.closeaddUserBtn.nativeElement.click();
+           // this.closeaddUserBtn.nativeElement.click();
+           this.disableJoiningLetterBtn  = true;
             this.getAllUserDetails();
           } 
         },(error:any) => {
@@ -615,7 +635,8 @@ export class UserComponent implements OnInit {
           if(data.status == 200){
            
             this._toastrService.success('Bank Passbook added successfully!');
-            this.closeaddUserBtn.nativeElement.click();
+           // this.closeaddUserBtn.nativeElement.click();
+           this.disablePassbookBtn = true;
             this.getAllUserDetails();
           } 
         },(error:any) => {
@@ -657,7 +678,8 @@ export class UserComponent implements OnInit {
           if(data.status == 200){
            
             this._toastrService.success('Education document added successfully!');
-            this.closeaddUserBtn.nativeElement.click();
+           // this.closeaddUserBtn.nativeElement.click();
+           this.disableEducationBtn = true;
             this.getAllUserDetails();
           } 
         },(error:any) => {
@@ -699,7 +721,8 @@ export class UserComponent implements OnInit {
           if(data.status == 200){
            
             this._toastrService.success('Releaving Letter added successfully!');
-            this.closeaddUserBtn.nativeElement.click();
+           // this.closeaddUserBtn.nativeElement.click();
+            this.disableReleavingLetterBtn = true;
             this.getAllUserDetails();
           } 
         },(error:any) => {
@@ -740,7 +763,8 @@ export class UserComponent implements OnInit {
           if(data.status == 200){
            
             this._toastrService.success('Previous Salary Slips added successfully!');
-          //  this.closeaddUserBtn.nativeElement.click();
+            this.disablepreviousSalarySlipsBtn = true;
+            this.closeaddUserBtn.nativeElement.click();
             this.getAllUserDetails();
           } 
         },(error:any) => {

@@ -223,7 +223,22 @@
                     </form>
                 </div>
                 <div id="tab2" class="tab-slider--body" *ngSwitchCase="'tab2'">
-                    
+                    <form>
+                        <div class="row">
+                            <div class="form-group col-lg-8">
+                                <label class="form-control-label">Product Images</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile" name="prodImages" 
+                                    (change)="uploadProductImages($event)">
+                                    <label class="custom-file-label" for="file">{{procutImagesName}}</label>    
+                                </div>
+                                
+                            </div>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableProdImagesBtn" (click)="submitProdImages()">Upload</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
    

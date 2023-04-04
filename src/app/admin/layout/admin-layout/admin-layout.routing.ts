@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { BranchComponent } from 'src/app/pages/branch/branch.component';
+import { CenterComponent } from 'src/app/pages/center/center.component';
 import { CityComponent } from 'src/app/pages/city/city.component';
 import { ExpenseTypeComponent } from 'src/app/pages/expense-type/expense-type.component';
 import { InstallmentsComponent } from 'src/app/pages/installments/installments.component';
@@ -19,6 +20,7 @@ export const AdminLayoutRoutes: Routes = [
      { path:'product-price', component: ProductPriceComponent },
      { path:'unit', component: UnitComponent },
      { path:'user-list', component: UserComponent },
+     { path:'center-list', component: CenterComponent },
      { path:'user-role', component: UserroleComponent },
      { path:'tax-slot', component: TaxSlotComponent },
      { path:'product-list', component: ProductsComponent },

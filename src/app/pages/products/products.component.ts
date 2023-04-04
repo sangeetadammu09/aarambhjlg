@@ -31,6 +31,10 @@ export class ProductsComponent implements OnInit {
   taxSlotList: any;
   todayDate = new Date().toJSON();
   productBrandList: any;
+  procutImagesName: any;
+  disableProdImagesBtn :boolean = false;
+  productImageFile: any;
+  addedProductId: any;
  
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
@@ -206,6 +210,7 @@ export class ProductsComponent implements OnInit {
           console.log(data.status);
           //console.log(data.headers.get('X-Custom-Header'));
           if(data.status == 200){
+            this.addedProductId = data.body;
             this._toastrService.success('Product added successfully!');
            // this.closeaddProductBtn.nativeElement.click();
             this.viewMode = 'tab2';
@@ -217,6 +222,49 @@ export class ProductsComponent implements OnInit {
         console.log('invalid form')
       }  
 
+  }
+
+  uploadProductImages(file: any) {
+    this.productImageFile='';
+    this.procutImagesName = file.target.files[0].name;
+    if(this.procutImagesName.includes('.png') || this.procutImagesName.includes('.jpg')) {
+      this.productImageFile = file.target.files[0];
+    }else{
+      this._toastrService.error('Only PNG or JPG document is allowed')
+    }
+  }
+
+  submitProdImages(){
+    console.log('submitProdImages',this.productImageFile)
+    if(this.productImageFile != undefined){
+      if(this.addedProductId){
+        var addProductImageData = new FormData();
+        var photoid :any = 0;
+        addProductImageData.append('PhotoId',photoid);
+        addProductImageData.append('ProductId',this.addedProductId);
+        addProductImageData.append('ProductPhoto',this.productImageFile);    
+ 
+        this._adminService.addProductImages(addProductImageData).subscribe((data:any) => {
+          if(data.status == 200){     
+            this._toastrService.success('Product Image added successfully!');
+          // this.closeaddUserBtn.nativeElement.click();
+            this.disableProdImagesBtn = true;
+           this.getAllProducts();
+          } 
+        }
+        ,(error:any) => {
+         if(error.status == 500){
+         this._toastrService.error('Please upload Aadhaar Front');
+         }
+        }
+        )
+         
+      }else{
+        this._toastrService.error('No user found');
+      }
+   }else{
+    this._toastrService.error('Please upload Aadhaar Front');
+  }
   }
 
 
@@ -242,9 +290,6 @@ export class ProductsComponent implements OnInit {
     })
     
   }
-
-
-
 
   
   submitUpdateProduct(){

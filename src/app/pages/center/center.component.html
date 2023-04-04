@@ -1,0 +1,327 @@
+<div class="wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-10">
+                <h3 class="mb-2 mt-2">List of Centers</h3>
+            </div>
+            <div class="col-lg-2 mb-3 mt-2">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#addeditCenterModal"
+                (click)="showaddCenterModal()">Add Center</button>
+            </div>
+            
+         </div>
+         <div class="card">
+          <div class="table-responsive">
+         <div class="table table-vcenter card-table" *ngIf="CenterList.length != 0">
+            <table class="table table-vcenter card-table">
+                <thead class="thead-secondary">
+                  <tr>
+                    <th scope="col">S No.</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Number</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Sales Officer</th>
+                    <th scope="col">Relation Officer</th>
+                    <th scope="col">Sales Manager</th>
+                  
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let item of CenterList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index ">
+                  <tr>
+                    <td>{{10*(p-1)+i+1}}</td>
+                    <td>{{item.centerName}}</td> 
+                    <td>{{item.centerNumber}}</td>
+                    <td>{{item.centerAddress}}</td>
+                    <td>{{item.city}}</td>
+                    <td>{{item.salesOfficer}}</td>
+                    <td>{{item.relationOfficer}}</td>
+                    <td>{{item.salesManager}}</td>
+                    
+                    <td (click)="showeditCenterModal(item)" data-toggle="modal" data-target="#addeditCenterModal">
+                        <svg enable-background="new 0 0 19 19" height="19px" id="Layer_1" version="1.1" viewBox="0 0 19 19" width="19px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <g><path d="M8.44,7.25C8.348,7.342,8.277,7.447,8.215,7.557L8.174,7.516L8.149,7.69   C8.049,7.925,8.014,8.183,8.042,8.442l-0.399,2.796l2.797-0.399c0.259,0.028,0.517-0.007,0.752-0.107l0.174-0.024l-0.041-0.041   c0.109-0.062,0.215-0.133,0.307-0.225l5.053-5.053l-3.191-3.191L8.44,7.25z" fill="#231F20"/>
+                            <path d="M18.183,1.568l-0.87-0.87c-0.641-0.641-1.637-0.684-2.225-0.097l-0.797,0.797l3.191,3.191l0.797-0.798   C18.867,3.205,18.824,2.209,18.183,1.568z" fill="#231F20"/><path d="M15,9.696V17H2V2h8.953l1.523-1.42c0.162-0.161,0.353-0.221,0.555-0.293   c0.043-0.119,0.104-0.18,0.176-0.287H0v19h17V7.928L15,9.696z" fill="#231F20"/>
+                        </g></svg>
+                    </td>     
+                    <td  (click)="showdeleteCenterModal(item)" data-toggle="modal"  data-target="#deleteCenterModal">
+                        <svg enable-background="new 0 0 19 19" height="19px" id="Layer_1" version="1.1" viewBox="0 0 26 29" width="26px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <g><path d="M1.035,9l3.49,17.478C4.525,27.854,5.643,29,7.019,29H13h5.981c1.376,0,2.493-1.146,2.493-2.522L24.965,9   H13H1.035z" fill="#231F20"/>
+                            <path d="M23.524,3H21V2.824C21,1.264,19.736,0,18.176,0H7.824C6.264,0,5,1.264,5,2.824V3H2.476   C0.946,3,0,3.939,0,5.468V7h7.824h10.352H26V5.468C26,3.939,25.053,3,23.524,3z" fill="#231F20"/>
+                        </g></svg>
+                    </td> 
+                  </tr>        
+                </tbody>
+                
+            </table>
+            <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+          
+            
+            <!--Including the pagination control.-->
+                <!-- <div class="d-flex justify-content-end">
+                    <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)"></pagination-controls>
+                </div> -->
+         </div>
+         </div>
+         </div>
+
+         <div class="row card mb-3" *ngIf="CenterList.length == 0">
+            <p class="text-center">No Center found</p>
+          </div>
+        
+    </div>
+</div>
+
+<!-- add/edit Center modal -->
+<div class="modal fade" id="addeditCenterModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" *ngIf="addCenter && !editCenter">Add Center</h5>
+          <h5 class="modal-title" id="exampleModalLabel" *ngIf="editCenter && !addCenter">Edit Center</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeaddCenterBtn  *ngIf="addCenter && !editCenter">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeeditCenterBtn *ngIf="editCenter && !addCenter">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body" *ngIf="addCenter && !editCenter">
+            <form [formGroup]="addCenterForm" (ngSubmit)="submitNewCenter()">
+                <div class="row">
+                <div class="form-group col-lg-6">
+                    <label class="form-control-label">Name</label>
+                    <input type="text" class="form-control" formControlName="centerName" name="centerName"  
+                    [ngClass]="{'is-invalid':(submitted && f['centerName'].errors) ||(f['centerName'].errors && f['centerName'].touched) }">
+                        <div *ngIf="(submitted && f['centerName'].errors) ||(f['centerName'].errors && f['centerName'].touched)" class="invalid-feedback">
+                            <div *ngIf="f['centerName'].errors['required']">
+                                Name is required
+                            </div>
+                     </div>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label class="form-control-label">Number</label>
+                    <input type="text" class="form-control" formControlName="centerNo" name="centerNo"  
+                    [ngClass]="{'is-invalid':(submitted && f['centerNo'].errors) ||(f['centerNo'].errors && f['centerNo'].touched) }">
+                        <div *ngIf="(submitted && f['centerNo'].errors) ||(f['centerNo'].errors && f['centerNo'].touched)" class="invalid-feedback">
+                            <div *ngIf="f['centerNo'].errors['required']">
+                                Number is required
+                            </div>
+                            <div *ngIf="f['centerNo'].errors['pattern']">
+                                Only Number accepted
+                              </div>
+                     </div>
+                </div>
+                </div>
+                <div class="row">
+                <div class="form-group col-lg-6">
+                    <label class="form-control-label">City</label>
+                    <select class="custom-select"  formControlName="cityId" name="cityId" id="cityId"
+                    [ngClass]="{'is-invalid':(submitted && f['cityId'].errors) ||(f['cityId'].errors && f['cityId'].touched) }">
+                    <option value="" [selected]="''">Choose..</option>
+                        <option *ngFor="let item of cityList" [ngValue]="item.cityId">
+                            {{item.cityName }}</option>
+                    </select>
+                        <div *ngIf="(submitted && f['cityId'].errors) ||(f['cityId'].errors && f['cityId'].touched)" class="invalid-feedback">
+                            <div *ngIf="f['cityId'].errors['required']">
+                                City is required
+                            </div>
+                     </div>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label class="form-control-label">Sales Officer</label>
+                    <select class="custom-select"  formControlName="soId" name="soId" id="soId"
+                    [ngClass]="{'is-invalid':(submitted && f['soId'].errors) ||(f['soId'].errors && f['soId'].touched) }">
+                    <option value="" [selected]="''">Choose..</option>
+                        <option *ngFor="let item of salesOfficerList" [ngValue]="item.userId">
+                            {{item.fullName }}</option>
+                    </select>
+                        <div *ngIf="(submitted && f['soId'].errors) ||(f['soId'].errors && f['soId'].touched)" class="invalid-feedback">
+                            <div *ngIf="f['soId'].errors['required']">
+                                Sales Officer is required
+                            </div>
+                     </div>
+                </div>
+                </div>
+                <div class="row">
+                <div class="form-group col-lg-6">
+                    <label class="form-control-label">Relation Officer</label>
+                    <select class="custom-select"  formControlName="roId" name="roId" id="roId"
+                    [ngClass]="{'is-invalid':(submitted && f['roId'].errors) ||(f['roId'].errors && f['roId'].touched) }">
+                    <option value="" [selected]="''">Choose..</option>
+                        <option *ngFor="let item of relationOfficerList" [ngValue]="item.userId">
+                            {{item.fullName }}</option>
+                    </select>
+                        <div *ngIf="(submitted && f['roId'].errors) ||(f['roId'].errors && f['roId'].touched)" class="invalid-feedback">
+                            <div *ngIf="f['roId'].errors['required']">
+                                Relation Officer is required
+                            </div>
+                     </div>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label class="form-control-label">Sales Manager</label>
+                    <select class="custom-select"  formControlName="smId" name="smId" id="smId"
+                    [ngClass]="{'is-invalid':(submitted && f['smId'].errors) ||(f['smId'].errors && f['smId'].touched) }">
+                    <option value="" [selected]="''">Choose..</option>
+                        <option *ngFor="let item of salesManagerList" [ngValue]="item.userId">
+                            {{item.fullName}}</option>
+                    </select>
+                        <div *ngIf="(submitted && f['smId'].errors) ||(f['smId'].errors && f['smId'].touched)" class="invalid-feedback">
+                            <div *ngIf="f['smId'].errors['required']">
+                                Sales Manager is required
+                            </div>
+                     </div>
+                </div>
+                </div>
+                <div class="row">
+                <div class="form-group col-lg-6">
+                    <label class="form-control-label">Address</label>
+                    <textarea formControlName="centerAddress" name="centerAddress"  class="form-control"  id="centerAddress" cols="30" rows="10"
+                    [ngClass]="{'is-invalid':(submitted && f['centerAddress'].errors) ||(f['centerAddress'].errors && f['centerAddress'].touched) }"
+                    ></textarea>
+                    <div *ngIf="(submitted && f['centerAddress'].errors) ||(f['centerAddress'].errors && f['centerAddress'].touched)" class="invalid-feedback">
+                            <div *ngIf="f['centerAddress'].errors['required']">
+                                Address is required
+                            </div>
+                    </div>
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                  </div>
+            </form>
+        </div>
+
+        <div class="modal-body" *ngIf="editCenter && !addCenter">
+            <form [formGroup]="editCenterForm" (ngSubmit)="submitUpdateCenter()">
+                <div class="form-group col-lg-6">
+                    <label class="form-control-label">Name</label>
+                    <input type="text" class="form-control" formControlName="centerName" name="centerName"  
+                    [ngClass]="{'is-invalid':(submitted && g['centerName'].errors) ||(g['centerName'].errors && g['centerName'].touched) }">
+                        <div *ngIf="(submitted && g['centerName'].errors) ||(g['centerName'].errors && g['centerName'].touched)" class="invalid-feedback">
+                            <div *ngIf="g['centerName'].errors['required']">
+                                Name is required
+                            </div>
+                     </div>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label class="form-control-label">Number</label>
+                    <input type="text" class="form-control" formControlName="centerNo" name="centerNo"  
+                    [ngClass]="{'is-invalid':(submitted && g['centerNo'].errors) ||(g['centerNo'].errors && g['centerNo'].touched) }">
+                        <div *ngIf="(submitted && g['centerNo'].errors) ||(g['centerNo'].errors && g['centerNo'].touched)" class="invalid-feedback">
+                            <div *ngIf="g['centerNo'].errors['required']">
+                                Registration Fees is required
+                            </div>
+                            <div *ngIf="g['centerNo'].errors['pattern']">
+                                Only Number accepted
+                              </div>
+                     </div>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label class="form-control-label">City</label>
+                    <select class="custom-select"  formControlName="cityId" name="cityId" id="cityId"
+                    [ngClass]="{'is-invalid':(submitted && g['cityId'].errors) ||(g['cityId'].errors && g['cityId'].touched) }">
+                    <option value="" [selected]="''">Choose..</option>
+                        <option *ngFor="let item of cityList" [ngValue]="item.cityId">
+                            {{item.cityName }}</option>
+                    </select>
+                        <div *ngIf="(submitted && g['cityId'].errors) ||(g['cityId'].errors && g['cityId'].touched)" class="invalid-feedback">
+                            <div *ngIf="g['cityId'].errors['required']">
+                                City is required
+                            </div>
+                     </div>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label class="form-control-label">Sales Officer</label>
+                    <select class="custom-select"  formControlName="soId" name="soId" id="soId"
+                    [ngClass]="{'is-invalid':(submitted && g['soId'].errors) ||(g['soId'].errors && g['soId'].touched) }">
+                    <option value="" [selected]="''">Choose..</option>
+                        <option *ngFor="let item of salesOfficerList" [ngValue]="item.soId">
+                            {{item.salesOfficer }}</option>
+                    </select>
+                        <div *ngIf="(submitted && g['soId'].errors) ||(g['soId'].errors && g['soId'].touched)" class="invalid-feedback">
+                            <div *ngIf="g['soId'].errors['required']">
+                                Sales Officer is required
+                            </div>
+                     </div>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label class="form-control-label">Relation Officer</label>
+                    <select class="custom-select"  formControlName="roId" name="roId" id="roId"
+                    [ngClass]="{'is-invalid':(submitted && g['roId'].errors) ||(g['roId'].errors && g['roId'].touched) }">
+                    <option value="" [selected]="''">Choose..</option>
+                        <option *ngFor="let item of relationOfficerList" [ngValue]="item.roId">
+                            {{item.relationOfficer }}</option>
+                    </select>
+                        <div *ngIf="(submitted && g['roId'].errors) ||(g['roId'].errors && g['roId'].touched)" class="invalid-feedback">
+                            <div *ngIf="g['roId'].errors['required']">
+                                Relation Officer is required
+                            </div>
+                     </div>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label class="form-control-label">Sales Manager</label>
+                    <select class="custom-select"  formControlName="smId" name="smId" id="smId"
+                    [ngClass]="{'is-invalid':(submitted && g['smId'].errors) ||(g['smId'].errors && g['smId'].touched) }">
+                    <option value="" [selected]="''">Choose..</option>
+                        <option *ngFor="let item of salesManagerList" [ngValue]="item.smId">
+                            {{item.salesManager }}</option>
+                    </select>
+                        <div *ngIf="(submitted && g['smId'].errors) ||(g['smId'].errors && g['smId'].touched)" class="invalid-feedback">
+                            <div *ngIf="g['smId'].errors['required']">
+                                Sales Manager is required
+                            </div>
+                     </div>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label class="form-control-label">Address</label>
+                    <textarea formControlName="centerAddress" name="centerAddress"  class="form-control"  id="centerAddress" cols="30" rows="10"
+                    [ngClass]="{'is-invalid':(submitted && g['centerAddress'].errors) ||(g['centerAddress'].errors && g['centerAddress'].touched) }"
+                    ></textarea>
+                    <div *ngIf="(submitted && g['centerAddress'].errors) ||(g['centerAddress'].errors && g['centerAddress'].touched)" class="invalid-feedback">
+                            <div *ngIf="g['centerAddress'].errors['required']">
+                                Address is required
+                            </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                  </div>
+            </form>
+        </div>
+       
+      </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="deleteCenterModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+         
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeDeleteCenterBtn>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+             <p>Are you sure you want to delete this Center?</p>
+             <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" (click)="deleteCenter()">Yes</button>
+              </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+

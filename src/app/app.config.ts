@@ -41,6 +41,15 @@ export const APP_DI_CONFIG: any = {
       UpdateCity : "/City/UpdateCity",
       DeleteCity : "/City/DeleteCity"
     },
+    Center:{
+      GetAllCentersListByCity : "/Center/GetCentersListByCityId",
+      GetAllSalesOfficerByCity : "/Center/GetSalesOfficerByCityId",
+      GetAllRelationOfficerByCity : "/Center/GetRelationOfficerByCityId",
+      GetAllSalesManagersByCity : "/Center/GetSalesManagersByCityId",
+      AddCenter : "/Center/AddCenter",
+      UpdateCenter : "/Center/UpdateCenter",
+      DeleteCenter : "/Center/DeleteCenter"
+    },
     ExpenseType:{
       GetAllExpenseType : "/ExpenseTypes/GetAllExpenseType",
       AddExpenseType : "/ExpenseTypes/AddExpenseType",
