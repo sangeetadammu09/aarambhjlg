@@ -211,7 +211,7 @@ export class CenterComponent implements OnInit {
 
 
   showdeleteCenterModal(item:any){
-      this.deleteCenterItem = item.CenterId;
+      this.deleteCenterItem = item.centerId;
   }
 
 
