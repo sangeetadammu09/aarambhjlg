@@ -46,6 +46,7 @@ export const APP_DI_CONFIG: any = {
       GetAllSalesOfficerByCity : "/Center/GetSalesOfficerByCityId",
       GetAllRelationOfficerByCity : "/Center/GetRelationOfficerByCityId",
       GetAllSalesManagersByCity : "/Center/GetSalesManagersByCityId",
+      GetCenterDropdownByCityId : "/Center/GetCenterDropdownByCityId",
       AddCenter : "/Center/AddCenter",
       UpdateCenter : "/Center/UpdateCenter",
       DeleteCenter : "/Center/DeleteCenter"
@@ -61,6 +62,13 @@ export const APP_DI_CONFIG: any = {
       AddInstallment : "/Installment/AddInstallment",
       UpdateInstallment : "/Installment/UpdateInstallment",
       DeleteInstallment : "/Installment/DeleteInstallment"
+    },
+    Group:{
+      GetAllGroups : "/Group/GetAllGroups",
+      GetGroupListByCenterId : "/Group/GetGroupListByCenterId",
+      AddGroup : "/Group/AddGroup",
+      UpdateGroup : "/Group/UpdateGroup",
+      DeleteGroup : "/Group/DeleteGroup"
     },
     TaxSlot:{
       GetAllTaxSlot : "/TaxSlot/GetAllTaxSlots",

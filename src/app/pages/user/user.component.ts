@@ -504,7 +504,7 @@ export class UserComponent implements OnInit {
         addUserDocumentData.append('DocumentName',this.userDocument);
         addUserDocumentData.append('file',this.userDocumentFile);    
  
-        this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
+        this._adminService.addUserOtherDocuments(addUserDocumentData).subscribe((data:any) => {
           if(data.status == 200){
            
             this._toastrService.success('Family Photo added successfully!');
@@ -548,7 +548,7 @@ export class UserComponent implements OnInit {
         addUserDocumentData.append('DocumentName',this.userDocument);
         addUserDocumentData.append('file',this.userDocumentFile);    
  
-        this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
+        this._adminService.addUserOtherDocuments(addUserDocumentData).subscribe((data:any) => {
           if(data.status == 200){
            
             this._toastrService.success('Driving License added successfully!');
@@ -589,7 +589,7 @@ export class UserComponent implements OnInit {
         addUserDocumentData.append('DocumentName',this.userDocument);
         addUserDocumentData.append('file',this.userDocumentFile);    
  
-        this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
+        this._adminService.addUserOtherDocuments(addUserDocumentData).subscribe((data:any) => {
           if(data.status == 200){
            
             this._toastrService.success('Joining Letter added successfully!');
@@ -631,7 +631,7 @@ export class UserComponent implements OnInit {
         addUserDocumentData.append('DocumentName',this.userDocument);
         addUserDocumentData.append('file',this.userDocumentFile);    
  
-        this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
+        this._adminService.addUserOtherDocuments(addUserDocumentData).subscribe((data:any) => {
           if(data.status == 200){
            
             this._toastrService.success('Bank Passbook added successfully!');
@@ -674,7 +674,7 @@ export class UserComponent implements OnInit {
         addUserDocumentData.append('DocumentName',this.userDocument);
         addUserDocumentData.append('file',this.userDocumentFile);    
  
-        this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
+        this._adminService.addUserOtherDocuments(addUserDocumentData).subscribe((data:any) => {
           if(data.status == 200){
            
             this._toastrService.success('Education document added successfully!');
@@ -717,7 +717,7 @@ export class UserComponent implements OnInit {
         addUserDocumentData.append('DocumentName',this.userDocument);
         addUserDocumentData.append('file',this.userDocumentFile);    
  
-        this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
+        this._adminService.addUserOtherDocuments(addUserDocumentData).subscribe((data:any) => {
           if(data.status == 200){
            
             this._toastrService.success('Releaving Letter added successfully!');
@@ -759,7 +759,7 @@ export class UserComponent implements OnInit {
         addUserDocumentData.append('DocumentName',this.userDocument);
         addUserDocumentData.append('file',this.userDocumentFile);    
  
-        this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
+        this._adminService.addUserOtherDocuments(addUserDocumentData).subscribe((data:any) => {
           if(data.status == 200){
            
             this._toastrService.success('Previous Salary Slips added successfully!');

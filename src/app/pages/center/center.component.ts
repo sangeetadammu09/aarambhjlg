@@ -38,7 +38,7 @@ export class CenterComponent implements OnInit {
       soId: [, Validators.required],
       roId: [, Validators.required],
       smId: [, Validators.required],
-      createdBy: [, Validators.required],
+      createdBy: [],
       createdDate: []
      
     })
@@ -52,7 +52,7 @@ export class CenterComponent implements OnInit {
       soId: [, Validators.required],
       roId: [, Validators.required],
       smId: [, Validators.required],
-      createdBy: [, Validators.required],
+      createdBy: [],
       createdDate: [],
       updatedBy: [],
       updatedDate:[]
@@ -156,7 +156,7 @@ export class CenterComponent implements OnInit {
      if(this.addCenterForm.valid){
       //  console.log(this.addCenterForm.value)
         var addCenterData :any = {};
-        addCenterData.centerId = 0;
+       // addCenterData.centerId = 0;
         addCenterData.centerName = this.addCenterForm.controls['centerName'].value;
         addCenterData.centerNo = this.addCenterForm.controls['centerNo'].value;
         addCenterData.centerAddress = this.addCenterForm.controls['centerAddress'].value;

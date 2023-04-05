@@ -122,6 +122,21 @@ export const AdminList = {
                 }
             ]
           },
+          {
+            id: 3,
+            parentMenu: 'Group',
+            icon : 'fa-user',
+            isActive: true, 
+            url: 'group',
+            submenuList: [
+                {
+                    id: 0,
+                    menu: 'Group-List',
+                    url: 'group-list',
+                    isActive: true, 
+                }
+            ]
+          },
 
     ],
     message: null,

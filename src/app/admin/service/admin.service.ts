@@ -62,8 +62,12 @@ export class AdminService {
 
     //city apis
 
-    getAllCenter(cityId:any){
+     getAllCenter(cityId:any){
       return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Center.GetAllCentersListByCity+`?cityId=${cityId}`)
+     }
+
+     getCenterDropdownByCityId(cityId:any){
+      return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Center.GetCenterDropdownByCityId+`?cityId=${cityId}`)
      }
 
      getAllSalesOfficerByCity(cityId:any){
@@ -127,6 +131,29 @@ export class AdminService {
    deleteInstallment(id:any){
      return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Installment.DeleteInstallment+`/${id}`,{observe: 'response'})
    }
+
+   //group
+
+   getAllGroupsByCityId(cityId:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Group.GetAllGroups+`?cityId=${cityId}`)
+   }
+
+   getGroupListByCenterId(id:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Group.GetGroupListByCenterId+`/${id}`,{observe: 'response'})
+   }
+ 
+   addGroup(data:any){
+     return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Group.AddGroup,data,{observe: 'response'})
+   }
+ 
+   updateGroup(data:any){
+     return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Group.UpdateGroup,data,{observe: 'response'})
+   }
+ 
+   deleteGroup(id:any){
+     return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Group.DeleteGroup+`/${id}`,{observe: 'response'})
+   }
+
 
 
    //tax slot

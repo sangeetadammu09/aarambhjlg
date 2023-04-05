@@ -16,6 +16,7 @@ import { ProductPriceComponent } from './product-price/product-price.component';
 import { UserroleComponent } from './userrole/userrole.component';
 import { CustomSharedModule } from '../shared.module';
 import { CenterComponent } from './center/center.component';
+import { GroupComponent } from './group/group.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -37,6 +38,7 @@ import { CenterComponent } from './center/center.component';
     ProductPriceComponent,
     UserroleComponent,
     CenterComponent,
+    GroupComponent,
   ]
 })
 
