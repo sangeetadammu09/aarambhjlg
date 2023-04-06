@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
    submitted :boolean = false;
    decodedToken!:any;
    loginText = "Login"
+   loggedInBoolean: boolean = false;
 
   constructor( private _router: Router, private _fb: FormBuilder,private _toastrService: ToastrService, 
     private _commonService: CommonService, private masterService: MasterService) { 
@@ -43,12 +44,12 @@ export class LoginComponent implements OnInit {
       var loginFormData = new FormData();
       loginFormData.append('username', this.loginForm.controls['username'].value);
       loginFormData.append('password', this.loginForm.controls['password'].value);
-
+      this.loginText = "Please Wait! Logging In";
       this._commonService.login(loginFormData).subscribe((data:any) => {
         if(data){
        //   console.log(data)
           this.decodedToken = decodeToken(data.access_token);
-          //console.log(this.decodedToken); 
+          this.loginText = "Login";
           const userData :any = {}
           userData.fullname = this.decodedToken.FullName;
           userData.userCity = this.decodedToken.CityId;
@@ -58,7 +59,7 @@ export class LoginComponent implements OnInit {
           this.masterService.saveToken(data.access_token);
           this.masterService.saveRefreshToken(data.refreshToken);
           //this.masterService.saveUser(data);
-  
+
          localStorage.setItem('userToken', data.access_token);  
          localStorage.setItem('refreshToken', data.refreshToken);        
          localStorage.setItem('fullname', this.decodedToken.FullName);
@@ -67,9 +68,14 @@ export class LoginComponent implements OnInit {
          localStorage.setItem('roles',this.decodedToken.role);
          
           this._toastrService.success('Logged in successfully!');
-          this._router.navigate(['/admin/user-list'])
-        }else{
-          this._toastrService.info('Logging in. Please hold on!');
+          var roleList :any= JSON.parse(userData.roles);
+          roleList.forEach((role:any) =>{
+            //console.log(role)
+            (role == "SuperAdmin" || role == "Admin") ? (this._router.navigate(['/admin/user-list']), localStorage.setItem('roleNo',"101") ):
+           (role == "RelationOfficer") ? (this._router.navigate(['/sales-relation-officer/center-list']),localStorage.setItem('roleNo',"102") ) : null;
+          })
+          
+          //
         }
       })
        

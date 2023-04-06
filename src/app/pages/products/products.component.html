@@ -78,13 +78,14 @@
             <span aria-hidden="true">&times;</span>
           </button>    
         </div>
-        <div class="modal-body" >
-              <div class="tab-slider--nav">
+        <div class="modal-body">
+            
+            <div class="tab-slider--nav">
                 <ul class="tab-slider--tabs">
                   <li class="tab-slider--trigger" [class.active]="viewMode == 'tab1'" rel="tab1" (click)="viewMode ='tab1';addProdTab()">Add Product</li>
                   <li class="tab-slider--trigger" [class.active]="viewMode == 'tab2'" rel="tab2" (click)="viewMode ='tab2';uploadProdImages()">Upload Product Images</li>
                 </ul>
-               </div>
+            </div>
             <div class="tab-slider--container" [ngSwitch]="viewMode">
                 <div id="tab1" class="tab-slider--body" *ngSwitchCase="'tab1'">
                     <form [formGroup]="addProductForm" (ngSubmit)="submitNewProduct()">

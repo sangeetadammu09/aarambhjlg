@@ -23,6 +23,7 @@ export class CenterComponent implements OnInit {
   p = 1;
   productsFound: boolean = false;
   cityId = localStorage.getItem('userCity');
+  roleNo = localStorage.getItem('roleNo');
   cityList: any;
   salesOfficerList: any;
   relationOfficerList: any;

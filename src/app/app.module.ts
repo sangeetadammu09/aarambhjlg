@@ -13,8 +13,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import {RadioButtonModule} from 'primeng/radiobutton';
 import { AuthInterceptor } from "./auth.interceptor";
 import { AdminLayoutModule } from "./admin/layout/admin-layout/admin-layout.module";
-
-
+import { SalesRelationLayoutModule } from "./sales-relation-officer/layout/sales-relation-layout/sales-relation-layout.module";
 
 
 @NgModule({
@@ -32,7 +31,7 @@ import { AdminLayoutModule } from "./admin/layout/admin-layout/admin-layout.modu
       useHash: false
     }),
    HttpClientModule, NgxPaginationModule,
-    CustomSharedModule,AdminLayoutModule,
+    CustomSharedModule,AdminLayoutModule,SalesRelationLayoutModule,
     ToastrModule.forRoot({
       closeButton: true,
       timeOut: 3000, // 3 seconds
