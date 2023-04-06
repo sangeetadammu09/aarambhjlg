@@ -42,7 +42,7 @@ export class GroupComponent implements OnInit {
       groupId: [],
       groupName: ['', Validators.required],
       groupNo: ['', Validators.required],
-      cityId:[,Validators.required],
+    //  cityId:[,Validators.required],
       centerId:[,Validators.required],
       updatedBy:[''],
     })
@@ -110,12 +110,12 @@ export class GroupComponent implements OnInit {
      if(this.addGroupForm.valid){
       //  console.log(this.addGroupForm.value)
         var addGroupData :any = {};
-        addGroupData.groupId = 0;
+       // addGroupData.groupId = 0;
         addGroupData.groupName = this.addGroupForm.controls['groupName'].value;
-        addGroupData.groupCode = this.addGroupForm.controls['groupNo'].value;
+        addGroupData.groupNo = this.addGroupForm.controls['groupNo'].value;
         addGroupData.cityId = this.addGroupForm.controls['cityId'].value;
-        addGroupData.groupAddress = this.addGroupForm.controls['centerId'].value;
-        addGroupData.createdBy = 0;
+        addGroupData.centerId = this.addGroupForm.controls['centerId'].value;
+        addGroupData.createdBy = "0";
         
         this._adminService.addGroup(addGroupData).subscribe((data:any) => {
           console.log(data.status);
@@ -142,7 +142,7 @@ export class GroupComponent implements OnInit {
       groupId : item.groupId,
       groupName : item.groupName,
       groupNo : item.groupNo,
-      cityId : item.cityId,
+     // cityId : item.cityId,
       centerId : item.centerId,
     })
     
@@ -154,12 +154,12 @@ export class GroupComponent implements OnInit {
    
      if(this.editGroupForm.valid){
         var updateGroupData :any = {};
-        updateGroupData.groupId = 0;
+        updateGroupData.groupId = this.editGroupForm.controls['groupId'].value;
         updateGroupData.groupName = this.editGroupForm.controls['groupName'].value;
-        updateGroupData.groupCode = this.editGroupForm.controls['groupNo'].value;
-        updateGroupData.cityId = this.editGroupForm.controls['cityId'].value;
-        updateGroupData.groupAddress = this.editGroupForm.controls['centerId'].value;
-        updateGroupData.updatedBy = 0;
+        updateGroupData.groupNo = this.editGroupForm.controls['groupNo'].value;
+      //  updateGroupData.cityId = this.editGroupForm.controls['cityId'].value;
+        updateGroupData.centerId = this.editGroupForm.controls['centerId'].value;
+        updateGroupData.updatedBy = "0";
 
         this._adminService.updateGroup(updateGroupData).subscribe((data:any) => {
           if(data){
