@@ -70,6 +70,13 @@ export const APP_DI_CONFIG: any = {
       UpdateGroup : "/Group/UpdateGroup",
       DeleteGroup : "/Group/DeleteGroup"
     },
+    Members:{
+      GetMemberDetailsById : "/Members/GetMemberDetailsById",
+      AddMember : "/Members/AddMember",
+      AddMemberDocuments : "/Members/AddMemberDocuments",
+     // UpdateMembers : "/Members/UpdateMembers",
+     // DeleteMembers : "/Members/DeleteMembers"
+    },
     TaxSlot:{
       GetAllTaxSlot : "/TaxSlot/GetAllTaxSlots",
       AddTaxSlot : "/TaxSlot/AddTaxSlot",

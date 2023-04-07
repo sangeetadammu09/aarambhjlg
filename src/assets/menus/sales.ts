@@ -19,6 +19,21 @@ export const SalesList = {
                 }
             ]
           },
+          {
+            id: 1,
+            parentMenu: 'Member',
+            icon : 'fa-user',
+            isActive: true, 
+            url: 'member',
+            submenuList: [
+                {
+                    id: 0,
+                    menu: 'Member List',
+                    url: 'member-list',
+                    isActive: true, 
+                }
+            ]
+          },
           
 
     ],

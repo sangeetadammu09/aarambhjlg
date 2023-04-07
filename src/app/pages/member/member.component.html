@@ -1,0 +1,419 @@
+<div class="wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-10">
+                <h3 class="mb-2 mt-2">List of Members</h3>
+            </div>
+            <div class="col-lg-2 mb-3 mt-2">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#addMemberModal"
+                (click)="showaddMemberModal()">Add Member</button>
+            </div>
+            
+         </div>
+         <div class="row table-card mb-3" *ngIf="memberList.length != 0">
+            <table class="table prduct-table">
+                <thead class="thead-secondary">
+                  <tr>
+                    <th scope="col">S No.</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">DOB</th>
+                    <th scope="col">Spouse</th>
+                    <th scope="col">Spouse DOB</th> 
+                    <th scope="col">Address</th>
+                    <th scope="col">Center</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Mobile</th>
+                    <th scope="col">Stay</th>
+                    <th scope="col">Occupation</th>
+                    <th scope="col">Family</th>
+                    <th scope="col">Anyone Studying</th>
+                    <th scope="col">Date of Join</th>
+                    <th scope="col">Vaild Till</th>
+                    <th scope="col">Verified</th>
+                    <th scope="col">Fees</th>
+                  </tr>
+                </thead>
+             
+                <tbody *ngFor="let item of memberList| paginate: { itemsPerPage: pageSize, currentPage: page } ; let i = index ">
+                  <tr>
+                    <td>{{pageSize*(page-1)+i+1}}</td>
+                    <td>{{item.fullName}}</td>
+                    <td>{{item.dateOfBirth | date : 'dd-mm-yyyy'}}</td>
+                    <td>{{item.spouse}}</td>
+                    <td>{{item.spouseDateOfBirth | date : 'dd-mm-yyyy'}}</td>
+                    <td>{{item.address}}</td>
+                    <td>{{item.centerName}}</td> 
+                    <td>{{item.cityName}}</td>
+                    <td>{{item.mobileNo}}</td>
+                    <td>{{item.stayThere}}</td>
+                    <td>{{item.workingAs}}</td>
+                    <td>{{item.familyMembers}}</td>
+                    <td>{{item.anyOneStudying}}</td>
+                    <td>{{item.dateOfJoining}}</td>
+                    <td>{{item.validTillDate}}</td>
+                    <td *ngIf="item.isKycVerified == true">Yes</td>
+                    <td *ngIf="item.isKycVerified == false">No</td>
+                    <td>{{item.paidRegistrationFees}}</td>
+
+                    <td (click)="showMemberModal(item)" data-toggle="modal" data-target="#showMemberModal">
+                        <svg enable-background="new 0 0 48 48" height="32px" id="Layer_1" version="1.1" viewBox="0 0 48 48"  width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                         xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path clip-rule="evenodd"
+                            d="M37,47H11c-2.209,0-4-1.791-4-4V5c0-2.209,1.791-4,4-4h18.973  c0.002,0,0.005,0,0.007,0h0.02H30c0.32,0,0.593,0.161,0.776,0.395l9.829,9.829C40.84,11.407,41,11.68,41,12l0,0v0.021  c0,0.002,0,0.003,0,0.005V43C41,45.209,39.209,47,37,47z M31,4.381V11h6.619L31,4.381z M39,13h-9c-0.553,0-1-0.448-1-1V3H11  C9.896,3,9,3.896,9,5v38c0,1.104,0.896,2,2,2h26c1.104,0,2-0.896,2-2V13z M33,39H15c-0.553,0-1-0.447-1-1c0-0.552,0.447-1,1-1h18  c0.553,0,1,0.448,1,1C34,38.553,33.553,39,33,39z M33,31H15c-0.553,0-1-0.447-1-1c0-0.552,0.447-1,1-1h18c0.553,0,1,0.448,1,1  C34,30.553,33.553,31,33,31z M33,23H15c-0.553,0-1-0.447-1-1c0-0.552,0.447-1,1-1h18c0.553,0,1,0.448,1,1C34,22.553,33.553,23,33,23  z"
+                            fill-rule="evenodd" />
+                        </svg>
+                    </td>     
+                  </tr>        
+                </tbody>
+                
+            </table>
+            <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
+                <pagination-controls previousLabel="Prev"nextLabel="Next" [responsive]="true"></pagination-controls>
+            </div>
+         </div>
+
+         <div class="row card mb-3" *ngIf="memberList.length == 0">
+            <p class="text-center">No Member found</p>
+          </div>
+        
+    </div>
+</div>
+
+
+<!-- add Member modal -->
+<div class="modal fade" id="addMemberModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{addMemberTitle}}</h5>       
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeaddMemberBtn>
+            <span aria-hidden="true">&times;</span>
+          </button>    
+        </div>
+        <div class="modal-body">
+            <div class="tab-slider--nav">
+                <ul class="tab-slider--tabs">
+                  <li class="tab-slider--trigger" [class.active]="viewMode == 'tab1'" rel="tab1" (click)="viewMode ='tab1';addProdTab()">Add Member</li>
+                  <li class="tab-slider--trigger" [class.active]="viewMode == 'tab2'" rel="tab2" (click)="viewMode ='tab2';uploadProdImages()">Upload Member Documents</li>
+                  
+                </ul>
+            </div>
+            <div class="tab-slider--container" [ngSwitch]="viewMode">
+                <div id="tab1" class="tab-slider--body" *ngSwitchCase="'tab1'">
+                    <form [formGroup]="addMemberForm" (ngSubmit)="submitNewMember()">
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Name</label>
+                                <input type="text" class="form-control" formControlName="fullName" name="fullName"  
+                                [ngClass]="{'is-invalid':(submitted && f['fullName'].errors) ||(f['fullName'].errors && f['fullName'].touched) }">
+                                    <div *ngIf="(submitted && f['fullName'].errors) ||(f['fullName'].errors && f['fullName'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['fullName'].errors['required']">
+                                            Name is required
+                                        </div>
+                                 </div>
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Date of Birth</label>
+                                <input type="date" class="form-control" formControlName="dateOfBirth" name="dateOfBirth"  
+                                [ngClass]="{'is-invalid':(submitted && f['dateOfBirth'].errors) ||(f['dateOfBirth'].errors && f['dateOfBirth'].touched) }">
+                                    <div *ngIf="(submitted && f['dateOfBirth'].errors) ||(f['dateOfBirth'].errors && f['dateOfBirth'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['dateOfBirth'].errors['required']">
+                                            Date of Birth is required
+                                        </div>
+                                 </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Spouse Name</label>
+                                <input type="text" class="form-control" formControlName="spouse" name="spouse"  
+                                [ngClass]="{'is-invalid':(submitted && f['spouse'].errors) ||(f['spouse'].errors && f['spouse'].touched) }">
+                                    <div *ngIf="(submitted && f['spouse'].errors) ||(f['spouse'].errors && f['spouse'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['spouse'].errors['required']">
+                                           Spouse  Name is required
+                                        </div>
+                                 </div>
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Spouse Date of Birth</label>
+                                <input type="date" class="form-control" formControlName="spouseDateOfBirth" name="spouseDateOfBirth"  
+                                [ngClass]="{'is-invalid':(submitted && f['spouseDateOfBirth'].errors) ||(f['spouseDateOfBirth'].errors && f['spouseDateOfBirth'].touched) }">
+                                    <div *ngIf="(submitted && f['spouseDateOfBirth'].errors) ||(f['spouseDateOfBirth'].errors && f['spouseDateOfBirth'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['spouseDateOfBirth'].errors['required']">
+                                           Spouse Date of Birth is required
+                                        </div>
+                                 </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Contact</label>
+                                <input type="text" class="form-control" formControlName="mobileNo" name="mobileNo"  
+                                [ngClass]="{'is-invalid':(submitted && f['mobileNo'].errors) ||(f['mobileNo'].errors && f['mobileNo'].touched) }">
+                                    <div *ngIf="(submitted && f['mobileNo'].errors) ||(f['mobileNo'].errors && f['mobileNo'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['mobileNo'].errors['required']">
+                                            Contact is required
+                                        </div>
+                                 </div>
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Address</label>
+                                <textarea formControlName="address" name="address"  class="form-control"  id="address" cols="20" rows="10"
+                                [ngClass]="{'is-invalid':(submitted && f['address'].errors) ||(f['address'].errors && f['address'].touched) }"
+                                ></textarea>
+                                <div *ngIf="(submitted && f['address'].errors) ||(f['address'].errors && f['address'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['address'].errors['required']">
+                                            Address is required
+                                        </div>
+                                </div>
+                            </div>
+                            
+                    
+                        </div>
+
+                        
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">City</label>
+                                <select class="custom-select"  formControlName="cityId" name="cityId" id="cityId"
+                                [ngClass]="{'is-invalid':(submitted && f['cityId'].errors) ||(f['cityId'].errors && f['cityId'].touched) }">
+                                <option value="" [selected]="''">Choose..</option>
+                                    <option *ngFor="let item of cityList" [ngValue]="item.cityId">
+                                        {{item.cityName }}</option>
+                                </select>
+                                    <div *ngIf="(submitted && f['cityId'].errors) ||(f['cityId'].errors && f['cityId'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['cityId'].errors['required']">
+                                            City is required
+                                        </div>
+                                 </div>
+                            </div>
+                            
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Center</label>
+                                <select class="custom-select"  formControlName="centerId" name="centerId" id="centerId"
+                                [ngClass]="{'is-invalid':(submitted && f['centerId'].errors) ||(f['centerId'].errors && f['centerId'].touched) }">
+                                <option value="" [selected]="''">Choose..</option>
+                                    <option *ngFor="let item of centerList" [ngValue]="item.centerId">
+                                        {{item.centerName }}</option>
+                                </select>
+                                    <div *ngIf="(submitted && f['centerId'].errors) ||(f['centerId'].errors && f['centerId'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['centerId'].errors['required']">
+                                            Center is required
+                                        </div>
+                                 </div>
+                            </div>
+                            
+                            
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Stay</label>
+                                <input type="text" class="form-control" formControlName="stayThere" name="stayThere"  
+                                [ngClass]="{'is-invalid':(submitted && f['stayThere'].errors) ||(f['stayThere'].errors && f['stayThere'].touched) }">
+                                    <div *ngIf="(submitted && f['stayThere'].errors) ||(f['stayThere'].errors && f['stayThere'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['stayThere'].errors['required']">
+                                           Stay is required
+                                        </div>
+                                 </div>
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Occupation</label>
+                                <input type="text" class="form-control" formControlName="workingAs" name="workingAs"  
+                                [ngClass]="{'is-invalid':(submitted && f['workingAs'].errors) ||(f['workingAs'].errors && f['workingAs'].touched) }">
+                                    <div *ngIf="(submitted && f['workingAs'].errors) ||(f['workingAs'].errors && f['workingAs'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['workingAs'].errors['required']">
+                                            Occupation  Name is required
+                                        </div>
+                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Family Details</label>
+                                <input type="text" class="form-control" formControlName="familyMembers" name="familyMembers"  
+                                [ngClass]="{'is-invalid':(submitted && f['familyMembers'].errors) ||(f['familyMembers'].errors && f['familyMembers'].touched) }">
+                                <div *ngIf="(submitted && f['familyMembers'].errors) ||(f['familyMembers'].errors && f['familyMembers'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['familyMembers'].errors['required']">
+                                            Family Members is required
+                                        </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Anyone Studying</label>
+                                <input type="text" class="form-control" formControlName="anyOneStudying" name="anyOneStudying"  
+                                [ngClass]="{'is-invalid':(submitted && f['anyOneStudying'].errors) ||(f['anyOneStudying'].errors && f['anyOneStudying'].touched) }">
+                                <div *ngIf="(submitted && f['anyOneStudying'].errors) ||(f['anyOneStudying'].errors && f['anyOneStudying'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['anyOneStudying'].errors['required']">
+                                            Anyone Studying is required
+                                        </div>
+                                </div>
+                            </div>
+                            
+
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Date of Joining</label>
+                                <input type="date" class="form-control" formControlName="dateOfJoining" name="dateOfJoining"  
+                                [ngClass]="{'is-invalid':(submitted && f['dateOfJoining'].errors) ||(f['dateOfJoining'].errors && f['dateOfJoining'].touched) }">
+                                    <div *ngIf="(submitted && f['dateOfJoining'].errors) ||(f['dateOfJoining'].errors && f['dateOfJoining'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['dateOfJoining'].errors['required']">
+                                            Date of Joining is required
+                                        </div>
+                                 </div>
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Valid Till</label>
+                                <input type="date" class="form-control" formControlName="validTillDate" name="validTillDate"  
+                                [ngClass]="{'is-invalid':(submitted && f['validTillDate'].errors) ||(f['validTillDate'].errors && f['validTillDate'].touched) }">
+                                    <div *ngIf="(submitted && f['validTillDate'].errors) ||(f['validTillDate'].errors && f['validTillDate'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['validTillDate'].errors['required']">
+                                            Valid Till is required
+                                        </div>
+                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Registration Fees</label>
+                                <input type="text" class="form-control" formControlName="paidRegistrationFees" name="paidRegistrationFees"  
+                                [ngClass]="{'is-invalid':(submitted && f['paidRegistrationFees'].errors) ||(f['paidRegistrationFees'].errors && f['paidRegistrationFees'].touched) }">
+                                <div *ngIf="(submitted && f['paidRegistrationFees'].errors) ||(f['paidRegistrationFees'].errors && f['paidRegistrationFees'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['paidRegistrationFees'].errors['required']">
+                                            Registration Fees is required
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                          </div>
+                    </form>
+                </div>
+                <div id="tab2" class="tab-slider--body" *ngSwitchCase="'tab2'">
+                    <form>
+                        <div class="row">
+                            <div class="form-group col-lg-8">
+                                <label class="form-control-label">Aadhaar Front</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile" name="aadhaarFrontDocument" 
+                                    (change)="uploadAadhaarFrontDocument($event)">
+                                    <label class="custom-file-label" for="file">{{aadhaarFrontDocumentName}}</label>    
+                                </div>
+                                
+                            </div>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableAFDocumentBtn" (click)="submitAFDocument()">Upload</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-8">
+                                <label class="form-control-label">Aadhaar Back</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile" name="aadhaarBackDocument" 
+                                    (change)="uploadAadhaarBackDocument($event)">
+                                    <label class="custom-file-label" for="customFile">{{aadhaarBackDocumentName}}</label>
+                                    
+                                </div>
+                                
+                            </div>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button"  [disabled]="disableABDocumentBtn" (click)="submitABDocument()">Upload</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-8">
+                                <label class="form-control-label">Photo</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile" name="photoDocument" 
+                                    (change)="uploadPhotoDocument($event)"
+                                    >
+                                    <label class="custom-file-label" for="customFile">{{photoDocumentName}}</label>
+                                    
+                                </div>
+                                
+                            </div>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button" [disabled]="disablePhotoDocumentBtn" (click)="submitPhoto()">Upload</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-8">
+                                <label class="form-control-label">Address </label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile" name="addressDocument" 
+                                    (change)="uploadAddressDocument($event)">
+                                    <label class="custom-file-label" for="customFile">{{addressDocumentName}}</label>
+                                    
+                                </div>
+                                
+                            </div>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableAddressDocumentBtn" (click)="submitAddress()">Upload</button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-8">
+                                <label class="form-control-label">VoterId/Pancard</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile" name="addressDocument" 
+                                    (change)="uploadVoterDocument($event)">
+                                    <label class="custom-file-label" for="customFile">{{voterDocumentName}}</label>
+                                    
+                                </div>
+                                
+                            </div>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableVoterDocumentBtn" (click)="submitVoterDoc()">Upload</button>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="form-group col-lg-8">
+                                <label class="form-control-label">Security Check</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile" name="securityDocument" 
+                                    (change)="uploadSecurityDocument($event)">
+                                    <label class="custom-file-label" for="customFile">{{securityDocumentName}}</label>
+                                    
+                                </div>
+                                
+                            </div>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button" 
+                                [disabled]="disableSecurityDocumentBtn" (click)="submitSecurityDoc()">Upload</button>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <small class="col-lg-12" style="color: red; font-weight: bold">Please upload one document at a time</small>
+                        </div>
+        
+                    </form>
+                </div>
+               
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

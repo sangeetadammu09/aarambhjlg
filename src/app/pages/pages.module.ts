@@ -17,6 +17,7 @@ import { UserroleComponent } from './userrole/userrole.component';
 import { CustomSharedModule } from '../shared.module';
 import { CenterComponent } from './center/center.component';
 import { GroupComponent } from './group/group.component';
+import { MemberComponent } from './member/member.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -39,6 +40,7 @@ import { GroupComponent } from './group/group.component';
     UserroleComponent,
     CenterComponent,
     GroupComponent,
+    MemberComponent
   ]
 })
 
