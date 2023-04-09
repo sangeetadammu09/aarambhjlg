@@ -54,7 +54,7 @@ export class SalesRelationService {
    }
  
    addMemberDocuments(data:any){
-     return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Members.AddMemberDocuments,data,{observe: 'response'})
+     return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Members.AddMemberDocuments,data,{observe: 'response'})
    }
 
 }
