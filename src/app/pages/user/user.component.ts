@@ -80,6 +80,10 @@ export class UserComponent implements OnInit {
   disableEducationBtn: boolean = false;
   disableReleavingLetterBtn: boolean = false;
   disablepreviousSalarySlipsBtn: boolean = false;
+  userDocImage: any;
+  documentTypePdf : boolean = false;
+  documentTypeImage : boolean = false;
+  fileUrl: any;
 
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
@@ -804,6 +808,20 @@ export class UserComponent implements OnInit {
      
     })
     
+   }
+
+  showUserDocuments(item:any){
+     this.userDocImage = item;
+     if(item.fileType == ".png" || item.fileType == ".jpg"){
+        this.documentTypePdf = false;
+        this.documentTypeImage = true;
+         //this.fileUrl = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
+        this.fileUrl =  item.url;
+      }else if(item.fileType == ".pdf"){
+       this.documentTypePdf = true;
+       this.documentTypeImage = false;
+        this.fileUrl = item.url;
+      }
    }
 
 

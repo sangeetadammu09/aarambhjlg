@@ -223,6 +223,10 @@ input[type=radio] {
     margin-top: 4% !important;
 }
 
+.scrollable-modal{
+    overflow: scroll;
+    height: 500px;
+}
 
 /* media */
 /* Extra small devices (phones, 600px and down) */
