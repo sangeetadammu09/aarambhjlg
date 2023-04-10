@@ -227,18 +227,79 @@
                     <form>
                         <div class="row">
                             <div class="form-group col-lg-8">
-                                <label class="form-control-label">Product Images</label>
+                                <label class="form-control-label">Product One</label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="prodImages" 
-                                    (change)="uploadProductImages($event)">
-                                    <label class="custom-file-label" for="file">{{procutImagesName}}</label>    
+                                    (change)="uploadProductImageOne($event)">
+                                    <label class="custom-file-label" for="file">{{productOneImageName}}</label>    
                                 </div>
                                 
                             </div>
                             <div class="col-lg-4 mt-button">
-                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableProdImagesBtn" (click)="submitProdImages()">Upload</button>
+                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableProdImageOneBtn" (click)="submitProdImageOne()">Upload</button>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-8">
+                                <label class="form-control-label">Product Two</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile" name="prodImages" 
+                                    (change)="uploadProductImageTwo($event)">
+                                    <label class="custom-file-label" for="file">{{productTwoImageName}}</label>    
+                                </div>
+                                
+                            </div>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableProdImageTwoBtn" (click)="submitProdImageTwo()">Upload</button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-8">
+                                <label class="form-control-label">Product Three</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile" name="prodImages" 
+                                    (change)="uploadProductImageThree($event)">
+                                    <label class="custom-file-label" for="file">{{productThreeImageName}}</label>    
+                                </div>
+                                
+                            </div>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableProdImageThreeBtn" (click)="submitProdImageThree()">Upload</button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-8">
+                                <label class="form-control-label">Product Four</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile" name="prodImages" 
+                                    (change)="uploadProductImageFour($event)">
+                                    <label class="custom-file-label" for="file">{{productFourImageName}}</label>    
+                                </div>
+                                
+                            </div>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableProdImageFourBtn" (click)="submitProdImageFour()">Upload</button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-8">
+                                <label class="form-control-label">Product Five</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile" name="prodImages" 
+                                    (change)="uploadProductImageFive($event)">
+                                    <label class="custom-file-label" for="file">{{productFiveImageName}}</label>    
+                                </div>
+                                
+                            </div>
+                            <div class="col-lg-4 mt-button">
+                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableProdImageFiveBtn" (click)="submitProdImageFive()">Upload</button>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>

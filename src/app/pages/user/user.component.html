@@ -65,7 +65,7 @@
             <span aria-hidden="true">&times;</span>
           </button>    
         </div>
-        <div class="modal-body">
+        <div class="modal-body scrollable-modal">
             <div class="tab-slider--nav">
                 <ul class="tab-slider--tabs">
                   <li class="tab-slider--trigger" [class.active]="viewMode == 'tab1'" rel="tab1" (click)="viewMode ='tab1';addProdTab()">Add User</li>
@@ -425,13 +425,7 @@
         </div>
 
         <div class="modal-body scrollable-modal">
-            
-            <!-- <pdf-viewer [src]="sampleUrl" [rotation]="0" [original-size]="false"
-              [show-all]="true"  [fit-to-page]="false" [zoom]="1" [zoom-scale]="'page-width'"
-              [stick-to-page]="false" [render-text]="false" [external-link-target]="'blank'"
-              [autoresize]="true" [show-borders]="true" style="width: 100%; height: calc(100vh - 100px);">
-            </pdf-viewer> -->
-            
+         
             <div class="card p-3 mb-2">
                 <div class="card-body">
                 <div class="d-flex justify-content-between">
@@ -475,9 +469,9 @@
                     <th scope="col">Details</th>
                   </tr>
                 </thead>
-                <tbody *ngFor="let item of userDocuments| paginate: { itemsPerPage: 10, currentPage: page } ; let i = index ">
+                <tbody *ngFor="let item of userDocuments| paginate: { itemsPerPage: 5, currentPage: pagenew } ; let i = index ">
                   <tr>
-                    <td>{{pageSize*(page-1)+i+1}}</td>
+                    <td>{{5*(pagenew-1)+i+1}}</td>
                     <td>{{item.documentName}}</td> 
                     <td (click)="showUserDocuments(item)" data-toggle="modal" data-target="#showUserDocModal" *ngIf="item.fileType == '.png' || item.fileType == '.jpg'">
                         <button class="btn btn-primary">View Image</button>
@@ -492,7 +486,7 @@
                 
             </table>
             <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
-                <pagination-controls previousLabel="Prev"nextLabel="Next" [responsive]="true"></pagination-controls>
+                <pagination-controls previousLabel="Prev"nextLabel="Next" (pageChange)="pagenew = $event" [responsive]="true"></pagination-controls>
             </div>
             
         </div> 
@@ -505,7 +499,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Documents</h5>
+          <h5 class="modal-title" id="exampleModalLabel">User Document</h5>
          
           <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeUserDocBtn>
             <span aria-hidden="true">&times;</span>
@@ -523,6 +517,7 @@
                   </div> -->
               
                   <div class="g-4 align-self-center text-center" *ngIf="!documentTypePdf && documentTypeImage">
+                        <p>{{userDocImage.documentName}}</p>
                         <img [src]="fileUrl" alt="Documents" >
                   </div>
         </div>

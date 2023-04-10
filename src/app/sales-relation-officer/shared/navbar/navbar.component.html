@@ -155,6 +155,7 @@
               <div class="dropdown-menu-columns" *ngFor="let submenuItem of menuItem.submenuList">
                 <div class="dropdown-menu-column sub-menu-li">
                   <a class="dropdown-item"  [routerLink]="[submenuItem.url]">
+                    <i [ngClass]="'fa ' + submenuItem.icon"></i> &nbsp;
                     <span  class="menu-title">{{submenuItem.menu}}</span>
                   </a>
                 </div>

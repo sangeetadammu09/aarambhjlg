@@ -6,7 +6,7 @@ export const AdminList = {
         {
             id: 1,
             parentMenu: 'Admin Master',
-            icon : 'fa-user-circle',
+            icon : 'fa-users',
             isActive: true,
             url: 'admin-master',
             submenuList: [
@@ -14,36 +14,42 @@ export const AdminList = {
                     id: 0,
                     menu: 'City',
                     url: 'city',
+                    icon : 'fa-building',
                     isActive: true, 
                 },
                 {
                     id: 1,
                     menu: 'Branch',
                     url: 'branch',
+                    icon : 'fa-building',
                     isActive: true, 
                 },
                 {
                     id: 2,
                     menu: 'Unit',
                     url: 'unit',
+                    icon : 'fa-building',
                     isActive: true, 
                 },
                 {
                     id: 3,
                     menu: 'Tax Slot',
                     url: 'tax-slot',
+                    icon : 'fa-building',
                     isActive: true, 
                 }, 
                 {
                     id: 4,
                     menu: 'Installments',
                     url: 'installments',
+                    icon : 'fa-building',
                     isActive: true, 
                 },
                 {
                     id: 5,
                     menu: 'Expense Type',
                     url: 'expense-type',
+                    icon : 'fa-building',
                     isActive: true, 
                 },
   
@@ -60,28 +66,30 @@ export const AdminList = {
                     id: 0,
                     menu: 'Product Category',
                     url: 'product-category',
+                    icon : 'fa-building',
                     isActive: true, 
                 },
                 {
                     id: 1,
                     menu: 'Product Brand',
                     url: 'product-brand',
+                    icon : 'fa-building',
                     isActive: true, 
                 },  
                 {
                 id: 2,
                 menu: 'Product List',
                 url: 'product-list',
+                icon : 'fa-building',
                 isActive: true, 
                },
                {
                 id: 3,
                 menu: 'Product Price',
                 url: 'product-price',
+                icon : 'fa-building',
                 isActive: true, 
-               },
-               
-            
+               },      
         ]
           },
           {
@@ -95,12 +103,14 @@ export const AdminList = {
                     id: 0,
                     menu: 'User List',
                     url: 'user-list',
+                    icon : 'fa-user',
                     isActive: true, 
                 },
                 {
                     id: 1,
                     menu: 'User Role',
                     url: 'user-role',
+                    icon : 'fa-user',
                     isActive: true, 
                 }
             ]
@@ -116,6 +126,7 @@ export const AdminList = {
                     id: 0,
                     menu: 'Center List',
                     url: 'center-list',
+                    icon : 'fa-building',
                     isActive: true, 
                 }
             ]
@@ -131,6 +142,7 @@ export const AdminList = {
                     id: 0,
                     menu: 'Group-List',
                     url: 'group-list',
+                    icon : 'fa-building',
                     isActive: true, 
                 }
             ]

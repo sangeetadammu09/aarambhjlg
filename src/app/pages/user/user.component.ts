@@ -26,6 +26,7 @@ export class UserComponent implements OnInit {
   deleteUserItem: any;
   usersFound: boolean = false;
   page = 1;
+  pagenew = 1;
   total = 20;
   pageSize = 10;
   userCategoryList: any;
@@ -81,7 +82,7 @@ export class UserComponent implements OnInit {
   disableEducationBtn: boolean = false;
   disableReleavingLetterBtn: boolean = false;
   disablepreviousSalarySlipsBtn: boolean = false;
-  userDocImage: any;
+  userDocImage: any ={};
   documentTypePdf : boolean = false;
   documentTypeImage : boolean = false;
   fileUrl: any;
@@ -279,8 +280,9 @@ export class UserComponent implements OnInit {
 
   uploadAadhaarFrontDocument(file: any) {
     this.aadhaarFrontFile='';
-    this.aadhaarFrontDocumentName = file.target.files[0].name;
-    if(this.aadhaarFrontDocumentName.includes('.png') || this.aadhaarFrontDocumentName.includes('.jpg')) {
+    this.aadhaarFrontDocumentName =  "Aadhaar Front"
+    var temp = file.target.files[0].name;
+    if(temp.includes('.png') || temp.includes('.jpg')) {
       this.aadhaarFrontFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
@@ -325,8 +327,9 @@ export class UserComponent implements OnInit {
 
   uploadAadhaarBackDocument(file: any) {
     this.aadhaarBackFile='';
-    this.aadhaarBackDocumentName = file.target.files[0].name;
-    if(this.aadhaarBackDocumentName.includes('.png') || this.aadhaarBackDocumentName.includes('.jpg')) {
+    this.aadhaarBackDocumentName = "Aadhaar Back"
+    var temp = file.target.files[0].name;
+    if(temp.includes('.png') || temp.includes('.jpg')) {
       this.aadhaarBackFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
@@ -366,8 +369,9 @@ export class UserComponent implements OnInit {
 
   uploadPhotoDocument(file: any) {
     this.photoFile='';
-    this.photoDocumentName = file.target.files[0].name;
-    if(this.photoDocumentName.includes('.png') || this.photoDocumentName.includes('.jpg')) {
+    this.photoDocumentName =  "Photo"
+    var temp = file.target.files[0].name;
+    if(temp.includes('.png') || temp.includes('.jpg')) {
       this.photoFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
@@ -408,8 +412,9 @@ export class UserComponent implements OnInit {
 
   uploadAddressDocument(file: any) {
     this.addressFile='';
-    this.addressDocumentName = file.target.files[0].name;
-    if(this.addressDocumentName.includes('.png') || this.addressDocumentName.includes('.jpg')) {
+    this.addressDocumentName = "Address";
+    var temp = file.target.files[0].name
+    if(temp.includes('.png') || temp.includes('.jpg')) {
       this.addressFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
@@ -450,8 +455,9 @@ export class UserComponent implements OnInit {
 
   uploadVoterDocument(file: any) {
     this.voterFile='';
-    this.voterDocumentName = file.target.files[0].name;
-    if(this.voterDocumentName.includes('.png') || this.voterDocumentName.includes('.jpg')) {
+    this.voterDocumentName = "Voter";
+    var temp = file.target.files[0].name;
+    if(temp.includes('.png') || temp.includes('.jpg')) {
       this.voterFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
@@ -493,8 +499,9 @@ export class UserComponent implements OnInit {
 
   uploadFamilyPhotoDoc(file:any){
     this.familyPhotoFile='';
-    this.familyPhotoName = file.target.files[0].name;
-    if(this.familyPhotoName.includes('.pdf')) {
+    this.familyPhotoName = "Family Photo";
+    var temp = file.target.files[0].name;
+    if(temp.includes('.pdf')) {
       this.familyPhotoFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PDF document is allowed')
@@ -537,8 +544,9 @@ export class UserComponent implements OnInit {
 
   uploadDrivingLicenseDoc(file:any){
     this.drivingLicenseFile='';
-    this.drivingLicenseName = file.target.files[0].name;
-    if(this.drivingLicenseName.includes('.png') || this.drivingLicenseName.includes('.jpg')) {
+    this.drivingLicenseName = "Driving License";
+    var temp = file.target.files[0].name;
+    if(temp.includes('.png') || temp.includes('.jpg')) {
       this.drivingLicenseFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
@@ -579,8 +587,9 @@ export class UserComponent implements OnInit {
 
   uploadJoiningLetterDoc(file:any){
     this.joiningLetterFile='';
-    this.joiningLetterName = file.target.files[0].name;
-    if(this.joiningLetterName.includes('.pdf')) {
+    this.joiningLetterName = "Joining Letter";
+    var temp = file.target.files[0].name;
+    if(temp.includes('.pdf')) {
       this.joiningLetterFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PDF is allowed')
@@ -621,8 +630,9 @@ export class UserComponent implements OnInit {
 
   uploadBankPassbookDoc(file:any){
     this.bankPassbookFile='';
-    this.bankPassbookName = file.target.files[0].name;
-    if(this.bankPassbookName.includes('.png') || this.bankPassbookName.includes('.jpg')) {
+    this.bankPassbookName = "Bank Passbook";
+    var temp = file.target.files[0].name;
+    if(temp.includes('.png') || temp.includes('.jpg')) {
       this.bankPassbookFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
@@ -663,9 +673,11 @@ export class UserComponent implements OnInit {
 
   uploadEducationDoc(file:any){
     this.educationDocFile='';
-    this.educationDocName = file.target.files[0].name;
-    if(this.educationDocName.includes('.pdf')) {
-      this.educationDocFile = file.target.files[0];
+    this.educationDocName = "Education";
+    var temp = file.target.files[0].name;
+
+    if(temp.includes('.pdf')) {
+      this.educationDocFile = file.target.files;
     }else{
       this._toastrService.error('Only PDF document is allowed')
     }
@@ -706,8 +718,10 @@ export class UserComponent implements OnInit {
 
   uploadReleavingLetter(file:any){
     this.releavingLetterFile='';
-    this.releavingLetterName = file.target.files[0].name;
-    if(this.releavingLetterName.includes('.pdf')) {
+    this.releavingLetterName = "Releaving Letter";
+
+    let temp = file.target.files[0].name;
+    if(temp.includes('.pdf')) {
       this.releavingLetterFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PDF document is allowed')
@@ -748,8 +762,9 @@ export class UserComponent implements OnInit {
 
   uploadpreviousSalarySlips(file:any){
     this.previousSalarySlipsFile='';
-    this.previousSalarySlipsName = file.target.files[0].name;
-    if(this.previousSalarySlipsName.includes('.pdf')) {
+    this.previousSalarySlipsName = "Previous Salary Slips";
+    let temp = file.target.files[0].name;
+    if(temp.includes('.pdf')) {
       this.previousSalarySlipsFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PDF document is allowed')

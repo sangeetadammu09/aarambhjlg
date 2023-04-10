@@ -15,6 +15,7 @@ export const SalesList = {
                     id: 0,
                     menu: 'Center List',
                     url: 'center-list',
+                    icon : 'fa-building',
                     isActive: true, 
                 }
             ]
@@ -30,6 +31,7 @@ export const SalesList = {
                     id: 0,
                     menu: 'Member List',
                     url: 'member-list',
+                    icon : 'fa-users',
                     isActive: true, 
                 }
             ]

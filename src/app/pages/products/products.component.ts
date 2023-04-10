@@ -31,10 +31,30 @@ export class ProductsComponent implements OnInit {
   taxSlotList: any;
   todayDate = new Date().toJSON();
   productBrandList: any;
-  procutImagesName: any;
-  disableProdImagesBtn :boolean = false;
-  productImageFile: any;
   addedProductId: any;
+
+  productOneImageName: any;
+  disableProdImageOneBtn :boolean = false;
+  productImageOneFile: any;
+
+  productTwoImageName: any;
+  disableProdImageTwoBtn :boolean = false;
+  productImageTwoFile: any;
+
+
+  productThreeImageName: any;
+  disableProdImageThreeBtn :boolean = false;
+  productImageThreeFile: any;
+
+
+  productFourImageName: any;
+  disableProdImageFourBtn :boolean = false;
+  productImageFourFile: any;
+
+
+  productFiveImageName: any;
+  disableProdImageFiveBtn :boolean = false;
+  productImageFiveFile: any;
  
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
@@ -184,7 +204,7 @@ export class ProductsComponent implements OnInit {
     this.addProductTitle ="Upload Product Images";
   }
 
- 
+  
   submitNewProduct(){
     this.submitted = true;
    
@@ -223,51 +243,6 @@ export class ProductsComponent implements OnInit {
       }  
 
   }
-
-  uploadProductImages(file: any) {
-    this.productImageFile='';
-    this.procutImagesName = file.target.files[0].name;
-    if(this.procutImagesName.includes('.png') || this.procutImagesName.includes('.jpg')) {
-      this.productImageFile = file.target.files[0];
-    }else{
-      this._toastrService.error('Only PNG or JPG document is allowed')
-    }
-  }
-
-  submitProdImages(){
-    console.log('submitProdImages',this.productImageFile)
-    if(this.productImageFile != undefined){
-      if(this.addedProductId){
-        var addProductImageData = new FormData();
-        var photoid :any = 0;
-        addProductImageData.append('PhotoId',photoid);
-        addProductImageData.append('ProductId',this.addedProductId);
-        addProductImageData.append('ProductPhoto',this.productImageFile);    
- 
-        this._adminService.addProductImages(addProductImageData).subscribe((data:any) => {
-          if(data.status == 200){     
-            this._toastrService.success('Product Image added successfully!');
-          // this.closeaddUserBtn.nativeElement.click();
-            this.disableProdImagesBtn = true;
-           this.getAllProducts();
-          } 
-        }
-        ,(error:any) => {
-         if(error.status == 500){
-         this._toastrService.error('Please upload Aadhaar Front');
-         }
-        }
-        )
-         
-      }else{
-        this._toastrService.error('No user found');
-      }
-   }else{
-    this._toastrService.error('Please upload Aadhaar Front');
-  }
-  }
-
-
 
   showeditProductModal(item:any){
     console.log(item)
@@ -343,6 +318,225 @@ export class ProductsComponent implements OnInit {
         }
        
       })
+  }
+
+
+  uploadProductImageOne(file: any) {
+    this.productImageOneFile='';
+    this.productOneImageName = file.target.files[0].name;
+    if(this.productOneImageName.includes('.png') || this.productOneImageName.includes('.jpg')) {
+      this.productImageOneFile = file.target.files[0];
+    }else{
+      this._toastrService.error('Only PNG or JPG document is allowed')
+    }
+  }
+
+  submitProdImageOne(){
+    console.log('submitProdImages',this.productImageOneFile)
+    if(this.productImageOneFile != undefined){
+      if(this.addedProductId){
+        var addProductImageData = new FormData();
+        var photoid :any = 0;
+        addProductImageData.append('PhotoId',photoid);
+        addProductImageData.append('ProductId',this.addedProductId);
+        addProductImageData.append('ProductPhoto',this.productImageOneFile);    
+ 
+        this._adminService.addProductImages(addProductImageData).subscribe((data:any) => {
+          if(data.status == 200){     
+            this._toastrService.success('Product Image added successfully!');
+          // this.closeaddUserBtn.nativeElement.click();
+            this.disableProdImageOneBtn = true;
+           this.getAllProducts();
+          } 
+        }
+        ,(error:any) => {
+         if(error.status == 500){
+         this._toastrService.error('Please upload Product Image');
+         }
+        }
+        )
+         
+      }else{
+        this._toastrService.error('No product found');
+      }
+   }else{
+    this._toastrService.error('Please upload Product Image');
+  }
+  }
+
+
+  uploadProductImageTwo(file: any) {
+    this.productImageTwoFile='';
+    this.productTwoImageName = file.target.files[0].name;
+    if(this.productTwoImageName.includes('.png') || this.productTwoImageName.includes('.jpg')) {
+      this.productImageTwoFile = file.target.files[0];
+    }else{
+      this._toastrService.error('Only PNG or JPG document is allowed')
+    }
+  }
+
+  submitProdImageTwo(){
+    console.log('submitProdImages',this.productImageTwoFile)
+    if(this.productImageTwoFile != undefined){
+      if(this.addedProductId){
+        var addProductImageData = new FormData();
+        var photoid :any = 0;
+        addProductImageData.append('PhotoId',photoid);
+        addProductImageData.append('ProductId',this.addedProductId);
+        addProductImageData.append('ProductPhoto',this.productImageTwoFile);    
+ 
+        this._adminService.addProductImages(addProductImageData).subscribe((data:any) => {
+          if(data.status == 200){     
+            this._toastrService.success('Product Image added successfully!');
+          // this.closeaddUserBtn.nativeElement.click();
+            this.disableProdImageTwoBtn = true;
+           this.getAllProducts();
+          } 
+        }
+        ,(error:any) => {
+         if(error.status == 500){
+         this._toastrService.error('Please upload Product Image');
+         }
+        }
+        )
+         
+      }else{
+        this._toastrService.error('No product found');
+      }
+   }else{
+    this._toastrService.error('Please upload Product Image');
+  }
+  }
+
+  uploadProductImageThree(file: any) {
+    this.productImageThreeFile='';
+    this.productThreeImageName = file.target.files[0].name;
+    if(this.productThreeImageName.includes('.png') || this.productThreeImageName.includes('.jpg')) {
+      this.productImageThreeFile = file.target.files[0];
+    }else{
+      this._toastrService.error('Only PNG or JPG document is allowed')
+    }
+  }
+
+  submitProdImageThree(){
+    console.log('submitProdImages',this.productImageThreeFile)
+    if(this.productImageThreeFile != undefined){
+      if(this.addedProductId){
+        var addProductImageData = new FormData();
+        var photoid :any = 0;
+        addProductImageData.append('PhotoId',photoid);
+        addProductImageData.append('ProductId',this.addedProductId);
+        addProductImageData.append('ProductPhoto',this.productImageThreeFile);    
+ 
+        this._adminService.addProductImages(addProductImageData).subscribe((data:any) => {
+          if(data.status == 200){     
+            this._toastrService.success('Product Image added successfully!');
+          // this.closeaddUserBtn.nativeElement.click();
+            this.disableProdImageThreeBtn = true;
+           this.getAllProducts();
+          } 
+        }
+        ,(error:any) => {
+         if(error.status == 500){
+         this._toastrService.error('Please upload Product Image');
+         }
+        }
+        )
+         
+      }else{
+        this._toastrService.error('No product found');
+      }
+   }else{
+    this._toastrService.error('Please upload Product Image');
+  }
+  }
+
+
+  uploadProductImageFour(file: any) {
+    this.productImageFourFile='';
+    this.productFourImageName = file.target.files[0].name;
+    if(this.productFourImageName.includes('.png') || this.productFourImageName.includes('.jpg')) {
+      this.productImageFourFile = file.target.files[0];
+    }else{
+      this._toastrService.error('Only PNG or JPG document is allowed')
+    }
+  }
+
+  submitProdImageFour(){
+   // console.log('submitProdImages',this.productImageFourFile)
+    if(this.productImageFourFile != undefined){
+      if(this.addedProductId){
+        var addProductImageData = new FormData();
+        var photoid :any = 0;
+        addProductImageData.append('PhotoId',photoid);
+        addProductImageData.append('ProductId',this.addedProductId);
+        addProductImageData.append('ProductPhoto',this.productImageFourFile);    
+ 
+        this._adminService.addProductImages(addProductImageData).subscribe((data:any) => {
+          if(data.status == 200){     
+            this._toastrService.success('Product Image added successfully!');
+          // this.closeaddUserBtn.nativeElement.click();
+            this.disableProdImageFourBtn = true;
+           this.getAllProducts();
+          } 
+        }
+        ,(error:any) => {
+         if(error.status == 500){
+         this._toastrService.error('Please upload Product Image');
+         }
+        }
+        )
+         
+      }else{
+        this._toastrService.error('No product found');
+      }
+   }else{
+    this._toastrService.error('Please upload Product Image');
+  }
+  }
+
+
+  uploadProductImageFive(file: any) {
+    this.productImageFiveFile='';
+    this.productFiveImageName = file.target.files[0].name;
+    if(this.productFiveImageName.includes('.png') || this.productFiveImageName.includes('.jpg')) {
+      this.productImageFiveFile = file.target.files[0];
+    }else{
+      this._toastrService.error('Only PNG or JPG document is allowed')
+    }
+  }
+
+  submitProdImageFive(){
+    console.log('submitProdImages',this.productImageFiveFile)
+    if(this.productImageFiveFile != undefined){
+      if(this.addedProductId){
+        var addProductImageData = new FormData();
+        var photoid :any = 0;
+        addProductImageData.append('PhotoId',photoid);
+        addProductImageData.append('ProductId',this.addedProductId);
+        addProductImageData.append('ProductPhoto',this.productImageFiveFile);    
+ 
+        this._adminService.addProductImages(addProductImageData).subscribe((data:any) => {
+          if(data.status == 200){     
+            this._toastrService.success('Product Image added successfully!');
+          // this.closeaddUserBtn.nativeElement.click();
+            this.disableProdImageFiveBtn = true;
+           this.getAllProducts();
+          } 
+        }
+        ,(error:any) => {
+         if(error.status == 500){
+         this._toastrService.error('Please upload Product Image');
+         }
+        }
+        )
+         
+      }else{
+        this._toastrService.error('No product found');
+      }
+   }else{
+    this._toastrService.error('Please upload Product Image');
+  }
   }
 
 }
