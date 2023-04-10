@@ -16,7 +16,6 @@ import {ProgressBarModule} from 'primeng/progressbar';
 import {InputTextModule} from 'primeng/inputtext';
 import {TooltipModule} from 'primeng/tooltip';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   imports: [
@@ -33,7 +32,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     ProgressBarModule,
     HttpClientModule,
     FormsModule,ReactiveFormsModule,
-    ProgressSpinnerModule,PdfViewerModule
+    ProgressSpinnerModule
    
   ],
   exports:[
@@ -51,7 +50,6 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     ProgressSpinnerModule,
     HttpClientModule,
     FormsModule,ReactiveFormsModule
-   ,PdfViewerModule
   ],
   providers: []
 })

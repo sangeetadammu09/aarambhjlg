@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/admin/service/admin.service';
 import * as moment from 'moment';
+import { DomSanitizer } from '@angular/platform-browser';
 
 declare var $ : any;
 
@@ -84,9 +85,12 @@ export class UserComponent implements OnInit {
   documentTypePdf : boolean = false;
   documentTypeImage : boolean = false;
   fileUrl: any;
+  src = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
+  sampleUrl: string = 'https://jlg.examfirst.in/Images/UserDocuments/15504358912023-04-07.pdf';
 
 
-  constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
+  constructor(private _adminService: AdminService, private _formBuilder : FormBuilder,
+     private _toastrService: ToastrService, private sanitizer: DomSanitizer) { 
     this.addUserForm = this._formBuilder.group({
       userId: [],
       fullName: ['', Validators.required],
@@ -812,15 +816,16 @@ export class UserComponent implements OnInit {
 
   showUserDocuments(item:any){
      this.userDocImage = item;
+  //   this.fileUrl = 'https://jlg.examfirst.in/Images/UserDocuments/15504358912023-04-07.pdf';
      if(item.fileType == ".png" || item.fileType == ".jpg"){
         this.documentTypePdf = false;
         this.documentTypeImage = true;
-         //this.fileUrl = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
         this.fileUrl =  item.url;
       }else if(item.fileType == ".pdf"){
        this.documentTypePdf = true;
        this.documentTypeImage = false;
-        this.fileUrl = item.url;
+       this.fileUrl = item.url;
+       
       }
    }
 

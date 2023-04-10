@@ -15,14 +15,11 @@ import { AuthInterceptor } from "./auth.interceptor";
 import { AdminLayoutModule } from "./admin/layout/admin-layout/admin-layout.module";
 import { SalesRelationLayoutModule } from "./sales-relation-officer/layout/sales-relation-layout/sales-relation-layout.module";
 
-
 @NgModule({
   declarations: [
-    AppComponent,
-   
+    AppComponent, 
     LoginComponent,
-    RegisterComponent,
-    
+    RegisterComponent, 
   ],
   imports: [
     BrowserModule,RadioButtonModule,

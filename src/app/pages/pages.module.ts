@@ -18,11 +18,12 @@ import { CustomSharedModule } from '../shared.module';
 import { CenterComponent } from './center/center.component';
 import { GroupComponent } from './group/group.component';
 import { MemberComponent } from './member/member.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    NgxPaginationModule,CustomSharedModule
+    NgxPaginationModule,CustomSharedModule,PdfViewerModule
    
   ],
   declarations: [
