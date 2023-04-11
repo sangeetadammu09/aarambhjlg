@@ -41,15 +41,15 @@ export const SalesList = {
             parentMenu: 'My Profile',
             icon : 'fa-user',
             isActive: true, 
-            url: 'myprofile',
+            url: 'my-profile',
             submenuList: [
-                {
-                    id: 0,
-                    menu: 'My Profile',
-                    url: 'my-profile',
-                    icon : 'fa-user',
-                    isActive: true, 
-                }
+                // {
+                //     id: 0,
+                //     menu: 'My Profile',
+                //     url: 'my-profile',
+                //     icon : 'fa-user',
+                //     isActive: true, 
+                // }
             ]
           },
           
