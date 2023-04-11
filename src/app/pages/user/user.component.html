@@ -506,16 +506,6 @@
           </button>
         </div>
         <div class="modal-body">
-                  <!-- <div class="g-4 align-self-center text-center" *ngIf="documentTypePdf && !documentTypeImage">
-                    <p>{{fileUrl}}</p>
-                    <a [href]="fileUrl" target="_blank">Click pdf</a>
-                    <pdf-viewer [src]="fileUrl" [rotation]="0" [original-size]="false"
-                    [show-all]="true"  [fit-to-page]="false" [zoom]="1" [zoom-scale]="'page-width'"
-                    [stick-to-page]="false" [render-text]="false" [external-link-target]="'blank'"
-                    [autoresize]="true" [show-borders]="true" style="width: 100%; height: calc(100vh - 100px);">
-                    </pdf-viewer>
-                  </div> -->
-              
                   <div class="g-4 align-self-center text-center" *ngIf="!documentTypePdf && documentTypeImage">
                         <p>{{userDocImage.documentName}}</p>
                         <img [src]="fileUrl" alt="Documents" >

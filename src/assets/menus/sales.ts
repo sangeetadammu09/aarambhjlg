@@ -36,6 +36,22 @@ export const SalesList = {
                 }
             ]
           },
+          {
+            id: 1,
+            parentMenu: 'My Profile',
+            icon : 'fa-user',
+            isActive: true, 
+            url: 'myprofile',
+            submenuList: [
+                {
+                    id: 0,
+                    menu: 'My Profile',
+                    url: 'my-profile',
+                    icon : 'fa-user',
+                    isActive: true, 
+                }
+            ]
+          },
           
 
     ],

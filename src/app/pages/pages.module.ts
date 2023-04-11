@@ -19,6 +19,7 @@ import { CenterComponent } from './center/center.component';
 import { GroupComponent } from './group/group.component';
 import { MemberComponent } from './member/member.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { ProfileComponent } from './profile/profile.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -41,7 +42,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     UserroleComponent,
     CenterComponent,
     GroupComponent,
-    MemberComponent
+    MemberComponent,
+    ProfileComponent
   ]
 })
 

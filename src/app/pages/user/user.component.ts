@@ -816,13 +816,13 @@ export class UserComponent implements OnInit {
   //     })
    }
 
-   showUserModal(item:any){
+showUserModal(item:any){
    // console.log(item)
     this._adminService.getAllUserDetails(item.usersInfo.userId).subscribe((data:any) =>{
       if(data){
         this.userDetailsObj = data;
         this.userDocuments = data.documents;
-        console.log(this.userDetailsObj)
+       // console.log(this.userDetailsObj)
       }
      
     })
