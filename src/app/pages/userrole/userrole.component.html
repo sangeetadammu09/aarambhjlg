@@ -75,20 +75,7 @@
 
         <div class="modal-body" *ngIf="addUserRole && !editUserRole">
             <form [formGroup]="addUserRoleForm" (ngSubmit)="submitNewUserRole()">
-                <div class="form-group">
-                    <label class="form-control-label">Role</label>
-                    <select class="custom-select"  formControlName="roleId" name="roleId" id="roleId"
-                    [ngClass]="{'is-invalid':(submitted && f['roleId'].errors) ||(f['roleId'].errors && f['roleId'].touched) }">
-                    <option value="" [selected]="''">Choose...</option>
-                        <option *ngFor="let item of roleList" [ngValue]="item.roleId">
-                            {{item.roleName}}</option>
-                    </select>
-                        <div *ngIf="(submitted && f['roleId'].errors) ||(f['roleId'].errors && f['roleId'].touched)" class="invalid-feedback">
-                            <div *ngIf="f['roleId'].errors['required']">
-                                Role is required
-                            </div>
-                     </div>
-                </div>
+                
                 <div class="form-group">
                   <label class="form-control-label">User</label>
                   <select class="custom-select"  formControlName="userId" name="userId" id="userId"
@@ -103,6 +90,20 @@
                           </div>
                    </div>
                 </div>
+                <div class="form-group">
+                  <label class="form-control-label">Role</label>
+                  <select class="custom-select"  formControlName="roleId" name="roleId" id="roleId"
+                  [ngClass]="{'is-invalid':(submitted && f['roleId'].errors) ||(f['roleId'].errors && f['roleId'].touched) }">
+                  <option value="" [selected]="''">Choose...</option>
+                      <option *ngFor="let item of roleList" [ngValue]="item.roleId">
+                          {{item.roleName}}</option>
+                  </select>
+                      <div *ngIf="(submitted && f['roleId'].errors) ||(f['roleId'].errors && f['roleId'].touched)" class="invalid-feedback">
+                          <div *ngIf="f['roleId'].errors['required']">
+                              Role is required
+                          </div>
+                   </div>
+              </div>
                 <div class="modal-footer">
                       <button type="submit" class="btn btn-primary">Save</button>
                 </div>
@@ -111,20 +112,7 @@
 
         <div class="modal-body" *ngIf="editUserRole && !addUserRole">
             <form [formGroup]="editUserRoleForm" (ngSubmit)="submitUpdateUserRole()">
-              <div class="form-group">
-                <label class="form-control-label">Role</label>
-                <select class="custom-select"  formControlName="roleId" name="roleId" id="roleId"
-                [ngClass]="{'is-invalid':(submitted && g['roleId'].errors) ||(g['roleId'].errors && g['roleId'].touched) }">
-                <option value="" [selected]="''">Choose...</option>
-                    <option *ngFor="let item of roleList" [ngValue]="item.roleId">
-                        {{item.roleName}}</option>
-                </select>
-                    <div *ngIf="(submitted && g['roleId'].errors) ||(g['roleId'].errors && g['roleId'].touched)" class="invalid-feedback">
-                        <div *ngIf="g['roleId'].errors['required']">
-                            Role is required
-                        </div>
-                 </div>
-            </div>
+              
             <div class="form-group">
               <label class="form-control-label">User</label>
               <select class="custom-select"  formControlName="userId" name="userId" id="userId"
@@ -139,6 +127,20 @@
                       </div>
                </div>
             </div>
+            <div class="form-group">
+              <label class="form-control-label">Role</label>
+              <select class="custom-select"  formControlName="roleId" name="roleId" id="roleId"
+              [ngClass]="{'is-invalid':(submitted && g['roleId'].errors) ||(g['roleId'].errors && g['roleId'].touched) }">
+              <option value="" [selected]="''">Choose...</option>
+                  <option *ngFor="let item of roleList" [ngValue]="item.roleId">
+                      {{item.roleName}}</option>
+              </select>
+                  <div *ngIf="(submitted && g['roleId'].errors) ||(g['roleId'].errors && g['roleId'].touched)" class="invalid-feedback">
+                      <div *ngIf="g['roleId'].errors['required']">
+                          Role is required
+                      </div>
+               </div>
+          </div>
             <div class="modal-footer">
                   <button type="submit" class="btn btn-primary">Save</button>
             </div>

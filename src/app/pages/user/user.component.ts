@@ -501,10 +501,10 @@ export class UserComponent implements OnInit {
     this.familyPhotoFile='';
     this.familyPhotoName = "Family Photo";
     var temp = file.target.files[0].name;
-    if(temp.includes('.pdf')) {
+    if(temp.includes('.png') || temp.includes('.jpg')) {
       this.familyPhotoFile = file.target.files[0];
     }else{
-      this._toastrService.error('Only PDF document is allowed')
+      this._toastrService.error('Only JPG or PNG document is allowed')
     }
 
   }
