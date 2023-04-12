@@ -6,16 +6,6 @@
       <div class="row row-cards">
         <div class="col-12">
             <div class="card">
-              <!-- <div class="card-header">
-                <div class="col-lg-10 mb-3 mt-2">
-                    <h3 class="card-title">List of Members</h3>
-                </div>
-                
-                <div class="col-lg-2 mb-3 mt-2">
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#addMemberModal"
-                    (click)="showaddMemberModal()">Add Member</button>
-                </div>
-              </div> -->
               <div class="card-header">
                 <div class="col-lg-7 mb-3 mt-2">
                     <h3 class="card-title">List of Members</h3>
@@ -23,11 +13,10 @@
                 <div class="col-lg-3 mb-3 mt-2">
                     <!-- <input type="text"  class="form-control searchProductPrice"  placeholder="Seach Member"
                     id="searchMember" [(ngModel)]="searchMemberPrice" (change)="getMemberPriceVal($event)"> -->
-                    <select class="custom-select" id="searchMember" [(ngModel)]="searchMember"
-                     (change)="getMemberPriceVal($event)">
+                    <select class="custom-select" id="searchMember" [(ngModel)]="searchMember" (change)="getMemberVal(searchMember)">
                     <option value="" [selected]="''">Choose Center..</option>
-                        <option *ngFor="let item of memberDropdownList" [ngValue]="item.centerId">
-                            {{item.centerName }}</option>
+                    <option *ngFor="let item of memberDropdownList" [ngValue]="item.centerId">
+                        {{item.centerName}}</option>
                     </select>
                 </div>
                 <div class="col-lg-2 mb-3 mt-2">
@@ -37,7 +26,7 @@
               </div>
 
           
-         <div class="table-responsive" *ngIf="memberList.length != 0">
+            <div class="table-responsive" *ngIf="memberList.length != 0">
             <table class="table card-table table-vcenter text-nowrap datatable">
                
                   <tr style="background-color:#1d4ed8;">
@@ -62,7 +51,7 @@
                       <td>{{item.centerName}}</td> 
                       <td>{{item.cityName}}</td>
                       <td>{{item.mobileNo}}</td>
-                      <td>{{item.dateOfJoining}}</td>
+                      <td>{{item.dateOfJoining | date : "dd-MM-YYYY"}}</td>
   
                       <td (click)="showMemberModal(item)" data-toggle="modal" data-target="#showMemberModal">
                           <svg enable-background="new 0 0 48 48" height="32px" id="Layer_1" version="1.1" viewBox="0 0 48 48"  width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
@@ -86,6 +75,9 @@
                 <p class="text-center">No Member found</p>
               </div>
             </div>
+            <div class="row card p-4" *ngIf="memberList.length == 0">
+                <p class="text-center">No Member found</p>
+              </div>
           </div>
       </div>
       </div>

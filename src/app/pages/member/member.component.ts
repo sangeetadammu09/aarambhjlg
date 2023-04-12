@@ -101,7 +101,7 @@ export class MemberComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllMemberDetails();
+  //this.getAllMemberDetails();
     this.getAllCitys();
     this.getCenterDropdownByCityId();
     this.getOfficersCenterList();
@@ -113,9 +113,6 @@ export class MemberComponent implements OnInit {
  
 
   getAllMemberDetails(){
-    var paginationObj :any ={};
-    paginationObj.pageNo =this.page;
-    paginationObj.pageSize = this.pageSize;
     this._salesService.getCenterWiseMemberList(this.cityId).subscribe((data) => {
         console.log(data,'all memberDropdownList')
         if(data.length > 0){
@@ -144,22 +141,17 @@ export class MemberComponent implements OnInit {
    
   }
 
-  getMemberPriceVal(event:any){
+  getMemberVal(event:any){
+      var searchMemberId = event;
+      this._salesService.getCenterWiseMemberList(searchMemberId).subscribe((data) => {
+        console.log(data,'all memberDropdownList')
+        if(data.length > 0){
+          this.memberList = data;
    
-      console.log(event.target.value)
-      var searchTerm = event.target.value;
-      // this._adminService.getProducts(this.page,this.pageSize,this.cityId,searchTerm).subscribe((data) => {    
-      //   if(data){
-      //  //  this.productsFound = true;
-      //     this.memberList = data.products;
-      //     this.total = data.pages.totalCount;
-  
-      //    }else{
-      //      this.memberList = [];
-      //     // this.productsFound = false;
-      //    }
-         
-      //  })
+         }else{
+           this.memberList = [];
+         } 
+       })
     
   }
 
