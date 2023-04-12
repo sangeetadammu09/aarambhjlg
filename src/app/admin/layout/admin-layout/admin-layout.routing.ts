@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { BranchComponent } from 'src/app/pages/branch/branch.component';
 import { CenterComponent } from 'src/app/pages/center/center.component';
+import { ChangePasswordComponent } from 'src/app/pages/change-password/change-password.component';
 import { CityComponent } from 'src/app/pages/city/city.component';
 import { ExpenseTypeComponent } from 'src/app/pages/expense-type/expense-type.component';
 import { GroupComponent } from 'src/app/pages/group/group.component';
@@ -30,5 +31,6 @@ export const AdminLayoutRoutes: Routes = [
      { path:'branch', component: BranchComponent },
      { path:'expense-type', component: ExpenseTypeComponent },
      { path:'installments', component: InstallmentsComponent },
+     { path:'change-password', component: ChangePasswordComponent },
    
 ];

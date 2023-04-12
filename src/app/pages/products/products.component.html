@@ -1,32 +1,38 @@
-<div class="wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-10">
-                <h3 class="mb-2 mt-2">List of Products</h3>
-            </div>
-            <div class="col-lg-2 mb-3 mt-2">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#addProductModal"
+
+<!-- Page body -->
+<div class="page-body">
+    <div class="container-xl">
+      <div class="row row-cards">
+        <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="col-lg-10 mb-3 mt-2">
+                    <h3 class="card-title">List of Products</h3>
+                </div>
+                
+                <div class="col-lg-2 mb-3 mt-2">
+                    <button class="btn btn-primary btn-pill w-100" data-toggle="modal" data-target="#addProductModal"
                 (click)="showaddProductModal()">Add Product</button>
-            </div>
-            
-         </div>
-         <div class="row table-card mb-3" *ngIf="productList.length != 0">
-            <table class="table prduct-table">
-                <thead class="thead-secondary">
-                  <tr>
-                    <th scope="col">S No.</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">HSN Code</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Unit</th>
-                    <th scope="col">SalesTax</th>
-                    <th scope="col">Bar Code</th>
-                    <th scope="col">Description</th>
+                </div>
+              </div>
+
+         <div class="table-responsive" *ngIf="productList.length != 0">
+            <table class="table card-table table-vcenter text-nowrap datatable">
+                
+                  <tr style="background-color:#1d4ed8;">
+                    <th scope="col" style="color: #fff;">S No.</th>
+                    <th scope="col" style="color: #fff;">Name</th>
+                    <th scope="col" style="color: #fff;">HSN Code</th>
+                    <th scope="col" style="color: #fff;">Category</th>
+                    <th scope="col" style="color: #fff;">Unit</th>
+                    <th scope="col" style="color: #fff;">SalesTax</th>
+                    <th scope="col" style="color: #fff;">Bar Code</th>
+                    <th scope="col" style="color: #fff;">Description</th>
                     
-                    <th scope="col">Edit</th>
-                    <th scope="col">Delete</th>
+                    <th scope="col" style="color: #fff;">Edit</th>
+                    <th scope="col" style="color: #fff;">Delete</th>
                   </tr>
-                </thead>
+                
              
                 <tbody *ngFor="let item of productList| paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: total } ; let i = index ">
                   <tr>
@@ -55,17 +61,23 @@
                 </tbody>
                 
             </table>
+
+        </div>
+
+        <div class="card-footer d-flex align-items-center" style="background-color: #fff;">
             <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
                 <pagination-controls previousLabel="Prev"nextLabel="Next" [responsive]="true" (pageChange)="handlePageChange($event)"></pagination-controls>
             </div>
-         </div>
-
-         <div class="row card mb-3" *ngIf="productList.length == 0">
-            <p class="text-center">No Product found</p>
-          </div>
-        
+        </div>
+        <div class="row card mb-3" *ngIf="productList.length == 0">
+          <p class="text-center">No Product found</p>
+        </div>
+      </div>
     </div>
 </div>
+</div>
+</div>
+            
 
 
 <!-- add Product modal -->
@@ -190,8 +202,8 @@
                             <div class="form-group col-lg-6">
                                 <label class="form-control-label">Bar Code
                                 <span class="barcode-check">
-                                    <input class="form-check-input" type="checkbox" value="">
-                                    <label class="form-check-label" for="flexCheckChecked">AutoGenerate</label>
+                                    <input class="form-check-input" type="checkbox" value="">AutoGenerate
+                                    
                                 </span> 
                                 </label>
                                 
@@ -205,9 +217,9 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-lg-6">
+                            <div class="form-group col-lg-12">
                                 <label class="form-control-label">Description</label>
-                                <textarea formControlName="description" name="description"  class="form-control"  id="description" cols="30" rows="10"
+                                <textarea formControlName="description" name="description"  class="form-control"  id="description" rows="3"
                                 [ngClass]="{'is-invalid':(submitted && f['description'].errors) ||(f['description'].errors && f['description'].touched) }"
                                 ></textarea>
                                 <div *ngIf="(submitted && f['description'].errors) ||(f['description'].errors && f['description'].touched)" class="invalid-feedback">
@@ -438,9 +450,9 @@
 
                      
                         <div class="row">
-                            <div class="form-group col-lg-6">
+                            <div class="form-group col-lg-12">
                                 <label class="form-control-label">Description</label>
-                                <textarea formControlName="description" name="description"  class="form-control"  id="description" cols="30" rows="10"
+                                <textarea formControlName="description" name="description"  class="form-control"  id="description" rows="3"
                                 [ngClass]="{'is-invalid':(submitted && g['description'].errors) ||(g['description'].errors && g['description'].touched) }"
                                 ></textarea>
                                 <div *ngIf="(submitted && g['description'].errors) ||(g['description'].errors && g['description'].touched)" class="invalid-feedback">

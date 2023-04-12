@@ -278,6 +278,10 @@ export class AdminService {
    addUser(data:any){
      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.AddUser,data,{observe: 'response'})
    }
+
+   changePassword(data:any){
+    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.ChangePassword,data,{observe: 'response'})
+  }
  
    addUserDocuments(data:any){
      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.AddUserDocuments,data,{observe: 'response'})

@@ -8,6 +8,7 @@ export const APP_DI_CONFIG: any = {
     User:{
       Login : "/User/Login", 
       Logout : "/User/Logout", 
+      ChangePassword : "/User/ChnagePassword", 
       RefreshToken: "/User/RefreshToken",
       GetAllManager : "/User/GetAllManager",
       GetAllUser : "/User/GetAllUser",

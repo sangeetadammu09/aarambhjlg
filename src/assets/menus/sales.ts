@@ -52,6 +52,22 @@ export const SalesList = {
                 // }
             ]
           },
+          {
+            id: 1,
+            parentMenu: 'Setting',
+            icon : 'fa-cog',
+            isActive: true, 
+            url: 'setting',
+            submenuList: [
+                {
+                    id: 0,
+                    menu: 'Change Password',
+                    url: 'change-password',
+                    icon : 'fa-wrench',
+                    isActive: true, 
+                }
+            ]
+          }
           
 
     ],

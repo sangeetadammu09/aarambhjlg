@@ -20,6 +20,7 @@ import { GroupComponent } from './group/group.component';
 import { MemberComponent } from './member/member.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ProfileComponent } from './profile/profile.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -43,7 +44,8 @@ import { ProfileComponent } from './profile/profile.component';
     CenterComponent,
     GroupComponent,
     MemberComponent,
-    ProfileComponent
+    ProfileComponent,
+    ChangePasswordComponent
   ]
 })
 

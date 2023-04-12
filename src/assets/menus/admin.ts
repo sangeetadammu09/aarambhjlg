@@ -128,16 +128,7 @@ export const AdminList = {
                     url: 'center-list',
                     icon : 'fa-building',
                     isActive: true, 
-                }
-            ]
-          },
-          {
-            id: 3,
-            parentMenu: 'Group',
-            icon : 'fa-user',
-            isActive: true, 
-            url: 'group',
-            submenuList: [
+                },
                 {
                     id: 0,
                     menu: 'Group-List',
@@ -147,6 +138,23 @@ export const AdminList = {
                 }
             ]
           },
+          {
+            id: 1,
+            parentMenu: 'Setting',
+            icon : 'fa-cog',
+            isActive: true, 
+            url: 'setting',
+            submenuList: [
+                {
+                    id: 0,
+                    menu: 'Change Password',
+                    url: 'change-password',
+                    icon : 'fa-wrench',
+                    isActive: true, 
+                }
+            ]
+          }
+          
 
     ],
     message: null,

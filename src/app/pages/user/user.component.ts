@@ -504,9 +504,9 @@ export class UserComponent implements OnInit {
     if(temp.includes('.png') || temp.includes('.jpg')) {
       this.familyPhotoFile = file.target.files[0];
     }else{
-      this._toastrService.error('Only JPG or PNG document is allowed')
+      this._toastrService.error('Only PNG or JPG document is allowed')
     }
-
+    
   }
 
   submitFamilyPhoto(){

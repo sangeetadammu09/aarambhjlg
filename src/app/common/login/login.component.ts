@@ -5,6 +5,9 @@ import { ToastrService } from 'ngx-toastr';
 import { decodeToken } from '../../utils/token';
 import { CommonService } from '../service/common.service';
 import { MasterService } from 'src/app/master.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { catchError, switchMap, throwError } from 'rxjs';
+import { request } from 'express';
 
 
 
@@ -45,9 +48,11 @@ export class LoginComponent implements OnInit {
       loginFormData.append('username', this.loginForm.controls['username'].value);
       loginFormData.append('password', this.loginForm.controls['password'].value);
       this.loginText = "Please Wait! Logging In";
+    
       this._commonService.login(loginFormData).subscribe((data:any) => {
+        console.log(data)
         if(data){
-       //   console.log(data)
+        console.log(data,'data')
           this.decodedToken = decodeToken(data.access_token);
           this.loginText = "Login";
           const userData :any = {}
@@ -76,8 +81,10 @@ export class LoginComponent implements OnInit {
           })
           
           //
-        }
-      })
+        }(err:any) =>{
+         console.log(err)
+        }}
+      )
        
     }else{
       console.log('invalid login')
