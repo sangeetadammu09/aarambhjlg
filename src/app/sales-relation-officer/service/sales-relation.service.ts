@@ -46,7 +46,7 @@ export class SalesRelationService {
   //members
 
    getAllMembersById(id:any){
-    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Members.GetMemberDetailsById+`?id=${id}`)
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Members.GetMemberDetailsById+`/id=${id}`)
    }
  
    addMember(data:any){
