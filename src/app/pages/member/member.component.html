@@ -1,82 +1,95 @@
-<div class="wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-10">
-                <h3 class="mb-2 mt-2">List of Members</h3>
-            </div>
-            <div class="col-lg-2 mb-3 mt-2">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#addMemberModal"
-                (click)="showaddMemberModal()">Add Member</button>
-            </div>
-            
-         </div>
-         <div class="row table-card mb-3" *ngIf="memberList.length != 0">
-            <table class="table prduct-table">
-                <thead class="thead-secondary">
-                  <tr>
-                    <th scope="col">S No.</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">DOB</th>
-                    <th scope="col">Spouse</th>
-                    <th scope="col">Spouse DOB</th> 
-                    <th scope="col">Address</th>
-                    <th scope="col">Center</th>
-                    <th scope="col">City</th>
-                    <th scope="col">Mobile</th>
-                    <th scope="col">Stay</th>
-                    <th scope="col">Occupation</th>
-                    <th scope="col">Family</th>
-                    <th scope="col">Anyone Studying</th>
-                    <th scope="col">Date of Join</th>
-                    <th scope="col">Vaild Till</th>
-                    <th scope="col">Verified</th>
-                    <th scope="col">Fees</th>
-                  </tr>
-                </thead>
-             
-                <tbody *ngFor="let item of memberList| paginate: { itemsPerPage: pageSize, currentPage: page } ; let i = index ">
-                  <tr>
-                    <td>{{pageSize*(page-1)+i+1}}</td>
-                    <td>{{item.fullName}}</td>
-                    <td>{{item.dateOfBirth | date : 'dd-mm-yyyy'}}</td>
-                    <td>{{item.spouse}}</td>
-                    <td>{{item.spouseDateOfBirth | date : 'dd-mm-yyyy'}}</td>
-                    <td>{{item.address}}</td>
-                    <td>{{item.centerName}}</td> 
-                    <td>{{item.cityName}}</td>
-                    <td>{{item.mobileNo}}</td>
-                    <td>{{item.stayThere}}</td>
-                    <td>{{item.workingAs}}</td>
-                    <td>{{item.familyMembers}}</td>
-                    <td>{{item.anyOneStudying}}</td>
-                    <td>{{item.dateOfJoining}}</td>
-                    <td>{{item.validTillDate}}</td>
-                    <td *ngIf="item.isKycVerified == true">Yes</td>
-                    <td *ngIf="item.isKycVerified == false">No</td>
-                    <td>{{item.paidRegistrationFees}}</td>
 
-                    <td (click)="showMemberModal(item)" data-toggle="modal" data-target="#showMemberModal">
-                        <svg enable-background="new 0 0 48 48" height="32px" id="Layer_1" version="1.1" viewBox="0 0 48 48"  width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
-                         xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <path clip-rule="evenodd"
-                            d="M37,47H11c-2.209,0-4-1.791-4-4V5c0-2.209,1.791-4,4-4h18.973  c0.002,0,0.005,0,0.007,0h0.02H30c0.32,0,0.593,0.161,0.776,0.395l9.829,9.829C40.84,11.407,41,11.68,41,12l0,0v0.021  c0,0.002,0,0.003,0,0.005V43C41,45.209,39.209,47,37,47z M31,4.381V11h6.619L31,4.381z M39,13h-9c-0.553,0-1-0.448-1-1V3H11  C9.896,3,9,3.896,9,5v38c0,1.104,0.896,2,2,2h26c1.104,0,2-0.896,2-2V13z M33,39H15c-0.553,0-1-0.447-1-1c0-0.552,0.447-1,1-1h18  c0.553,0,1,0.448,1,1C34,38.553,33.553,39,33,39z M33,31H15c-0.553,0-1-0.447-1-1c0-0.552,0.447-1,1-1h18c0.553,0,1,0.448,1,1  C34,30.553,33.553,31,33,31z M33,23H15c-0.553,0-1-0.447-1-1c0-0.552,0.447-1,1-1h18c0.553,0,1,0.448,1,1C34,22.553,33.553,23,33,23  z"
-                            fill-rule="evenodd" />
-                        </svg>
-                    </td>     
-                  </tr>        
-                </tbody>
+
+<!-- Page body -->
+<div class="page-body">
+    <div class="container-xl">
+      <div class="row row-cards">
+        <div class="col-12">
+            <div class="card">
+              <!-- <div class="card-header">
+                <div class="col-lg-10 mb-3 mt-2">
+                    <h3 class="card-title">List of Members</h3>
+                </div>
+                
+                <div class="col-lg-2 mb-3 mt-2">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#addMemberModal"
+                    (click)="showaddMemberModal()">Add Member</button>
+                </div>
+              </div> -->
+              <div class="card-header">
+                <div class="col-lg-7 mb-3 mt-2">
+                    <h3 class="card-title">List of Members</h3>
+                </div>
+                <div class="col-lg-3 mb-3 mt-2">
+                    <!-- <input type="text"  class="form-control searchProductPrice"  placeholder="Seach Member"
+                    id="searchMember" [(ngModel)]="searchMemberPrice" (change)="getMemberPriceVal($event)"> -->
+                    <select class="custom-select" id="searchMember" [(ngModel)]="searchMember"
+                     (change)="getMemberPriceVal($event)">
+                    <option value="" [selected]="''">Choose Center..</option>
+                        <option *ngFor="let item of memberDropdownList" [ngValue]="item.centerId">
+                            {{item.centerName }}</option>
+                    </select>
+                </div>
+                <div class="col-lg-2 mb-3 mt-2">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#addMemberModal"
+                    (click)="showaddMemberModal()">Add Member</button>
+                </div>
+              </div>
+
+          
+         <div class="table-responsive" *ngIf="memberList.length != 0">
+            <table class="table card-table table-vcenter text-nowrap datatable">
+               
+                  <tr style="background-color:#1d4ed8;">
+                    <th scope="col" style="color: #fff; font-family: sans-serif;">S No.</th>
+                    <th scope="col" style="color: #fff; font-family: sans-serif;">Name</th>
+                    <th scope="col" style="color: #fff; font-family: sans-serif;">Address</th>
+                    <th scope="col" style="color: #fff; font-family: sans-serif;">Center</th>
+                    <th scope="col" style="color: #fff; font-family: sans-serif;">City</th>
+                    <th scope="col" style="color: #fff; font-family: sans-serif;">Mobile</th>
+                    <th scope="col" style="color: #fff; font-family: sans-serif;">Date of Join</th>
+                    
+                  
+                    <th scope="col" style="color: #fff; font-family: sans-serif;">Edit</th>
+                    <th scope="col" *ngIf="roleNo == 101" style="color: #fff; font-family: sans-serif;">Delete</th>
+                  </tr>
+                
+                  <tbody *ngFor="let item of memberList| paginate: { itemsPerPage: pageSize, currentPage: page } ; let i = index ">
+                    <tr>
+                      <td>{{pageSize*(page-1)+i+1}}</td>
+                      <td>{{item.fullName}}</td>
+                      <td>{{item.address}}</td>
+                      <td>{{item.centerName}}</td> 
+                      <td>{{item.cityName}}</td>
+                      <td>{{item.mobileNo}}</td>
+                      <td>{{item.dateOfJoining}}</td>
+  
+                      <td (click)="showMemberModal(item)" data-toggle="modal" data-target="#showMemberModal">
+                          <svg enable-background="new 0 0 48 48" height="32px" id="Layer_1" version="1.1" viewBox="0 0 48 48"  width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                           xmlns:xlink="http://www.w3.org/1999/xlink">
+                          <path clip-rule="evenodd"
+                              d="M37,47H11c-2.209,0-4-1.791-4-4V5c0-2.209,1.791-4,4-4h18.973  c0.002,0,0.005,0,0.007,0h0.02H30c0.32,0,0.593,0.161,0.776,0.395l9.829,9.829C40.84,11.407,41,11.68,41,12l0,0v0.021  c0,0.002,0,0.003,0,0.005V43C41,45.209,39.209,47,37,47z M31,4.381V11h6.619L31,4.381z M39,13h-9c-0.553,0-1-0.448-1-1V3H11  C9.896,3,9,3.896,9,5v38c0,1.104,0.896,2,2,2h26c1.104,0,2-0.896,2-2V13z M33,39H15c-0.553,0-1-0.447-1-1c0-0.552,0.447-1,1-1h18  c0.553,0,1,0.448,1,1C34,38.553,33.553,39,33,39z M33,31H15c-0.553,0-1-0.447-1-1c0-0.552,0.447-1,1-1h18c0.553,0,1,0.448,1,1  C34,30.553,33.553,31,33,31z M33,23H15c-0.553,0-1-0.447-1-1c0-0.552,0.447-1,1-1h18c0.553,0,1,0.448,1,1C34,22.553,33.553,23,33,23  z"
+                              fill-rule="evenodd" />
+                          </svg>
+                      </td>     
+                    </tr>        
+                  </tbody>
                 
             </table>
-            <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
-                <pagination-controls previousLabel="Prev"nextLabel="Next" [responsive]="true"></pagination-controls>
-            </div>
-         </div>
 
-         <div class="row card mb-3" *ngIf="memberList.length == 0">
-            <p class="text-center">No Member found</p>
+            <div class="card-footer d-flex align-items-center" style="background-color: #fff;">
+                <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
+                    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                </div>
+              </div>
+              <div class="row card mb-3" *ngIf="memberList.length == 0">
+                <p class="text-center">No Member found</p>
+              </div>
+            </div>
           </div>
-        
-    </div>
+      </div>
+      </div>
+      </div>
 </div>
 
 

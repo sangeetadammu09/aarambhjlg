@@ -48,6 +48,7 @@ export class MemberComponent implements OnInit {
   securityFile: any;
   voterDocumentName: any;
   cityId = localStorage.getItem('userCity');
+  userId = localStorage.getItem('userId');
   MemberId = localStorage.getItem('MemberId');
   MemberDetailsObj: any = {};
   MemberDocuments: any = [];
@@ -58,6 +59,8 @@ export class MemberComponent implements OnInit {
   disableVoterDocumentBtn: boolean = false;
   disableSecurityDocumentBtn : boolean = false;
   centerList: any = [];
+  memberDropdownList :any = [];
+  searchMember :any;
   
 
   constructor(private _salesService: SalesRelationService, private _formBuilder : FormBuilder,
@@ -101,6 +104,8 @@ export class MemberComponent implements OnInit {
     this.getAllMemberDetails();
     this.getAllCitys();
     this.getCenterDropdownByCityId();
+    this.getOfficersCenterList();
+    this.searchMember ="";
   }
 
   get f(){ return this.addMemberForm.controls}
@@ -111,8 +116,8 @@ export class MemberComponent implements OnInit {
     var paginationObj :any ={};
     paginationObj.pageNo =this.page;
     paginationObj.pageSize = this.pageSize;
-    this._salesService.getAllMembersById(this.cityId).subscribe((data) => {
-      //   console.log(data,'all MemberRoles')
+    this._salesService.getCenterWiseMemberList(this.cityId).subscribe((data) => {
+        console.log(data,'all memberDropdownList')
         if(data.length > 0){
           this.memberList = data;
    
@@ -121,6 +126,41 @@ export class MemberComponent implements OnInit {
          } 
        })
    
+  }
+
+  getOfficersCenterList(){
+    var paginationObj :any ={};
+    paginationObj.pageNo =this.page;
+    paginationObj.pageSize = this.pageSize;
+    this._salesService.getOfficersCenterList(this.cityId,this.userId).subscribe((data) => {
+      //   console.log(data,'all MemberRoles')
+        if(data.length > 0){
+          this.memberDropdownList = data;
+   
+         }else{
+           this.memberDropdownList = [];
+         } 
+       })
+   
+  }
+
+  getMemberPriceVal(event:any){
+   
+      console.log(event.target.value)
+      var searchTerm = event.target.value;
+      // this._adminService.getProducts(this.page,this.pageSize,this.cityId,searchTerm).subscribe((data) => {    
+      //   if(data){
+      //  //  this.productsFound = true;
+      //     this.memberList = data.products;
+      //     this.total = data.pages.totalCount;
+  
+      //    }else{
+      //      this.memberList = [];
+      //     // this.productsFound = false;
+      //    }
+         
+      //  })
+    
   }
 
   getAllCitys(){

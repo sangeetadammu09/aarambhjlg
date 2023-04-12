@@ -34,6 +34,11 @@ export class SalesRelationService {
    addCenter(data:any){
      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Center.AddCenter,data,{observe: 'response'})
    }
+
+
+   getOfficersCenterList(cityId:any,officerUserId:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Center.GetOfficersCenterList+`?cityId=${cityId}&officerUserId=${officerUserId}`)
+   }
  
    updateCenter(data:any){
      return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Center.UpdateCenter,data,{observe: 'response'})
@@ -49,6 +54,11 @@ export class SalesRelationService {
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Members.GetMemberDetailsById+`/id=${id}`)
    }
  
+   getCenterWiseMemberList(id:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Members.GetCenterWiseMemberList+`?centerId=${id}`)
+   }
+ 
+
    addMember(data:any){
      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Members.AddMember,data,{observe: 'response'})
    }
