@@ -61,6 +61,14 @@ export class MemberComponent implements OnInit {
   centerList: any = [];
   memberDropdownList :any = [];
   searchMember :any;
+  memberDetailsObj: any ={};
+  memberDocuments: any;
+  memberDocImage: any;
+  documentTypePdf: boolean = false;
+  documentTypeImage: boolean = false;
+  fileUrl: any;
+  pagenew = 1;
+  roleNo = localStorage.getItem('roleNo');
   
 
   constructor(private _salesService: SalesRelationService, private _formBuilder : FormBuilder,
@@ -129,8 +137,20 @@ export class MemberComponent implements OnInit {
     var paginationObj :any ={};
     paginationObj.pageNo =this.page;
     paginationObj.pageSize = this.pageSize;
+    if(this.roleNo == '101'){
+      this._adminService.getCenterDropdownByCityId(this.cityId).subscribe((data) =>{
+        console.log(data,'admin member')
+        if(data.length > 0){
+          this.memberDropdownList = data;
+   
+         }else{
+           this.memberDropdownList = [];
+         } 
+       })
+
+    }else if(this.roleNo == '102')
     this._salesService.getOfficersCenterList(this.cityId,this.userId).subscribe((data) => {
-      //   console.log(data,'all MemberRoles')
+      console.log(data,'cco member')
         if(data.length > 0){
           this.memberDropdownList = data;
    
@@ -526,6 +546,34 @@ export class MemberComponent implements OnInit {
         this._toastrService.error("Please upload Voter/PAN")
       }
   }
+
+
+  showMemberModal(item:any){
+     console.log(item)
+     this._salesService.getAllMemberDetails(item.memberId).subscribe((data:any) =>{
+       if(data){
+         this.memberDetailsObj = data;
+         this.memberDocuments = data.documents;
+        // console.log(this.userDetailsObj)
+       }
+      
+     })
+     
+    }
+ 
+   showMemberDocuments(item:any){
+      this.memberDocImage = item;
+      if(item.fileType == ".png" || item.fileType == ".jpg"){
+         this.documentTypePdf = false;
+         this.documentTypeImage = true;
+         this.fileUrl =  item.url;
+       }else if(item.fileType == ".pdf"){
+        this.documentTypePdf = true;
+        this.documentTypeImage = false;
+        this.fileUrl = item.url;
+        
+       }
+    }
 
 }
 

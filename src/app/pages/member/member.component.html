@@ -10,15 +10,22 @@
                 <div class="col-lg-7 mb-3 mt-2">
                     <h3 class="card-title">List of Members</h3>
                 </div>
-                <div class="col-lg-3 mb-3 mt-2">
-                    <!-- <input type="text"  class="form-control searchProductPrice"  placeholder="Seach Member"
-                    id="searchMember" [(ngModel)]="searchMemberPrice" (change)="getMemberPriceVal($event)"> -->
+                <div class="col-lg-3 mb-3 mt-2" *ngIf="roleNo == '102'">
                     <select class="custom-select" id="searchMember" [(ngModel)]="searchMember" (change)="getMemberVal(searchMember)">
                     <option value="" [selected]="''">Choose Center..</option>
                     <option *ngFor="let item of memberDropdownList" [ngValue]="item.centerId">
                         {{item.centerName}}</option>
                     </select>
                 </div>
+
+                <div class="col-lg-3 mb-3 mt-2" *ngIf="roleNo == '101'">
+                    <select class="custom-select" id="searchMember" [(ngModel)]="searchMember" (change)="getMemberVal(searchMember)">
+                    <option value="" [selected]="''">Choose Center..</option>
+                    <option *ngFor="let item of memberDropdownList" [ngValue]="item.centerId">
+                        {{item.centerName}}</option>
+                    </select>
+                </div>
+
                 <div class="col-lg-2 mb-3 mt-2">
                     <button class="btn btn-primary" data-toggle="modal" data-target="#addMemberModal"
                     (click)="showaddMemberModal()">Add Member</button>
@@ -39,7 +46,7 @@
                     <th scope="col" style="color: #fff; font-family: sans-serif;">Date of Join</th>
                     
                   
-                    <th scope="col" style="color: #fff; font-family: sans-serif;">Edit</th>
+                    <th scope="col" style="color: #fff; font-family: sans-serif;">Details</th>
                     <th scope="col" *ngIf="roleNo == 101" style="color: #fff; font-family: sans-serif;">Delete</th>
                   </tr>
                 
@@ -412,6 +419,141 @@
       </div>
     </div>
 </div>
+
+
+<!-- show Member modal -->
+<div class="modal fade" id="showMemberModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">   
+          <h5 class="modal-title" id="exampleModalLabel">Member Details</h5>    
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeeditUserBtn>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body scrollable-modal">   
+            <div class="card p-3 mb-2">
+                <div class="card-body">
+                <div class="d-flex justify-content-between">
+                <div class="d-flex flex-row align-items-center">
+                    <div class="icon"> 
+                        <i class="bx bxl-mailchimp"></i> </div>
+                        <div class="ms-2 c-details">
+                            <div class="row d-flex">
+                               <div class="card-title col-lg-6">Name :</div>
+                               <div class="col-lg-6">{{memberDetailsObj.fullName}}</div>
+
+                               <div class="card-title col-lg-6">Contact :</div>
+                               <div class="col-lg-6">{{memberDetailsObj.mobileNo}}</div>
+
+                               <div class="card-title col-lg-6">Date of Joining :</div>
+                               <div class="col-lg-6">{{memberDetailsObj.dateOfJoining | date : "dd-mm-yyyy"}}</div>
+
+                               <div class="card-title col-lg-6">Valid Till :</div>
+                               <div class="col-lg-6">{{memberDetailsObj.validTillDate | date : "dd-mm-yyyy"}}</div>
+
+                               <div class="card-title col-lg-6">Family :</div>
+                               <div class="col-lg-6">{{memberDetailsObj.familyMembers}}</div>
+
+                               <div class="card-title col-lg-6">Center :</div>
+                               <div class="col-lg-6">{{memberDetailsObj.centerName}}</div>
+
+                               <div class="card-title col-lg-6">City :</div>
+                               <div class="col-lg-6">{{memberDetailsObj.cityName}}</div>
+
+                               <div class="card-title col-lg-6">Spouse :</div>
+                               <div class="col-lg-6">{{memberDetailsObj.spouse}}</div>
+
+                               <div class="card-title col-lg-6">Spouse Date Of Birth :</div>
+                               <div class="col-lg-6">{{memberDetailsObj.spouseDateOfBirth | date : "dd-mm-yyyy"}}</div>
+
+                               <div class="card-title col-lg-6">Anyone Studying:</div>
+                               <div class="col-lg-6">{{memberDetailsObj.anyOneStudying}}</div>
+
+                               <div class="card-title col-lg-6">Spouse Date Of Birth :</div>
+                               <div class="col-lg-6">{{memberDetailsObj.spouseDateOfBirth | date : "dd-mm-yyyy"}}</div>
+
+                            </div>
+                       </div>
+                </div>  
+                </div>
+                </div>   
+            </div>
+                        <!-- Page body -->
+            <div class="page-body">
+                <div class="container-xl">
+                <div class="row row-cards">
+                    <div class="col-12">
+                        <div class="card">
+                        <div class="card-header">
+                            <div class="col-lg-10 mb-3 mt-2">
+                                <h3 class="card-title">Member Documents</h3>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                        <table class="table card-table table-vcenter text-nowrap datatable">
+                        
+                            <tr style="background-color:#1d4ed8;">
+                                <th scope="col" style="color: #fff; font-family: sans-serif;">S No.</th>
+                                <th scope="col" style="color: #fff; font-family: sans-serif;">Name</th>
+                                <th scope="col" style="color: #fff; font-family: sans-serif;">Details</th>
+                            </tr>
+                            
+                            <tbody *ngFor="let item of memberDocuments| paginate: { itemsPerPage: 5, currentPage: pagenew } ; let i = index ">
+                            <tr>
+                                <td>{{5*(pagenew-1)+i+1}}</td>
+                                <td>{{item.documentName}}</td> 
+                                <td (click)="showMemberDocuments(item)" data-toggle="modal" data-target="#showMemberDocModal" *ngIf="item.fileType == '.png' || item.fileType == '.jpg'">
+                                    <button class="btn btn-primary">View Image</button>
+                                
+                                </td>
+                                <td *ngIf="item.fileType == '.pdf'">
+                                    <a [href]="item.url" target="_blank">
+                                        <button class="btn btn-primary">Open PDF</button></a>
+                                </td>     
+                            </tr>        
+                            </tbody>
+                            
+                        </table>
+                        <div class="card-footer d-flex align-items-center" style="background-color: #fff;">
+                            <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
+                                <pagination-controls previousLabel="Prev"nextLabel="Next" (pageChange)="pagenew = $event" [responsive]="true"></pagination-controls>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<div class="modal fade" id="showMemberDocModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Member Document</h5>
+         
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeUserDocBtn>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body scrollable-modal">
+                  <div class="g-4 align-self-center text-center" *ngIf="!documentTypePdf && documentTypeImage">
+                        <p>{{memberDocImage.documentName}}</p>
+                        <img [src]="fileUrl" alt="Documents" >
+                  </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
 
 
 

@@ -53,6 +53,10 @@ export class SalesRelationService {
    getAllMembersById(id:any){
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Members.GetMemberDetailsById+`/id=${id}`)
    }
+
+   getAllMemberDetails(id:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Members.GetMemberAllDetails+`?memberId=${id}`)
+   }
  
    getCenterWiseMemberList(id:any){
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Members.GetCenterWiseMemberList+`?centerId=${id}`)

@@ -130,10 +130,17 @@ export const AdminList = {
                     isActive: true, 
                 },
                 {
-                    id: 0,
+                    id: 1,
                     menu: 'Group-List',
                     url: 'group-list',
                     icon : 'fa-building',
+                    isActive: true, 
+                },
+                {
+                    id: 2,
+                    menu: 'Member List',
+                    url: 'member-list',
+                    icon : 'fa-users',
                     isActive: true, 
                 }
             ]

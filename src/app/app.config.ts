@@ -74,6 +74,7 @@ export const APP_DI_CONFIG: any = {
     },
     Members:{
       GetMemberDetailsById : "/Members/GetMemberDetailsById",
+      GetMemberAllDetails : "/Members/GetMemberAllDetails",
       AddMember : "/Members/AddMember",
       AddMemberDocuments : "/Members/AddMemberDocuments",
       GetCenterWiseMemberList : "/Members/GetCenterWiseMemberList",

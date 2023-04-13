@@ -6,6 +6,7 @@ import { CityComponent } from 'src/app/pages/city/city.component';
 import { ExpenseTypeComponent } from 'src/app/pages/expense-type/expense-type.component';
 import { GroupComponent } from 'src/app/pages/group/group.component';
 import { InstallmentsComponent } from 'src/app/pages/installments/installments.component';
+import { MemberComponent } from 'src/app/pages/member/member.component';
 import { ProductBrandComponent } from 'src/app/pages/product-brand/product-brand.component';
 import { ProductCategoryComponent } from 'src/app/pages/product-category/product-category.component';
 import { ProductPriceComponent } from 'src/app/pages/product-price/product-price.component';
@@ -23,6 +24,7 @@ export const AdminLayoutRoutes: Routes = [
      { path:'unit', component: UnitComponent },
      { path:'user-list', component: UserComponent },
      { path:'center-list', component: CenterComponent },
+     { path:'member-list', component: MemberComponent },
      { path:'group-list', component: GroupComponent },
      { path:'user-role', component: UserroleComponent },
      { path:'tax-slot', component: TaxSlotComponent },
