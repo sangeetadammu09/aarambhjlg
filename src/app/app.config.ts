@@ -22,7 +22,8 @@ export const APP_DI_CONFIG: any = {
       GetUsersListByCity: "/User/GetUsersListByCity",
       GetUsersByCity: "/User/GetUsersByCity",
       GetAllRoles: "/User/GetAllRoles",
-      GetAllUserDetails : "/User/GetUserAllDetails"
+      GetAllUserDetails : "/User/GetUserAllDetails",
+      GetUserContacts: "/User/GetUserContacts",
     },
     ProductCategory:{
       GetAllProductCategory : "/ProductCategory/GetAllProductCategory",
@@ -78,6 +79,7 @@ export const APP_DI_CONFIG: any = {
       AddMember : "/Members/AddMember",
       AddMemberDocuments : "/Members/AddMemberDocuments",
       GetCenterWiseMemberList : "/Members/GetCenterWiseMemberList",
+      GetMemberContacts : "/Members/GetMemberContacts",
      // UpdateMembers : "/Members/UpdateMembers",
      // DeleteMembers : "/Members/DeleteMembers"
     },

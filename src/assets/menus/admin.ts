@@ -112,6 +112,13 @@ export const AdminList = {
                     url: 'user-role',
                     icon : 'fa-user',
                     isActive: true, 
+                },
+                {
+                    id: 2,
+                    menu: 'User Contacts',
+                    url: 'user-contacts',
+                    icon : 'fa-phone',
+                    isActive: true, 
                 }
             ]
           },
@@ -141,6 +148,13 @@ export const AdminList = {
                     menu: 'Member List',
                     url: 'member-list',
                     icon : 'fa-users',
+                    isActive: true, 
+                },
+                {
+                    id: 2,
+                    menu: 'Member Contacts',
+                    url: 'member-contacts',
+                    icon : 'fa-phone',
                     isActive: true, 
                 }
             ]

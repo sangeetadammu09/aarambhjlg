@@ -6,6 +6,7 @@ import { CityComponent } from 'src/app/pages/city/city.component';
 import { ExpenseTypeComponent } from 'src/app/pages/expense-type/expense-type.component';
 import { GroupComponent } from 'src/app/pages/group/group.component';
 import { InstallmentsComponent } from 'src/app/pages/installments/installments.component';
+import { MemberContactsComponent } from 'src/app/pages/member-contacts/member-contacts.component';
 import { MemberComponent } from 'src/app/pages/member/member.component';
 import { ProductBrandComponent } from 'src/app/pages/product-brand/product-brand.component';
 import { ProductCategoryComponent } from 'src/app/pages/product-category/product-category.component';
@@ -13,6 +14,7 @@ import { ProductPriceComponent } from 'src/app/pages/product-price/product-price
 import { ProductsComponent } from 'src/app/pages/products/products.component';
 import { TaxSlotComponent } from 'src/app/pages/tax-slot/tax-slot.component';
 import { UnitComponent } from 'src/app/pages/unit/unit.component';
+import { UserContactsComponent } from 'src/app/pages/user-contacts/user-contacts.component';
 import { UserComponent } from 'src/app/pages/user/user.component';
 import { UserroleComponent } from 'src/app/pages/userrole/userrole.component';
 
@@ -34,5 +36,7 @@ export const AdminLayoutRoutes: Routes = [
      { path:'expense-type', component: ExpenseTypeComponent },
      { path:'installments', component: InstallmentsComponent },
      { path:'change-password', component: ChangePasswordComponent },
+     { path:'user-contacts', component: UserContactsComponent },
+     { path:'member-contacts', component: MemberContactsComponent },
    
 ];

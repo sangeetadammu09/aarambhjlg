@@ -21,6 +21,8 @@ import { MemberComponent } from './member/member.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ProfileComponent } from './profile/profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { UserContactsComponent } from './user-contacts/user-contacts.component';
+import { MemberContactsComponent } from './member-contacts/member-contacts.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -45,7 +47,9 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     GroupComponent,
     MemberComponent,
     ProfileComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    UserContactsComponent,
+    MemberContactsComponent
   ]
 })
 

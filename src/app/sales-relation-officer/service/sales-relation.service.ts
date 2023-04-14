@@ -62,6 +62,9 @@ export class SalesRelationService {
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Members.GetCenterWiseMemberList+`?centerId=${id}`)
    }
  
+   getMemberContacts(id:any,pageno:any,pageSize:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Members.GetMemberContacts+`?centerId=${id}&PageNumber=${pageno}&PageSize=${pageSize}`)
+   }
 
    addMember(data:any){
      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Members.AddMember,data,{observe: 'response'})

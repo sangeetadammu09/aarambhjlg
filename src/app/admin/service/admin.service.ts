@@ -274,6 +274,11 @@ export class AdminService {
    getAllUserDetails(userId : any){
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.GetAllUserDetails+`?userId=${userId}`)
    }
+
+   getUserContacts(cityId : any,pageNo:any,pageSize:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.GetUserContacts+`?cityId=${cityId}&PageNumber=${pageNo}&PageSize=${pageSize}`)
+   }
+ 
  
    addUser(data:any){
      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.AddUser,data,{observe: 'response'})
