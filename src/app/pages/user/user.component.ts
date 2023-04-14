@@ -34,7 +34,7 @@ export class UserComponent implements OnInit {
   cityList: any;
   todayDate = new Date().toJSON();
   userDateofBirth: any;
-  addUserDocumentForm: any;
+  addUserDocumentForm: FormGroup;
   adduserDocumentName: any;
   userDocumentFile: any;
   aadhaarFrontDocumentName: any ="Choose File";
@@ -50,14 +50,16 @@ export class UserComponent implements OnInit {
   userDocument: any;
   addJKycDocumentForm: FormGroup;
 
-  familyPhotoName:any;
-  drivingLicenseName:any;
-  joiningLetterName:any;
-  bankPassbookName:any;
-  educationDocName:any;
-  releavingLetterName:any;
-  previousSalarySlipsName:any;
-  familyPhotoFile:any;
+  familyPhotoName: any ="Choose File";
+  drivingLicenseName: any ="Choose File";
+  joiningLetterName: any ="Choose File";
+  bankPassbookName: any ="Choose File";
+  educationDocName: any ="Choose File";
+  releavingLetterName: any ="Choose File";
+  previousSalarySlipsName: any ="Choose File";
+  voterDocumentName: any ="Choose File";
+  
+  familyPhotoFile: any ;
   drivingLicenseFile:any;
   joiningLetterFile:any;
   bankPassbookFile:any;
@@ -65,7 +67,7 @@ export class UserComponent implements OnInit {
   releavingLetterFile:any;
   previousSalarySlipsFile:any;
   voterFile: any;
-  voterDocumentName: any;
+  
   cityId = localStorage.getItem('userCity');
   userId = localStorage.getItem('userId');
   userDetailsObj: any = {};
@@ -208,11 +210,32 @@ export class UserComponent implements OnInit {
     this.addUserDocumentForm.markAsPristine();
     this.addUserForm.controls['cityId'].setValue('')
     this.addUserForm.controls['isActive'].setValue('true');
-    // $('.datepicker').datepicker({
-    //   language: "es",
-    //   autoclose: true,
-    //   format: "dd/mm/yyyy"
-    // });
+    this.familyPhotoName ="Choose File";
+    this.drivingLicenseName ="Choose File";
+    this.joiningLetterName ="Choose File";
+    this.bankPassbookName ="Choose File";
+    this.educationDocName ="Choose File";
+    this.releavingLetterName ="Choose File";
+    this.previousSalarySlipsName ="Choose File";
+    this.voterDocumentName ="Choose File";
+    this.aadhaarFrontDocumentName ="Choose File";
+    this.aadhaarBackDocumentName ="Choose File";
+    this.photoDocumentName ="Choose File";
+    this.addressDocumentName ="Choose File";
+
+    this.disableAFDocumentBtn = false;
+    this.disableABDocumentBtn = false;
+    this.disablePhotoDocumentBtn = false;
+    this.disableAddressDocumentBtn = false;
+    this.disableVoterDocumentBtn = false;
+    this.disableFamilyDocumentBtn = false;
+    this.disableDLDocumentBtn = false;
+    this.disableJoiningLetterBtn = false;
+    this.disablePassbookBtn = false;
+    this.disableEducationBtn = false;
+    this.disableReleavingLetterBtn = false;
+    this.disablepreviousSalarySlipsBtn = false;
+   
   }
 
   addProdTab(){
@@ -227,7 +250,7 @@ export class UserComponent implements OnInit {
     this.addUserTitle ="Upload KYC Documents";
   } 
 
-  changeDateOfBirth(event:any){
+  changeDateOfBirth(event: any){
     //  console.log(event.target.value, 'event')
       var dob = event.target.value
       var dt = new Date(dob);
@@ -327,7 +350,7 @@ export class UserComponent implements OnInit {
 
   uploadAadhaarBackDocument(file: any) {
     this.aadhaarBackFile='';
-    this.aadhaarBackDocumentName = "Aadhaar Back"
+    this.aadhaarBackDocumentName = "Aadhaar Back" 
     var temp = file.target.files[0].name;
     if(temp.includes('.png') || temp.includes('.jpg')) {
       this.aadhaarBackFile = file.target.files[0];

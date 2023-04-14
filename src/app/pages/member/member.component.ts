@@ -216,6 +216,19 @@ export class MemberComponent implements OnInit {
     this.addMemberDocumentForm.markAsPristine();
     this.addMemberForm.controls['cityId'].setValue('')
     this.addMemberForm.controls['centerId'].setValue('');
+   
+    this.voterDocumentName ="Choose File";
+    this.aadhaarFrontDocumentName ="Choose File";
+    this.aadhaarBackDocumentName ="Choose File";
+    this.photoDocumentName ="Choose File";
+    this.addressDocumentName ="Choose File";
+
+    this.disableAFDocumentBtn = false;
+    this.disableABDocumentBtn = false;
+    this.disablePhotoDocumentBtn = false;
+    this.disableAddressDocumentBtn = false;
+    this.disableVoterDocumentBtn = false;
+   
   }
 
   addProdTab(){
@@ -291,10 +304,12 @@ export class MemberComponent implements OnInit {
 
   }
 
+
   uploadAadhaarFrontDocument(file: any) {
     this.aadhaarFrontFile='';
-    this.aadhaarFrontDocumentName = file.target.files[0].name;
-    if(this.aadhaarFrontDocumentName.includes('.png') || this.aadhaarFrontDocumentName.includes('.jpg')) {
+    this.aadhaarFrontDocumentName =  "Aadhaar Front"
+    var temp = file.target.files[0].name;
+    if(temp.includes('.png') || temp.includes('.jpg')) {
       this.aadhaarFrontFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
@@ -339,8 +354,9 @@ export class MemberComponent implements OnInit {
 
   uploadAadhaarBackDocument(file: any) {
     this.aadhaarBackFile='';
-    this.aadhaarBackDocumentName = file.target.files[0].name;
-    if(this.aadhaarBackDocumentName.includes('.png') || this.aadhaarBackDocumentName.includes('.jpg')) {
+    this.aadhaarBackDocumentName = "Aadhaar Back" 
+    var temp = file.target.files[0].name;
+    if(temp.includes('.png') || temp.includes('.jpg')) {
       this.aadhaarBackFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
@@ -380,8 +396,9 @@ export class MemberComponent implements OnInit {
 
   uploadPhotoDocument(file: any) {
     this.photoFile='';
-    this.photoDocumentName = file.target.files[0].name;
-    if(this.photoDocumentName.includes('.png') || this.photoDocumentName.includes('.jpg')) {
+    this.photoDocumentName =  "Photo"
+    var temp = file.target.files[0].name;
+    if(temp.includes('.png') || temp.includes('.jpg')) {
       this.photoFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
@@ -422,8 +439,9 @@ export class MemberComponent implements OnInit {
 
   uploadAddressDocument(file: any) {
     this.addressFile='';
-    this.addressDocumentName = file.target.files[0].name;
-    if(this.addressDocumentName.includes('.png') || this.addressDocumentName.includes('.jpg')) {
+    this.addressDocumentName = "Address";
+    var temp = file.target.files[0].name
+    if(temp.includes('.png') || temp.includes('.jpg')) {
       this.addressFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
@@ -464,8 +482,9 @@ export class MemberComponent implements OnInit {
 
   uploadVoterDocument(file: any) {
     this.voterFile='';
-    this.voterDocumentName = file.target.files[0].name;
-    if(this.voterDocumentName.includes('.png') || this.voterDocumentName.includes('.jpg')) {
+    this.voterDocumentName = "Voter";
+    var temp = file.target.files[0].name;
+    if(temp.includes('.png') || temp.includes('.jpg')) {
       this.voterFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
@@ -507,8 +526,9 @@ export class MemberComponent implements OnInit {
 
   uploadSecurityDocument(file: any) {
     this.securityFile='';
-    this.securityDocumentName = file.target.files[0].name;
-    if(this.securityDocumentName.includes('.png') || this.securityDocumentName.includes('.jpg')) {
+    this.securityDocumentName = "Secuity Check"
+    var temp = file.target.files[0].name;
+    if(temp.includes('.png') || temp.includes('.jpg')) {
       this.securityFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')

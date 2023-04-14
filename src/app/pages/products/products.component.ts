@@ -33,26 +33,26 @@ export class ProductsComponent implements OnInit {
   productBrandList: any;
   addedProductId: any;
 
-  productOneImageName: any;
+  productOneImageName: any = "Choose Product";
   disableProdImageOneBtn :boolean = false;
   productImageOneFile: any;
 
-  productTwoImageName: any;
+  productTwoImageName: any = "Choose Product";
   disableProdImageTwoBtn :boolean = false;
   productImageTwoFile: any;
 
 
-  productThreeImageName: any;
+  productThreeImageName: any = "Choose Product";
   disableProdImageThreeBtn :boolean = false;
   productImageThreeFile: any;
 
 
-  productFourImageName: any;
+  productFourImageName: any = "Choose Product";
   disableProdImageFourBtn :boolean = false;
   productImageFourFile: any;
 
 
-  productFiveImageName: any;
+  productFiveImageName: any = "Choose Product";
   disableProdImageFiveBtn :boolean = false;
   productImageFiveFile: any;
  
@@ -193,6 +193,16 @@ export class ProductsComponent implements OnInit {
     this.addProductForm.controls['unitId'].setValue('')
     this.addProductForm.controls['saleTaxId'].setValue('')
     this.addProductForm.controls['brandId'].setValue('')
+    this.productOneImageName = "Choose Product";
+    this.productTwoImageName = "Choose Product";
+    this.productThreeImageName = "Choose Product";
+    this.productFourImageName = "Choose Product";
+    this.productFiveImageName = "Choose Product";
+    this.disableProdImageOneBtn= false;
+    this.disableProdImageTwoBtn= false;
+    this.disableProdImageThreeBtn= false;
+    this.disableProdImageFourBtn= false;
+    this.disableProdImageFiveBtn= false;
     
   }
 
