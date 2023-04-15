@@ -89,6 +89,13 @@ export const AdminList = {
                 url: 'product-price',
                 icon : 'fa-building',
                 isActive: true, 
+               }, 
+               {
+                id: 4,
+                menu: 'Product Details',
+                url: 'product-details',
+                icon : 'fa-building',
+                isActive: true, 
                },      
         ]
           },

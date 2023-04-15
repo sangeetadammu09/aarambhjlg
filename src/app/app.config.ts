@@ -105,6 +105,7 @@ export const APP_DI_CONFIG: any = {
       GetAllProduct : "/Product/GetAllProduct",
       GetProducts : "/Product/GetProducts",
       GetAllProductByCity : "/Product/GetAllProductByCity",
+      GetProductDetailsForSale : "/Product/GetProductDetailsForSale",
       AddProduct : "/Product/AddProduct",
       AddProductPrice : "/Product/AddProductPrice",
       AddProductImages : "/Product/AddProductImages",

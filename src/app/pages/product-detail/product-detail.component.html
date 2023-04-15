@@ -1,0 +1,46 @@
+<!-- Page body -->
+<div class="page-body">
+    <div class="container-xl">
+      <div class="row row-cards">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="col-lg-9 mb-3 mt-2">
+                        <h3 class="card-title">List of Products Details</h3>
+                    </div>
+             
+                  </div>
+              <div class="container mt-3 mb-3" *ngIf="productList.length != 0">
+                <div class="row">
+                  <div class="col col-3" *ngFor="let item of productList| paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: total };
+                  let i = index">
+                    <div class="card" style="height:65vh">
+                      <img class="card-img-top" [src]="item.url" alt="User Document" width="87%" height="45%">
+                      <div class="card-body">
+                        <h5 class="card-title">Name: {{item.productName}}</h5>
+                        <p class="card-text">Mobile No: {{item.regionalName}}</p>
+                        <p class="card-text">Address: {{item.mrp}}</p>
+                        <p class="card-text">Sale Price: {{item.jlgSalePrice}}</p>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>   
+                </div>
+
+        <div class="card-footer d-flex align-items-center" style="background-color: #fff;">
+          <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2" *ngIf="productList.length != 0">
+              <pagination-controls previousLabel="Prev"nextLabel="Next" [responsive]="true"
+              (pageChange)="handlePageChange($event)"></pagination-controls>
+          </div>
+        </div>
+        <div class="text-center mb-3" *ngIf="productList.length == 0">
+          <p>No Product found</p>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+</div>
+
+

@@ -10,6 +10,7 @@ import { MemberContactsComponent } from 'src/app/pages/member-contacts/member-co
 import { MemberComponent } from 'src/app/pages/member/member.component';
 import { ProductBrandComponent } from 'src/app/pages/product-brand/product-brand.component';
 import { ProductCategoryComponent } from 'src/app/pages/product-category/product-category.component';
+import { ProductDetailComponent } from 'src/app/pages/product-detail/product-detail.component';
 import { ProductPriceComponent } from 'src/app/pages/product-price/product-price.component';
 import { ProductsComponent } from 'src/app/pages/products/products.component';
 import { TaxSlotComponent } from 'src/app/pages/tax-slot/tax-slot.component';
@@ -23,6 +24,7 @@ export const AdminLayoutRoutes: Routes = [
      { path:'product-category', component: ProductCategoryComponent },
      { path:'product-brand', component: ProductBrandComponent },
      { path:'product-price', component: ProductPriceComponent },
+     { path:'product-details', component: ProductDetailComponent },
      { path:'unit', component: UnitComponent },
      { path:'user-list', component: UserComponent },
      { path:'center-list', component: CenterComponent },

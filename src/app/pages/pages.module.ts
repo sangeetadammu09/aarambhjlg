@@ -23,6 +23,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { UserContactsComponent } from './user-contacts/user-contacts.component';
 import { MemberContactsComponent } from './member-contacts/member-contacts.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -49,7 +50,8 @@ import { MemberContactsComponent } from './member-contacts/member-contacts.compo
     ProfileComponent,
     ChangePasswordComponent,
     UserContactsComponent,
-    MemberContactsComponent
+    MemberContactsComponent,
+    ProductDetailComponent
   ]
 })
 

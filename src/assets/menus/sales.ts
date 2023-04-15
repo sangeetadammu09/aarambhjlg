@@ -21,6 +21,22 @@ export const SalesList = {
             ]
           },
           {
+            id: 2,
+            parentMenu: 'Product',
+            icon : 'fa-list',
+            isActive: true, 
+            url: 'product',
+            submenuList: [ 
+               {
+                id: 1,
+                menu: 'Product Details',
+                url: 'product-details',
+                icon : 'fa-building',
+                isActive: true, 
+               },      
+        ]
+          },
+          {
             id: 1,
             parentMenu: 'Member',
             icon : 'fa-user',
