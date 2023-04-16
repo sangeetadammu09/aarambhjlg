@@ -233,6 +233,11 @@ table tbody tr td {
     text-align: left !important;
 }
 
+.navbar-brand-image{
+    width:160px !important;
+    height: 40px !important;
+}
+
 /* media */
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
