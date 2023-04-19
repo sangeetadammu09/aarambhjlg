@@ -126,6 +126,13 @@ export const AdminList = {
                     url: 'user-contacts',
                     icon : 'fa-phone',
                     isActive: true, 
+                },
+                {
+                    id: 2,
+                    menu: 'KYC',
+                    url: 'user-kyc',
+                    icon : 'fa-check',
+                    isActive: true, 
                 }
             ]
           },

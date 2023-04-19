@@ -336,6 +336,23 @@ export class AdminService {
     deleteUserRole(data:any){
       return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.DeleteUserRole,data,{observe: 'response'})
     }
+
+
+    //installment
+
+    getUserListForKycVerification(cityId:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Kyc.GetUserListForKycVerification+`?cityId=${cityId}`)
+   }
+
+   getUserKycDetails(userId:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Kyc.GetUserKycDetails+`?userId=${userId}`,{observe: 'response'})
+   }
+ 
+   addUserKycVerification(data:any){
+     return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Kyc.AddUserKycVerification,data,{observe: 'response'})
+   }
+ 
+  
    
     
 

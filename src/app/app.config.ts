@@ -118,8 +118,11 @@ export const APP_DI_CONFIG: any = {
       UpdateBranch : "/Branch/UpdateBranch",
       DeleteBranch : "/Branch/DeleteBranch"
     },
-    
-    
+    Kyc:{
+      GetUserListForKycVerification : "/Kyc/GetUserListForKycVerification",
+      GetUserKycDetails : "/Kyc/GetUserKycDetails",
+      AddUserKycVerification:"/Kyc/AddUserKycVerification"
+    }
   }
   
 };

@@ -1,0 +1,182 @@
+<!-- Page body -->
+<div class="page-body">
+    <div class="container-xl">
+      <div class="row row-cards">
+        <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="col-lg-10 mb-3 mt-2">
+                    <h3 class="card-title">List of User Kyc</h3>
+                </div>
+              </div>
+              
+              <div class="table-responsive" *ngIf="userList.length != 0">
+                <table class="table card-table table-vcenter text-nowrap datatable" style="border-color: #fff;">
+                    
+                      <tr style="background-color:#1d4ed8;">
+                        <th scope="col" style="color: #fff;">S No.</th>
+                        <th scope="col" style="color: #fff;">Name</th>
+                        <th scope="col" style="color: #fff;">Email</th>
+                        <th scope="col" style="color: #fff;">Contact</th>            
+                        <th scope="col" style="color: #fff;">Details</th>
+                      </tr>
+    
+                        <tbody *ngFor="let item of userList| paginate: { itemsPerPage: pageSize, currentPage: page } ; let i = index ">
+                        <tr>
+                            <td>{{pageSize*(page-1)+i+1}}</td>
+                            <td>{{item.fullName}}</td> 
+                            <td>{{item.email}}</td>
+                            <td>{{item.mobileNo}}</td>
+                            
+                            <td (click)="showUserModal(item)" data-toggle="modal" data-target="#showUserModal">
+                                <svg enable-background="new 0 0 48 48" height="32px" id="Layer_1" version="1.1" viewBox="0 0 48 48"  width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <path clip-rule="evenodd"
+                                    d="M37,47H11c-2.209,0-4-1.791-4-4V5c0-2.209,1.791-4,4-4h18.973  c0.002,0,0.005,0,0.007,0h0.02H30c0.32,0,0.593,0.161,0.776,0.395l9.829,9.829C40.84,11.407,41,11.68,41,12l0,0v0.021  c0,0.002,0,0.003,0,0.005V43C41,45.209,39.209,47,37,47z M31,4.381V11h6.619L31,4.381z M39,13h-9c-0.553,0-1-0.448-1-1V3H11  C9.896,3,9,3.896,9,5v38c0,1.104,0.896,2,2,2h26c1.104,0,2-0.896,2-2V13z M33,39H15c-0.553,0-1-0.447-1-1c0-0.552,0.447-1,1-1h18  c0.553,0,1,0.448,1,1C34,38.553,33.553,39,33,39z M33,31H15c-0.553,0-1-0.447-1-1c0-0.552,0.447-1,1-1h18c0.553,0,1,0.448,1,1  C34,30.553,33.553,31,33,31z M33,23H15c-0.553,0-1-0.447-1-1c0-0.552,0.447-1,1-1h18c0.553,0,1,0.448,1,1C34,22.553,33.553,23,33,23  z"
+                                    fill-rule="evenodd" />
+                                </svg>
+                            </td>                    
+                        </tr>        
+                        </tbody>
+                
+            </table>
+        </div>
+
+        <div class="card-footer d-flex align-items-center" style="background-color: #fff;">
+          <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
+              <pagination-controls previousLabel="Prev"nextLabel="Next" [responsive]="true"></pagination-controls>
+          </div>
+        </div>
+        <div class="row card mb-3" *ngIf="userList.length == 0">
+          <p class="text-center">No User found</p>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+<!-- show User modal -->
+<div class="modal fade" id="showUserModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">   
+          <h5 class="modal-title" id="exampleModalLabel">User Details</h5>    
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeeditUserBtn>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">   
+            <form [formGroup]="addUserKycForm" (ngSubmit)="submitNewUser()">
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label class="form-control-label">Aadhaar Verification</label>
+                        <input type="text" class="form-control" formControlName="isAadharVerified" name="isAadharVerified"  readonly>
+
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label class="form-control-label">Comment</label>
+                        <input type="text" class="form-control" formControlName="aadharComment" name="aadharComment"  
+                        [ngClass]="{'is-invalid':(submitted && f['aadharComment'].errors) ||(f['aadharComment'].errors && f['aadharComment'].touched) }">
+                            <div *ngIf="(submitted && f['aadharComment'].errors) ||(f['aadharComment'].errors && f['aadharComment'].touched)" class="invalid-feedback">
+                                <div *ngIf="f['aadharComment'].errors['required']">
+                                    Comment is required
+                                </div>
+                         </div>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label class="form-control-label">Pan Verification</label>
+                        <input type="text" class="form-control" formControlName="isPan_VoterIdVerified" name="isPan_VoterIdVerified" readonly>
+                           
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label class="form-control-label">Comment</label>
+                        <input type="text" class="form-control" formControlName="panComment" name="panComment"  
+                        [ngClass]="{'is-invalid':(submitted && f['panComment'].errors) ||(f['panComment'].errors && f['panComment'].touched) }">
+                            <div *ngIf="(submitted && f['panComment'].errors) ||(f['panComment'].errors && f['panComment'].touched)" class="invalid-feedback">
+                                <div *ngIf="f['panComment'].errors['required']">
+                                    Comment is required
+                                </div>
+                         </div>
+                    </div>
+                    
+
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label class="form-control-label">Address Verification</label>
+                        <input type="text" class="form-control" formControlName="isAddressVerified" name="isAddressVerified" readonly>
+                            
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label class="form-control-label">Comment</label>
+                        <input type="text" class="form-control" formControlName="addressComment" name="addressComment"  
+                        [ngClass]="{'is-invalid':(submitted && f['addressComment'].errors) ||(f['addressComment'].errors && f['addressComment'].touched) }">
+                            <div *ngIf="(submitted && f['addressComment'].errors) ||(f['addressComment'].errors && f['addressComment'].touched)" class="invalid-feedback">
+                                <div *ngIf="f['addressComment'].errors['required']">
+                                    Comment is required
+                                </div>
+                         </div>
+                    </div>
+                    
+
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label class="form-control-label">Photo Verification</label>
+                        <input type="text" class="form-control" formControlName="isPhotoVerified" name="isPhotoVerified" readonly>
+                            
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label class="form-control-label">Comment</label>
+                        <input type="text" class="form-control" formControlName="photoComment" name="photoComment"  
+                        [ngClass]="{'is-invalid':(submitted && f['photoComment'].errors) ||(f['photoComment'].errors && f['photoComment'].touched) }">
+                            <div *ngIf="(submitted && f['photoComment'].errors) ||(f['photoComment'].errors && f['photoComment'].touched)" class="invalid-feedback">
+                                <div *ngIf="f['photoComment'].errors['required']">
+                                    Comment is required
+                                </div>
+                         </div>
+                    </div>
+                    
+
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label class="form-control-label">KYC Completed</label>
+                        <select class="custom-select"  formControlName="isKycCompleted" name="isKycCompleted" id="isKycCompleted">
+                                <option value="" [selected]="''">Choose..</option>
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                        </select>
+                            <div *ngIf="(submitted && f['isKycCompleted'].errors) ||(f['isKycCompleted'].errors && f['isKycCompleted'].touched)" class="invalid-feedback">
+                                <div *ngIf="f['isKycCompleted'].errors['required']">
+                                    KYC Completion is required
+                                </div>
+                         </div>
+                    </div>
+                    
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                  </div>
+            </form>
+        </div>
+       
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+

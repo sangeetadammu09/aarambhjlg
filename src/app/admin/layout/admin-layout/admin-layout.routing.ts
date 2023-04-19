@@ -16,6 +16,7 @@ import { ProductsComponent } from 'src/app/pages/products/products.component';
 import { TaxSlotComponent } from 'src/app/pages/tax-slot/tax-slot.component';
 import { UnitComponent } from 'src/app/pages/unit/unit.component';
 import { UserContactsComponent } from 'src/app/pages/user-contacts/user-contacts.component';
+import { UserKycComponent } from 'src/app/pages/user-kyc/user-kyc.component';
 import { UserComponent } from 'src/app/pages/user/user.component';
 import { UserroleComponent } from 'src/app/pages/userrole/userrole.component';
 
@@ -27,6 +28,7 @@ export const AdminLayoutRoutes: Routes = [
      { path:'product-details', component: ProductDetailComponent },
      { path:'unit', component: UnitComponent },
      { path:'user-list', component: UserComponent },
+     { path:'user-kyc', component: UserKycComponent },
      { path:'center-list', component: CenterComponent },
      { path:'member-list', component: MemberComponent },
      { path:'group-list', component: GroupComponent },

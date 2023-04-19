@@ -24,6 +24,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { UserContactsComponent } from './user-contacts/user-contacts.component';
 import { MemberContactsComponent } from './member-contacts/member-contacts.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { UserKycComponent } from './user-kyc/user-kyc.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -51,7 +52,8 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     ChangePasswordComponent,
     UserContactsComponent,
     MemberContactsComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    UserKycComponent
   ]
 })
 
