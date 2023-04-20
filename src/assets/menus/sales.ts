@@ -56,7 +56,14 @@ export const SalesList = {
                   url: 'member-contacts',
                   icon : 'fa-phone',
                   isActive: true, 
-              }
+              },
+              {
+                id: 2,
+                menu: 'KYC',
+                url: 'member-kyc',
+                icon : 'fa-check',
+                isActive: true, 
+            }
             ]
           },
           {
@@ -95,4 +102,32 @@ export const SalesList = {
 
     ],
     message: null,
+};
+
+
+
+export const SalesManagerList = {
+
+  statusCode: 200,
+
+  data: [
+        {
+          id: 1,
+          parentMenu: 'Member',
+          icon : 'fa-user',
+          isActive: true, 
+          url: 'member',
+          submenuList: [
+            {
+              id: 2,
+              menu: 'KYC',
+              url: 'member-kyc',
+              icon : 'fa-check',
+              isActive: true, 
+          }
+          ]
+        },
+    
+  ],
+  message: null,
 };

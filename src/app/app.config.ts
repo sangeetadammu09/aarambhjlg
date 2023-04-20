@@ -48,6 +48,7 @@ export const APP_DI_CONFIG: any = {
       GetAllSalesOfficerByCity : "/Center/GetSalesOfficerByCityId",
       GetAllRelationOfficerByCity : "/Center/GetRelationOfficerByCityId",
       GetAllSalesManagersByCity : "/Center/GetSalesManagersByCityId",
+      GetSalesManagerCenterList : "/Center/GetSalesManagerCenterList",
       GetCenterDropdownByCityId : "/Center/GetCenterDropdownByCityId",
       GetOfficersCenterList : "/Center/GetOfficersCenterList",
       AddCenter : "/Center/AddCenter",
@@ -121,7 +122,10 @@ export const APP_DI_CONFIG: any = {
     Kyc:{
       GetUserListForKycVerification : "/Kyc/GetUserListForKycVerification",
       GetUserKycDetails : "/Kyc/GetUserKycDetails",
-      AddUserKycVerification:"/Kyc/AddUserKycVerification"
+      AddUserKycVerification:"/Kyc/AddUserKycVerification",
+      GetMemberListForKycVerification : "/Kyc/GetMemberListForKycVerification",
+      GetMemberKycDetails : "/Kyc/GetMemberKycDetails",
+      AddMemberKycVerification:"/Kyc/AddMemberKycVerification"
     }
   }
   

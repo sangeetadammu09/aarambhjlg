@@ -36,9 +36,11 @@ export class NavbarComponent implements OnInit{
     ngOnInit(){
        // this.listTitles = MenuList.data;
      //   console.log(this.listTitles);
-     if(this.userRoles)
-     var temp = JSON.parse(this.userRoles)
-      console.log(typeof this.userRoles)
+     if(this.userRoles){
+      var temp = JSON.parse(this.userRoles);
+      const finalArray = temp.map((item:any, index:number) => ({ id: index,name: item }))
+      this.userRoles = finalArray;
+    }
         var navbar : HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
         this.router.events.subscribe((event) => {

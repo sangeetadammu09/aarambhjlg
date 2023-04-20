@@ -338,9 +338,9 @@ export class AdminService {
     }
 
 
-    //installment
+    //kyc
 
-    getUserListForKycVerification(cityId:any){
+   getUserListForKycVerification(cityId:any){
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Kyc.GetUserListForKycVerification+`?cityId=${cityId}`)
    }
 

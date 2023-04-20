@@ -30,6 +30,10 @@ export class SalesRelationService {
    getAllSalesManagersByCity(cityId:any){
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Center.GetAllSalesManagersByCity+`?cityId=${cityId}`)
    }
+
+   getSalesManagerCenterList(smId:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Center.GetSalesManagerCenterList+`?smId=${smId}`)
+   }
  
    addCenter(data:any){
      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Center.AddCenter,data,{observe: 'response'})
@@ -73,5 +77,19 @@ export class SalesRelationService {
    addMemberDocuments(data:any){
      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Members.AddMemberDocuments,data,{observe: 'response'})
    }
+
+   //kyc 
+   getMemberListForKycVerification(centerId:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Kyc.GetMemberListForKycVerification+`?centerId=${centerId}`)
+   }
+
+   getMemberKycDetails(memberId:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Kyc.GetMemberKycDetails+`?memberId=${memberId}`,{observe: 'response'})
+   }
+ 
+   addMemberKycVerification(data:any){
+     return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Kyc.AddMemberKycVerification,data,{observe: 'response'})
+   }
+ 
 
 }

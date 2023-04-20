@@ -50,10 +50,11 @@ export class LoginComponent implements OnInit {
       this.loginText = "Please Wait! Logging In";
     
       this._commonService.login(loginFormData).subscribe((data:any) => {
-        console.log(data)
+        //console.log(data)
         if(data){
         console.log(data,'data')
           this.decodedToken = decodeToken(data.access_token);
+          console.log(this.decodedToken)
           this.loginText = "Login";
           const userData :any = {}
           userData.fullname = this.decodedToken.FullName;
@@ -76,8 +77,9 @@ export class LoginComponent implements OnInit {
           var roleList :any= JSON.parse(userData.roles);
           roleList.forEach((role:any) =>{
             //console.log(role)
-            (role == "SuperAdmin" || role == "Admin") ? (this._router.navigate(['/admin/user-list']), localStorage.setItem('roleNo',"101") ):
-           (role == "RelationOfficer") ? (this._router.navigate(['/sales-relation-officer/center-list']),localStorage.setItem('roleNo',"102") ) : null;
+            (role == "SuperAdmin" || role == "Admin") ? (this._router.navigate(['/admin/user-list']), localStorage.setItem('roleNo',"101")):
+           (role == "RelationOfficer") ? (this._router.navigate(['/sales-relation-officer/center-list']),localStorage.setItem('roleNo',"102")):
+           (role == "SalesManager") ? (this._router.navigate(['/sales-manager-officer/member-kyc']),localStorage.setItem('roleNo',"103")): null;
           })
           
           //

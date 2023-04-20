@@ -1,7 +1,7 @@
 import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location} from '@angular/common';
-import { SalesList } from 'src/assets/menus/sales';
+import { SalesManagerList } from 'src/assets/menus/sales';
 import { CommonService } from 'src/app/common/service/common.service';
 import { MasterService } from 'src/app/master.service';
 
@@ -51,7 +51,7 @@ export class NavbarComponent implements OnInit{
 
     getMenuList() {
       // this.menuItems =  MenuList.data;
-      this.menuItems =  SalesList.data;
+      this.menuItems =  SalesManagerList.data;
       console.log(this.menuItems);
       
   }
