@@ -51,6 +51,7 @@ export const APP_DI_CONFIG: any = {
       GetSalesManagerCenterList : "/Center/GetSalesManagerCenterList",
       GetCenterDropdownByCityId : "/Center/GetCenterDropdownByCityId",
       GetOfficersCenterList : "/Center/GetOfficersCenterList",
+      GetSalesOfficersCenterList : "/Center/GetSalesOfficerCenterList",
       AddCenter : "/Center/AddCenter",
       UpdateCenter : "/Center/UpdateCenter",
       DeleteCenter : "/Center/DeleteCenter"
@@ -80,6 +81,7 @@ export const APP_DI_CONFIG: any = {
       AddMember : "/Members/AddMember",
       AddMemberDocuments : "/Members/AddMemberDocuments",
       GetCenterWiseMemberList : "/Members/GetCenterWiseMemberList",
+      GetMemberListByCenter : "/Members/GetMemberListByCenter",
       GetMemberContacts : "/Members/GetMemberContacts",
      // UpdateMembers : "/Members/UpdateMembers",
      // DeleteMembers : "/Members/DeleteMembers"

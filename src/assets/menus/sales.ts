@@ -97,6 +97,22 @@ export const SalesList = {
                     isActive: true, 
                 }
             ]
+          },
+          {
+            id: 1,
+            parentMenu: 'Order',
+            icon : 'fa-pencil',
+            isActive: true, 
+            url: 'order',
+            submenuList: [
+                {
+                    id: 0,
+                    menu: 'New Order',
+                    url: 'new-order',
+                    icon : 'fa-book',
+                    isActive: true, 
+                }
+            ]
           }
           
 

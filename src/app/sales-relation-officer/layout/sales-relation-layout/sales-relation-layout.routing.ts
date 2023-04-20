@@ -6,6 +6,7 @@ import { ChangePasswordComponent } from 'src/app/pages/change-password/change-pa
 import { MemberContactsComponent } from 'src/app/pages/member-contacts/member-contacts.component';
 import { ProductDetailComponent } from 'src/app/pages/product-detail/product-detail.component';
 import { MemberKycComponent } from 'src/app/pages/member-kyc/member-kyc.component';
+import { NeworderComponent } from 'src/app/pages/neworder/neworder.component';
 
 export const SalesRelationLayoutRoutes: Routes = [
 
@@ -16,6 +17,7 @@ export const SalesRelationLayoutRoutes: Routes = [
      { path:'change-password', component: ChangePasswordComponent },
      { path:'member-contacts', component: MemberContactsComponent },
      { path:'product-details', component: ProductDetailComponent },
+     { path:'new-order', component: NeworderComponent },
      
    
      

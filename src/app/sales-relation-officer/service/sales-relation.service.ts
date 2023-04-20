@@ -34,6 +34,11 @@ export class SalesRelationService {
    getSalesManagerCenterList(smId:any){
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Center.GetSalesManagerCenterList+`?smId=${smId}`)
    }
+
+   getSalesOfficersCenterList(soId:any,cityId:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Center.GetSalesOfficersCenterList+`?soId=${soId}&cityId=${cityId}`)
+   }
+ 
  
    addCenter(data:any){
      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Center.AddCenter,data,{observe: 'response'})
@@ -64,6 +69,10 @@ export class SalesRelationService {
  
    getCenterWiseMemberList(id:any){
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Members.GetCenterWiseMemberList+`?centerId=${id}`)
+   }
+
+   getMemberListByCenter(id:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Members.GetMemberListByCenter+`?centerId=${id}`)
    }
  
    getMemberContacts(id:any,pageno:any,pageSize:any){

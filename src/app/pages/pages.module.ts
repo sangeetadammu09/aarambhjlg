@@ -26,6 +26,7 @@ import { MemberContactsComponent } from './member-contacts/member-contacts.compo
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { UserKycComponent } from './user-kyc/user-kyc.component';
 import { MemberKycComponent } from './member-kyc/member-kyc.component';
+import { NeworderComponent } from './neworder/neworder.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -55,7 +56,8 @@ import { MemberKycComponent } from './member-kyc/member-kyc.component';
     MemberContactsComponent,
     ProductDetailComponent,
     UserKycComponent,
-    MemberKycComponent
+    MemberKycComponent,
+    NeworderComponent
   ]
 })
 
