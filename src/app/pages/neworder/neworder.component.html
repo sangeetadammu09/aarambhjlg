@@ -37,7 +37,8 @@
                           
                           <div class="form-group col-md-3">
                             <label for="inputAddress">Select Product</label>
-                            <input type="text" class="form-control" id="product"  [(ngModel)]="searchProduct">
+                            <input type="text" class="form-control" id="product"  [(ngModel)]="searchProduct" 
+                            (change)="getSearchedProducts(searchProduct)">
                           </div>
 
                           <div class="form-group col-md-3 mt-order">

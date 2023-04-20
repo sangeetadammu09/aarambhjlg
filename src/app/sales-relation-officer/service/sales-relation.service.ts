@@ -99,6 +99,11 @@ export class SalesRelationService {
    addMemberKycVerification(data:any){
      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Kyc.AddMemberKycVerification,data,{observe: 'response'})
    }
+
+   getProductAutocomplete(SearchTerm?:any){
+   
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.GetProductAutoComplete+`?SearchTerm=${SearchTerm}`)
+   }
  
 
 }

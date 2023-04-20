@@ -61,5 +61,17 @@ export class NeworderComponent implements OnInit {
   
   }
 
+  getSearchedProducts(event: any){
+    var searchProd = event;
+    this._salesService.getProductAutocomplete(searchProd).subscribe((data:any) => {
+      console.log(data,'all productList')
+      // if(data.length > 0){
+      //   this.memberDropdownList = data;
+      //  }else{
+      //    this.memberDropdownList = [];
+      //  } 
+     })
+  }
+
 
 }
