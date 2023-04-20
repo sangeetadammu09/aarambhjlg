@@ -226,7 +226,7 @@ export class MemberKycComponent implements OnInit {
         addMemberData.addressComment = this.addMemberKycForm.controls['addressComment'].value;
         addMemberData.isPhotoVerified = this.addMemberKycForm.controls['isPhotoVerified'].value  == 'Yes' ? true : false;
         addMemberData.photoComment = this.addMemberKycForm.controls['photoComment'].value;
-        addMemberData.isKycCompleted = this.addMemberKycForm.controls['isKycCompleted'].value;
+        addMemberData.isKycCompleted = this.addMemberKycForm.controls['isKycCompleted'].value.value== 'true' ? true : false;;
         this._salesService.addMemberKycVerification(addMemberData).subscribe((data:any) => {
           if(data.status == 200){
            
