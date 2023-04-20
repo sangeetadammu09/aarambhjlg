@@ -56,14 +56,7 @@ export const SalesList = {
                   url: 'member-contacts',
                   icon : 'fa-phone',
                   isActive: true, 
-              },
-              {
-                id: 2,
-                menu: 'KYC',
-                url: 'member-kyc',
-                icon : 'fa-check',
-                isActive: true, 
-            }
+              }
             ]
           },
           {
