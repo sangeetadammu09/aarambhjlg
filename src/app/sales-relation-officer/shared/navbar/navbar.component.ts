@@ -51,8 +51,7 @@ export class NavbarComponent implements OnInit{
 
     getMenuList() {
       // this.menuItems =  MenuList.data;
-      this.menuItems =  SalesList.data;
-      console.log(this.menuItems);
+      this.menuItems =  SalesList.data; 
       
   }
 

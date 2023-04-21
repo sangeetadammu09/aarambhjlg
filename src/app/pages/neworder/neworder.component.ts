@@ -124,10 +124,11 @@ export class NeworderComponent implements OnInit {
 
     this._salesService.createNewCart(newCart).subscribe((data:any) => {
       if(data){
-        console.log(data)
-        this.selectedCartId = data.id;
+        console.log(data.body)
+        //this.selectedCartId = data.body.cartId;
+        this.toastrService.success('Cart created successfully')
        }else{
-         this.toastrService.error('No Cart Created')
+         this.toastrService.error('No cart created')
        } 
      })
   }
