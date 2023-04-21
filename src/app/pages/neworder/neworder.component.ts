@@ -9,7 +9,7 @@ import { SalesRelationService } from 'src/app/sales-relation-officer/service/sal
 })
 export class NeworderComponent implements OnInit {
 
-  memberList: any =[];
+  randomProductList: any =[];
   MembersFound: boolean = false;
   page = 1;
   total = 20;
@@ -22,6 +22,7 @@ export class NeworderComponent implements OnInit {
   searchMember:any;
   searchProduct:any;
   searchCenter:any;
+  productList: any = []; 
   
   constructor(private _salesService: SalesRelationService, private _adminService: AdminService ) { }
 
@@ -30,6 +31,7 @@ export class NeworderComponent implements OnInit {
     this.searchMember = "";
     this.searchCenter = "";
     this.searchProduct = "";
+    this.getRandomProductList()
   }
 
   getSalesOfficersCenterList(){
@@ -63,14 +65,37 @@ export class NeworderComponent implements OnInit {
 
   getSearchedProducts(event: any){
     var searchProd = event;
+
     this._salesService.getProductAutocomplete(searchProd).subscribe((data:any) => {
       console.log(data,'all productList')
-      // if(data.length > 0){
-      //   this.memberDropdownList = data;
-      //  }else{
-      //    this.memberDropdownList = [];
-      //  } 
+      if(data.length > 0){
+        this.productList = data;
+       }else{
+         this.productList = [];
+       } 
      })
+  }
+
+
+  getRandomProductList(){
+    this._salesService.getRandomProducts(this.cityId).subscribe((data:any) => {
+      console.log(data,'random')
+        if(data.length > 0){
+          this.randomProductList = data;
+   
+         }else{
+           this.randomProductList = [];
+         } 
+       })
+  }
+
+
+  getProductQuantity(prodQuantity:any){
+
+  }
+
+  addToCart(){
+    
   }
 
 

@@ -32,7 +32,7 @@ import { NeworderComponent } from './neworder/neworder.component';
     CommonModule,
     ReactiveFormsModule,
     NgxPaginationModule,CustomSharedModule,PdfViewerModule
-   
+  
   ],
   declarations: [
     ProductCategoryComponent,

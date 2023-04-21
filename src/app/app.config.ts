@@ -110,6 +110,7 @@ export const APP_DI_CONFIG: any = {
       GetAllProductByCity : "/Product/GetAllProductByCity",
       GetProductDetailsForSale : "/Product/GetProductDetailsForSale",
       GetProductAutoComplete : "/Product/GetProductAutoComplete",
+      GetRandomProducts : "/Product/GetRandomProducts",
       AddProduct : "/Product/AddProduct",
       AddProductPrice : "/Product/AddProductPrice",
       AddProductImages : "/Product/AddProductImages",
