@@ -125,7 +125,7 @@ export class NeworderComponent implements OnInit {
     this._salesService.createNewCart(newCart).subscribe((data:any) => {
       if(data){
         console.log(data.body)
-        //this.selectedCartId = data.body.cartId;
+        this.selectedCartId = data.body;
         this.toastrService.success('Cart created successfully')
        }else{
          this.toastrService.error('No cart created')
@@ -138,22 +138,26 @@ export class NeworderComponent implements OnInit {
   }
 
   addToCart(prodQuantity:any, product:any){
+    if(this.selectedCartId){
     var addCart :any = {};
     addCart.cartId = this.selectedCartId,
     addCart.itemId = product.productId,
     addCart.itemName = product.productName ,
-    addCart.qty = prodQuantity,
+    addCart.qty = JSON.parse(prodQuantity),
     addCart.salePrice = product.jlgSalePrice,
     addCart.mrp = product.mrp,
     addCart.subTotal = this.todayDate,
     addCart.itemUrl = product.productPhoto
     this._salesService.addItemToCart(addCart).subscribe((data:any) => {
-      if(data){
-        console.log(data)
+      if(data.status == 200){
+        this.toastrService.error('Items added successfully')
        }else{
-         this.toastrService.error('No Cart Created')
+         this.toastrService.error('No Items added. Please try again')
        } 
      })
+    }else{
+      this.toastrService.error('No Cart Found')
+    }
     
   }
 

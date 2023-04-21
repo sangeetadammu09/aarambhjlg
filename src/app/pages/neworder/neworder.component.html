@@ -73,13 +73,10 @@
                       <p class="card-text">Regional Name: {{item.regionalName}}</p>
                       <p class="card-text">MRP: {{item.mrp | currency: 'INR'}}</p>
                       <p class="card-text">Sale Price: {{item.jlgSalePrice | currency: 'INR'}}</p>
-                      <p><input type="text" class="form-control w-100" id="quantity"  [(ngModel)]="prodQuantity" 
-                         placeholder="Enter Quantity" (change)="validateQuantity($event.target.value)"></p>
-                        <button class="btn btn-primary w-100" (click)="addToCart(prodQuantity,item)">Add To Cart</button>
                     </div>
-                    
-                     
-                   
+                    <p><input type="text" class="form-control w-100" id="quantity"  [(ngModel)]="prodQuantity" 
+                      placeholder="Enter Quantity" (change)="validateQuantity($event.target.value)"></p>
+                     <button class="btn btn-primary w-100" (click)="addToCart(prodQuantity,item)">Add To Cart</button> 
                   </div>
                   </div>
                 </div>   

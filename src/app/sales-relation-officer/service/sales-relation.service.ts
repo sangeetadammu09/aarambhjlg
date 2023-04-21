@@ -118,7 +118,7 @@ export class SalesRelationService {
    }
 
    addItemToCart(data: any){
-    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ShoppingCart.AddItemToCart,data)
+    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ShoppingCart.AddItemToCart,data,{observe: 'response'})
    }
 
    
