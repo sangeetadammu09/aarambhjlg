@@ -69,6 +69,7 @@ export class NeworderComponent implements OnInit {
     this._salesService.getProductAutocomplete(searchProd).subscribe((data:any) => {
       console.log(data,'all productList')
       if(data.length > 0){
+        this.searchProduct = ''
         this.productList = data;
        }else{
          this.productList = [];
@@ -96,6 +97,12 @@ export class NeworderComponent implements OnInit {
 
   addToCart(){
     
+  }
+
+
+  clearText(){
+    this.productList = [];
+    this.searchProduct = null;
   }
 
 
