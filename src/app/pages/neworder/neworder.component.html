@@ -27,7 +27,7 @@
 
                             <div class="form-group col-md-3">
                               <label for="searchMember">Select Member</label>
-                              <select class="custom-select" id="searchMember" [(ngModel)]="searchMember">
+                              <select class="custom-select" id="searchMember" [(ngModel)]="searchMember" (change)="createNewCart(searchMember)">
                                 <option value="" [selected]="''">Choose Member..</option>
                                 <option *ngFor="let item of memberDropdownList" [ngValue]="item.memberId">
                                     {{item.fullName}}
@@ -74,8 +74,8 @@
                       <p class="card-text">MRP: {{item.mrp | currency: 'INR'}}</p>
                       <p class="card-text">Sale Price: {{item.jlgSalePrice | currency: 'INR'}}</p>
                       <p><input type="text" class="form-control w-100" id="quantity"  [(ngModel)]="prodQuantity" 
-                        (change)="getProductQuantity(prodQuantity)" placeholder="Enter Quantity"></p>
-                        <button class="btn btn-primary w-100" (click)="addToCart()">Add To Cart</button>
+                         placeholder="Enter Quantity" (change)="validateQuantity($event.target.value)"></p>
+                        <button class="btn btn-primary w-100" (click)="addToCart(prodQuantity,item)">Add To Cart</button>
                     </div>
                     
                      

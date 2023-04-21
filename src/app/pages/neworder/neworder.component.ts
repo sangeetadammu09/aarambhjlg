@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from 'src/app/admin/service/admin.service';
+import { ToastrService } from 'ngx-toastr';
 import { SalesRelationService } from 'src/app/sales-relation-officer/service/sales-relation.service';
 
 @Component({
@@ -23,8 +23,11 @@ export class NeworderComponent implements OnInit {
   searchProduct:any;
   searchCenter:any;
   productList: any = []; 
-  
-  constructor(private _salesService: SalesRelationService, private _adminService: AdminService ) { }
+  todayDate = new Date().toJSON();
+  selectedCartId: any;
+
+
+  constructor(private _salesService: SalesRelationService, private toastrService: ToastrService ) { }
 
   ngOnInit(): void {
     this.getSalesOfficersCenterList();
@@ -65,7 +68,6 @@ export class NeworderComponent implements OnInit {
 
   getSearchedProducts(event: any){
     var searchProd = event;
-
     this._salesService.getProductAutocomplete(searchProd).subscribe((data:any) => {
       console.log(data,'all productList')
       if(data.length > 0){
@@ -77,10 +79,24 @@ export class NeworderComponent implements OnInit {
      })
   }
 
+  listSearchedProducts(item:any){
+ 
+      var selectproductId = item;
+      this._salesService.getSingleProducts(this.cityId,selectproductId).subscribe((data:any) => {
+     
+          if(data){
+            this.randomProductList= [data, ...[]] 
+           
+     
+           }else{
+             this.toastrService.error('No Product Found')
+           } 
+         })
+  }
+
 
   getRandomProductList(){
     this._salesService.getRandomProducts(this.cityId).subscribe((data:any) => {
-      console.log(data,'random')
         if(data.length > 0){
           this.randomProductList = data;
    
@@ -90,19 +106,54 @@ export class NeworderComponent implements OnInit {
        })
   }
 
-
-  getProductQuantity(prodQuantity:any){
-
-  }
-
-  addToCart(){
-    
-  }
-
-
   clearText(){
     this.productList = [];
     this.searchProduct = null;
+    this.getRandomProductList();
+  }
+
+  createNewCart(item:any){
+    var newCart :any = {};
+    newCart.cartId = 0,
+    newCart.cityId = this.cityId ? JSON.parse(this.cityId) : null,
+    newCart.centerId = this.searchCenter,
+    newCart.memberId = item,
+    newCart.orderTakenById = this.userId ? JSON.parse(this.userId) : null,
+    newCart.orderTakenByRole = this.roleNo == '102' ? 'Role Officer' : null,
+    newCart.cartDate = this.todayDate
+
+    this._salesService.createNewCart(newCart).subscribe((data:any) => {
+      if(data){
+        console.log(data)
+        this.selectedCartId = data.id;
+       }else{
+         this.toastrService.error('No Cart Created')
+       } 
+     })
+  }
+
+  validateQuantity(value:any){
+    
+  }
+
+  addToCart(prodQuantity:any, product:any){
+    var addCart :any = {};
+    addCart.cartId = this.selectedCartId,
+    addCart.itemId = product.productId,
+    addCart.itemName = product.productName ,
+    addCart.qty = prodQuantity,
+    addCart.salePrice = product.jlgSalePrice,
+    addCart.mrp = product.mrp,
+    addCart.subTotal = this.todayDate,
+    addCart.itemUrl = product.productPhoto
+    this._salesService.addItemToCart(addCart).subscribe((data:any) => {
+      if(data){
+        console.log(data)
+       }else{
+         this.toastrService.error('No Cart Created')
+       } 
+     })
+    
   }
 
 

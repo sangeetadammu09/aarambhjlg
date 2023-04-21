@@ -111,6 +111,7 @@ export const APP_DI_CONFIG: any = {
       GetProductDetailsForSale : "/Product/GetProductDetailsForSale",
       GetProductAutoComplete : "/Product/GetProductAutoComplete",
       GetRandomProducts : "/Product/GetRandomProducts",
+      GetSingleProducts : "/Product/GetSingleProducts",
       AddProduct : "/Product/AddProduct",
       AddProductPrice : "/Product/AddProductPrice",
       AddProductImages : "/Product/AddProductImages",
@@ -130,6 +131,10 @@ export const APP_DI_CONFIG: any = {
       GetMemberListForKycVerification : "/Kyc/GetMemberListForKycVerification",
       GetMemberKycDetails : "/Kyc/GetMemberKycDetails",
       AddMemberKycVerification:"/Kyc/AddMemberKycVerification"
+    },
+    ShoppingCart:{
+      CreateNewCart: '/ShopingCart/CreateNewCart',
+      AddItemToCart: '/ShopingCart/AddItemToCart',
     }
   }
   
