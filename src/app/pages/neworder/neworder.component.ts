@@ -146,7 +146,7 @@ export class NeworderComponent implements OnInit {
     addCart.qty = JSON.parse(prodQuantity),
     addCart.salePrice = product.jlgSalePrice,
     addCart.mrp = product.mrp,
-    addCart.subTotal = this.todayDate,
+    addCart.subTotal = addCart.salePrice * addCart.qty,
     addCart.itemUrl = product.productPhoto
     this._salesService.addItemToCart(addCart).subscribe((data:any) => {
       if(data.status == 200){
