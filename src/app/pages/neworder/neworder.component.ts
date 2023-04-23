@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { SalesRelationService } from 'src/app/sales-relation-officer/service/sales-relation.service';
 
+
+declare var $ :any;
 @Component({
   selector: 'app-neworder',
   templateUrl: './neworder.component.html',
   styleUrls: ['./neworder.component.css']
 })
+
 export class NeworderComponent implements OnInit {
 
   randomProductList: any =[];
@@ -25,7 +28,9 @@ export class NeworderComponent implements OnInit {
   productList: any = []; 
   todayDate = new Date().toJSON();
   selectedCartId: any;
-
+  exampleData: any = [];
+  suggestions: string[] = [];
+ 
 
   constructor(private _salesService: SalesRelationService, private toastrService: ToastrService ) { }
 
@@ -34,7 +39,26 @@ export class NeworderComponent implements OnInit {
     this.searchMember = "";
     this.searchCenter = "";
     this.searchProduct = "";
-    this.getRandomProductList()
+    this.getRandomProductList();
+    this.exampleData = [
+      {
+        id: 'basic1',
+        text: 'Basic 1'
+      },
+      {
+        id: 'basic2',
+        disabled: true,
+        text: 'Basic 2'
+      },
+      {
+        id: 'basic3',
+        text: 'Basic 3'
+      },
+      {
+        id: 'basic4',
+        text: 'Basic 4'
+      }
+    ];
   }
 
   getSalesOfficersCenterList(){
@@ -73,15 +97,17 @@ export class NeworderComponent implements OnInit {
       if(data.length > 0){
         this.searchProduct = ''
         this.productList = data;
+        
        }else{
          this.productList = [];
+         
        } 
      })
-  }
+    }
 
-  listSearchedProducts(item:any){
- 
-      var selectproductId = item;
+  listSearchedProduct(item:any){
+    this.searchProduct = item.productName;
+      var selectproductId = item.productId;
       this._salesService.getSingleProducts(this.cityId,selectproductId).subscribe((data:any) => {
      
           if(data){
@@ -160,6 +186,8 @@ export class NeworderComponent implements OnInit {
     }
     
   }
+
+ 
 
 
 }

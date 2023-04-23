@@ -2,7 +2,7 @@
 <div class="page-body">
     <div class="container-xl">
       <div class="row row-cards">
-        <div class="col-12">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
                     <div class="container d-block">
@@ -37,11 +37,34 @@
                           
                           <div class="form-group col-md-3">
                             <label for="inputAddress">Select Product</label>
-                            <div *ngIf="productList.length == 0">
+                            <div class="dropdown">
+                              <div class="d-none d-xl-block ps-2" data-bs-toggle="dropdown">
+                                <input type="text" class="form-control" [(ngModel)]="searchProduct" 
+                                (input)="getSearchedProducts(searchProduct)" placeholder="Search Product">
+                              </div>
+                        
+                            <div class="dropdown-menu search-dropdown-menu">
+                              <div *ngIf="productList.length > 0">
+                                <a class="dropdown-item search-dropdown-item" *ngFor="let item of productList"
+                                 (click)="listSearchedProduct(item)" >
+                                  {{item.productName}}
+                                </a>
+                              </div>
+                               <div *ngIf="productList.length == 0">
+                                <a  class="dropdown-item search-dropdown-item">No Product Found</a>
+                               </div>
+                              
+                            </div>
+                            <!-- [ngStyle]="productList.length == 0 ? 'display: none' : 'display: visible'" -->
+                          
+                            </div> 
+                            </div>
+                          
+                            <!-- <div *ngIf="productList.length == 0">
                             <input type="text" class="form-control" id="product"  [(ngModel)]="searchProduct" 
                             (change)="getSearchedProducts(searchProduct)">
-                            </div>
-                            <div *ngIf="productList.length > 0">
+                            </div> -->
+                            <!-- <div *ngIf="productList.length > 0">
                               <select class="custom-select" id="searchProduct" [(ngModel)]="searchProduct"
                               (change)="listSearchedProducts(searchProduct)">
                                 <option value="" [selected]="''">Choose Product..</option>
@@ -49,9 +72,9 @@
                                     {{item.productName}}
                                 </option>
                                 </select>
-                              </div>
+                              </div> -->
                             
-                          </div>
+                          
 
                           <div class="form-group col-md-3 mt-order">
                             <button class="btn btn-primary" (click)="clearText()">Clear Text</button>
