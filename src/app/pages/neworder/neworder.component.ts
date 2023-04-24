@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { SalesRelationService } from 'src/app/sales-relation-officer/service/sales-relation.service';
 
@@ -30,7 +30,14 @@ export class NeworderComponent implements OnInit {
   selectedCartId: any;
   exampleData: any = [];
   suggestions: string[] = [];
- 
+  itemsAdded :boolean = false;
+  cartText = "Add To Cart";
+  isselectedProduct: boolean = true;
+  @ViewChild('closeproductModalBtn') closeproductModalBtn: any;
+  searchProductItem: any;
+  productObj:any ={}
+
+  
 
   constructor(private _salesService: SalesRelationService, private toastrService: ToastrService ) { }
 
@@ -40,25 +47,11 @@ export class NeworderComponent implements OnInit {
     this.searchCenter = "";
     this.searchProduct = "";
     this.getRandomProductList();
-    this.exampleData = [
-      {
-        id: 'basic1',
-        text: 'Basic 1'
-      },
-      {
-        id: 'basic2',
-        disabled: true,
-        text: 'Basic 2'
-      },
-      {
-        id: 'basic3',
-        text: 'Basic 3'
-      },
-      {
-        id: 'basic4',
-        text: 'Basic 4'
-      }
-    ];
+    this.productObj = { 
+      prodQuantityInput:"",
+      
+    };
+ 
   }
 
   getSalesOfficersCenterList(){
@@ -95,7 +88,7 @@ export class NeworderComponent implements OnInit {
     this._salesService.getProductAutocomplete(searchProd).subscribe((data:any) => {
       console.log(data,'all productList')
       if(data.length > 0){
-        this.searchProduct = ''
+        //this.searchProduct = ''
         this.productList = data;
         
        }else{
@@ -160,7 +153,14 @@ export class NeworderComponent implements OnInit {
   }
 
   validateQuantity(value:any){
-    
+     this.isselectedProduct = value;
+     
+  }
+
+  showProductModal(item:any,index:any){
+     this.searchProductItem = item;
+     this.productObj.prodQuantityInput = null;
+     this.itemsAdded = false;
   }
 
   addToCart(prodQuantity:any, product:any){
@@ -169,14 +169,18 @@ export class NeworderComponent implements OnInit {
     addCart.cartId = this.selectedCartId,
     addCart.itemId = product.productId,
     addCart.itemName = product.productName ,
-    addCart.qty = JSON.parse(prodQuantity),
+    addCart.qty = JSON.parse(this.productObj.prodQuantityInput),
     addCart.salePrice = product.jlgSalePrice,
     addCart.mrp = product.mrp,
     addCart.subTotal = addCart.salePrice * addCart.qty,
     addCart.itemUrl = product.productPhoto
     this._salesService.addItemToCart(addCart).subscribe((data:any) => {
       if(data.status == 200){
-        this.toastrService.error('Items added successfully')
+        this.toastrService.success('Items added successfully')
+        this.itemsAdded = true;
+        this.cartText = "Added To Cart"
+        this.productObj.prodQuantityInput = null;
+        this.closeproductModalBtn.nativeElement.click();
        }else{
          this.toastrService.error('No Items added. Please try again')
        } 

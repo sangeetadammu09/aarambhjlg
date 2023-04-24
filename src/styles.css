@@ -20,6 +20,16 @@
     font-size: 15px;
 }
 
+.btn-success{
+    background-color: green !important;
+    text-transform: capitalize !important;
+    font-size: 15px;
+}
+
+.text-red{
+    color: red !important;
+}
+
 
 .nav-tabs>.nav-item>.nav-link {
     color: #070707;

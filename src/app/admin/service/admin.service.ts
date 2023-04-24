@@ -13,9 +13,8 @@ export class AdminService {
    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ProductCategory.GetAllProductCategory)
   }
 
-  getProductDetailsForSale(pageNo:any,pageSize:any,cityId:any){
-    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.GetProductDetailsForSale
-      +`?cityId=${cityId}&pageNo=${pageNo}&pageSize=${pageSize}`)
+  getProductDetailsForSale(cityId:any,pageNo:any,pageSize:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.GetProductDetailsForSale+`?cityId=${cityId}&pageNo=${pageNo}&pageSize=${pageSize}`)
    }
 
   addProductCategory(data:any){

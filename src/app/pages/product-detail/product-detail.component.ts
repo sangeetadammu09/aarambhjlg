@@ -26,7 +26,8 @@ export class ProductDetailComponent implements OnInit {
 
   getProductDetailsListBySale(){
       this._adminService.getProductDetailsForSale(this.cityId,this.page,this.pageSize).subscribe((data:any) =>{
-       
+        console.log(data,'data');
+        
         if(data.products.length > 0){
           data.products.forEach((product:any) =>{
             product['url'] = product.assetes[0].url;
