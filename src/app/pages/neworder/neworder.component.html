@@ -10,13 +10,16 @@
                         <div class="col-lg-2 mb-3 mt-2">
                             <h3 class="card-title">Make New Order</h3>
                         </div>
-                        <div class="col-lg-3 mb-3 mt-2">
-                            <button class="btn btn-primary btn-md">Go To Cart</button>
+                        <div class="col-lg-4 mb-3 mt-2">
+                            <button class="btn btn-primary btn-md mr-2">Go To Cart</button>
+                            <button class="btn btn-primary btn-md" data-toggle="modal" data-target="#viewCartModal"
+                            (click)="showViewCartModal()">View Cart</button>
                         </div>
+                        
                     </div>
                     <div class="mt-3 mb-3 row">
                         <div class="form-row">
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-6">
                               <label for="searchCenter">Select Center</label>
                               <select class="custom-select" id="searchCenter" [(ngModel)]="searchCenter" (change)="getCenterVal(searchCenter)">
                                 <option value="" [selected]="''">Choose Center..</option>
@@ -25,7 +28,7 @@
                                 </select>
                             </div>
 
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-6">
                               <label for="searchMember">Select Member</label>
                               <select class="custom-select" id="searchMember" [(ngModel)]="searchMember" (change)="createNewCart(searchMember)">
                                 <option value="" [selected]="''">Choose Member..</option>
@@ -34,8 +37,10 @@
                                 </option>
                                 </select>
                             </div>
-                          
-                          <div class="form-group col-md-3">
+                          </div>
+                          <div class="row">
+                          <div class="form-row">
+                          <div class="form-group col-md-10">
                             <label for="inputAddress">Select Product</label>
                             <div class="dropdown">
                               <div class="d-none d-xl-block ps-2" data-bs-toggle="dropdown">
@@ -58,11 +63,14 @@
                             <!-- [ngStyle]="productList.length == 0 ? 'display: none' : 'display: visible'" -->
                           
                             </div> 
-                            </div>
-                          <div class="form-group col-md-3 mt-order">
+                          </div>
+                          <div class="form-group col-md-2 mt-order">
                             <button class="btn btn-primary" (click)="clearText()">Clear Text</button>
                           </div>
+                          </div>
                         </div>
+
+                       
    
                     </div>
                 </div>
@@ -73,7 +81,7 @@
                   <div class="col col-3 mb-3" *ngFor="let item of randomProductList| paginate: { itemsPerPage: 12, currentPage: page};
                   let i = index">
                   <div class="card p-2 h-100">
-                    <img class="card-img-top"  [src]="item.productPhoto" alt="User Document" height="300px" 
+                    <img class="card-img-top"  [src]="item.productPhoto" alt="User Document" height="250px" 
                     data-toggle="modal" data-target="#productModal"
                     (click)="showProductModal(item,i)">
                     <div class="card-body">
@@ -133,6 +141,79 @@
             [disabled]="itemsAdded ? true : false">
             {{cartText}}</button>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- view cart -->
+<div class="modal fade" id="viewCartModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">View Cart</h5>
+       
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeViewCartModalBtn>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body scrollable-modal">
+        <div class="card p-3 mb-2">
+          <div class="card-body">
+          <div class="d-flex justify-content-between">
+          <div class="d-flex flex-row align-items-center">
+              <div class="icon"> 
+                  <i class="bx bxl-mailchimp"></i> </div>
+                      <div class="ms-2 c-details">
+                           <div class="row d-flex">
+                              <div class="card-title col-lg-6">Member Name :</div>
+                              <div class="col-lg-6">{{cartDetailsObj.fullName}}</div>
+
+                              <div class="card-title col-lg-6">DOB :</div>
+                              <div class="col-lg-6">{{cartDetailsObj.cartDate | date : "dd-mm-yyyy"}}</div>
+
+                              
+
+                           </div>
+                      </div>
+                  </div>  
+                  </div>
+                  </div>   
+      </div>
+      <!-- Page body -->
+      <div class="page-body">
+          <div class="container-xl">
+          <div class="row row-cards">
+              <div class="col-12">
+
+                <div class="container mt-3 mb-3" *ngIf="cartList.length != 0">
+                  <div class="row">
+                    <div class="col col-3 mb-3" *ngFor="let item of cartList| paginate: { itemsPerPage: 10, currentPage: page};
+                    let i = index">
+                    <div class="card p-2 h-100">
+                      <img class="card-img-top"  [src]="item.itemUrl" alt="cart image" height="250px">
+                      <div class="card-body">
+                        <h5 class="card-title" style="height: 40px">Name: {{item.itemName}}</h5>
+                        <p class="card-text">MRP: {{item.mrp | currency: 'INR'}}</p>
+                        <p class="card-text">Sale Price: {{item.jlgSalePrice | currency: 'INR'}}</p>
+                        <p class="card-text">Sub Total: {{item.subTotal | currency: 'INR'}}</p>
+                      </div>
+  
+                    </div>
+                    </div>
+                  </div>   
+                  </div>
+                  <div class=" d-flex align-items-center" style="background-color: #fff;">
+                    <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
+                        <pagination-controls previousLabel="Prev"nextLabel="Next" (pageChange)="page = $event" [responsive]="true"></pagination-controls>
+                    </div>
+                </div>
+
+              
+          </div>
+          </div>
+          </div>
+      </div>
       </div>
     </div>
   </div>

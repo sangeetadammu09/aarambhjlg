@@ -34,8 +34,12 @@ export class NeworderComponent implements OnInit {
   cartText = "Add To Cart";
   isselectedProduct: boolean = true;
   @ViewChild('closeproductModalBtn') closeproductModalBtn: any;
+  @ViewChild('closeViewCartModalBtn') closeViewCartModalBtn: any;
   searchProductItem: any;
   productObj:any ={}
+  memberId: any;
+  cartDetailsObj :any ={}
+  cartList : any = [];
 
   
 
@@ -132,6 +136,7 @@ export class NeworderComponent implements OnInit {
   }
 
   createNewCart(item:any){
+    this.memberId = item;
     var newCart :any = {};
     newCart.cartId = 0,
     newCart.cityId = this.cityId ? JSON.parse(this.cityId) : null,
@@ -189,6 +194,22 @@ export class NeworderComponent implements OnInit {
       this.toastrService.error('No Cart Found')
     }
     
+  }
+
+  showViewCartModal(){
+    if(this.selectedCartId && this.memberId){
+    this._salesService.getShoppingCart(this.memberId, this.selectedCartId).subscribe((data:any) => {
+      if(data){
+        console.log(data)
+        this.cartDetailsObj = data;
+        this.cartList = data.cartItems;
+       }else{
+         this.toastrService.error('No Cart Found')
+       } 
+     })
+    }else{
+      this.toastrService.error('No Member Found. No Cart Selected')
+    }
   }
 
  

@@ -23,6 +23,10 @@ export class CommonService {
     return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.RefreshToken,data,{observe: 'response'})
   }
 
+  getUserProfilePicture(userId: any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.GetUserProfilePic+`?userId=${userId}`,{observe: 'response'})
+   }
+
   
 
 

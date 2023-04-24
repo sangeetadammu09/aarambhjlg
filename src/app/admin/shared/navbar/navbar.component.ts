@@ -4,6 +4,7 @@ import { Location} from '@angular/common';
 import { AdminList } from 'src/assets/menus/admin';
 import { CommonService } from 'src/app/common/service/common.service';
 import { MasterService } from 'src/app/master.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -22,9 +23,10 @@ export class NavbarComponent implements OnInit{
     userName = localStorage.getItem('fullname');
     userRoles = localStorage.getItem('roles');
     public menuItems: any;
-
+    userId = localStorage.getItem('userId');
     public isCollapsed = true;
     @ViewChild("navbar-cmp", {static: false}) button:any;
+    userPhoto: any;
 
     constructor(location:Location, private renderer : Renderer2, private element : ElementRef,
        private router: Router, private _commonService: CommonService, private masterService: MasterService) {
@@ -34,6 +36,7 @@ export class NavbarComponent implements OnInit{
     }
 
     ngOnInit(){
+      this.getUserPic();
        // this.listTitles = MenuList.data;
      //   console.log(this.listTitles);
      if(this.userRoles){
@@ -55,6 +58,22 @@ export class NavbarComponent implements OnInit{
       console.log(this.menuItems);
       
   }
+
+  getUserPic(){
+    if(this.userId)
+    this.userId = JSON.parse(this.userId)
+    this._commonService.getUserProfilePicture(this.userId).subscribe((user:any) => {
+        if(user){
+          this.userPhoto = user.body.photoUrl;
+        }
+    }, (err:HttpErrorResponse)=>{
+      if(err.status == 0){
+        this.userPhoto = '../../../../assets/images/user.png'
+  }
+    })
+   
+  }
+
 
    
     sidebarToggle() {

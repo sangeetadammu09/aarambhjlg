@@ -24,6 +24,7 @@ export const APP_DI_CONFIG: any = {
       GetAllRoles: "/User/GetAllRoles",
       GetAllUserDetails : "/User/GetUserAllDetails",
       GetUserContacts: "/User/GetUserContacts",
+      GetUserProfilePic: "/User/GetUserProfilePic",
     },
     ProductCategory:{
       GetAllProductCategory : "/ProductCategory/GetAllProductCategory",
@@ -135,6 +136,7 @@ export const APP_DI_CONFIG: any = {
     ShoppingCart:{
       CreateNewCart: '/ShopingCart/CreateNewCart',
       AddItemToCart: '/ShopingCart/AddItemToCart',
+      GetShoppingCart: '/ShopingCart/GetShopingCart',
     }
   }
   

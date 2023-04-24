@@ -4,6 +4,7 @@ import { Location} from '@angular/common';
 import { SalesList } from 'src/assets/menus/sales';
 import { CommonService } from 'src/app/common/service/common.service';
 import { MasterService } from 'src/app/master.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -21,10 +22,12 @@ export class NavbarComponent implements OnInit{
     private sidebarVisible: boolean;
     userName = localStorage.getItem('fullname');
     userRoles = localStorage.getItem('roles');
+    userId = localStorage.getItem('userId');
     public menuItems: any;
 
     public isCollapsed = true;
     @ViewChild("navbar-cmp", {static: false}) button:any;
+    userPhoto: any;
 
     constructor(location:Location, private renderer : Renderer2, private element : ElementRef,
        private router: Router, private _commonService: CommonService, private masterService: MasterService) {
@@ -47,12 +50,28 @@ export class NavbarComponent implements OnInit{
         const finalArray = temp.map((item:any, index:number) => ({ id: index,name: item }))
         this.userRoles = finalArray;
       }
+      this.getUserPic();
     }
 
     getMenuList() {
       // this.menuItems =  MenuList.data;
       this.menuItems =  SalesList.data; 
       
+  }
+
+  getUserPic(){
+    if(this.userId)
+    this.userId = JSON.parse(this.userId)
+    this._commonService.getUserProfilePicture(this.userId).subscribe((user:any) => {
+        if(user){
+          this.userPhoto =  user.body.photoUrl;
+        }
+    }, (err:HttpErrorResponse)=>{
+      if(err.status == 0){
+        this.userPhoto = '../../../../assets/images/user.png'
+  }
+    })
+   
   }
 
    
