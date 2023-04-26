@@ -27,6 +27,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { UserKycComponent } from './user-kyc/user-kyc.component';
 import { MemberKycComponent } from './member-kyc/member-kyc.component';
 import { NeworderComponent } from './neworder/neworder.component';
+import { ViewcartComponent } from './viewcart/viewcart.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -57,7 +58,8 @@ import { NeworderComponent } from './neworder/neworder.component';
     ProductDetailComponent,
     UserKycComponent,
     MemberKycComponent,
-    NeworderComponent
+    NeworderComponent,
+    ViewcartComponent
   ]
 })
 

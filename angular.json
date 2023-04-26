@@ -44,7 +44,7 @@
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/jquery/dist/jquery.js",
               "src/assets/dist/js/demo-theme.min.js",
-              "src/assets/dist/libs/apexcharts/dist/apexcharts.min.js",
+             
               "src/assets/dist/libs/jsvectormap/dist/js/jsvectormap.min.js",
               "src/assets/dist/libs/jsvectormap/dist/maps/world.js",
               "src/assets/dist/libs/jsvectormap/dist/maps/world-merc.js",

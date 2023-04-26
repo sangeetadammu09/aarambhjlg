@@ -7,6 +7,7 @@ import { MemberContactsComponent } from 'src/app/pages/member-contacts/member-co
 import { ProductDetailComponent } from 'src/app/pages/product-detail/product-detail.component';
 import { MemberKycComponent } from 'src/app/pages/member-kyc/member-kyc.component';
 import { NeworderComponent } from 'src/app/pages/neworder/neworder.component';
+import { ViewcartComponent } from 'src/app/pages/viewcart/viewcart.component';
 
 export const SalesRelationLayoutRoutes: Routes = [
 
@@ -18,6 +19,7 @@ export const SalesRelationLayoutRoutes: Routes = [
      { path:'member-contacts', component: MemberContactsComponent },
      { path:'product-details', component: ProductDetailComponent },
      { path:'new-order', component: NeworderComponent },
+     { path:'view-cart', component: ViewcartComponent },
      
    
      

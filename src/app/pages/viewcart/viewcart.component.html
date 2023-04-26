@@ -1,0 +1,173 @@
+<!-- Page body -->
+<div class="page-body">
+    <div class="container-xl">
+      <div class="row row-cards">
+        <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="col-lg-10 mb-3 mt-2">
+                    <h3 class="card-title">Shopping Cart</h3>
+                </div>
+                
+                <!-- <div class="col-lg-2 mb-3 mt-2">
+                    <button class="btn btn-primary btn-pill w-100" data-toggle="modal" data-target="#addeditBranchModal"
+                (click)="showaddBranchModal()">Add Branch</button>
+                </div> -->
+              </div>
+  
+         <div class="table-responsive mt-3">
+          
+            <div class="d-flex justify-content-center">
+                <div class="d-flex flex-row align-items-center">
+                    <div class="icon"> 
+                        <i class="bx bxl-mailchimp"></i> </div>
+                        <div class="ms-2 c-details">
+                            <div class="row d-flex">
+                               <div class="card-title col-lg-6">Member Name :</div>
+                               <div class="col-lg-6">{{cartDetailsObj?.fullName}}</div>
+
+                               <div class="card-title col-lg-6">City :</div>
+                               <div class="col-lg-6">{{cartDetailsObj?.cityName}}</div>
+
+                               <div class="card-title col-lg-6">Center :</div>
+                               <div class="col-lg-6">{{cartDetailsObj?.centerName}}</div>
+                              
+                               <div class="card-title col-lg-6">Center No :</div>
+                               <div class="col-lg-6">{{cartDetailsObj?.centerNo}}</div>
+
+                               <div class="card-title col-lg-6">Mobile :</div>
+                               <div class="col-lg-6">{{cartDetailsObj?.mobileNo}}</div>
+
+                               <div class="card-title col-lg-6">Address :</div>
+                               <div class="col-lg-6">{{cartDetailsObj?.address}}</div>
+
+                               <div class="card-title col-lg-6">Cart Date :</div>
+                               <div class="col-lg-6">{{cartDetailsObj?.cartDate | date : "dd-mm-yyyy"}}</div>
+
+                               <div class="card-title col-lg-6">Order Taken By :</div>
+                               <div class="col-lg-6">{{cartDetailsObj?.orderTakenByName}},<span>{{cartDetailsObj?.orderTakenByRole}}</span> </div>
+
+                            </div>
+                       </div>
+                </div>  
+            </div>
+            <table class="table card-table table-vcenter text-nowrap datatable" *ngIf="viewCartList?.length>0">
+               
+                  <tr style="background-color:#1d4ed8;">
+                    <th scope="col" style="color: #fff;">S No.</th>
+                    <th scope="col" style="color: #fff;">Name</th>
+                    <th scope="col" style="color: #fff;">Quantity</th>
+                    <th scope="col" style="color: #fff;">MRP</th>
+                    <th scope="col" style="color: #fff;">Sales Price</th>
+                    <th scope="col" style="color: #fff;">Sub Total</th>
+                    <th scope="col" style="color: #fff;">Delete</th>
+                  </tr>
+               
+                <tbody *ngFor="let item of viewCartList | paginate: { itemsPerPage: 10, currentPage: page }; let i = index ">
+                  <tr>
+                    <td>{{10*(page-1)+i+1}}</td>
+                    <td>{{item.itemName}}</td> 
+                    <td><div class="quantity">
+                        <input type="text" class="form-control" [(ngModel)]="viewCartList[i].prodQuantityInput" 
+                        placeholder="Enter Quantity" #prodQuantityInput=ngModel name="{{'quantity' + i}}" id="{{'quantity' + i}}"
+                         pattern="^(0|[1-9][0-9]*)$" (input)="updateItemQuantity(item)">
+                        <div *ngIf="prodQuantityInput.touched">
+                          <p class="text-red" *ngIf="prodQuantityInput.errors?.pattern">Only Numbers are required</p>
+                        </div>
+                        </div>
+                    </td>
+                    <td> {{item.mrp | currency: 'INR'}}</td>
+                    <td> {{item.salePrice | currency: 'INR'}}</td>
+                    <td>{{item.subTotal | currency: 'INR'}}</td>
+                    
+                    <td  (click)="showdeleteCartModal(item)" data-toggle="modal"  data-target="#deleteCartModal">
+                        <svg enable-background="new 0 0 19 19" height="19px" id="Layer_1" version="1.1" viewBox="0 0 26 29" width="26px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <g><path d="M1.035,9l3.49,17.478C4.525,27.854,5.643,29,7.019,29H13h5.981c1.376,0,2.493-1.146,2.493-2.522L24.965,9   H13H1.035z" fill="#231F20"/>
+                            <path d="M23.524,3H21V2.824C21,1.264,19.736,0,18.176,0H7.824C6.264,0,5,1.264,5,2.824V3H2.476   C0.946,3,0,3.939,0,5.468V7h7.824h10.352H26V5.468C26,3.939,25.053,3,23.524,3z" fill="#231F20"/>
+                        </g></svg>
+                    </td> 
+                  </tr>        
+                </tbody>
+                
+            </table>
+            <div class="card-footer d-flex align-items-center" style="background-color: #fff;"  *ngIf="viewCartList.length>0">
+                <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
+                    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                </div>
+            </div>
+              <div class="row card mb-3" *ngIf="viewCartList.length == 0">
+                <p class="text-center">No Cart found</p>
+              </div>
+
+              <div class="d-flex justify-content-center" *ngIf="cartDetailsObj">
+                <div class="d-flex flex-row align-items-center">
+                    <div class="icon"> 
+                        <i class="bx bxl-mailchimp"></i> </div>
+                        <div class="ms-2 c-details">
+                            <div class="row d-flex">
+                               <div class="card-title col-lg-6">Total Bill Amount :</div>
+                               <div class="col-lg-6">{{cartDetailsObj.total | currency: 'INR'}}</div>
+
+                               <div class="card-title col-lg-6">Service Charges :</div>
+                               <div class="col-lg-4">
+                               <div class="serviceCharge">
+                                    <input type="text" class="form-control" id="serviceCharge"  [(ngModel)]="productObj.prodServiceChangeInput" 
+                                    placeholder="Enter Quantity" #prodServiceChangeInput=ngModel pattern="^(0|[1-9][0-9]*)$" 
+                                    (input)="addServiceCharge(productObj.prodServiceChangeInput)">
+                                    <div *ngIf="prodServiceChangeInput.touched">
+                                      <p class="text-red" *ngIf="prodServiceChangeInput.errors?.pattern">Only Numbers are required</p>
+                                    </div>
+                                    </div>
+                                
+                               </div>
+
+                               <div class="card-title col-lg-6">Bill Amount + Service Charges  :</div>
+                               <div class="col-lg-6">{{cartDetailsObj.finalAmount | currency: 'INR'}}</div>
+
+                               <div class="card-title col-lg-6">Payment Installments  :</div>
+                               <div class="col-lg-4">
+                                <select class="custom-select" id="searchInstallment" [(ngModel)]="paymentInstallment">
+                                    <option value="" [selected]="''">Choose Payment Installment..</option>
+                                    <option *ngFor="let item of installmentList" [ngValue]="item.id">
+                                        {{item.name}}</option>
+                                    </select>
+                               </div>
+
+                                <div class="row mt-3">
+                                       <div class="offset-lg-4 col-lg-4">
+                                        <button class="btn btn-primary  mr-2" (click)="cancelOrder()">Cancel Order</button>
+                                        <button class="btn btn-primary" (click)="placeOrder()">Place Order</button>
+                                       </div>
+                                </div>      
+                            </div>
+                       </div>
+                </div>  
+            </div>
+
+            </div>
+          </div>
+      </div>
+      </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="deleteCartModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+         
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeDeleteItemBtn>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+             <p>Are you sure you want to delete this item?</p>
+             <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" (click)="deleteItem()">Yes</button>
+              </div>
+        </div>
+      </div>
+    </div>
+</div>

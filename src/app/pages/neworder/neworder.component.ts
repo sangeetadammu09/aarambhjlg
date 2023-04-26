@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SalesRelationService } from 'src/app/sales-relation-officer/service/sales-relation.service';
+import { DataService } from 'src/app/utils/data.service';
 
 
 declare var $ :any;
@@ -36,14 +38,15 @@ export class NeworderComponent implements OnInit {
   @ViewChild('closeproductModalBtn') closeproductModalBtn: any;
   @ViewChild('closeViewCartModalBtn') closeViewCartModalBtn: any;
   searchProductItem: any;
-  productObj:any ={}
+  productObj:any ={};
   memberId: any;
   cartDetailsObj :any ={}
   cartList : any = [];
 
   
 
-  constructor(private _salesService: SalesRelationService, private toastrService: ToastrService ) { }
+  constructor(private _salesService: SalesRelationService, private toastrService: ToastrService,
+    private router: Router, private dataService: DataService) { }
 
   ngOnInit(): void {
     this.getSalesOfficersCenterList();
@@ -60,7 +63,7 @@ export class NeworderComponent implements OnInit {
 
   getSalesOfficersCenterList(){
     this._salesService.getSalesOfficersCenterList(this.userId,this.cityId).subscribe((data:any) => {
-      console.log(data,'cco member')
+      //console.log(data,'cco member')
         if(data.length > 0){
           this.centerDropdownList = data;
    
@@ -74,7 +77,7 @@ export class NeworderComponent implements OnInit {
   getCenterVal(event:any){
     var searchMemberId = event;
     this._salesService.getMemberListByCenter(searchMemberId).subscribe((data:any) => {
-      console.log(data,'all memberDropdownList')
+     // console.log(data,'all memberDropdownList')
       if(data.length > 0){
         this.memberDropdownList = data;
 
@@ -90,7 +93,7 @@ export class NeworderComponent implements OnInit {
   getSearchedProducts(event: any){
     var searchProd = event;
     this._salesService.getProductAutocomplete(searchProd).subscribe((data:any) => {
-      console.log(data,'all productList')
+   //   console.log(data,'all productList')
       if(data.length > 0){
         //this.searchProduct = ''
         this.productList = data;
@@ -148,7 +151,7 @@ export class NeworderComponent implements OnInit {
 
     this._salesService.createNewCart(newCart).subscribe((data:any) => {
       if(data){
-        console.log(data.body)
+    //    console.log(data.body)
         this.selectedCartId = data.body;
         this.toastrService.success('Cart created successfully')
        }else{
@@ -198,17 +201,15 @@ export class NeworderComponent implements OnInit {
 
   showViewCartModal(){
     if(this.selectedCartId && this.memberId){
-    this._salesService.getShoppingCart(this.memberId, this.selectedCartId).subscribe((data:any) => {
-      if(data){
-        console.log(data)
-        this.cartDetailsObj = data;
-        this.cartList = data.cartItems;
-       }else{
-         this.toastrService.error('No Cart Found')
-       } 
-     })
-    }else{
-      this.toastrService.error('No Member Found. No Cart Selected')
+      localStorage.setItem('selectedCartId',this.selectedCartId)
+       localStorage.setItem('memberId',this.memberId)
+      //  var cartObj:any = {};
+      //  cartObj.cartId = this.selectedCartId;
+      //  cartObj.memberId = this.memberId;
+      //  this.dataService.sendMemberIdAndCartId(cartObj);
+       
+       this.router.navigate(['/sales-relation-officer/view-cart'])
+      
     }
   }
 

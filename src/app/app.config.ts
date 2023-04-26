@@ -136,7 +136,9 @@ export const APP_DI_CONFIG: any = {
     ShoppingCart:{
       CreateNewCart: '/ShopingCart/CreateNewCart',
       AddItemToCart: '/ShopingCart/AddItemToCart',
+      RemoveItemFromCart: '/ShopingCart/RemoveItemFromCart',
       GetShoppingCart: '/ShopingCart/GetShopingCart',
+      
     }
   }
   
