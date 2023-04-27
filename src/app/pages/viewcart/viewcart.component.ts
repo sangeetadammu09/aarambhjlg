@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AdminService } from 'src/app/admin/service/admin.service';
 import { SalesRelationService } from 'src/app/sales-relation-officer/service/sales-relation.service';
-import { DataService } from 'src/app/utils/data.service';
 
 @Component({
   selector: 'app-viewcart',
@@ -23,15 +23,22 @@ export class ViewcartComponent implements OnInit {
   serviceCharge: any =0;
   paymentInstallment :any;
   installmentList :any =[];
+  updatedCartId: any;
+  paymentInstallmentId: any;
+  rowEdited = false;
+  rowValue: any;
   
 
-  constructor(private dataService: DataService, private _salesService: SalesRelationService,
-    private toastrService :ToastrService,private router: Router) {}
+  constructor(private _adminService:AdminService, private _salesService: SalesRelationService,
+    private toastrService :ToastrService,private router: Router) {
+
+    }
 
   ngOnInit(): void {
     this.showViewCartModal();
-    this.installmentList= [{id:1,name:"4 Installments"},{id:2,name:"5 Installments"},{id:3,name:"6 Installments"},{id:4,name:"7 Installments"},
-    {id:5,name:"8 Installments"}]
+    this.getAllInstallments();
+    // this.installmentList= [{id:1,name:"4 Installments"},{id:2,name:"5 Installments"},{id:3,name:"6 Installments"},{id:4,name:"7 Installments"},
+    // {id:5,name:"8 Installments"}]
     this.paymentInstallment = ""
 
   }
@@ -47,9 +54,8 @@ export class ViewcartComponent implements OnInit {
           this.cartDetailsObj.finalAmount = 0;
           this.viewCartList.forEach((item:any,index:number) => {
             this.cartDetailsObj.total += item['subTotal'];
-          })  
-          this.cartDetailsObj.finalAmount +=  this.cartDetailsObj.total + this.serviceCharge;
-          //console.log(this.viewCartList);
+          }) 
+          this.rowEdited = false;
          
          }
        })
@@ -68,8 +74,15 @@ export class ViewcartComponent implements OnInit {
 
   }
 
+  editRow(qty:any,index:number){
+    var value = qty+index
+      this.rowValue = value
+       this.rowEdited = true;
+       
+  }
+
   updateItemQuantity(item:any){
-          console.log(item)
+          this.updatedCartId = item.cartId;
           var updateCart :any = {};
           updateCart.cartId = item.cartId,
           updateCart.itemId = item.itemId,
@@ -82,19 +95,19 @@ export class ViewcartComponent implements OnInit {
           this._salesService.addItemToCart(updateCart).subscribe((data:any) => {
             if(data.status == 200){
               this.toastrService.success('Item Quantity updated successfully')
-             this.showViewCartModal()
+
+              this.showViewCartModal()
 
              }else{
                this.toastrService.error('No Items added. Please try again')
              } 
            })
-          
-          
+         
   }
 
   addServiceCharge(value:any){
-      this.serviceCharge = value;
-      this.cartDetailsObj.finalAmount =0;
+      this.serviceCharge = JSON.parse(value);
+      this.cartDetailsObj.finalAmount = 0;
       this.cartDetailsObj.finalAmount +=  this.cartDetailsObj.total + this.serviceCharge
   }
 
@@ -113,15 +126,62 @@ export class ViewcartComponent implements OnInit {
     })
   }
 
+  getAllInstallments(){
+    this._adminService.getAllInstallment().subscribe((data) => {
+      console.log(data,'all Installments')
+     if(data.length > 0){
+    //  this.productsFound = true;
+       this.installmentList = data;
+      }else{
+        this.installmentList = [];
+       // this.productsFound = false;
+      }
+      
+    })
+  }
+
+
   cancelOrder(){
-    this.router.navigate(['/sales-relation-officer/new-order']);
-    localStorage.removeItem(this.memberId);
-    localStorage.removeItem(this.selectedCartId);
+    this._salesService.cancelOrder(this.selectedCartId).subscribe((data) => {
+     if(data.status == 200){
+      this.router.navigate(['/sales-relation-officer/new-order']);
+      localStorage.removeItem(this.memberId);
+      localStorage.removeItem(this.selectedCartId);
+      this.toastrService.success('Order cancelled successfully')
+
+      }else{
+        this.toastrService.success('Error cancelling the order')
+      }
+      
+    })
+   
 
   }
 
-  placeOrder(){
+  getInstallmentDetails(item:any){
+      this.paymentInstallmentId = item;
+  }
 
+  placeOrder(){
+    var newOrder :any = {};
+    newOrder.cartId = this.updatedCartId,
+    newOrder.totalBill = this.cartDetailsObj.total ,
+    newOrder.serviceCharges = this.serviceCharge,
+    newOrder.totalBillWithServiceCharges = this.cartDetailsObj.finalAmount,
+    newOrder.requestedInstallmentId = this.paymentInstallmentId
+  
+    this._salesService.placeNewOrder(newOrder).subscribe((data:any) => {
+      if(data.status == 200){
+      this.toastrService.success('Order placed successfully')
+      this.router.navigate(['/sales-relation-officer/new-order']);
+      localStorage.removeItem(this.memberId);
+      localStorage.removeItem(this.selectedCartId);
+      this.showViewCartModal()
+
+       }else{
+         this.toastrService.error('Error placing the order. Please try again')
+       } 
+     })
   }
 
 

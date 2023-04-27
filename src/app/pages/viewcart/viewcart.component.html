@@ -60,6 +60,7 @@
                     <th scope="col" style="color: #fff;">MRP</th>
                     <th scope="col" style="color: #fff;">Sales Price</th>
                     <th scope="col" style="color: #fff;">Sub Total</th>
+                    <th scope="col" style="color: #fff;">Edit</th>
                     <th scope="col" style="color: #fff;">Delete</th>
                   </tr>
                
@@ -67,19 +68,21 @@
                   <tr>
                     <td>{{10*(page-1)+i+1}}</td>
                     <td>{{item.itemName}}</td> 
-                    <td><div class="quantity">
-                        <input type="text" class="form-control" [(ngModel)]="viewCartList[i].prodQuantityInput" 
-                        placeholder="Enter Quantity" #prodQuantityInput=ngModel name="{{'quantity' + i}}" id="{{'quantity' + i}}"
-                         pattern="^(0|[1-9][0-9]*)$" (input)="updateItemQuantity(item)">
-                        <div *ngIf="prodQuantityInput.touched">
-                          <p class="text-red" *ngIf="prodQuantityInput.errors?.pattern">Only Numbers are required</p>
-                        </div>
-                        </div>
-                    </td>
+                    <td *ngIf="!rowEdited" id="{{'quantity' + i}}" name="{{'quantity' + i}}">{{item.qty}}</td>
+                    <td *ngIf="rowEdited">
+                      <div class="quantity">
+                      <input type="text" class="form-control" [(ngModel)]="viewCartList[i].prodQuantityInput" 
+                      placeholder="Enter Quantity" #prodQuantityInput=ngModel name="{{'quantity' + i}}" id="{{'quantity' + i}}"
+                       pattern="^(0|[1-9][0-9]*)$" (input)="updateItemQuantity(item)">
+                      <div *ngIf="prodQuantityInput.touched">
+                        <p class="text-red" *ngIf="prodQuantityInput.errors?.pattern">Only Numbers are required</p>
+                      </div>
+                      </div>
+                   </td>
                     <td> {{item.mrp | currency: 'INR'}}</td>
                     <td> {{item.salePrice | currency: 'INR'}}</td>
                     <td>{{item.subTotal | currency: 'INR'}}</td>
-                    
+                     <td> <i class="fa fa-pencil" (click)="editRow(item.qty,i)"></i> </td>
                     <td  (click)="showdeleteCartModal(item)" data-toggle="modal"  data-target="#deleteCartModal">
                         <svg enable-background="new 0 0 19 19" height="19px" id="Layer_1" version="1.1" viewBox="0 0 26 29" width="26px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <g><path d="M1.035,9l3.49,17.478C4.525,27.854,5.643,29,7.019,29H13h5.981c1.376,0,2.493-1.146,2.493-2.522L24.965,9   H13H1.035z" fill="#231F20"/>
@@ -126,10 +129,11 @@
 
                                <div class="card-title col-lg-6">Payment Installments  :</div>
                                <div class="col-lg-4">
-                                <select class="custom-select" id="searchInstallment" [(ngModel)]="paymentInstallment">
+                                <select class="custom-select" id="searchInstallment" [(ngModel)]="paymentInstallment" 
+                                (change)="getInstallmentDetails(paymentInstallment)">
                                     <option value="" [selected]="''">Choose Payment Installment..</option>
                                     <option *ngFor="let item of installmentList" [ngValue]="item.id">
-                                        {{item.name}}</option>
+                                        {{item.installment}}</option>
                                     </select>
                                </div>
 

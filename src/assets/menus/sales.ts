@@ -150,8 +150,24 @@ export const SalesManagerList = {
               icon : 'fa-building',
               isActive: true, 
              },      
-      ]
+        ]
         },
+        {
+          id: 3,
+          parentMenu: 'Order',
+          icon : 'fa-pencil',
+          isActive: true, 
+          url: 'order',
+          submenuList: [
+              {
+                  id: 0,
+                  menu: 'Order Details',
+                  url: 'order-details',
+                  icon : 'fa-book',
+                  isActive: true, 
+              }
+          ]
+        }
     
   ],
   message: null,

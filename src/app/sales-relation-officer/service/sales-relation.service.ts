@@ -129,6 +129,27 @@ export class SalesRelationService {
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ShoppingCart.GetShoppingCart+`?memberId=${memberId}&cartId=${cartId}`)
    }
 
+   
+   placeNewOrder(data:any){
+    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.PlaceNewOrder,data,{observe: 'response'})
+   }
+
+   cancelOrder(cartId:any){
+    return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.CancelOrder+`?cartId=${cartId}`,{observe: 'response'})
+   }
+
+   getOrderListForApproval(id:any,pagesize:any,pageno:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.GetOrderListForApproval+`?userId=${id}&PageSize=${pagesize}&PageNo=${pageno}`)
+   }
+
+   getOrderDetails(orderId:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.GetOrderDetails+`?orderId=${orderId}`,{observe: 'response'})
+   }
+
+   approveOrder(data:any){
+    return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.ApproveOrder,data,{observe: 'response'})
+   }
+
 
    
  

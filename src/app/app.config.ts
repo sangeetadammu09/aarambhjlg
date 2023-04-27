@@ -137,8 +137,14 @@ export const APP_DI_CONFIG: any = {
       CreateNewCart: '/ShopingCart/CreateNewCart',
       AddItemToCart: '/ShopingCart/AddItemToCart',
       RemoveItemFromCart: '/ShopingCart/RemoveItemFromCart',
-      GetShoppingCart: '/ShopingCart/GetShopingCart',
-      
+      GetShoppingCart: '/ShopingCart/GetShopingCart',  
+    },
+    Order:{
+        PlaceNewOrder: '/Order/PlaceNewOrder',
+        CancelOrder: '/Order/CancelOrder',
+        GetOrderDetails: '/Order/GetOrderDetails',
+        GetOrderListForApproval: '/Order/GetOrdersListForApproval',
+        ApproveOrder: '/Order/ApproveOrder',
     }
   }
   

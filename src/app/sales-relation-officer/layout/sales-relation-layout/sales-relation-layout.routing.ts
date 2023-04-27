@@ -20,6 +20,7 @@ export const SalesRelationLayoutRoutes: Routes = [
      { path:'product-details', component: ProductDetailComponent },
      { path:'new-order', component: NeworderComponent },
      { path:'view-cart', component: ViewcartComponent },
+    
      
    
      
