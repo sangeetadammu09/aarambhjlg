@@ -65,6 +65,7 @@ export const APP_DI_CONFIG: any = {
     },
     Installment:{
       GetAllInstallment : "/Installment/GetAllInstallment",
+      GetInstallmentById : "/Installment/GetInstallmentById",
       AddInstallment : "/Installment/AddInstallment",
       UpdateInstallment : "/Installment/UpdateInstallment",
       DeleteInstallment : "/Installment/DeleteInstallment"
@@ -145,6 +146,7 @@ export const APP_DI_CONFIG: any = {
         GetOrderDetails: '/Order/GetOrderDetails',
         GetOrderListForApproval: '/Order/GetOrdersListForApproval',
         ApproveOrder: '/Order/ApproveOrder',
+        GetInstallmentList : '/Order/GetInstallmentList',
     }
   }
   

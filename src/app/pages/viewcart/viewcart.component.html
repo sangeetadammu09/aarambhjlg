@@ -132,7 +132,7 @@
                                 <select class="custom-select" id="searchInstallment" [(ngModel)]="paymentInstallment" 
                                 (change)="getInstallmentDetails(paymentInstallment)">
                                     <option value="" [selected]="''">Choose Payment Installment..</option>
-                                    <option *ngFor="let item of installmentList" [ngValue]="item.id">
+                                    <option *ngFor="let item of installmentList" [ngValue]="item.installmentNo">
                                         {{item.installment}}</option>
                                     </select>
                                </div>
@@ -146,7 +146,7 @@
                             </div>
                        </div>
                 </div>  
-            </div>
+              </div>
 
             </div>
           </div>

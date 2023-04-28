@@ -152,8 +152,6 @@ export class ViewcartComponent implements OnInit {
       }
       
     })
-   
-
   }
 
   getInstallmentDetails(item:any){

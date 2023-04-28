@@ -150,6 +150,10 @@ export class SalesRelationService {
     return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.ApproveOrder,data,{observe: 'response'})
    }
 
+   getInstallmentList(totalAmount:any,installmentNo:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.GetInstallmentList+`?totalAmount=${totalAmount}&installmentNo=${installmentNo}`)
+   }
+
 
    
  

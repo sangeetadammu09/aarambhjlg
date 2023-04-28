@@ -123,11 +123,15 @@ export class AdminService {
    getAllInstallment(){
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Installment.GetAllInstallment)
    }
+
+   getInstallmentById(id:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Installment.GetAllInstallment)
+   }
  
    addInstallment(data:any){
      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Installment.AddInstallment,data,{observe: 'response'})
    }
- 
+
    updateInstallment(data:any){
      return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Installment.UpdateInstallment,data,{observe: 'response'})
    }
