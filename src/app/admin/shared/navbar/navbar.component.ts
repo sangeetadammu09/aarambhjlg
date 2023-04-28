@@ -55,7 +55,7 @@ export class NavbarComponent implements OnInit{
     getMenuList() {
       // this.menuItems =  MenuList.data;
       this.menuItems =  AdminList.data;
-      console.log(this.menuItems);
+     
       
   }
 
@@ -139,7 +139,7 @@ export class NavbarComponent implements OnInit{
         logoutTokenObj.append('refreshToken',refreshToken);
   
          this._commonService.logout(logoutTokenObj).subscribe((result:any) => {
-          console.log(result);
+      
           localStorage.clear();
           this.router.navigate(['/'])
          })

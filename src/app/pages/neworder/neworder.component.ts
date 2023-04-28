@@ -22,6 +22,7 @@ export class NeworderComponent implements OnInit {
   cityId = localStorage.getItem('userCity');
   userId = localStorage.getItem('userId');
   roleNo = localStorage.getItem('roleNo');
+  roles = localStorage.getItem('roles');
   memberDropdownList: any =[];
   centerDropdownList :any =[]
   searchMember:any;
@@ -42,6 +43,7 @@ export class NeworderComponent implements OnInit {
   memberId: any;
   cartDetailsObj :any ={}
   cartList : any = [];
+  firstRole: any;
 
   
 
@@ -58,6 +60,13 @@ export class NeworderComponent implements OnInit {
       prodQuantityInput:"",
       
     };
+
+    if(this.roles){
+      var temp = JSON.parse(this.roles);
+      const finalArray = temp.map((item:any, index:number) => ({ id: index,name: item }))
+      this.firstRole = finalArray[0].name;
+      console.log(this.firstRole);
+    }
  
   }
 
@@ -146,9 +155,8 @@ export class NeworderComponent implements OnInit {
     newCart.centerId = this.searchCenter,
     newCart.memberId = item,
     newCart.orderTakenById = this.userId ? JSON.parse(this.userId) : null,
-    newCart.orderTakenByRole = this.roleNo == '102' ? 'Role Officer' : null,
+    newCart.orderTakenByRole = this.roleNo == '102' && this.roles ? this.firstRole : null,
     newCart.cartDate = this.todayDate
-
     this._salesService.createNewCart(newCart).subscribe((data:any) => {
       if(data){
     //    console.log(data.body)

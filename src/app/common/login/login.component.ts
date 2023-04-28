@@ -52,9 +52,9 @@ export class LoginComponent implements OnInit {
       this._commonService.login(loginFormData).subscribe((data:any) => {
         //console.log(data)
         if(data){
-        console.log(data,'data')
+       
           this.decodedToken = decodeToken(data.access_token);
-          console.log(this.decodedToken)
+       
           this.loginText = "Login";
           const userData :any = {}
           userData.fullname = this.decodedToken.FullName;
