@@ -169,6 +169,7 @@ export class NeworderComponent implements OnInit {
      this.searchProductItem = item;
      this.productObj.prodQuantityInput = null;
      this.itemsAdded = false;
+     this.cartText = "Add To Cart";
   }
 
   addToCart(prodQuantity:any, product:any){

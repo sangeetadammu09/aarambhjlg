@@ -25,7 +25,6 @@ export class ViewcartComponent implements OnInit {
   installmentList :any =[];
   updatedCartId: any;
   paymentInstallmentId: any;
-  rowEdited = false;
   rowValue: any;
   
 
@@ -54,8 +53,9 @@ export class ViewcartComponent implements OnInit {
           this.cartDetailsObj.finalAmount = 0;
           this.viewCartList.forEach((item:any,index:number) => {
             this.cartDetailsObj.total += item['subTotal'];
+            item['rowEdited'] = false;
           }) 
-          this.rowEdited = false;
+        
          
          }
        })
@@ -74,10 +74,8 @@ export class ViewcartComponent implements OnInit {
 
   }
 
-  editRow(qty:any,index:number){
-    var value = qty+index
-      this.rowValue = value
-       this.rowEdited = true;
+  editRow(item:any){
+    item.rowEdited = !item.rowEdited;
        
   }
 
