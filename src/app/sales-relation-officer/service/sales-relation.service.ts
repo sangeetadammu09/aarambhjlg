@@ -125,8 +125,8 @@ export class SalesRelationService {
     return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ShoppingCart.RemoveItemFromCart+`?cartId=${cartId}&itemId=${itemId}`,{observe: 'response'})
    }
 
-   getShoppingCart(memberId: any, cartId: any){
-    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ShoppingCart.GetShoppingCart+`?memberId=${memberId}&cartId=${cartId}`)
+   getShoppingCart(data: any){
+    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.ShoppingCart.GetShoppingCart,data)
    }
 
    

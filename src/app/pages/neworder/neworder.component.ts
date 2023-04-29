@@ -44,6 +44,8 @@ export class NeworderComponent implements OnInit {
   cartDetailsObj :any ={}
   cartList : any = [];
   firstRole: any;
+  newCart :any = {};
+  createdCart: any;
 
   
 
@@ -149,18 +151,18 @@ export class NeworderComponent implements OnInit {
 
   createNewCart(item:any){
     this.memberId = item;
-    var newCart :any = {};
-    newCart.cartId = 0,
-    newCart.cityId = this.cityId ? JSON.parse(this.cityId) : null,
-    newCart.centerId = this.searchCenter,
-    newCart.memberId = item,
-    newCart.orderTakenById = this.userId ? JSON.parse(this.userId) : null,
-    newCart.orderTakenByRole = this.roleNo == '102' && this.roles ? this.firstRole : null,
-    newCart.cartDate = this.todayDate
-    this._salesService.createNewCart(newCart).subscribe((data:any) => {
+    this.newCart.cartId = 0,
+    this.newCart.cityId = this.cityId ? JSON.parse(this.cityId) : null,
+    this.newCart.centerId = this.searchCenter,
+    this.newCart.memberId = item,
+    this.newCart.orderTakenById = this.userId ? JSON.parse(this.userId) : null,
+    this.newCart.orderTakenByRole = this.roleNo == '102' && this.roles ? this.firstRole : null,
+    this.newCart.cartDate = this.todayDate
+   // console.log(this.newCart)
+    this._salesService.getShoppingCart(this.newCart).subscribe((data:any) => {
       if(data){
-    //    console.log(data.body)
-        this.selectedCartId = data.body;
+        this.createdCart = data;
+        this.selectedCartId = data.cartId;
         this.toastrService.success('Cart created successfully')
        }else{
          this.toastrService.error('No cart created')
@@ -210,13 +212,8 @@ export class NeworderComponent implements OnInit {
 
   showViewCartModal(){
     if(this.selectedCartId && this.memberId){
-      localStorage.setItem('selectedCartId',this.selectedCartId)
-       localStorage.setItem('memberId',this.memberId)
-      //  var cartObj:any = {};
-      //  cartObj.cartId = this.selectedCartId;
-      //  cartObj.memberId = this.memberId;
-      //  this.dataService.sendMemberIdAndCartId(cartObj);
-       
+   //   localStorage.setItem('newCart',JSON.stringify(this.createdCart))
+      this.dataService.sendMemberIdAndCartId(this.createdCart)
        this.router.navigate(['/sales-relation-officer/view-cart'])
       
     }

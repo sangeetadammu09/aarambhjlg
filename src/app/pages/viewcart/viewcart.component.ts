@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/admin/service/admin.service';
 import { SalesRelationService } from 'src/app/sales-relation-officer/service/sales-relation.service';
+import { DataService } from 'src/app/utils/data.service';
 
 @Component({
   selector: 'app-viewcart',
@@ -10,8 +11,7 @@ import { SalesRelationService } from 'src/app/sales-relation-officer/service/sal
   styleUrls: ['./viewcart.component.css']
 })
 export class ViewcartComponent implements OnInit {
-  selectedCartId:any = localStorage.getItem('selectedCartId');
-  memberId:any = localStorage.getItem('memberId');
+  newCart:any 
   cartDetailsObj :any={};
   viewCartList :any = [];
   productObj:any ={};
@@ -26,25 +26,30 @@ export class ViewcartComponent implements OnInit {
   updatedCartId: any;
   paymentInstallmentId: any;
   rowValue: any;
+  selectedCartId :any
+  memberId :any
   
 
   constructor(private _adminService:AdminService, private _salesService: SalesRelationService,
-    private toastrService :ToastrService,private router: Router) {
+    private toastrService :ToastrService,private router: Router, private dataService:DataService) {
 
     }
 
   ngOnInit(): void {
-    this.showViewCartModal();
+   
     this.getAllInstallments();
-    // this.installmentList= [{id:1,name:"4 Installments"},{id:2,name:"5 Installments"},{id:3,name:"6 Installments"},{id:4,name:"7 Installments"},
-    // {id:5,name:"8 Installments"}]
-    this.paymentInstallment = ""
+    this.paymentInstallment = "";
+    this.dataService.currentCatObj.subscribe((data:any) => {
+      this.newCart = data;
+      this.showViewCartModal();
+    })
 
   }
 
   showViewCartModal(){
-    if(this.selectedCartId != null && this.memberId != null){
-      this._salesService.getShoppingCart(this.memberId,this.selectedCartId).subscribe((data:any) => {
+    if(this.newCart != null){
+      console.log(this.newCart,'new cart')
+      this._salesService.getShoppingCart(this.newCart).subscribe((data:any) => {
         if(data){
          // debugger;
           this.cartDetailsObj = data;
