@@ -154,6 +154,14 @@ export class SalesRelationService {
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.GetInstallmentList+`?totalAmount=${totalAmount}&installmentNo=${installmentNo}`)
    }
 
+   getApprovedOrdersList(id:any,pagesize:any,pageno:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.GetApprovedOrdersList+`?userId=${id}&PageSize=${pagesize}&PageNo=${pageno}`)
+   }
+
+   getApprovedOrdersDetails(id:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.GetApprovedOrderDetails+`?orderId=${id}`,{observe: 'response'})
+   }
+
 
    
  

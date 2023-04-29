@@ -104,7 +104,14 @@ export const SalesList = {
                     url: 'new-order',
                     icon : 'fa-book',
                     isActive: true, 
-                }
+                },
+                {
+                  id: 0,
+                  menu: 'Approved Order',
+                  url: 'approved-order',
+                  icon : 'fa-book',
+                  isActive: true, 
+              }
             ]
           }
           

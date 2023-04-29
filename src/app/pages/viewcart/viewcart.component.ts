@@ -51,6 +51,7 @@ export class ViewcartComponent implements OnInit {
           this.viewCartList = data.cartItems;
           this.cartDetailsObj.total = 0;
           this.cartDetailsObj.finalAmount = 0;
+          this.updatedCartId = this.cartDetailsObj.cartId;
           this.viewCartList.forEach((item:any,index:number) => {
             this.cartDetailsObj.total += item['subTotal'];
             item['rowEdited'] = false;
@@ -165,7 +166,7 @@ export class ViewcartComponent implements OnInit {
     newOrder.serviceCharges = this.serviceCharge,
     newOrder.totalBillWithServiceCharges = this.cartDetailsObj.finalAmount,
     newOrder.requestedInstallmentId = this.paymentInstallmentId
-  
+   
     this._salesService.placeNewOrder(newOrder).subscribe((data:any) => {
       if(data.status == 200){
       this.toastrService.success('Order placed successfully')

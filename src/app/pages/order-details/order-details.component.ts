@@ -139,7 +139,7 @@ export class OrderDetailsComponent implements OnInit {
      installmentObj.memberId=  this.approveOrderObj.memberId,
      installmentObj.orderId=  this.approveOrderObj.orderId,
      installmentObj.installmentNo=  this.paymentInstallmentNo.installmentNo,
-     installmentObj.installmentDate=  this.selectedOrderInstallmentList[0].installmentDate,
+     installmentObj.installmentDate=  moment(this.selectedOrderInstallmentList[0].installmentDate).format(),
      installmentObj.installmentAmt=  this.selectedOrderInstallmentList[0].insatllmentAmount
      let installmentTemp= [installmentObj, ...[]] 
      approveObject.installments = installmentTemp;
