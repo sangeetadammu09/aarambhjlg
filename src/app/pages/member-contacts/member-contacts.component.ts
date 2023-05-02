@@ -43,7 +43,7 @@ export class MemberContactsComponent implements OnInit {
        })
 
     }
-    else if(this.roleNo == '102')
+    else if(this.roleNo == '102'){
     this._salesService.getOfficersCenterList(this.cityId,this.userId).subscribe((data:any) => {
       console.log(data,'cco member')
         if(data.length > 0){
@@ -53,6 +53,7 @@ export class MemberContactsComponent implements OnInit {
            this.memberDropdownList = [];
          } 
        })
+      }
    
   }
   

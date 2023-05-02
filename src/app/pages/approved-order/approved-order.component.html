@@ -80,32 +80,42 @@
                     <div class="icon"> 
                         <i class="bx bxl-mailchimp"></i> </div>
                         <div class="ms-2 c-details">
+                             <div class="row mt-3 mb-3">
+                              <img src="../../../../assets/images/aalogo.png" alt="AarambhJLG" class="navbar-brand-image logo-image">
+                                <h2 class="text-center">Order and Payment Installment Details</h2>
+                             </div>
                             <div class="row d-flex">
-                               <div class="card-title col-lg-6">Member Name :</div>
-                               <div class="col-lg-6">{{approvedOrderDetailsObj?.fullName}}</div>
 
-                               <div class="card-title col-lg-6">City :</div>
-                               <div class="col-lg-6">{{approvedOrderDetailsObj?.cityName}}</div>
+                              <div class="card-title col-lg-3">Bill Id :</div>
+                               <div class="col-lg-3">{{approvedOrderDetailsObj?.orderId}}</div>
 
-                               <div class="card-title col-lg-6">Center :</div>
-                               <div class="col-lg-6">{{approvedOrderDetailsObj?.centerName}}</div>
+                               <div class="card-title col-lg-3">Member Name :</div>
+                               <div class="col-lg-3">{{approvedOrderDetailsObj?.fullName}}</div>
+
+                               <div class="card-title col-lg-3">City :</div>
+                               <div class="col-lg-3">{{approvedOrderDetailsObj?.cityName}}</div>
+
+                               <div class="card-title col-lg-3">Center :</div>
+                               <div class="col-lg-3">{{approvedOrderDetailsObj?.centerName}}</div>
                               
-                               <div class="card-title col-lg-6">Center No :</div>
-                               <div class="col-lg-6">{{approvedOrderDetailsObj?.centerNo}}</div>
+                               <div class="card-title col-lg-3">Center No :</div>
+                               <div class="col-lg-3">{{approvedOrderDetailsObj?.centerNo}}</div>
 
-                               <div class="card-title col-lg-6">Mobile :</div>
-                               <div class="col-lg-6">{{approvedOrderDetailsObj?.mobileNo}}</div>
+                               <div class="card-title col-lg-3">Mobile :</div>
+                               <div class="col-lg-3">{{approvedOrderDetailsObj?.mobileNo}}</div>
 
-                               <div class="card-title col-lg-6">Address :</div>
-                               <div class="col-lg-6">{{approvedOrderDetailsObj?.address}}</div>
+                               <div class="card-title col-lg-3">Address :</div>
+                               <div class="col-lg-3">{{approvedOrderDetailsObj?.address}}</div>
 
-                               <div class="card-title col-lg-6">Order Date :</div>
-                               <div class="col-lg-6">{{approvedOrderDetailsObj?.orderDate | date : "dd-mm-yyyy"}}</div>
+                               <div class="card-title col-lg-3">Order Date :</div>
+                               <div class="col-lg-3">{{approvedOrderDetailsObj?.orderDate | date : "dd-mm-yyyy"}}</div>
 
-                               <div class="card-title col-lg-6">Order Taken By :</div>
-                               <div class="col-lg-6">{{approvedOrderDetailsObj?.orderTakenByName}},<span>{{approvedOrderDetailsObj?.orderTakenByRole}}</span> </div>
-                             
+                               <div class="card-title col-lg-3">Order Taken By :</div>
+                               <div class="col-lg-3">{{approvedOrderDetailsObj?.orderTakenByName}},<span>{{approvedOrderDetailsObj?.orderTakenByRole}}</span> </div>
                                
+                               <div class="card-title col-lg-3">Pending Registration Fees :</div>
+                               <div class="col-lg-3">₹ 0.0</div>
+                              
 
                             </div>
                        </div>
@@ -142,20 +152,34 @@
                       </div>
                     </div>
             </div>
+
+            <div class="row d-flex">
+              <div class="card-title col-lg-3">Service Charges:</div>
+               <div class="col-lg-3">{{approvedOrderDetailsObj?.serviceCharges}}</div>
+
+               <div class="card-title col-lg-3">Sub Total:</div>
+               <div class="col-lg-3">{{approvedOrderDetailsObj?.subTotal}}</div>
+
+               <div class="card-title col-lg-3">Total Bill Amount :</div>
+               <div class="col-lg-3">{{approvedOrderDetailsObj?.totalBillAmt}}</div>
+            </div>
+
             <div class="table-responsive mt-3">
               <table class="table card-table table-vcenter text-nowrap datatable" *ngIf="orderinstallmentList?.length>0">
              
                   <tr style="background-color:#1d4ed8;">
                     <th scope="col" style="color: #fff;">S No.</th>
-                    <th scope="col" style="color: #fff;">Installment Amount</th>
                     <th scope="col" style="color: #fff;">Installment Payment Date</th>
+                    <th scope="col" style="color: #fff;">Installment Amount</th>
+                    
                   </tr>
                
                 <tbody *ngFor="let item of orderinstallmentList | paginate: { itemsPerPage: 10, currentPage: page }; let i = index ">
                   <tr>
                     <td>{{10*(page-1)+i+1}}</td>
-                    <td>{{item.insatllmentAmount}}</td> 
                     <td> {{item.installmentDate}}</td>
+                    <td>{{item.insatllmentAmount | currency: 'INR'}}</td> 
+                   
                   </tr>        
                 </tbody>
                 
@@ -167,7 +191,15 @@
                         (pageChange)="page = $event"></pagination-controls>
                     </div>
                   </div>
-          </div>
+
+
+           </div>
+           <div class="row mt-3">
+            <div class="offset-lg-4 col-lg-4">
+             <button class="btn btn-primary  mr-2" (click)="printBill()">Print Bill</button>
+             <button class="btn btn-primary" (click)="downloadBill()">Download Bill</button>
+            </div>
+     </div> 
     
         </div>
       </div>

@@ -22,30 +22,34 @@
                     <div class="icon"> 
                         <i class="bx bxl-mailchimp"></i> </div>
                         <div class="ms-2 c-details">
+                          <div class="row mt-3 mb-3">
+                            <img src="../../../../assets/images/aalogo.png" alt="AarambhJLG" class="navbar-brand-image logo-image">
+                              <h2 class="text-center">Order and Payment Installment Details</h2>
+                           </div>
                             <div class="row d-flex">
-                               <div class="card-title col-lg-6">Member Name :</div>
-                               <div class="col-lg-6">{{cartDetailsObj?.fullName}}</div>
+                               <div class="card-title col-lg-3">Member Name :</div>
+                               <div class="col-lg-3">{{cartDetailsObj?.fullName}}</div>
 
-                               <div class="card-title col-lg-6">City :</div>
-                               <div class="col-lg-6">{{cartDetailsObj?.cityName}}</div>
+                               <div class="card-title col-lg-3">City :</div>
+                               <div class="col-lg-3">{{cartDetailsObj?.cityName}}</div>
 
-                               <div class="card-title col-lg-6">Center :</div>
-                               <div class="col-lg-6">{{cartDetailsObj?.centerName}}</div>
+                               <div class="card-title col-lg-3">Center :</div>
+                               <div class="col-lg-3">{{cartDetailsObj?.centerName}}</div>
                               
-                               <div class="card-title col-lg-6">Center No :</div>
-                               <div class="col-lg-6">{{cartDetailsObj?.centerNo}}</div>
+                               <div class="card-title col-lg-3">Center No :</div>
+                               <div class="col-lg-3">{{cartDetailsObj?.centerNo}}</div>
 
-                               <div class="card-title col-lg-6">Mobile :</div>
-                               <div class="col-lg-6">{{cartDetailsObj?.mobileNo}}</div>
+                               <div class="card-title col-lg-3">Mobile :</div>
+                               <div class="col-lg-3">{{cartDetailsObj?.mobileNo}}</div>
 
-                               <div class="card-title col-lg-6">Address :</div>
-                               <div class="col-lg-6">{{cartDetailsObj?.address}}</div>
+                               <div class="card-title col-lg-3">Address :</div>
+                               <div class="col-lg-3">{{cartDetailsObj?.address}}</div>
 
-                               <div class="card-title col-lg-6">Cart Date :</div>
-                               <div class="col-lg-6">{{cartDetailsObj?.cartDate | date : "dd-mm-yyyy"}}</div>
+                               <div class="card-title col-lg-3">Cart Date :</div>
+                               <div class="col-lg-3">{{cartDetailsObj?.cartDate | date : "dd-mm-yyyy"}}</div>
 
-                               <div class="card-title col-lg-6">Order Taken By :</div>
-                               <div class="col-lg-6">{{cartDetailsObj?.orderTakenByName}},<span>{{cartDetailsObj?.orderTakenByRole}}</span> </div>
+                               <div class="card-title col-lg-3">Order Taken By :</div>
+                               <div class="col-lg-3">{{cartDetailsObj?.orderTakenByName}},<span>{{cartDetailsObj?.orderTakenByRole}}</span> </div>
 
                             </div>
                        </div>

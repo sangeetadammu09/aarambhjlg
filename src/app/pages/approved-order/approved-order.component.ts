@@ -17,10 +17,9 @@ export class ApprovedOrderComponent implements OnInit {
   selectedOrderList: any =[];
   orderinstallmentList: any =[];
   userId = localStorage.getItem('userId');
+  roleNo = localStorage.getItem('roleNo');
   approvedOrderDetailsObj :any ={};
 
-  
-  
 
   constructor(private _saleService: SalesRelationService,private toastrService :ToastrService) { }
 
@@ -29,19 +28,31 @@ export class ApprovedOrderComponent implements OnInit {
 
   }
 
-
-
   getapprovedOrderList(){
-    this._saleService.getApprovedOrdersList(this.userId,this.pageSize,this.page).subscribe((data) => {
-       console.log(data,'all orders')
-       if(data.length > 0){
-        this.approvedOrderList = data,
-        this.total = data[0].totalCount;
-        }else{
-          this.approvedOrderList = [];
-        }
-        
-      })
+
+    if(this.roleNo == '102'){
+      this._saleService.getApprovedOrdersForSoRoList(this.userId,this.pageSize,this.page).subscribe((data) => {
+        console.log(data,'all orders')
+        if(data.length > 0){
+         this.approvedOrderList = data,
+         this.total = data[0].totalCount;
+         }else{
+           this.approvedOrderList = [];
+         } 
+       })
+
+    }
+    else if(this.roleNo == '103'){
+      this._saleService.getApprovedOrdersForManagerList(this.userId,this.pageSize,this.page).subscribe((data) => {
+        console.log(data,'all orders')
+        if(data.length > 0){
+         this.approvedOrderList = data,
+         this.total = data[0].totalCount;
+         }else{
+           this.approvedOrderList = [];
+         } 
+       })
+      }
   }
 
   handlePageChange(event: number){
@@ -63,6 +74,15 @@ export class ApprovedOrderComponent implements OnInit {
       }
     })
 
+  }
+
+  printBill(){
+
+  }
+
+
+  downloadBill(){
+    
   }
 
  

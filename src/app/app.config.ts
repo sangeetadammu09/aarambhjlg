@@ -147,7 +147,8 @@ export const APP_DI_CONFIG: any = {
         GetOrderListForApproval: '/Order/GetOrdersListForApproval',
         ApproveOrder: '/Order/ApproveOrder',
         GetInstallmentList : '/Order/GetInstallmentList',
-        GetApprovedOrdersList : '/Order/GetApprovedOrdersList',
+        GetApprovedOrdersForSoRoList : '/Order/GetApprovedOrdersForSoRoList',
+        GetApprovedOrdersForManagerList : '/Order/GetApprovedOrdersForManagerList',
         GetApprovedOrderDetails : '/Order/GetApprovedOrderDetails'
     }
   }

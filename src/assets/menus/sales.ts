@@ -172,7 +172,14 @@ export const SalesManagerList = {
                   url: 'order-details',
                   icon : 'fa-book',
                   isActive: true, 
-              }
+              },
+              {
+                id: 0,
+                menu: 'Approved Order',
+                url: 'approved-order',
+                icon : 'fa-book',
+                isActive: true, 
+            }
           ]
         }
     
