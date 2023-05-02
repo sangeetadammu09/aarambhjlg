@@ -82,10 +82,10 @@ export class ApprovedOrderComponent implements OnInit {
   printBill(divName:any){
    
     var printContents :any = document.getElementById(divName)?.innerHTML;
-    console.log(printContents)
-    document.body.innerHTML = printContents;
+    // console.log(printContents)
+    // document.body.innerHTML = printContents;
     window.print();
-    document.body.innerHTML = printContents;
+    // document.body.innerHTML = printContents;
   
   }
 
