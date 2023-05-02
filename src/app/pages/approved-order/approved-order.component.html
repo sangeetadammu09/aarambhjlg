@@ -74,7 +74,7 @@
           </button>
         </div>
         <div class="modal-body scrollable-modal">
-
+             <div class="wrapper"  id="approvedOrderPdf" #approvedOrderPdf>
             <div class="d-flex justify-content-center" *ngIf="approvedOrderDetailsObj">
                 <div class="d-flex flex-row align-items-center">
                     <div class="icon"> 
@@ -121,7 +121,6 @@
                        </div>
                 </div>  
             </div>
-
             <div class="table-responsive mt-3">
                 <table class="table card-table table-vcenter text-nowrap datatable" *ngIf="selectedOrderList?.length>0">
                
@@ -152,7 +151,6 @@
                       </div>
                     </div>
             </div>
-
             <div class="row d-flex">
               <div class="card-title col-lg-3">Service Charges:</div>
                <div class="col-lg-3">{{approvedOrderDetailsObj?.serviceCharges}}</div>
@@ -163,7 +161,6 @@
                <div class="card-title col-lg-3">Total Bill Amount :</div>
                <div class="col-lg-3">{{approvedOrderDetailsObj?.totalBillAmt}}</div>
             </div>
-
             <div class="table-responsive mt-3">
               <table class="table card-table table-vcenter text-nowrap datatable" *ngIf="orderinstallmentList?.length>0">
              
@@ -194,9 +191,11 @@
 
 
            </div>
+          </div>
            <div class="row mt-3">
             <div class="offset-lg-4 col-lg-4">
-             <button class="btn btn-primary  mr-2" (click)="printBill()">Print Bill</button>
+             <button class="btn btn-primary  mr-2" (click)="printBill('approvedOrderPdf')">Print Bill</button>
+          
              <button class="btn btn-primary" (click)="downloadBill()">Download Bill</button>
             </div>
      </div> 

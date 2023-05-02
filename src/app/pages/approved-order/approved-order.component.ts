@@ -1,7 +1,9 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { SalesRelationService } from 'src/app/sales-relation-officer/service/sales-relation.service';
 import * as moment from 'moment';
+import jspdf from 'jspdf';
+import html2canvas from "html2canvas";
 
 @Component({
   selector: 'app-approved-order',
@@ -19,6 +21,7 @@ export class ApprovedOrderComponent implements OnInit {
   userId = localStorage.getItem('userId');
   roleNo = localStorage.getItem('roleNo');
   approvedOrderDetailsObj :any ={};
+  @ViewChild('approvedOrderPdf', {static: false}) approvedOrderPdf!: ElementRef;
 
 
   constructor(private _saleService: SalesRelationService,private toastrService :ToastrService) { }
@@ -76,17 +79,34 @@ export class ApprovedOrderComponent implements OnInit {
 
   }
 
-  printBill(){
-
+  printBill(divName:any){
+   
+    var printContents :any = document.getElementById(divName)?.innerHTML;
+    console.log(printContents)
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = printContents;
+  
   }
 
 
   downloadBill(){
+    const pdfTable = this.approvedOrderPdf.nativeElement;
+    var data = document.getElementById("contentToConvert");
+    html2canvas(pdfTable).then(canvas => {
+      // Few necessary setting options
+      var imgWidth = 200;
+      var imgHeight = (canvas.height * imgWidth) / canvas.width;
     
+      const contentDataURL = canvas.toDataURL("image/png");
+      let pdf = new jspdf("p", "mm", "a4"); // A4 size page of PDF
+      var position = 0;
+      pdf.addImage(contentDataURL, "PNG", 4, position, imgWidth, imgHeight);
+      pdf.save("OrderBill.pdf"); // Generated PDF
+      // pdf.autoPrint();
+    });
   }
-
- 
-
+    
   
 
 }

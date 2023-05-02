@@ -15,6 +15,8 @@ import { AuthInterceptor } from "./auth.interceptor";
 import { AdminLayoutModule } from "./admin/layout/admin-layout/admin-layout.module";
 import { SalesRelationLayoutModule } from "./sales-relation-officer/layout/sales-relation-layout/sales-relation-layout.module";
 
+
+
 @NgModule({
   declarations: [
     AppComponent, 
@@ -34,7 +36,7 @@ import { SalesRelationLayoutModule } from "./sales-relation-officer/layout/sales
       timeOut: 3000, // 3 seconds
       progressBar: true,
       positionClass: "toast-top-center",
-    }),
+    })
   ],
   providers: [
     {
