@@ -81,14 +81,6 @@ export class ApprovedOrderComponent implements OnInit {
 
   }
 
-  public config = {
-    printMode: 'template-popup', // template
-    popupProperties: 'toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=0,fullscreen=yes',
-    pageTitle: 'Hello World',
-    templateString: '<header>I\'m part of the template header</header>{{printBody}}<footer>I\'m part of the template footer</footer>',
-    stylesheets: [{ rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' }],
-    styles: ['td { border: 1px solid black; color: green; }', 'table { border: 1px solid black; color: red }', 'header, table, footer { margin: auto; text-align: center; }']
-  }
 
   printBill(){
 
@@ -99,18 +91,18 @@ export class ApprovedOrderComponent implements OnInit {
     // });
     // printDoc.autoPrint();
     // printDoc.output("dataurlnewwindow");
-    var panel = document.getElementById("approvedOrderPdf");
+    var panel = this.approvedOrderPdf.nativeElement;
     if(panel){
-      console.log(panel.innerHTML)
+      console.log(this.approvedOrderPdf.nativeElement)
     var printWindow = window.open('', '', 'height=600,width=800');
-    printWindow?.document.write('<html><head>');
-    printWindow?.document.write('</head><body>');
+    printWindow?.document.write('<html><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css"><script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script><head>');
+    printWindow?.document.write('<style>.logo-image{margin-left: auto;margin-right: auto;display: block;}</style></head><body>');
     printWindow?.document.write(panel.innerHTML);
     printWindow?.document.write('</body></html>');
     printWindow?.document.close();
     setTimeout(function () {
         printWindow?.print();
-    }, 500);
+    }, 1000);
     return false;
   }
   

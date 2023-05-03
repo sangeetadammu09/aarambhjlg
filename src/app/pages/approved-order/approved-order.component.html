@@ -76,49 +76,47 @@
         <div class="modal-body scrollable-modal">
              <div class="wrapper"  id="approvedOrderPdf" #approvedOrderPdf>
             <div class="d-flex justify-content-center" *ngIf="approvedOrderDetailsObj">
-                <div class="d-flex flex-row align-items-center">
-                    <div class="icon"> 
-                        <i class="bx bxl-mailchimp"></i> </div>
-                        <div class="ms-2 c-details">
-                             <div class="row mt-3 mb-3">
+                <div class="container-xl">
+                       
+                             <div class="row row-deck row-cards mb-3">
                               <img src="../../../../assets/images/aalogo.png" alt="AarambhJLG" class="navbar-brand-image logo-image">
                                 <h2 class="text-center">Order and Payment Installment Details</h2>
                              </div>
-                            <div class="row d-flex">
+                            <div class="row row-deck row-cards">
 
-                              <div class="card-title col-lg-3">Bill Id :</div>
-                               <div class="col-lg-3">{{approvedOrderDetailsObj?.orderId}}</div>
+                              <div class="card-title col-lg-3 col-sm-3">Bill Id :</div>
+                               <div class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.orderId}}</div>
 
-                               <div class="card-title col-lg-3">Member Name :</div>
-                               <div class="col-lg-3">{{approvedOrderDetailsObj?.fullName}}</div>
+                               <div class="card-title col-lg-3 col-sm-3">Member Name :</div>
+                               <div class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.fullName}}</div>
 
-                               <div class="card-title col-lg-3">City :</div>
-                               <div class="col-lg-3">{{approvedOrderDetailsObj?.cityName}}</div>
+                               <div class="card-title col-lg-3 col-sm-3">City :</div>
+                               <div class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.cityName}}</div>
 
-                               <div class="card-title col-lg-3">Center :</div>
-                               <div class="col-lg-3">{{approvedOrderDetailsObj?.centerName}}</div>
+                               <div class="card-title col-lg-3 col-sm-3">Center :</div>
+                               <div class=" col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.centerName}}</div>
                               
-                               <div class="card-title col-lg-3">Center No :</div>
-                               <div class="col-lg-3">{{approvedOrderDetailsObj?.centerNo}}</div>
+                               <div class="card-title col-lg-3 col-sm-3">Center No :</div>
+                               <div class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.centerNo}}</div>
 
-                               <div class="card-title col-lg-3">Mobile :</div>
-                               <div class="col-lg-3">{{approvedOrderDetailsObj?.mobileNo}}</div>
+                               <div class="card-title col-lg-3 col-sm-3">Mobile :</div>
+                               <div class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.mobileNo}}</div>
 
-                               <div class="card-title col-lg-3">Address :</div>
-                               <div class="col-lg-3">{{approvedOrderDetailsObj?.address}}</div>
+                               <div class="card-title col-lg-3 col-sm-3">Address :</div>
+                               <div class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.address}}</div>
 
-                               <div class="card-title col-lg-3">Order Date :</div>
-                               <div class="col-lg-3">{{approvedOrderDetailsObj?.orderDate | date : "dd-mm-yyyy"}}</div>
+                               <div class="card-title col-lg-3 col-sm-3">Order Date :</div>
+                               <div class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.orderDate | date : "dd-mm-yyyy"}}</div>
 
-                               <div class="card-title col-lg-3">Order Taken By :</div>
-                               <div class="col-lg-3">{{approvedOrderDetailsObj?.orderTakenByName}},<span>{{approvedOrderDetailsObj?.orderTakenByRole}}</span> </div>
+                               <div class="card-title col-lg-3 col-sm-3">Order Taken By :</div>
+                               <div class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.orderTakenByName}},<span>{{approvedOrderDetailsObj?.orderTakenByRole}}</span> </div>
                                
-                               <div class="card-title col-lg-3">Pending Registration Fees :</div>
-                               <div class="col-lg-3">₹ 0.0</div>
+                               <div class="card-title col-lg-3 col-sm-3">Pending Registration Fees :</div>
+                               <div class="col-lg-3 col-sm-3">₹ 0.0</div>
                               
 
                             </div>
-                       </div>
+                  
                 </div>  
             </div>
             <div class="table-responsive mt-3">
@@ -132,7 +130,7 @@
                       <th scope="col" style="color: #fff;">Total</th>
                     </tr>
                  
-                  <tbody *ngFor="let item of selectedOrderList | paginate: { itemsPerPage: 10, currentPage: page }; let i = index ">
+                  <tbody *ngFor="let item of selectedOrderList; let i = index ">
                     <tr>
                       <td>{{10*(page-1)+i+1}}</td>
                       <td>{{item.productName}}</td> 
@@ -144,22 +142,22 @@
                   
               </table>
     
-                    <div class="card-footer d-flex align-items-center" style="background-color: #fff;">
+                    <!-- <div class="card-footer d-flex align-items-center" style="background-color: #fff;">
                       <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2" *ngIf="selectedOrderList.length != 0">
                           <pagination-controls previousLabel="Prev"nextLabel="Next" [responsive]="true"
                           (pageChange)="page = $event"></pagination-controls>
                       </div>
-                    </div>
+                    </div> -->
             </div>
-            <div class="row d-flex">
-              <div class="card-title col-lg-3">Service Charges:</div>
-               <div class="col-lg-3">{{approvedOrderDetailsObj?.serviceCharges}}</div>
+            <div class="row row-deck row-cards mb-3 mt-3">
+              <div class="card-title col-lg-3 col-sm-3">Service Charges:</div>
+               <div class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.serviceCharges}}</div>
 
-               <div class="card-title col-lg-3">Sub Total:</div>
-               <div class="col-lg-3">{{approvedOrderDetailsObj?.subTotal}}</div>
+               <div class="card-title col-lg-3 col-sm-3">Sub Total:</div>
+               <div class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.subTotal}}</div>
 
-               <div class="card-title col-lg-3">Total Bill Amount :</div>
-               <div class="col-lg-3">{{approvedOrderDetailsObj?.totalBillAmt}}</div>
+               <div class="card-title col-lg-3 col-sm-3">Total Bill Amount :</div>
+               <div class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.totalBillAmt}}</div>
             </div>
             <div class="table-responsive mt-3">
               <table class="table card-table table-vcenter text-nowrap datatable" *ngIf="orderinstallmentList?.length>0">
@@ -171,7 +169,7 @@
                     
                   </tr>
                
-                <tbody *ngFor="let item of orderinstallmentList | paginate: { itemsPerPage: 10, currentPage: page }; let i = index ">
+                <tbody *ngFor="let item of orderinstallmentList; let i = index ">
                   <tr>
                     <td>{{10*(page-1)+i+1}}</td>
                     <td> {{item.installmentDate}}</td>
@@ -182,12 +180,12 @@
                 
             </table>
   
-                  <div class="card-footer d-flex align-items-center" style="background-color: #fff;" >
+                  <!-- <div class="card-footer d-flex align-items-center" style="background-color: #fff;" >
                     <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2" *ngIf="orderinstallmentList.length != 0">
                         <pagination-controls previousLabel="Prev"nextLabel="Next" [responsive]="true"
                         (pageChange)="page = $event"></pagination-controls>
                     </div>
-                  </div>
+                  </div> -->
 
 
            </div>
