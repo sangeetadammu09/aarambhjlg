@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
    decodedToken!:any;
    loginText = "Login"
    loggedInBoolean: boolean = false;
+   @ViewChild('mypassword') mypassword:any;
 
   constructor( private _router: Router, private _fb: FormBuilder,private _toastrService: ToastrService, 
     private _commonService: CommonService, private masterService: MasterService) { 
@@ -90,6 +91,15 @@ export class LoginComponent implements OnInit {
        
     }else{
       console.log('invalid login')
+    }
+  }
+
+  showpassword() {
+    var passwordType = this.mypassword.nativeElement.type;
+    if (passwordType == "password") {
+      this.mypassword.nativeElement.type = "text";
+    } else {
+      this.mypassword.nativeElement.type = "password";
     }
   }
 

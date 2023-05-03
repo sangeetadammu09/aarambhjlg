@@ -3,7 +3,14 @@ export const SalesList = {
     statusCode: 200,
 
     data: [
-        
+      {
+        id: 1,
+        parentMenu: 'Dashboard',
+        icon : 'fa-cog',
+        isActive: true, 
+        url: 'dashboard',
+        submenuList: []
+      },
           {
             id: 1,
             parentMenu: 'Center',
@@ -77,22 +84,6 @@ export const SalesList = {
           },
           {
             id: 1,
-            parentMenu: 'Setting',
-            icon : 'fa-cog',
-            isActive: true, 
-            url: 'setting',
-            submenuList: [
-                {
-                    id: 0,
-                    menu: 'Change Password',
-                    url: 'change-password',
-                    icon : 'fa-wrench',
-                    isActive: true, 
-                }
-            ]
-          },
-          {
-            id: 1,
             parentMenu: 'Order',
             icon : 'fa-pencil',
             isActive: true, 
@@ -113,7 +104,16 @@ export const SalesList = {
                   isActive: true, 
               }
             ]
-          }
+          },
+          {
+            id: 1,
+            parentMenu: 'Setting',
+            icon : 'fa-cog',
+            isActive: true, 
+            url: 'setting',
+            submenuList: []
+          },
+
           
 
     ],
@@ -127,6 +127,14 @@ export const SalesManagerList = {
   statusCode: 200,
 
   data: [
+    {
+      id: 1,
+      parentMenu: 'Dashboard',
+      icon : 'fa-cog',
+      isActive: true, 
+      url: 'dashboard',
+      submenuList: []
+    },
         {
           id: 1,
           parentMenu: 'Member',

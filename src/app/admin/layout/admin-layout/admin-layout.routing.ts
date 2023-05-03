@@ -13,6 +13,7 @@ import { ProductCategoryComponent } from 'src/app/pages/product-category/product
 import { ProductDetailComponent } from 'src/app/pages/product-detail/product-detail.component';
 import { ProductPriceComponent } from 'src/app/pages/product-price/product-price.component';
 import { ProductsComponent } from 'src/app/pages/products/products.component';
+import { ProfileComponent } from 'src/app/pages/profile/profile.component';
 import { TaxSlotComponent } from 'src/app/pages/tax-slot/tax-slot.component';
 import { UnitComponent } from 'src/app/pages/unit/unit.component';
 import { UserContactsComponent } from 'src/app/pages/user-contacts/user-contacts.component';
@@ -42,5 +43,6 @@ export const AdminLayoutRoutes: Routes = [
      { path:'change-password', component: ChangePasswordComponent },
      { path:'user-contacts', component: UserContactsComponent },
      { path:'member-contacts', component: MemberContactsComponent },
+     { path:'my-profile', component: ProfileComponent },
    
 ];

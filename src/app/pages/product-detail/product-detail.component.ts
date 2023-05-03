@@ -12,7 +12,7 @@ export class ProductDetailComponent implements OnInit {
   productList: any =[];
   page = 1;
   total = 20;
-  pageSize = 10;
+  pageSize = 12;
   cityId = localStorage.getItem('userCity');
   userId = localStorage.getItem('userId');
   roleNo = localStorage.getItem('roleNo');

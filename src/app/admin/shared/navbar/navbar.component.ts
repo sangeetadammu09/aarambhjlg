@@ -144,5 +144,14 @@ export class NavbarComponent implements OnInit{
           this.router.navigate(['/'])
          })
       }
+      
+      myProfile(){
+        this.router.navigate(['/sales-manager-officer/my-profile'])
+      }
+
+      changePassword(){
+        this.router.navigate(['/sales-manager-officer/change-password'])
+      }
+
 
 }

@@ -1,9 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { SalesRelationService } from 'src/app/sales-relation-officer/service/sales-relation.service';
 import * as moment from 'moment';
 import jspdf from 'jspdf';
 import html2canvas from "html2canvas";
+import { NgxPrintElementService } from 'ngx-print-element';
+
+declare var $ :any;
 
 @Component({
   selector: 'app-approved-order',
@@ -24,7 +26,7 @@ export class ApprovedOrderComponent implements OnInit {
   @ViewChild('approvedOrderPdf', {static: false}) approvedOrderPdf!: ElementRef;
 
 
-  constructor(private _saleService: SalesRelationService,private toastrService :ToastrService) { }
+  constructor(private _saleService: SalesRelationService,public print: NgxPrintElementService) { }
 
   ngOnInit(): void {
     this.getapprovedOrderList();
@@ -79,13 +81,38 @@ export class ApprovedOrderComponent implements OnInit {
 
   }
 
-  printBill(divName:any){
-   
-    var printContents :any = document.getElementById(divName)?.innerHTML;
-    // console.log(printContents)
-    // document.body.innerHTML = printContents;
-    window.print();
-    // document.body.innerHTML = printContents;
+  public config = {
+    printMode: 'template-popup', // template
+    popupProperties: 'toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=0,fullscreen=yes',
+    pageTitle: 'Hello World',
+    templateString: '<header>I\'m part of the template header</header>{{printBody}}<footer>I\'m part of the template footer</footer>',
+    stylesheets: [{ rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' }],
+    styles: ['td { border: 1px solid black; color: green; }', 'table { border: 1px solid black; color: red }', 'header, table, footer { margin: auto; text-align: center; }']
+  }
+
+  printBill(){
+
+    // var divToPrint :any= document.getElementById('approvedOrderPdf');
+    var printDoc = new jspdf();
+    // printDoc.fromHTML($('#approvedOrderPdf').get(0), 10, 10, {
+    //     'width': 180
+    // });
+    // printDoc.autoPrint();
+    // printDoc.output("dataurlnewwindow");
+    var panel = document.getElementById("approvedOrderPdf");
+    if(panel){
+      console.log(panel.innerHTML)
+    var printWindow = window.open('', '', 'height=600,width=800');
+    printWindow?.document.write('<html><head>');
+    printWindow?.document.write('</head><body>');
+    printWindow?.document.write(panel.innerHTML);
+    printWindow?.document.write('</body></html>');
+    printWindow?.document.close();
+    setTimeout(function () {
+        printWindow?.print();
+    }, 500);
+    return false;
+  }
   
   }
 

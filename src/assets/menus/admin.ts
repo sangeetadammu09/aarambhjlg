@@ -5,6 +5,14 @@ export const AdminList = {
     data: [
         {
             id: 1,
+            parentMenu: 'Dashboard',
+            icon : 'fa-cog',
+            isActive: true, 
+            url: 'dashboard',
+            submenuList: []
+          },
+        {
+            id: 1,
             parentMenu: 'Admin Master',
             icon : 'fa-users',
             isActive: true,

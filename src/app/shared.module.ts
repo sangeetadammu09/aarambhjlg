@@ -16,7 +16,7 @@ import {ProgressBarModule} from 'primeng/progressbar';
 import {InputTextModule} from 'primeng/inputtext';
 import {TooltipModule} from 'primeng/tooltip';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
-import { NgxPrintElementModule } from "ngx-print-element/lib/ngx-print-element.module";
+import { NgxPrintElementModule } from "ngx-print-element";
 
 
 @NgModule({
@@ -34,7 +34,7 @@ import { NgxPrintElementModule } from "ngx-print-element/lib/ngx-print-element.m
     ProgressBarModule,
     HttpClientModule,
     FormsModule,ReactiveFormsModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,NgxPrintElementModule
    
   ],
   exports:[
@@ -51,7 +51,7 @@ import { NgxPrintElementModule } from "ngx-print-element/lib/ngx-print-element.m
     ProgressBarModule,
     ProgressSpinnerModule,
     HttpClientModule,
-    FormsModule,ReactiveFormsModule
+    FormsModule,ReactiveFormsModule,NgxPrintElementModule
   ],
   providers: []
 })
