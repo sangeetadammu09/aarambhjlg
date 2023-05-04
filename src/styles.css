@@ -30,6 +30,11 @@
     color: red !important;
 }
 
+.text-green{
+    color:green !important;
+    font-weight: bold !important;
+}
+
 .logo-image{
     margin-left: auto;
     margin-right: auto;

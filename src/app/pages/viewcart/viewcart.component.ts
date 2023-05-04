@@ -28,6 +28,7 @@ export class ViewcartComponent implements OnInit {
   rowValue: any;
   selectedCartId :any
   memberId :any
+  itemId: any;
   
 
   constructor(private _adminService:AdminService, private _salesService: SalesRelationService,
@@ -116,12 +117,14 @@ export class ViewcartComponent implements OnInit {
   }
 
   showdeleteCartModal(item:any){
+    console.log(item)
     this.cartItemId = item.cartId;
+    this.itemId = item.itemId;
     
  }
 
   deleteItem(){
-    this._salesService.removeItemFromCart(this.cartItemId,this.memberId).subscribe((data:any) => {
+    this._salesService.removeItemFromCart(this.cartItemId,this.itemId).subscribe((data:any) => {
       if(data.status == 200){
         this.toastrService.success('Item deleted successfully!');
         this.showViewCartModal();

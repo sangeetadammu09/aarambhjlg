@@ -135,14 +135,22 @@ export class OrderDetailsComponent implements OnInit {
      approveObject.rejectedByRole=  null,
      approveObject.rejectionComment=  '',
      approveObject.installmentApprovedId= this.paymentInstallmentNo.id
-     let installmentObj : any={};
-     installmentObj.memberId=  this.approveOrderObj.memberId,
-     installmentObj.orderId=  this.approveOrderObj.orderId,
-     installmentObj.installmentNo=  this.paymentInstallmentNo.installmentNo,
-     installmentObj.installmentDate=  moment(this.selectedOrderInstallmentList[0].installmentDate).format(),
-     installmentObj.installmentAmt=  this.selectedOrderInstallmentList[0].insatllmentAmount
-     let installmentTemp= [installmentObj, ...[]] 
-     approveObject.installments = installmentTemp;
+    //  let installmentObj : any={};
+    //  installmentObj.memberId=  this.approveOrderObj.memberId,
+    //  installmentObj.orderId=  this.approveOrderObj.orderId,
+    //  installmentObj.installmentNo=  this.paymentInstallmentNo.installmentNo,
+    //  installmentObj.installmentDate=  moment(this.selectedOrderInstallmentList[0].installmentDate).format(),
+    //  installmentObj.installmentAmt=  this.selectedOrderInstallmentList[0].insatllmentAmount
+    // let installmentTemp= [installmentObj, ...[]] 
+     this.selectedOrderInstallmentList.forEach((installment:any)=>{
+      installment.memberId = this.approveOrderObj.memberId;
+      installment.orderId = this.approveOrderObj.orderId;
+      installment.installmentAmt = installment.insatllmentAmount
+      installment.installmentDate=  moment(installment.installmentDate).format(),
+      delete installment.isPaid;
+      delete installment.insatllmentAmount;
+     })
+     approveObject.installments = this.selectedOrderInstallmentList;
     this._saleService.approveOrder(approveObject).subscribe((data) => {
      if(data.status == 200){
       this.toastrService.success('Order approved successfully')
