@@ -94,7 +94,7 @@ export class ApprovedOrderComponent implements OnInit {
     var panel = this.approvedOrderPdf.nativeElement;
     if(panel){
       console.log(this.approvedOrderPdf.nativeElement)
-    var printWindow = window.open('', '', 'height=600,width=800');
+    var printWindow = window.open('', '', 'height=600,width=1000');
     printWindow?.document.write('<html><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css"><script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script><head>');
     printWindow?.document.write('<style>.logo-image{margin-left: auto;margin-right: auto;display: block;}</style></head><body>');
     printWindow?.document.write(panel.innerHTML);
