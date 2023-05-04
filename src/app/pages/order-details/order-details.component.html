@@ -157,15 +157,28 @@
                                <div class="card-title col-lg-6">Total Bill Amount :</div>
                                <div class="col-lg-6">{{orderDetailsObj?.totalBillAmt | currency: 'INR'}}</div>
 
+                               <div class="card-title col-lg-6">Set Gaps  :</div>
+                             <div class="col-lg-6">
+                              <select class="custom-select" id="searchGap" [(ngModel)]="paymentGap" 
+                              (change)="getGapVal(paymentGap)">
+                                  <option value="" [selected]="''">Choose Payment Gap..</option>
+                                  <option *ngFor="let item of gapList" [ngValue]="item">
+                                      {{item.value}}</option>
+                                  </select>
+                             </div> 
+
                              <div class="card-title col-lg-6">Set Installments  :</div>
                              <div class="col-lg-6">
                               <select class="custom-select" id="searchInstallment" [(ngModel)]="paymentInstallment" 
-                              (change)="getInstallmentDetails(paymentInstallment,orderDetailsObj)">
+                              (change)="getInstallmentDetails(paymentInstallment,orderDetailsObj,paymentGap)">
                                   <option value="" [selected]="''">Choose Payment Installment..</option>
                                   <option *ngFor="let item of installmentList" [ngValue]="item">
                                       {{item.installment}}</option>
                                   </select>
-                             </div>     
+                             </div> 
+
+                             
+
                           </div>
                      </div>
               </div>  

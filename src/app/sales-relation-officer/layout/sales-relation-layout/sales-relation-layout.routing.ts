@@ -9,6 +9,7 @@ import { MemberKycComponent } from 'src/app/pages/member-kyc/member-kyc.componen
 import { NeworderComponent } from 'src/app/pages/neworder/neworder.component';
 import { ViewcartComponent } from 'src/app/pages/viewcart/viewcart.component';
 import { ApprovedOrderComponent } from 'src/app/pages/approved-order/approved-order.component';
+import { PaymentComponent } from 'src/app/pages/payment/payment.component';
 
 export const SalesRelationLayoutRoutes: Routes = [
 
@@ -22,6 +23,7 @@ export const SalesRelationLayoutRoutes: Routes = [
      { path:'new-order', component: NeworderComponent },
      { path:'view-cart', component: ViewcartComponent },
      { path:'approved-order', component: ApprovedOrderComponent },
+     { path:'payment', component: PaymentComponent },
      
 
     

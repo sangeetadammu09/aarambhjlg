@@ -150,6 +150,9 @@ export const APP_DI_CONFIG: any = {
         GetApprovedOrdersForSoRoList : '/Order/GetApprovedOrdersForSoRoList',
         GetApprovedOrdersForManagerList : '/Order/GetApprovedOrdersForManagerList',
         GetApprovedOrderDetails : '/Order/GetApprovedOrderDetails'
+    },
+    OrderInstallment:{
+      getTodaysInstallmentCollectionList: '/OrderInstallment/GetTodaysInstallmentCollectionList'
     }
   }
   

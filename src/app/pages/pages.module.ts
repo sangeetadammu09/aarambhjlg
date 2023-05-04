@@ -30,6 +30,7 @@ import { NeworderComponent } from './neworder/neworder.component';
 import { ViewcartComponent } from './viewcart/viewcart.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { ApprovedOrderComponent } from './approved-order/approved-order.component';
+import { PaymentComponent } from './payment/payment.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -63,7 +64,8 @@ import { ApprovedOrderComponent } from './approved-order/approved-order.componen
     NeworderComponent,
     ViewcartComponent,
     OrderDetailsComponent,
-    ApprovedOrderComponent
+    ApprovedOrderComponent,
+    PaymentComponent
   ]
 })
 

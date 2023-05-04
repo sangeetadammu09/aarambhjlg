@@ -30,6 +30,8 @@ export class OrderDetailsComponent implements OnInit {
   approveOrderObj: any;
   firstRole: any;
   paymentInstallmentNo: any;
+  gapList : any = [];
+  paymentGapValue:any
 
   constructor(private _saleService: SalesRelationService,private toastrService :ToastrService,
     private _adminService:AdminService) { }
@@ -39,6 +41,9 @@ export class OrderDetailsComponent implements OnInit {
     this.getAllInstallments();
     this.paymentInstallment = "";
     console.log(this.todayDate)
+
+    this.gapList = [{"id" : 0,"value" : 0},{"id" : 1,"value" : 1},{"id" : 2,"value" : 2},{"id" : 3,"value" : 3},
+    {"id" : 4,"value" : 4},{"id" : 5,"value" : 5},{"id" : 6,"value" : 6},{"id" : 7,"value" : 7}]
    
 
   }
@@ -102,9 +107,13 @@ export class OrderDetailsComponent implements OnInit {
    
   }
 
+  getGapVal(paymentGap:any){
+     this.paymentGapValue = paymentGap.value;
+  }
+
   getInstallmentDetails(item:any,orderDetailsObj:any){
     this.paymentInstallmentNo = item;
-    this._saleService.getInstallmentList(orderDetailsObj.totalBillAmt,item.installmentNo).subscribe((data) => {
+    this._saleService.getInstallmentList(orderDetailsObj.totalBillAmt,item.installmentNo,this.paymentGapValue).subscribe((data) => {
       console.log(data,'all installment table')
       if(data.length > 0){
         data.forEach((item:any) => {
@@ -142,7 +151,9 @@ export class OrderDetailsComponent implements OnInit {
     //  installmentObj.installmentDate=  moment(this.selectedOrderInstallmentList[0].installmentDate).format(),
     //  installmentObj.installmentAmt=  this.selectedOrderInstallmentList[0].insatllmentAmount
     // let installmentTemp= [installmentObj, ...[]] 
-     this.selectedOrderInstallmentList.forEach((installment:any)=>{
+      let insatallmentArray :any= [];
+      insatallmentArray = this.selectedOrderInstallmentList;
+      insatallmentArray.forEach((installment:any)=>{
       installment.memberId = this.approveOrderObj.memberId;
       installment.orderId = this.approveOrderObj.orderId;
       installment.installmentAmt = installment.insatllmentAmount

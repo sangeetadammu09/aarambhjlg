@@ -107,6 +107,14 @@ export const SalesList = {
           },
           {
             id: 1,
+            parentMenu: 'Payment',
+            icon : 'fa-money',
+            isActive: true, 
+            url: 'payment',
+            submenuList: []
+          },
+          {
+            id: 1,
             parentMenu: 'Setting',
             icon : 'fa-cog',
             isActive: true, 
@@ -183,13 +191,15 @@ export const SalesManagerList = {
               },
               {
                 id: 0,
-                menu: 'Approved Order',
+                menu: 'Approved Orders',
                 url: 'approved-order',
                 icon : 'fa-book',
                 isActive: true, 
             }
           ]
-        }
+        },
+        
+
     
   ],
   message: null,
