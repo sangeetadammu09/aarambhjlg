@@ -54,6 +54,10 @@ export class UserKycComponent implements OnInit {
   fileUrl: any;
   src = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
   noDocumentsFound = true;
+  documentPhoto: any;
+  documentAadhar: any;
+  documentAddress: any;
+  documentPan_VoterId: any;
 
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder,
@@ -61,13 +65,13 @@ export class UserKycComponent implements OnInit {
 
     this.addUserKycForm = this._formBuilder.group({
       userId: [],
-      isAadharVerified: [],
+      isAadharVerified: [, Validators.required],
       aadharComment: [],
-      isPan_VoterIdVerified: [],
+      isPan_VoterIdVerified: [, Validators.required],
       panComment: [],
-      isAddressVerified: [],
+      isAddressVerified: [, Validators.required],
       addressComment: [],
-      isPhotoVerified: [],
+      isPhotoVerified: [, Validators.required],
       photoComment: [],
       isKycCompleted: [, Validators.required]
     })  
@@ -126,39 +130,42 @@ export class UserKycComponent implements OnInit {
 
 
   showUserModal(item:any){
-    // console.log(item)
+    //console.log(item, 'user item')
     this.submitted = false;
     this.addUserKycForm.reset();
     this.addUserKycForm.markAsUntouched();
     this.addUserKycForm.markAsPristine();
     this.addUserKycForm.controls['isKycCompleted'].setValue('')
+    this.addUserKycForm.controls['isPhotoVerified'].setValue('')
+    this.addUserKycForm.controls['isAadharVerified'].setValue('')
+    this.addUserKycForm.controls['isAddressVerified'].setValue('')
+    this.addUserKycForm.controls['isPan_VoterIdVerified'].setValue('')
+
      this._adminService.getUserKycDetails(item.userId).subscribe((data:any) =>{
       console.log(data.status)
        if(data.status == 200){
         this.noDocumentsFound = false;
          this.userDetailsObj = data.body;
          this.userDocuments = data.body.documents;
+         console.log(this.userDocuments)
         this.addUserKycForm.patchValue({userId: data.userId,})
         this.userDocuments.forEach((user:any) =>{
           if(user.documentName == "Photo" || user.documentName == "photo"){
-            this.addUserKycForm.controls['isPhotoVerified'].setValue('Yes')
-          }else{
-            this.addUserKycForm.controls['isPhotoVerified'].setValue('No')
+
+            this.documentPhoto = user.url;
+            //this.addUserKycForm.controls['isPhotoVerified'].setValue('Yes')
           }
           if(user.documentName == "Aadhar" || user.documentName == "aadhar"){
-            this.addUserKycForm.controls['isAadharVerified'].setValue('Yes')
-          }else{
-            this.addUserKycForm.controls['isAadharVerified'].setValue('No')
+            this.documentAadhar = user.url;
+           // this.addUserKycForm.controls['isAadharVerified'].setValue('Yes')
           }
           if(user.documentName == "Address" || user.documentName == "address" ){
-            this.addUserKycForm.controls['isAddressVerified'].setValue('Yes')
-          }else{
-            this.addUserKycForm.controls['isAddressVerified'].setValue('No')
+            this.documentAddress = user.url;
+           // this.addUserKycForm.controls['isAddressVerified'].setValue('Yes')
           }
-          if(user.documentName == "Pan_VoterId" || user.documentName == "pan_voterid" ){
-            this.addUserKycForm.controls['isPan_VoterIdVerified'].setValue('Yes')
-          }else{
-            this.addUserKycForm.controls['isPan_VoterIdVerified'].setValue('No')
+          if(user.documentName == "Pan_VoterId" || user.documentName == "pan_voterid" || user.documentName == "Voter"){
+            this.documentPan_VoterId = user.url;
+           //this.addUserKycForm.controls['isPan_VoterIdVerified'].setValue('Yes')
           }
         })
 
@@ -168,10 +175,14 @@ export class UserKycComponent implements OnInit {
       
      },(err:HttpErrorResponse)=>{
       if(err.status == 500){
-            this.addUserKycForm.controls['isPhotoVerified'].setValue('No')
-            this.addUserKycForm.controls['isAadharVerified'].setValue('No')
-            this.addUserKycForm.controls['isAddressVerified'].setValue('No')
-            this.addUserKycForm.controls['isPan_VoterIdVerified'].setValue('No')
+        this.documentPhoto = null;
+        this.documentAadhar = null;
+        this.documentAddress = null;
+        this.documentPan_VoterId = null;
+            // this.addUserKycForm.controls['isPhotoVerified'].setValue('No')
+            // this.addUserKycForm.controls['isAadharVerified'].setValue('No')
+            // this.addUserKycForm.controls['isAddressVerified'].setValue('No')
+            // this.addUserKycForm.controls['isPan_VoterIdVerified'].setValue('No')
       }
      })
      
@@ -180,10 +191,10 @@ export class UserKycComponent implements OnInit {
 
   submitNewUser(){
     this.submitted = true;
+    console.log(this.addUserKycForm.value)
      if(this.addUserKycForm.valid){
       //  console.log(this.addUserForm.value)
          var addUserData :any = {};
-        
         addUserData.userId = this.userDetailsObj.userId;
         addUserData.isAadharVerified = this.addUserKycForm.controls['isAadharVerified'].value == 'Yes' ? true : false;
         addUserData.aadharComment = this.addUserKycForm.controls['aadharComment'].value;
@@ -205,8 +216,7 @@ export class UserKycComponent implements OnInit {
         })
          
       }else{
-     
-        console.log('invalid form')
+        return;
       }  
 
   }

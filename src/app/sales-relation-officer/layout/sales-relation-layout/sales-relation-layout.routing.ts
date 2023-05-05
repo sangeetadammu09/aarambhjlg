@@ -23,7 +23,7 @@ export const SalesRelationLayoutRoutes: Routes = [
      { path:'new-order', component: NeworderComponent },
      { path:'view-cart', component: ViewcartComponent },
      { path:'approved-order', component: ApprovedOrderComponent },
-     { path:'payment', component: PaymentComponent },
+     { path:'collections', component: PaymentComponent },
      
 
     

@@ -7,32 +7,34 @@
         <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <div class="col-lg-7 mb-3 mt-2">
+                <div class="col-lg-4 mb-3 mt-2">
                     <h3 class="card-title">List of Members</h3>
                 </div>
-                <div class="col-lg-3 mb-3 mt-2" *ngIf="roleNo == '102'">
-                    <select class="custom-select" id="searchMember" [(ngModel)]="searchMember" (change)="getMemberVal(searchMember)">
-                    <option value="" [selected]="''">Choose Center..</option>
-                    <option *ngFor="let item of memberDropdownList" [ngValue]="item.centerId">
-                        {{item.centerName}}</option>
-                    </select>
+                 <div class="col-lg-2 text-end">Select Center <span class="mandatory-text">*</span></div>
+                <div class="form-row" class="col-lg-4 mt-3">
+                    <div class="form-group">
+                      <div *ngIf="roleNo == '102'">
+                        <select class="custom-select" id="searchMember" [(ngModel)]="searchMember" (change)="getMemberVal(searchMember)">
+                        <option value="" [selected]="''">Choose Center..</option>
+                        <option *ngFor="let item of memberDropdownList" [ngValue]="item.centerId">
+                            {{item.centerName}}</option>
+                        </select>
+                      </div>
+    
+                      <div *ngIf="roleNo == '101'">
+                            <select class="custom-select" id="searchMember" [(ngModel)]="searchMember" (change)="getMemberVal(searchMember)">
+                            <option value="" [selected]="''">Choose Center..</option>
+                            <option *ngFor="let item of memberDropdownList" [ngValue]="item.centerId">
+                                {{item.centerName}}</option>
+                            </select>
+                      </div>
+                    </div>
                 </div>
-
-                <div class="col-lg-3 mb-3 mt-2" *ngIf="roleNo == '101'">
-                    <select class="custom-select" id="searchMember" [(ngModel)]="searchMember" (change)="getMemberVal(searchMember)">
-                    <option value="" [selected]="''">Choose Center..</option>
-                    <option *ngFor="let item of memberDropdownList" [ngValue]="item.centerId">
-                        {{item.centerName}}</option>
-                    </select>
-                </div>
-
-                <div class="col-lg-2 mb-3 mt-2">
+                <div class="col-lg-2 mb-3 mt-3">
                     <button class="btn btn-primary" data-toggle="modal" data-target="#addMemberModal"
                     (click)="showaddMemberModal()">Add Member</button>
                 </div>
-              </div>
-
-          
+              </div>      
             <div class="table-responsive" *ngIf="memberList.length != 0">
             <table class="table card-table table-vcenter text-nowrap datatable">
                
@@ -436,50 +438,27 @@
                 <div class="card-body">
                 <div class="d-flex justify-content-between">
                 <div class="d-flex flex-row align-items-center">
-                    <div class="icon"> 
-                        <i class="bx bxl-mailchimp"></i> </div>
                         <div class="ms-2 c-details">
-                            <div class="row d-flex">
-                               <div class="card-title col-lg-6">Name :</div>
-                               <div class="col-lg-6">{{memberDetailsObj.fullName}}</div>
-
-                               <div class="card-title col-lg-6">Contact :</div>
-                               <div class="col-lg-6">{{memberDetailsObj.mobileNo}}</div>
-
-                               <div class="card-title col-lg-6">Date of Joining :</div>
-                               <div class="col-lg-6">{{memberDetailsObj.dateOfJoining | date : "dd-mm-yyyy"}}</div>
-
-                               <div class="card-title col-lg-6">Valid Till :</div>
-                               <div class="col-lg-6">{{memberDetailsObj.validTillDate | date : "dd-mm-yyyy"}}</div>
-
-                               <div class="card-title col-lg-6">Family :</div>
-                               <div class="col-lg-6">{{memberDetailsObj.familyMembers}}</div>
-
-                               <div class="card-title col-lg-6">Center :</div>
-                               <div class="col-lg-6">{{memberDetailsObj.centerName}}</div>
-
-                               <div class="card-title col-lg-6">City :</div>
-                               <div class="col-lg-6">{{memberDetailsObj.cityName}}</div>
-
-                               <div class="card-title col-lg-6">Spouse :</div>
-                               <div class="col-lg-6">{{memberDetailsObj.spouse}}</div>
-
-                               <div class="card-title col-lg-6">Spouse Date Of Birth :</div>
-                               <div class="col-lg-6">{{memberDetailsObj.spouseDateOfBirth | date : "dd-mm-yyyy"}}</div>
-
-                               <div class="card-title col-lg-6">Anyone Studying:</div>
-                               <div class="col-lg-6">{{memberDetailsObj.anyOneStudying}}</div>
-
-                               <div class="card-title col-lg-6">Spouse Date Of Birth :</div>
-                               <div class="col-lg-6">{{memberDetailsObj.spouseDateOfBirth | date : "dd-mm-yyyy"}}</div>
-
+                            <div class="row row-deck row-cards">
+                               <div class="col-lg-6 col-sm-6"> <b class="mr-2">Name : </b> {{memberDetailsObj.fullName}}</div>
+                               <div class="col-lg-6 col-sm-6"> <b class="mr-2">Contact : </b> {{memberDetailsObj.mobileNo}}</div>
+                               <div class="col-lg-6 col-sm-6"> <b class="mr-2">Date of Joining : </b> {{memberDetailsObj.dateOfJoining | date : "dd-mm-yyyy"}}</div>
+                               <div class="col-lg-6 col-sm-6"> <b class="mr-2">Valid Till : </b> {{memberDetailsObj.validTillDate | date : "dd-mm-yyyy"}}</div>
+                               <div class="col-lg-6 col-sm-6"> <b class="mr-2">Family : </b> {{memberDetailsObj.familyMembers}}</div>
+                               <div class="col-lg-6 col-sm-6"> <b class="mr-2">Center : </b> {{memberDetailsObj.centerName}}</div>
+                               <div class="col-lg-6 col-sm-6"> <b class="mr-2">City : </b> {{memberDetailsObj.cityName}}</div>
+                               <div class="col-lg-6 col-sm-6"> <b class="mr-2">Spouse : </b> {{memberDetailsObj.spouse}}</div>
+                               <div class="col-lg-6 col-sm-6"> <b class="mr-2">Spouse Date Of Birth : </b> {{memberDetailsObj.spouseDateOfBirth | date : "dd-mm-yyyy"}}</div>
+                               <div class="col-lg-6 col-sm-6"> <b class="mr-2">Anyone Studying : </b> {{memberDetailsObj.anyOneStudying}}</div>
+                               <div class="col-lg-6 col-sm-6"> <b class="mr-2">Spouse : </b> {{memberDetailsObj.spouse}}</div>
+                             
                             </div>
                        </div>
                 </div>  
                 </div>
                 </div>   
             </div>
-                        <!-- Page body -->
+            <!-- Page body -->
             <div class="page-body">
                 <div class="container-xl">
                 <div class="row row-cards">

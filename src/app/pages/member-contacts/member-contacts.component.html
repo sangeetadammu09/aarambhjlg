@@ -30,7 +30,7 @@
                   <div class="col col-3" *ngFor="let item of memberList| paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: total };
                   let i = index">
                     <div class="card" style="height:65vh">
-                      <img class="card-img-top" [src]="item.documentUrl" alt="User Document" width="87%" height="45%">
+                      <img class="card-img-top" [src]="item.documentUrl" alt="User Document" width="100%" height="250vh">
                       <div class="card-body">
                         <h5 class="card-title">Name: {{item.fullName}}</h5>
                         <p class="card-text">Mobile No: {{item.mobileNo}}</p>

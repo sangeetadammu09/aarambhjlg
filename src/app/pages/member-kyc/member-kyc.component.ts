@@ -59,6 +59,10 @@ export class MemberKycComponent implements OnInit {
   roleNo = localStorage.getItem('roleNo');
   memberDropdownList: any =[];
   searchMember:any
+  documentPhoto: any;
+  documentAadhar: any;
+  documentAddress: any;
+  documentPan_VoterId: any;
 
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder,
@@ -66,13 +70,13 @@ export class MemberKycComponent implements OnInit {
 
     this.addMemberKycForm = this._formBuilder.group({
       memberId: [],
-      isAadharVerified: [],
+      isAadharVerified: [, Validators.required],
       aadharComment: [],
-      isPan_VoterIdVerified: [],
+      isPan_VoterIdVerified: [, Validators.required],
       panComment: [],
-      isAddressVerified: [],
+      isAddressVerified: [, Validators.required],
       addressComment: [],
-      isPhotoVerified: [],
+      isPhotoVerified: [, Validators.required],
       photoComment: [],
       isKycCompleted: [, Validators.required]
     })  
@@ -159,12 +163,17 @@ export class MemberKycComponent implements OnInit {
 
 
   showMemberModal(item:any){
-    // console.log(item)
+     console.log(item,'member item')
     this.submitted = false;
     this.addMemberKycForm.reset();
     this.addMemberKycForm.markAsUntouched();
     this.addMemberKycForm.markAsPristine();
+    this.addMemberKycForm.controls['isKycCompleted'].setValue('');
     this.addMemberKycForm.controls['isKycCompleted'].setValue('')
+    this.addMemberKycForm.controls['isPhotoVerified'].setValue('')
+    this.addMemberKycForm.controls['isAadharVerified'].setValue('')
+    this.addMemberKycForm.controls['isAddressVerified'].setValue('')
+    this.addMemberKycForm.controls['isPan_VoterIdVerified'].setValue('')
      this._salesService.getMemberKycDetails(item.memberId).subscribe((data:any) =>{
       console.log(data.status)
        if(data.status == 200){
@@ -174,24 +183,20 @@ export class MemberKycComponent implements OnInit {
         this.addMemberKycForm.patchValue({memberId: data.memberId,})
         this.memberDocuments.forEach((member:any) =>{
           if(member.documentName == "Photo" || member.documentName == "photo"){
-            this.addMemberKycForm.controls['isPhotoVerified'].setValue('Yes')
-          }else{
-            this.addMemberKycForm.controls['isPhotoVerified'].setValue('No')
+            //this.addMemberKycForm.controls['isPhotoVerified'].setValue('Yes')
+            this.documentPhoto = member.url;
           }
           if(member.documentName == "Aadhar" || member.documentName == "aadhar"){
-            this.addMemberKycForm.controls['isAadharVerified'].setValue('Yes')
-          }else{
-            this.addMemberKycForm.controls['isAadharVerified'].setValue('No')
+            //this.addMemberKycForm.controls['isAadharVerified'].setValue('Yes');
+            this.documentAadhar = member.url;
           }
           if(member.documentName == "Address" || member.documentName == "address" ){
-            this.addMemberKycForm.controls['isAddressVerified'].setValue('Yes')
-          }else{
-            this.addMemberKycForm.controls['isAddressVerified'].setValue('No')
+            //this.addMemberKycForm.controls['isAddressVerified'].setValue('Yes');
+            this.documentAddress = member.url;
           }
           if(member.documentName == "Pan_VoterId" || member.documentName == "pan_voterid" ){
-            this.addMemberKycForm.controls['isPan_VoterIdVerified'].setValue('Yes')
-          }else{
-            this.addMemberKycForm.controls['isPan_VoterIdVerified'].setValue('No')
+           // this.addMemberKycForm.controls['isPan_VoterIdVerified'].setValue('Yes')
+           this.documentPan_VoterId = member.url;
           }
         })
 
@@ -201,10 +206,10 @@ export class MemberKycComponent implements OnInit {
       
      },(err:HttpErrorResponse)=>{
       if(err.status == 500){
-            this.addMemberKycForm.controls['isPhotoVerified'].setValue('No')
-            this.addMemberKycForm.controls['isAadharVerified'].setValue('No')
-            this.addMemberKycForm.controls['isAddressVerified'].setValue('No')
-            this.addMemberKycForm.controls['isPan_VoterIdVerified'].setValue('No')
+        this.documentPhoto = null;
+        this.documentAadhar = null;
+        this.documentAddress = null;
+        this.documentPan_VoterId = null;
       }
      })
      
@@ -239,7 +244,7 @@ export class MemberKycComponent implements OnInit {
          
       }else{
      
-        console.log('invalid form')
+        return;
       }  
 
   }

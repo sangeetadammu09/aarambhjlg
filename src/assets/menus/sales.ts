@@ -111,7 +111,16 @@ export const SalesList = {
             icon : 'fa-money',
             isActive: true, 
             url: 'payment',
-            submenuList: []
+            submenuList:[
+              {
+                  id: 0,
+                  menu: 'Collections',
+                  url: 'collections',
+                  icon : 'fa-money',
+                  isActive: true, 
+              },
+              
+          ]
           },
           {
             id: 1,

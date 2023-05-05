@@ -67,12 +67,26 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">   
+        <div class="modal-body scrollable-modal">   
             <form [formGroup]="addUserKycForm" (ngSubmit)="submitNewUser()">
                 <div class="row">
+                    <div class="row row-deck row-cards mb-3">
+                        <img [src]="documentAadhar" alt="User Documents" class="logo-image"  *ngIf="documentAadhar">
+                        <p class="text-center" *ngIf="!documentAadhar">No Aadhaar Image available</p>
+                    </div>
                     <div class="form-group col-lg-6">
                         <label class="form-control-label">Aadhaar Verification</label>
-                        <input type="text" class="form-control" formControlName="isAadharVerified" name="isAadharVerified"  readonly>
+                        <!-- <input type="text" class="form-control" formControlName="isAadharVerified" name="isAadharVerified"  readonly> -->
+                        <select class="custom-select"  formControlName="isAadharVerified" name="isAadharVerified" id="isAadharVerified">
+                            <option value="" [selected]="''">Choose..</option>
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                       </select>
+                       <div *ngIf="(submitted && f['isAadharVerified'].errors) ||(f['isAadharVerified'].errors && f['isAadharVerified'].touched)" class="invalid-feedback">
+                            <div *ngIf="f['isAadharVerified'].errors['required']">
+                                Aadhaar Verification is required
+                            </div>
+                     </div>
 
                     </div>
                     <div class="form-group col-lg-6">
@@ -88,10 +102,24 @@
                     
                 </div>
                 <div class="row">
+                    <div class="row row-deck row-cards mb-3">
+                        <img [src]="documentPan_VoterId" alt="User Documents" class="logo-image"  *ngIf="documentPan_VoterId">
+                        <p class="text-center" *ngIf="!documentPan_VoterId">No Pan/Voter Image available</p>
+                    </div>
+                   
                     <div class="form-group col-lg-6">
                         <label class="form-control-label">Pan Verification</label>
-                        <input type="text" class="form-control" formControlName="isPan_VoterIdVerified" name="isPan_VoterIdVerified" readonly>
-                           
+                        <!-- <input type="text" class="form-control" formControlName="isPan_VoterIdVerified" name="isPan_VoterIdVerified" readonly> -->
+                        <select class="custom-select"  formControlName="isPan_VoterIdVerified" name="isPan_VoterIdVerified" id="isPan_VoterIdVerified">
+                            <option value="" [selected]="''">Choose..</option>
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                       </select>
+                       <div *ngIf="(submitted && f['isPan_VoterIdVerified'].errors) ||(f['isPan_VoterIdVerified'].errors && f['isPan_VoterIdVerified'].touched)" class="invalid-feedback">
+                            <div *ngIf="f['isPan_VoterIdVerified'].errors['required']">
+                                PAN/Voter Verification is required
+                            </div>
+                     </div>  
                     </div>
                     <div class="form-group col-lg-6">
                         <label class="form-control-label">Comment</label>
@@ -108,9 +136,23 @@
                 </div>
 
                 <div class="row">
+                    <div class="row row-deck row-cards mb-3" >
+                        <img [src]="documentAddress" alt="User Documents" class="logo-image" *ngIf="documentAddress">
+                        <p class="text-center" *ngIf="!documentAddress">No Address Image available</p>
+                    </div>
                     <div class="form-group col-lg-6">
                         <label class="form-control-label">Address Verification</label>
-                        <input type="text" class="form-control" formControlName="isAddressVerified" name="isAddressVerified" readonly>
+                        <!-- <input type="text" class="form-control" formControlName="isAddressVerified" name="isAddressVerified" readonly> -->
+                        <select class="custom-select"  formControlName="isAddressVerified" name="isAddressVerified" id="isAddressVerified">
+                            <option value="" [selected]="''">Choose..</option>
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                       </select>
+                       <div *ngIf="(submitted && f['isAddressVerified'].errors) ||(f['isAddressVerified'].errors && f['isAddressVerified'].touched)" class="invalid-feedback">
+                            <div *ngIf="f['isAddressVerified'].errors['required']">
+                                Address Verification is required
+                            </div>
+                     </div>  
                             
                     </div>
                     <div class="form-group col-lg-6">
@@ -128,9 +170,24 @@
                 </div>
 
                 <div class="row">
+                    <div class="row row-deck row-cards mb-3" >
+                        <img [src]="documentPhoto" alt="User Documents" class="logo-image" *ngIf="documentPhoto">
+                        <p class="text-center" *ngIf="!documentPhoto">No Photo available</p>
+                    </div>
+                   
                     <div class="form-group col-lg-6">
                         <label class="form-control-label">Photo Verification</label>
-                        <input type="text" class="form-control" formControlName="isPhotoVerified" name="isPhotoVerified" readonly>
+                        <!-- <input type="text" class="form-control" formControlName="isPhotoVerified" name="isPhotoVerified" readonly> -->
+                        <select class="custom-select"  formControlName="isPhotoVerified" name="isPhotoVerified" id="isPhotoVerified">
+                            <option value="" [selected]="''">Choose..</option>
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                       </select>
+                       <div *ngIf="(submitted && f['isPhotoVerified'].errors) ||(f['isPhotoVerified'].errors && f['isPhotoVerified'].touched)" class="invalid-feedback">
+                            <div *ngIf="f['isPhotoVerified'].errors['required']">
+                                Photo Verification is required
+                            </div>
+                     </div> 
                             
                     </div>
                     <div class="form-group col-lg-6">
@@ -148,6 +205,7 @@
                 </div>
 
                 <div class="row">
+                   
                     <div class="form-group col-lg-6">
                         <label class="form-control-label">KYC Completed</label>
                         <select class="custom-select"  formControlName="isKycCompleted" name="isKycCompleted" id="isKycCompleted">

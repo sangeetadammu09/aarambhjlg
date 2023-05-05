@@ -1,114 +1,91 @@
-<div class="wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-10">
-                <h3 class="mb-2 mt-2">User Details</h3>
-            </div>
-         </div>
-         <div class="row bg-white">
-            <div class="offset-md-4 col-md-4 mt-3 mb-3">
-                <div class="card p-3 mb-2">
-                    <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                    <div class="d-flex flex-row align-items-center">
-                        <div class="icon"> 
-                            <i class="bx bxl-mailchimp"></i>
-                        </div>
-                                <div class="ms-2 c-details">
-                                     <div class="row d-flex">
-                                        <div class="card-title col-lg-6">Name :</div>
-                                        <div class="col-lg-6">{{userDetailsObj.fullName}}</div>
-    
-                                        <div class="card-title col-lg-6">Email :</div>
-                                        <div class="col-lg-6">{{userDetailsObj.email}}</div>
-    
-                                        <div class="card-title col-lg-6">Contact :</div>
-                                        <div class="col-lg-6">{{userDetailsObj.mobileNo}}</div>
-    
-                                        <div class="card-title col-lg-6">DOB :</div>
-                                        <div class="col-lg-6">{{userDetailsObj.dateOfBirth | date : "dd-mm-yyyy"}}</div>
-    
-                                        <div class="card-title col-lg-6">Family :</div>
-                                        <div class="col-lg-6">{{userDetailsObj.familyDetails}}</div>
-    
-                                        <div class="card-title col-lg-6">Address :</div>
-                                        <div class="col-lg-6">{{userDetailsObj.address}}</div>
-    
-                                        <div class="card-title col-lg-6">City :</div>
-                                        <div class="col-lg-6">{{userDetailsObj.cityName}}</div>
-      
-                                     </div>
-                                </div>
-                    </div>  
-                    </div>
-                    </div>   
-                </div>
-             </div>
-         </div>
-         
-         <div class="page-body">
-          <div class="container-xl">
-            <div class="row row-cards">
-              <div class="col-12">
-                  <div class="card">
-                    <div class="card-header">
-                      <div class="col-lg-10 mb-3 mt-2">
-                          <h3 class="card-title">User Documents</h3>
-                      </div>
-                    </div>
-                    <div class="table-responsive">
-            <table class="table card-table table-vcenter text-nowrap datatable">
+<div class="page-body">
+  <div class="container-xl">
+    <div class="row row-cards">
+      <div class="col-12">
+      <div class="card">
+        <div class="card-header mb-3 mt-3">
+          <h3 class="card-title">User Details</h3>
+        </div>
+        <div class="card-body p-3 mb-2">
+                <div class="row row-deck row-cards">
                 
-                  <tr style="background-color:#1d4ed8;">
-                    <th scope="col" style="color: #fff; font-family: sans-serif;">S No.</th>
-                    <th scope="col" style="color: #fff; font-family: sans-serif;">Name</th>
-                    <th scope="col" style="color: #fff; font-family: sans-serif;">Details</th>
-                  </tr>
-                
-                <tbody *ngFor="let item of userDocuments | paginate: { itemsPerPage: 5, currentPage: pagenew } ; let i = index ">
-                  <tr>
-                    <td>{{5*(pagenew-1)+i+1}}</td>
-                    <td>{{item.documentName}}</td> 
-                    <td (click)="showUserDocuments(item)" data-toggle="modal" data-target="#showUserDocModal" *ngIf="item.fileType == '.png' || item.fileType == '.jpg'">
-                        <button class="btn btn-primary">View Image</button>
-                       
-                    </td>
-                    <td *ngIf="item.fileType == '.pdf'">
-                        <a [href]="item.url" target="_blank">
-                            <button class="btn btn-primary">Open PDF</button></a>
-                    </td>     
-                  </tr>        
-                </tbody>      
-            </table>
-            <div class="card-footer d-flex align-items-center" style="background-color: #fff;">
-              <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
-                <pagination-controls previousLabel="Prev"nextLabel="Next" (pageChange)="pagenew = $event" [responsive]="true"></pagination-controls>
-            </div>
+                  <div class="col-lg-3 col-sm-3"> <b class="mr-2">Name : </b> {{userDetailsObj.fullName}}</div>
+                  <div class="col-lg-3 col-sm-3"> <b class="mr-2">Email : </b> {{userDetailsObj.email}}</div>
+                  <div class="col-lg-3 col-sm-3"> <b class="mr-2">Contact : </b> {{userDetailsObj.mobileNo}}</div>
+                  <div class="col-lg-3 col-sm-3"> <b class="mr-2">DOB : </b> {{userDetailsObj.dateOfBirth | date :
+                    "dd-mm-yyyy"}}</div>
+                  <div class="col-lg-3 col-sm-3"> <b class="mr-2">Family : </b> {{userDetailsObj.familyDetails}}</div>
+                  <div class="col-lg-3 col-sm-3"> <b class="mr-2">Address : </b> {{userDetailsObj.address}}</div>
+                  <div class="col-lg-3 col-sm-3"> <b class="mr-2">City : </b> {{userDetailsObj.cityName}}</div>
+                  </div>
+              
+             
+           
+        </div>
+     
+        <div class="card-header">
+          <div class="col-lg-10 mb-3 mt-2">
+            <h3 class="card-title">User Documents</h3>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table card-table table-vcenter text-nowrap datatable">
+
+            <tr style="background-color:#1d4ed8;">
+              <th scope="col" style="color: #fff; font-family: sans-serif;">S No.</th>
+              <th scope="col" style="color: #fff; font-family: sans-serif;">Name</th>
+              <th scope="col" style="color: #fff; font-family: sans-serif;">Details</th>
+            </tr>
+
+            <tbody
+              *ngFor="let item of userDocuments | paginate: { itemsPerPage: 5, currentPage: pagenew } ; let i = index ">
+              <tr>
+                <td>{{5*(pagenew-1)+i+1}}</td>
+                <td>{{item.documentName}}</td>
+                <td (click)="showUserDocuments(item)" data-toggle="modal" data-target="#showUserDocModal"
+                  *ngIf="item.fileType == '.png' || item.fileType == '.jpg'">
+                  <button class="btn btn-primary">View Image</button>
+
+                </td>
+                <td *ngIf="item.fileType == '.pdf'">
+                  <a [href]="item.url" target="_blank">
+                    <button class="btn btn-primary">Open PDF</button></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="card-footer d-flex align-items-center" style="background-color: #fff;">
+            <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
+              <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="pagenew = $event"
+                [responsive]="true"></pagination-controls>
             </div>
           </div>
         </div>
+        </div>
+      </div>
+     
     </div>
-    </div>
-    </div>
+  </div>
+</div>
+
 
 
 <div class="modal fade" id="showUserDocModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">User Document</h5>
-         
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeUserDocBtn>
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-                  <div class="g-4 align-self-center text-center">
-                        <p>{{userDocImage.documentName}}</p>
-                        <img [src]="fileUrl" alt="Documents" >
-                  </div>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">User Document</h5>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeUserDocBtn>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="g-4 align-self-center text-center">
+          <p>{{userDocImage.documentName}}</p>
+          <img [src]="fileUrl" alt="Documents">
         </div>
       </div>
     </div>
+  </div>
 </div>
-

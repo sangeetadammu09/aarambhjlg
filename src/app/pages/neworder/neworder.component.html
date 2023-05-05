@@ -68,9 +68,6 @@
                           </div>
                           </div>
                         </div>
-
-                       
-   
                     </div>
                 </div>
                 
@@ -85,7 +82,7 @@
                     (click)="showProductModal(item,i)">
                     <div class="card-body">
                       <h5 class="card-title" style="height: 40px" data-toggle="modal" data-target="#productModal"
-                      (click)="showProductModal(item,i)">Name: {{item.productName}}</h5>
+                      (click)="showProductModal(item,i)">{{item.productName}}</h5>
                       <p class="card-text">Regional Name: {{item.regionalName}}</p>
                       <p class="card-text">MRP: {{item.mrp | currency: 'INR'}}</p>
                       <p class="card-text">Sale Price: {{item.jlgSalePrice | currency: 'INR'}}</p>
