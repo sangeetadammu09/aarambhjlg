@@ -155,7 +155,7 @@ export class UserKycComponent implements OnInit {
             this.documentPhoto = user.url;
             //this.addUserKycForm.controls['isPhotoVerified'].setValue('Yes')
           }
-          if(user.documentName == "Aadhar" || user.documentName == "aadhar"){
+          if(user.documentName == "Aadhaar Front" || user.documentName == "aadhaar front"){
             this.documentAadhar = user.url;
            // this.addUserKycForm.controls['isAadharVerified'].setValue('Yes')
           }

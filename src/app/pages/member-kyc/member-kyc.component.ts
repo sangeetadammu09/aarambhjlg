@@ -186,7 +186,7 @@ export class MemberKycComponent implements OnInit {
             //this.addMemberKycForm.controls['isPhotoVerified'].setValue('Yes')
             this.documentPhoto = member.url;
           }
-          if(member.documentName == "Aadhar" || member.documentName == "aadhar"){
+          if(member.documentName == "Aadhaar Front" || member.documentName == "aadhar front"){
             //this.addMemberKycForm.controls['isAadharVerified'].setValue('Yes');
             this.documentAadhar = member.url;
           }
@@ -194,7 +194,7 @@ export class MemberKycComponent implements OnInit {
             //this.addMemberKycForm.controls['isAddressVerified'].setValue('Yes');
             this.documentAddress = member.url;
           }
-          if(member.documentName == "Pan_VoterId" || member.documentName == "pan_voterid" ){
+          if(member.documentName == "Pan_VoterId" || member.documentName == "pan_voterid" || member.documentName == "Voter" ){
            // this.addMemberKycForm.controls['isPan_VoterIdVerified'].setValue('Yes')
            this.documentPan_VoterId = member.url;
           }

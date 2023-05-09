@@ -152,7 +152,9 @@ export const APP_DI_CONFIG: any = {
         GetApprovedOrderDetails : '/Order/GetApprovedOrderDetails'
     },
     OrderInstallment:{
-      getTodaysInstallmentCollectionList: '/OrderInstallment/GetTodaysInstallmentCollectionList'
+      getOrderInstallmentCollectionList: '/OrderInstallment/GetOrderInstallmentCollectionList',
+      makeInstallmentPayment: '/OrderInstallment/MakeInstallment/MakeInstallmentPayment',
+      getOrderInstallmentHistory: '/OrderInstallment/GetOrderInstallmentHistory'
     }
   }
   

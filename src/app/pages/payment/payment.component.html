@@ -29,11 +29,21 @@
                               (change)="getinstallmentDate(installmentDate)" placeholder="Search Installment Date">
                             </div>
                           </div>
+
+                          <div class="form-group col-md-6">
+                            <label for="searchMember">Select Member</label>
+                            <select class="custom-select" id="searchMember" [(ngModel)]="searchMember" (change)="getMemberVal(searchMember)">
+                              <option value="" [selected]="''">Choose Member..</option>
+                              <option *ngFor="let item of memberDropdownList" [ngValue]="item.memberId">
+                                  {{item.fullName}}
+                              </option>
+                              </select>
+                          </div>
                     </div>
                 </div>
                 
                   </div>
-                  <div class="table-responsive" *ngIf="installmentCollectionList.length != 0">
+                <div class="table-responsive" *ngIf="installmentCollectionList.length != 0">
                     <table class="table card-table table-vcenter text-nowrap datatable">
                         
                           <tr style="background-color:#1d4ed8;">
@@ -43,6 +53,7 @@
                             <th scope="col" style="color: #fff;">Installment No</th>
                             <th scope="col" style="color: #fff;">Installment Date</th>
                             <th scope="col" style="color: #fff;">Installment Amount</th>
+                            <th scope="col" style="color: #fff;">Edit</th>
                             
                           </tr>
                         
@@ -55,6 +66,12 @@
                             <td>{{item.installmentNo}}</td>
                             <td>{{item.installmentDate | date:"dd-mm-yyyy"}}</td>
                             <td>{{item.installmentAmt}}</td>
+                            <td (click)="showeditCollectionModal(item)" data-toggle="modal" data-target="#addeditProductBrandModal">
+                              <svg enable-background="new 0 0 19 19" height="19px" id="Layer_1" version="1.1" viewBox="0 0 19 19" width="19px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                  <g><path d="M8.44,7.25C8.348,7.342,8.277,7.447,8.215,7.557L8.174,7.516L8.149,7.69   C8.049,7.925,8.014,8.183,8.042,8.442l-0.399,2.796l2.797-0.399c0.259,0.028,0.517-0.007,0.752-0.107l0.174-0.024l-0.041-0.041   c0.109-0.062,0.215-0.133,0.307-0.225l5.053-5.053l-3.191-3.191L8.44,7.25z" fill="#231F20"/>
+                                  <path d="M18.183,1.568l-0.87-0.87c-0.641-0.641-1.637-0.684-2.225-0.097l-0.797,0.797l3.191,3.191l0.797-0.798   C18.867,3.205,18.824,2.209,18.183,1.568z" fill="#231F20"/><path d="M15,9.696V17H2V2h8.953l1.523-1.42c0.162-0.161,0.353-0.221,0.555-0.293   c0.043-0.119,0.104-0.18,0.176-0.287H0v19h17V7.928L15,9.696z" fill="#231F20"/>
+                              </g></svg>
+                          </td>  
             
                           </tr>        
                         </tbody>
@@ -64,10 +81,7 @@
                 </div>
                 <div class="mt-3" *ngIf="installmentCollectionList.length == 0">
                     <p class="text-center">No Installment Collection found</p>
-                  </div>
-    
-        
-
+                </div>
                 <div class="card-footer d-flex align-items-center" style="background-color: #fff;">
                   <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2" *ngIf="installmentCollectionList.length != 0">
                       <pagination-controls previousLabel="Prev"nextLabel="Next" [responsive]="true"
@@ -79,4 +93,111 @@
     </div>
 </div>
 </div>
+</div>
+
+<!-- add/edit ProductBrand modal -->
+<div class="modal fade" id="addeditProductBrandModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h5 class="modal-title" id="exampleModalLabel">Edit Payment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closededitCollectionBtn>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+  
+      <div class="modal-body scrollable-modal">
+          <form [formGroup]="updatePaymentForm" (ngSubmit)="submitUpdatePayment()">
+              <div class="form-row">
+              <div class="form-group col-lg-6">
+                  <label class="form-control-label">Member Name</label>
+                  <input type="text" class="form-control" formControlName="memberName" name="memberName" readonly>  
+              </div>
+
+              <div class="form-group col-lg-6">
+                  <label class="form-control-label">Installment No</label>
+                  <input type="text" class="form-control" formControlName="installmentNo" name="installmentNo"  readonly>    
+              </div>
+            </div>
+
+             <div class="form-row">
+              <div class="form-group col-lg-6">
+                <label class="form-control-label">Order Id</label>
+                <input type="text" class="form-control" formControlName="orderId" name="orderId" readonly>     
+            </div>
+            <div class="form-group col-lg-6">
+              <label class="form-control-label">Payment Date</label>
+              <input type="text" class="form-control" formControlName="paidDate" name="paidDate">     
+           </div>
+             </div>
+             
+              <div class="form-row">
+                <div class="form-group col-lg-6">
+                  <label class="form-control-label">Payment Amount</label>
+                  <input type="text" class="form-control" formControlName="payingAmt" name="payingAmt"
+                  [ngClass]="{'is-invalid':(submitted && g['payingAmt'].errors) ||(g['payingAmt'].errors && g['payingAmt'].touched) }">  
+                  <div *ngIf="(submitted && g['payingAmt'].errors) ||(g['payingAmt'].errors && g['payingAmt'].touched)" class="invalid-feedback">
+                    <div *ngIf="g['payingAmt'].errors['required']">
+                        Payment Amount is required
+                    </div>
+               </div>   
+              </div>
+              </div>
+             
+
+      
+              <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+          </form>
+
+          <div class="wrapper">
+          <div class="table-responsive" *ngIf="installmentCollectionHistoryList.length != 0">
+            <table class="table card-table table-vcenter text-nowrap datatable">
+                
+                  <tr style="background-color:#1d4ed8;">
+                    <th scope="col" style="color: #fff;">S No.</th>
+                    <th scope="col" style="color: #fff;">Name</th>
+                    <th scope="col" style="color: #fff;">Order Id</th>
+                    <th scope="col" style="color: #fff;">Installment No</th>
+                    <th scope="col" style="color: #fff;">Installment Date</th>
+                    <th scope="col" style="color: #fff;">Installment Amount</th>
+                    
+                    
+                  </tr>
+                
+             
+                <tbody *ngFor="let item of installmentCollectionHistoryList| paginate: { itemsPerPage: pageSize, currentPage: page} ; let i = index ">
+                  <tr>
+                    <td>{{pageSize*(page-1)+i+1}}</td>
+                    <td>{{item.fullName}}</td> 
+                    <td>{{item.orderId}}</td>
+                    <td>{{item.installmentNo}}</td>
+                    <td>{{item.installmentDate | date:"dd-mm-yyyy"}}</td>
+                    <td>{{item.installmentAmt}}</td>
+                     
+    
+                  </tr>        
+                </tbody>
+                
+            </table>
+
+          </div>
+          <div class="mt-3" *ngIf="installmentCollectionList.length == 0">
+              <p class="text-center">No Installment Collection found</p>
+          </div>
+          <div class="card-footer d-flex align-items-center" style="background-color: #fff;">
+            <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2" *ngIf="installmentCollectionHistoryList.length != 0">
+                <pagination-controls previousLabel="Prev"nextLabel="Next" [responsive]="true"
+                (pageChange)="page = $event"></pagination-controls>
+            </div>
+          </div>
+          </div>
+
+
+      </div>
+     
+    </div>
+  </div>
 </div>

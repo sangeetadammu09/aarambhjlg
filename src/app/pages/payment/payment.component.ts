@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from 'express';
+import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { SalesRelationService } from 'src/app/sales-relation-officer/service/sales-relation.service';
 import { DataService } from 'src/app/utils/data.service';
@@ -25,24 +27,40 @@ export class PaymentComponent implements OnInit {
   searchMember:any;
   searchProduct:any;
   searchCenter:any;
-  productList: any = []; 
+  installmentCollectionHistoryList: any = []; 
   todayDate = new Date().toJSON();
   productObj:any ={};
   memberId: any;
-
+  updatePaymentForm :FormGroup;
   installmentDate:any
   centerId: any;
+  submitted : boolean = false;
+  selectedPayment: any;
+  @ViewChild ("closededitCollectionBtn") closededitCollectionBtn : any
   
 
-  constructor(private _salesService: SalesRelationService) { }
+  constructor(private _salesService: SalesRelationService, private fb :FormBuilder, private toastrService : ToastrService) { 
+    this.updatePaymentForm = this.fb.group({
+      orderInstallmentId: [],
+      memberId: [],
+      memberName:[],
+      installmentNo: [],
+      orderId: [],
+      payingAmt: ['', Validators.required],
+      paidDate: [, Validators.required],
+      paymentTakenById: ['']
+    })
+  }
 
   ngOnInit(): void {
     this.getSalesOfficersCenterList();
     this.searchCenter = "";
-  
+    this.searchMember ="";
 
  
   }
+
+  get g(){return this.updatePaymentForm.controls};
 
   getSalesOfficersCenterList(){
     this._salesService.getSalesOfficersCenterList(this.userId,this.cityId).subscribe((data:any) => {
@@ -58,16 +76,40 @@ export class PaymentComponent implements OnInit {
   }
 
   getCenterVal(event:any){
+    var searchMemberId = event;
     this.centerId = event;
-
+    this._salesService.getMemberListByCenter(searchMemberId).subscribe((data:any) => {
+     console.log(data,'all memberDropdownList')
+      if(data.length > 0){
+        this.memberDropdownList = data;
+       }else{
+         this.memberDropdownList = [];
+       } 
+     })
+  
   }
+
+  getMemberVal(event:any){
+    this.memberId = event;
+  }
+
+ 
 
   getinstallmentDate(date:any){
     this.installmentDate = date;
-    this._salesService.getTodaysInstallmentCollectionList(this.centerId,this.userId,this.installmentDate,this.page,this.pageSize).subscribe((data:any) => {
-      if(data.length > 0){
-        this.installmentCollectionList = data;
-        this.total = data.pages.totalCount;
+    var paymentObj :any = {};
+    paymentObj.pageNumber = this.page,
+    paymentObj.pageSize = this.pageSize,
+    paymentObj.centerId = this.centerId,
+    paymentObj.userId = this.userId,
+    paymentObj.installmentDate = this.installmentDate,
+    paymentObj.memberId = this.memberId ? this.memberId : 0
+    
+    this._salesService.getOrderInstallmentCollectionList(paymentObj).subscribe((data:any) => {
+      if(data){
+        this.installmentCollectionList = data.installments;
+        console.log(this.installmentCollectionList)
+        this.total = data.page.totalCount;
  
        }else{
          this.installmentCollectionList = [];
@@ -80,6 +122,49 @@ export class PaymentComponent implements OnInit {
     //console.log(event)
     this.page = event;
     this.getinstallmentDate(this.installmentDate);
+}
+
+showeditCollectionModal(item:any){
+   console.log(item)
+   this.selectedPayment = item;
+   this.updatePaymentForm.patchValue({
+    orderInstallmentId: item.orderInstallmentId,
+    memberId: item.memberId,
+    memberName: item.fullName,
+    installmentNo: item.installmentNo,
+    orderId: item.orderId,
+    paidDate: moment().format('L'),
+    paymentTakenById: this.userId
+   })
+   this._salesService.getOrderInstallmentHistory(item.orderId, item.memberId).subscribe((data:any) => {
+    if(data){
+      this.installmentCollectionHistoryList = data;
+      console.log(this.installmentCollectionHistoryList)
+    //  this.total = data.page.totalCount;
+
+     }else{
+       this.installmentCollectionList = [];
+     } 
+   })
+}
+
+submitUpdatePayment(){
+  var paymentObj :any = {};
+  paymentObj.orderInstallmentId = this.selectedPayment.orderInstallmentId,
+  paymentObj.memberId = this.selectedPayment.memberId,
+  paymentObj.installmentNo = this.selectedPayment.installmentNo
+  paymentObj.orderId =  this.selectedPayment.orderId,
+  paymentObj.paidDate= moment().format(),
+  paymentObj.paymentTakenById = Number(this.userId)
+  paymentObj.payingAmt = Number( this.updatePaymentForm.controls['payingAmt'].value)
+  this._salesService.makeInstallmentPayment(paymentObj).subscribe((data:any) => {
+    if(data){
+      this.closededitCollectionBtn.nativeElement.click();
+      this.toastrService.success("Installment paid successfully")
+     }else{
+       this.toastrService.error("Error while updating payment")
+     } 
+   })
 }
 
 

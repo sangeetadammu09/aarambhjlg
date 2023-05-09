@@ -166,9 +166,17 @@ export class SalesRelationService {
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.GetApprovedOrderDetails+`?orderId=${id}`,{observe: 'response'})
    }
 
-   getTodaysInstallmentCollectionList(centerId:any,userId:any,installmentDate:any,pageno:any,pageSize:any){
-    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.OrderInstallment.getTodaysInstallmentCollectionList
-      +`?centerId=${centerId}&userId=${userId}&installmentDate=${installmentDate}&PageNumber=${pageno}&PageSize=${pageSize}`)
+   getOrderInstallmentCollectionList(data:any){
+    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.OrderInstallment.getOrderInstallmentCollectionList,data)
+   }
+
+   makeInstallmentPayment(data:any){
+    return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.OrderInstallment.makeInstallmentPayment,data)
+   }
+
+   getOrderInstallmentHistory(id:any, memberId:any){
+    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.OrderInstallment.getOrderInstallmentHistory
+      +`?orderId=${id}&memberId=${memberId}`,null)
    }
 
 
