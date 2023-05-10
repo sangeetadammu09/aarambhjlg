@@ -124,6 +124,23 @@ export const SalesList = {
           },
           {
             id: 1,
+            parentMenu: 'Return',
+            icon : 'fa-undo',
+            isActive: true, 
+            url: 'return',
+            submenuList:[
+              {
+                  id: 0,
+                  menu: 'Start Return',
+                  url: 'returnorder',
+                  icon : 'fa-undo',
+                  isActive: true, 
+              },
+              
+          ]
+          },
+          {
+            id: 1,
             parentMenu: 'Setting',
             icon : 'fa-cog',
             isActive: true, 

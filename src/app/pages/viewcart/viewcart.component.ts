@@ -83,7 +83,6 @@ export class ViewcartComponent implements OnInit {
 
   editRow(item:any){
     item.rowEdited = !item.rowEdited;
-       
   }
 
   updateItemQuantity(item:any){

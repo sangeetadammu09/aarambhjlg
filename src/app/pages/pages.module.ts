@@ -31,6 +31,7 @@ import { ViewcartComponent } from './viewcart/viewcart.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { ApprovedOrderComponent } from './approved-order/approved-order.component';
 import { PaymentComponent } from './payment/payment.component';
+import { ReturnorderComponent } from './returnorder/returnorder.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -65,7 +66,8 @@ import { PaymentComponent } from './payment/payment.component';
     ViewcartComponent,
     OrderDetailsComponent,
     ApprovedOrderComponent,
-    PaymentComponent
+    PaymentComponent,
+    ReturnorderComponent
   ]
 })
 

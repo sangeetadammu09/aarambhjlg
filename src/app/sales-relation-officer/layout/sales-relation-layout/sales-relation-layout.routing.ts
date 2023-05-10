@@ -10,6 +10,7 @@ import { NeworderComponent } from 'src/app/pages/neworder/neworder.component';
 import { ViewcartComponent } from 'src/app/pages/viewcart/viewcart.component';
 import { ApprovedOrderComponent } from 'src/app/pages/approved-order/approved-order.component';
 import { PaymentComponent } from 'src/app/pages/payment/payment.component';
+import { ReturnorderComponent } from 'src/app/pages/returnorder/returnorder.component';
 
 export const SalesRelationLayoutRoutes: Routes = [
 
@@ -24,6 +25,7 @@ export const SalesRelationLayoutRoutes: Routes = [
      { path:'view-cart', component: ViewcartComponent },
      { path:'approved-order', component: ApprovedOrderComponent },
      { path:'collections', component: PaymentComponent },
+     { path:'returnorder', component: ReturnorderComponent },
      
 
     

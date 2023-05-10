@@ -180,6 +180,23 @@ export class SalesRelationService {
    }
 
 
+   addOrderReturnItems(data:any){
+    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.OrderReturn.addOrderReturnItems,data,{observe: 'response'})
+   }
+
+   getOrderReturnedItems(id:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.OrderReturn.getOrderReturnedItems
+      +`?orderId=${id}`,{observe: 'response'})
+   }
+
+   submitReturnRequest(data:any){
+    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.OrderReturn.submitReturnRequest,data,{observe: 'response'})
+   }
+
+
+
+
+
 
    
  
