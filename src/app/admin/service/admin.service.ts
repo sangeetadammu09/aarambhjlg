@@ -63,6 +63,10 @@ export class AdminService {
      return this.http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.City.DeleteCity+`/${id}`,{observe: 'response'})
    }
 
+   getCityById(cityId:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.City.GetCityById+`/${cityId}`)
+   }
+
 
     //city apis
 

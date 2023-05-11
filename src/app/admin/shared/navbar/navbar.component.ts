@@ -5,6 +5,7 @@ import { AdminList } from 'src/assets/menus/admin';
 import { CommonService } from 'src/app/common/service/common.service';
 import { MasterService } from 'src/app/master.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AdminService } from '../../service/admin.service';
 
 
 @Component({
@@ -27,8 +28,10 @@ export class NavbarComponent implements OnInit{
     public isCollapsed = true;
     @ViewChild("navbar-cmp", {static: false}) button:any;
     userPhoto: any;
+    cityId = localStorage.getItem('userCity');
+    userCity :any
 
-    constructor(location:Location, private renderer : Renderer2, private element : ElementRef,
+    constructor(location:Location, private renderer : Renderer2, private element : ElementRef,private adminService : AdminService,
        private router: Router, private _commonService: CommonService, private masterService: MasterService) {
         this.location = location;
         this.nativeElement = element.nativeElement;
@@ -50,6 +53,9 @@ export class NavbarComponent implements OnInit{
           this.sidebarClose();
        });
       this.getMenuList();
+      this.adminService.getCityById(this.cityId).subscribe((data:any) => {
+        this.userCity = data.cityName
+      })
     }
 
     getMenuList() {

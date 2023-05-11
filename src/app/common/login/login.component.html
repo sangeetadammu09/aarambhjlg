@@ -11,7 +11,7 @@
                     <div class="col-lg-12 login-form">
                         <form [formGroup]="loginForm" (ngSubmit)="login()">
                             <div class="form-group">
-                                <label class="form-control-label">Email Address</label>
+                                <label class="form-control-label">Username</label>
                                 <input type="text" class="form-control" formControlName="username" name="username"  
                                 [ngClass]="{'is-invalid':(submitted && f['username'].errors) ||(f['username'].errors && f['username'].touched) }">
                                     <div *ngIf="(submitted && f['username'].errors) ||(f['username'].errors && f['username'].touched)" class="invalid-feedback">
@@ -41,12 +41,12 @@
                                         <label class="custom-control-label" for="customControlInline">Show Password</label>
                                     </div>
                                 </div>
-                                <div class="col-lg-3">
+                                <!-- <div class="col-lg-3">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="customControlInline">
                                         <label class="custom-control-label" for="customControlInline">Remember me</label>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
     
                             <div class="col-lg-12 loginbttm mb-3">

@@ -42,7 +42,8 @@ export const APP_DI_CONFIG: any = {
       GetAllCity : "/City/GetAllCity",
       AddCity : "/City/AddCity",
       UpdateCity : "/City/UpdateCity",
-      DeleteCity : "/City/DeleteCity"
+      DeleteCity : "/City/DeleteCity",
+      GetCityById : "/City/GetCityById"
     },
     Center:{
       GetAllCentersListByCity : "/Center/GetCentersListByCityId",

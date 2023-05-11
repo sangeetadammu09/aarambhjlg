@@ -55,7 +55,6 @@ export class LoginComponent implements OnInit {
         if(data){
        
           this.decodedToken = decodeToken(data.access_token);
-       
           this.loginText = "Login";
           const userData :any = {}
           userData.fullname = this.decodedToken.FullName;

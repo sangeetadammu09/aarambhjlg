@@ -5,6 +5,7 @@ import { SalesList } from 'src/assets/menus/sales';
 import { CommonService } from 'src/app/common/service/common.service';
 import { MasterService } from 'src/app/master.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AdminService } from 'src/app/admin/service/admin.service';
 
 
 @Component({
@@ -23,13 +24,15 @@ export class NavbarComponent implements OnInit{
     userName = localStorage.getItem('fullname');
     userRoles = localStorage.getItem('roles');
     userId = localStorage.getItem('userId');
+    cityId = localStorage.getItem('userCity');
     public menuItems: any;
+    userCity :any
 
     public isCollapsed = true;
     @ViewChild("navbar-cmp", {static: false}) button:any;
     userPhoto: any;
 
-    constructor(location:Location, private renderer : Renderer2, private element : ElementRef,
+    constructor(location:Location, private renderer : Renderer2, private element : ElementRef, private adminService : AdminService,
        private router: Router, private _commonService: CommonService, private masterService: MasterService) {
         this.location = location;
         this.nativeElement = element.nativeElement;
@@ -51,6 +54,9 @@ export class NavbarComponent implements OnInit{
         this.userRoles = finalArray;
       }
       this.getUserPic();
+      this.adminService.getCityById(this.cityId).subscribe((data:any) => {
+        this.userCity = data.cityName
+      })
     }
 
     getMenuList() {

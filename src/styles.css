@@ -35,6 +35,18 @@
     font-weight: bold !important;
 }
 
+.data-green{
+    color:green !important;
+}
+.data-red{
+    color:red !important;
+}
+.data-blue{
+    color:blue !important;
+}
+
+
+
 .card-title {
     margin: 0 0 0rem !important;
 }
