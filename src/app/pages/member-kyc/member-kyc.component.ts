@@ -219,19 +219,17 @@ export class MemberKycComponent implements OnInit {
   submitNewMember(){
     this.submitted = true;
      if(this.addMemberKycForm.valid){
-      //  console.log(this.addMemberForm.value)
          var addMemberData :any = {};
-        
         addMemberData.memberId = this.memberDetailsObj.memberId;
-        addMemberData.isAadharVerified = this.addMemberKycForm.controls['isAadharVerified'].value == 'Yes' ? true : false;
+        addMemberData.isAadharVerified = this.addMemberKycForm.controls['isAadharVerified'].value == 'true' ? true : false;
         addMemberData.aadharComment = this.addMemberKycForm.controls['aadharComment'].value;
-        addMemberData.isPan_VoterIdVerified= this.addMemberKycForm.controls['isPan_VoterIdVerified'].value  == 'Yes' ? true : false;
+        addMemberData.isPan_VoterIdVerified= this.addMemberKycForm.controls['isPan_VoterIdVerified'].value  == 'true' ? true : false;
         addMemberData.panComment = this.addMemberKycForm.controls['panComment'].value;
-        addMemberData.isAddressVerified = this.addMemberKycForm.controls['isAddressVerified'].value  == 'Yes' ? true : false;
+        addMemberData.isAddressVerified = this.addMemberKycForm.controls['isAddressVerified'].value  == 'true' ? true : false;
         addMemberData.addressComment = this.addMemberKycForm.controls['addressComment'].value;
-        addMemberData.isPhotoVerified = this.addMemberKycForm.controls['isPhotoVerified'].value  == 'Yes' ? true : false;
+        addMemberData.isPhotoVerified = this.addMemberKycForm.controls['isPhotoVerified'].value  == 'true' ? true : false;
         addMemberData.photoComment = this.addMemberKycForm.controls['photoComment'].value;
-        addMemberData.isKycCompleted = this.addMemberKycForm.controls['isKycCompleted'].value.value== 'true' ? true : false;;
+        addMemberData.isKycCompleted = this.addMemberKycForm.controls['isKycCompleted'].value == 'true' ? true : false;
         this._salesService.addMemberKycVerification(addMemberData).subscribe((data:any) => {
           if(data.status == 200){
            
