@@ -702,7 +702,7 @@ export class UserComponent implements OnInit {
     var temp = file.target.files[0].name;
 
     if(temp.includes('.pdf')) {
-      this.educationDocFile = file.target.files;
+      this.educationDocFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PDF document is allowed')
     }
