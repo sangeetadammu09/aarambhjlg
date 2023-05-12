@@ -107,6 +107,9 @@ export class PaymentComponent implements OnInit {
     
     this._salesService.getOrderInstallmentCollectionList(paymentObj).subscribe((data:any) => {
       if(data){
+        data.installments.forEach((item:any) => {
+          item.installmentDate = moment(item.installmentDate).format('L')
+        })
         this.installmentCollectionList = data.installments;
         console.log(this.installmentCollectionList)
         this.total = data.page.totalCount;

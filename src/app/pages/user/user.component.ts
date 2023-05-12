@@ -623,11 +623,13 @@ export class UserComponent implements OnInit {
     if(this.joiningLetterFile != undefined){
       this.userDocument =  this.joiningLetterName;
       this.userDocumentFile = this.joiningLetterFile;
+      this.addedUserId = 45
       if(this.addedUserId){
         var addUserDocumentData = new FormData();
         addUserDocumentData.append('UserId',this.addedUserId);
         addUserDocumentData.append('DocumentName',this.userDocument);
-        addUserDocumentData.append('file',this.userDocumentFile);    
+        addUserDocumentData.append('file',this.userDocumentFile);   
+        console.log(addUserDocumentData,'joining') 
  
         this._adminService.addUserOtherDocuments(addUserDocumentData).subscribe((data:any) => {
           if(data.status == 200){
@@ -711,12 +713,13 @@ export class UserComponent implements OnInit {
     if(this.educationDocFile != undefined){
       this.userDocument =  this.educationDocName;
       this.userDocumentFile = this.educationDocFile;
+      this.addedUserId = 45
       if(this.addedUserId){
         var addUserDocumentData = new FormData();
         addUserDocumentData.append('UserId',this.addedUserId);
         addUserDocumentData.append('DocumentName',this.userDocument);
         addUserDocumentData.append('file',this.userDocumentFile);    
- 
+        console.log(addUserDocumentData,'education');
         this._adminService.addUserOtherDocuments(addUserDocumentData).subscribe((data:any) => {
           if(data.status == 200){
            

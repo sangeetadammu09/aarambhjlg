@@ -37,12 +37,15 @@
 
 .data-green{
     color:green !important;
+    font-weight: bold !important;
 }
 .data-red{
     color:red !important;
+    font-weight: bold !important;
 }
 .data-blue{
     color:blue !important;
+    font-weight: bold !important;
 }
 
 

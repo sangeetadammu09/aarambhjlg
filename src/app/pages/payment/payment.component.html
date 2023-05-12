@@ -49,7 +49,7 @@
                           <tr style="background-color:#1d4ed8;">
                             <th scope="col" style="color: #fff;">S No.</th>
                             <th scope="col" style="color: #fff;">Name</th>
-                            <th scope="col" style="color: #fff;">Order Id</th>
+                            <th scope="col" style="color: #fff;">Order No</th>
                             <th scope="col" style="color: #fff;">Installment No</th>
                             <th scope="col" style="color: #fff;">Installment Date</th>
                             <th scope="col" style="color: #fff;">Installment Amount</th>
@@ -66,10 +66,10 @@
                             <td>{{item.fullName}}</td> 
                             <td>{{item.orderId}}</td>
                             <td>{{item.installmentNo}}</td>
-                            <td>{{item.installmentDate | date:"dd-mm-yyyy"}}</td>
+                            <td>{{item.installmentDate}}</td>
                             <td>{{item.installmentAmt}}</td>
                             <td>{{item.address}}</td>
-                            <td [ngClass]="{'data-blue' :item.status == 'Future','data-green' : item.status == 'Today','data-red' : item.status == 'Pending' }">{{item.status}}</td>
+                            <td [ngClass]="{'data-blue' :item.status == 'Future','data-green' : item.status == 'Todays','data-red' : item.status == 'Pending' }">{{item.status}}</td>
                             <td (click)="showeditCollectionModal(item)" data-toggle="modal" data-target="#addeditProductBrandModal">
                               <svg enable-background="new 0 0 19 19" height="19px" id="Layer_1" version="1.1" viewBox="0 0 19 19" width="19px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                   <g><path d="M8.44,7.25C8.348,7.342,8.277,7.447,8.215,7.557L8.174,7.516L8.149,7.69   C8.049,7.925,8.014,8.183,8.042,8.442l-0.399,2.796l2.797-0.399c0.259,0.028,0.517-0.007,0.752-0.107l0.174-0.024l-0.041-0.041   c0.109-0.062,0.215-0.133,0.307-0.225l5.053-5.053l-3.191-3.191L8.44,7.25z" fill="#231F20"/>
@@ -127,7 +127,7 @@
 
              <div class="form-row">
               <div class="form-group col-lg-6">
-                <label class="form-control-label">Order Id</label>
+                <label class="form-control-label">Order No</label>
                 <input type="text" class="form-control" formControlName="orderId" name="orderId" readonly>     
             </div>
             <div class="form-group col-lg-6">
@@ -163,7 +163,7 @@
                   <tr style="background-color:#1d4ed8;">
                     <th scope="col" style="color: #fff;">S No.</th>
                     <th scope="col" style="color: #fff;">Name</th>
-                    <th scope="col" style="color: #fff;">Order Id</th>
+                    <th scope="col" style="color: #fff;">Order No</th>
                     <th scope="col" style="color: #fff;">Installment No</th>
                     <th scope="col" style="color: #fff;">Installment Date</th>
                     <th scope="col" style="color: #fff;">Installment Amount</th>
