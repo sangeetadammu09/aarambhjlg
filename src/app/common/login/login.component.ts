@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
           roleList.forEach((role:any) =>{
             //console.log(role)
             (role == "SuperAdmin" || role == "Admin") ? (this._router.navigate(['/admin/user-list']), localStorage.setItem('roleNo',"101")):
-           (role == "RelationOfficer") ? (this._router.navigate(['/sales-relation-officer/center-list']),localStorage.setItem('roleNo',"102")):
+           (role == "RelationOfficer" || role == "SalesOfficer") ? (this._router.navigate(['/sales-relation-officer/center-list']),localStorage.setItem('roleNo',"102")):
            (role == "SalesManager") ? (this._router.navigate(['/sales-manager-officer/member-kyc']),localStorage.setItem('roleNo',"103")): null;
           })
           
