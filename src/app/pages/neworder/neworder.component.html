@@ -28,7 +28,7 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                              <label for="searchMember">Select Member</label>
+                              <label for="searchMember">Select Member{{memberDropdownList | json}}</label>
                               <select class="custom-select" id="searchMember" [(ngModel)]="searchMember" (change)="createNewCart(searchMember)">
                                 <option value="" [selected]="''">Choose Member..</option>
                                 <option *ngFor="let item of memberDropdownList" [ngValue]="item.memberId">
@@ -123,10 +123,11 @@
             <p class="card-text">Regional Name: {{searchProductItem.regionalName}}</p>
             <p class="card-text">MRP: {{searchProductItem.mrp | currency: 'INR'}}</p>
             <p class="card-text">Sale Price: {{searchProductItem.jlgSalePrice | currency: 'INR'}}</p>
+            <p>{{searchProductItem.qty}}</p>
           </div>
           <div class="mb-3">
             <input type="text" class="form-control" id="quantity"  [(ngModel)]="productObj.prodQuantityInput" 
-            placeholder="Enter Quantity" #prodQuantityInput=ngModel pattern="^(0|[1-9][0-9]*)$">
+            placeholder="Enter Quantity" #prodQuantityInput=ngModel pattern="^(0|[1-9][0-9]*)$" [value]="searchProductItem.qty">
             <div *ngIf="prodQuantityInput.touched">
               <p class="text-red" *ngIf="prodQuantityInput.errors?.pattern">Only Numbers are required</p>
             </div>

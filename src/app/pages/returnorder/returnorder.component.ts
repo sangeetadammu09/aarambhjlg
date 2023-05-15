@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SalesRelationService } from 'src/app/sales-relation-officer/service/sales-relation.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { isArray } from 'chart.js/dist/helpers/helpers.core';
 
 @Component({
   selector: 'app-returnorder',
@@ -26,6 +27,7 @@ export class ReturnorderComponent implements OnInit {
   returnedOrderList: any;
   userId = localStorage.getItem('userId');
   userRole = localStorage.getItem('roles');
+  tempOrderArr:string[] = [];
 
   constructor( private _saleService: SalesRelationService, private toastrService :ToastrService) { }
 
@@ -70,33 +72,32 @@ export class ReturnorderComponent implements OnInit {
   }
 
   editRow(item:any){
+    console.log(item.qty)
+    item.prodQuantityInput = item.qty
     item.rowEdited = !item.rowEdited;
   }
 
   updateItemQuantity(item:any){
+    console.log(item)
     this.selectedReturnOrder = item;
     var updateCart :any = {};
     updateCart.orderId = item.orderId,
     updateCart.productId = item.productId,
-    updateCart.qty = JSON.parse(item.prodQuantityInput),
+    
+    item.prodQuantityInput != "" ? updateCart.qty = JSON.parse(item.prodQuantityInput) : null
     updateCart.salePrice = item.salePrice,
     updateCart.taxAmt = item.taxAmt? item.taxAmt : 0,
-    updateCart.totalAmt = item.totalAmt 
-    console.log(updateCart);
-    this._saleService.addOrderReturnItems(updateCart).subscribe((data:any) => {
-      if(data.status == 200){
-        this.toastrService.success('Item Quantity updated successfully')
-        this.getSearchedOrder(item.orderId)
-
-       }else{
-         this.toastrService.error('No Items added. Please try again')
-       } 
-     })
+    updateCart.totalAmt = updateCart.qty * updateCart.salePrice; 
+    updateCart.saleprice = item.salePrice,
+    updateCart.productName = item.productName,
+    console.log(updateCart); //object
+    this.tempOrderArr.push(updateCart)
+    this.returnedOrderList  = this.tempOrderArr;
+ 
    
 }
 
   showdeleteCartModal(item:any){
-    console.log(item)
     this.selectedReturnOrder = item;
     
  }
@@ -125,7 +126,6 @@ export class ReturnorderComponent implements OnInit {
   }
 
   submitReturnRequest(){
-    console.log(this.approvedOrderDetailsObj)
     var selectedReturnOrder :any = this.approvedOrderDetailsObj;
     if(this.userRole)
     var temp = JSON.parse(this.userRole);
@@ -139,6 +139,9 @@ export class ReturnorderComponent implements OnInit {
     submitOrder.returnRequestedById = this.userId ? JSON.parse(this.userId) : null,
     submitOrder.returnRequestedRole =  this.userRole,
     submitOrder.totalActualBillAmt = selectedReturnOrder.orderItems[0].totalAmt 
+    this.returnedOrderList.forEach((returnOrder:any) => { delete returnOrder.salePrice , delete returnOrder.productName})
+    
+    submitOrder.items = this.returnedOrderList
     console.log(submitOrder);
     this._saleService.submitReturnRequest(submitOrder).subscribe((data:any) => {
       console.log(data.status)

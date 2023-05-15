@@ -49,7 +49,7 @@ export class ViewcartComponent implements OnInit {
 
   showViewCartModal(){
     if(this.newCart != null){
-      console.log(this.newCart,'new cart')
+   //   console.log(this.newCart,'new cart')
       this._salesService.getShoppingCart(this.newCart).subscribe((data:any) => {
         if(data){
          // debugger;
@@ -83,6 +83,7 @@ export class ViewcartComponent implements OnInit {
 
   editRow(item:any){
     item.rowEdited = !item.rowEdited;
+    item.prodQuantityInput = item.qty
   }
 
   updateItemQuantity(item:any){
@@ -134,7 +135,7 @@ export class ViewcartComponent implements OnInit {
 
   getAllInstallments(){
     this._adminService.getAllInstallment().subscribe((data) => {
-      console.log(data,'all Installments')
+   //   console.log(data,'all Installments')
      if(data.length > 0){
     //  this.productsFound = true;
        this.installmentList = data;
@@ -186,6 +187,13 @@ export class ViewcartComponent implements OnInit {
          this.toastrService.error('Error placing the order. Please try again')
        } 
      })
+  }
+
+  showGoToCartModal(){
+    if(this.newCart != null){
+          this.dataService.sendOldCartData(this.cartDetailsObj)
+          this.router.navigate(['/sales-relation-officer/new-order']) 
+    } 
   }
 
 

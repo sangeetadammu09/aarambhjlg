@@ -38,7 +38,7 @@ export class NeworderComponent implements OnInit {
   isselectedProduct: boolean = true;
   @ViewChild('closeproductModalBtn') closeproductModalBtn: any;
   @ViewChild('closeViewCartModalBtn') closeViewCartModalBtn: any;
-  searchProductItem: any;
+  searchProductItem: any ={};
   productObj:any ={};
   memberId: any;
   cartDetailsObj :any ={}
@@ -46,6 +46,7 @@ export class NeworderComponent implements OnInit {
   firstRole: any;
   newCart :any = {};
   createdCart: any;
+  oldCartData: any;
 
   
 
@@ -69,6 +70,8 @@ export class NeworderComponent implements OnInit {
       this.firstRole = finalArray[0].name;
       console.log(this.firstRole);
     }
+
+   
  
   }
 
@@ -136,6 +139,17 @@ export class NeworderComponent implements OnInit {
     this._salesService.getRandomProducts(this.cityId).subscribe((data:any) => {
         if(data.length > 0){
           this.randomProductList = data;
+          this.dataService.oldCartData.subscribe((data:any) => {
+            this.oldCartData = data;    
+            if(this.oldCartData){
+              console.log(this.oldCartData.cartItems);
+            this.searchCenter = this.oldCartData.centerId;
+            this.getCenterVal(this.searchCenter)
+            console.log(this.randomProductList)
+            
+            }
+      
+          })
    
          }else{
            this.randomProductList = [];
@@ -176,8 +190,15 @@ export class NeworderComponent implements OnInit {
   }
 
   showProductModal(item:any,index:any){
+    this.productObj.prodQuantityInput = null;
      this.searchProductItem = item;
-     this.productObj.prodQuantityInput = null;
+     let tempCartArr = this.oldCartData.cartItems;
+      tempCartArr.forEach((y:any)=>{
+        if(item.productId == y.itemId){
+          this.productObj.prodQuantityInput = y.qty
+        }
+      }) 
+    
      this.itemsAdded = false;
      this.cartText = "Add To Cart";
   }
