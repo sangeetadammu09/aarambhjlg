@@ -89,6 +89,7 @@
                                      pattern="^(0|[1-9][0-9]*)$" (change)="updateItemQuantity(item)">
                                     <div *ngIf="prodQuantityInput.touched">
                                       <p class="text-red" *ngIf="prodQuantityInput.errors?.pattern">Only Numbers are required</p>
+                                      <p class="text-red" *ngIf="isIncreaseAmountError">Quantity cannot be increased</p>
                                     </div>
                                     </div>
                                  </td>
@@ -126,7 +127,7 @@
                         </div>
                         <div class="container-xl mt-3">
                             <div class="row row-deck row-cards mb-3">
-                                <h2 class="text-center">Returned Order Details</h2>
+                                <h2 class="text-center" *ngIf="returnedOrderList.length>0">Returned Order Details</h2>
                              </div>   
                         </div> 
                         <div class="table-responsive mt-3">

@@ -28,6 +28,7 @@ export class ReturnorderComponent implements OnInit {
   userId = localStorage.getItem('userId');
   userRole = localStorage.getItem('roles');
   tempOrderArr:string[] = [];
+  isIncreaseAmountError :any = false;
 
   constructor( private _saleService: SalesRelationService, private toastrService :ToastrService) { }
 
@@ -78,22 +79,25 @@ export class ReturnorderComponent implements OnInit {
   }
 
   updateItemQuantity(item:any){
-    console.log(item)
+    
+    if(JSON.parse(item.prodQuantityInput) > item.qty){
+      this.isIncreaseAmountError = true;
+    }else{
+      this.isIncreaseAmountError = false;
     this.selectedReturnOrder = item;
     var updateCart :any = {};
     updateCart.orderId = item.orderId,
     updateCart.productId = item.productId,
-    
     item.prodQuantityInput != "" ? updateCart.qty = JSON.parse(item.prodQuantityInput) : null
     updateCart.salePrice = item.salePrice,
     updateCart.taxAmt = item.taxAmt? item.taxAmt : 0,
     updateCart.totalAmt = updateCart.qty * updateCart.salePrice; 
     updateCart.saleprice = item.salePrice,
     updateCart.productName = item.productName,
-    console.log(updateCart); //object
+   
     this.tempOrderArr.push(updateCart)
     this.returnedOrderList  = this.tempOrderArr;
- 
+    }
    
 }
 
