@@ -35,8 +35,8 @@
                     (click)="showaddMemberModal()">Add Member</button>
                 </div>
               </div>      
-            <div class="table-responsive" *ngIf="memberList.length != 0">
-            <table class="table card-table table-vcenter text-nowrap datatable">
+            <div class="table-responsive"  *ngIf="pageLoaded">
+            <table class="table card-table table-vcenter text-nowrap datatable" *ngIf="memberList.length != 0">
                
                   <tr style="background-color:#1d4ed8;">
                     <th scope="col" style="color: #fff; font-family: sans-serif;">S No.</th>
@@ -75,7 +75,7 @@
                 
             </table>
 
-            <div class="card-footer d-flex align-items-center" style="background-color: #fff;">
+            <div class="card-footer d-flex align-items-center" style="background-color: #fff;" *ngIf="memberList.length != 0">
                 <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
                     <pagination-controls (pageChange)="page = $event"></pagination-controls>
                 </div>
@@ -84,10 +84,15 @@
                 <p class="text-center">No Member found</p>
               </div>
             </div>
-            <div class="row card p-4" *ngIf="memberList.length == 0">
-                <p class="text-center">No Member found</p>
+          <div class="table-responsive mt-3" *ngIf="!pageLoaded">
+            <div class="d-flex justify-content-center">
+              <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
               </div>
-          </div>
+                    &nbsp;
+                <h3 class="text-center mr-2">Data loading. Please Hold on!</h3>
+            </div>
+        </div>
       </div>
       </div>
       </div>

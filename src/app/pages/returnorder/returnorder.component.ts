@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SalesRelationService } from 'src/app/sales-relation-officer/service/sales-relation.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
-import { isArray } from 'chart.js/dist/helpers/helpers.core';
 
 @Component({
   selector: 'app-returnorder',
@@ -32,7 +31,13 @@ export class ReturnorderComponent implements OnInit {
 
   constructor( private _saleService: SalesRelationService, private toastrService :ToastrService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(this.userRole)
+    var temp = JSON.parse(this.userRole);
+    const finalArray = temp.map((item:any, index:number) => ({ id: index,name: item }))
+    this.userRole = finalArray[0].name;
+   // console.log(this.userRole);
+  }
 
   getSearchedOrder(searchOrder:any){
     this.orderId = searchOrder;
@@ -131,10 +136,10 @@ export class ReturnorderComponent implements OnInit {
 
   submitReturnRequest(){
     var selectedReturnOrder :any = this.approvedOrderDetailsObj;
-    if(this.userRole)
-    var temp = JSON.parse(this.userRole);
-    const finalArray = temp.map((item:any, index:number) => ({ id: index,name: item }))
-    this.userRole = finalArray[0].name;
+   // if(this.userRole)
+    // var temp = JSON.parse(this.userRole);
+    // const finalArray = temp.map((item:any, index:number) => ({ id: index,name: item }))
+    // this.userRole = finalArray[0].name;
     var submitOrder :any = {};
     submitOrder.orderId = selectedReturnOrder.orderId,
     submitOrder.cityId = selectedReturnOrder.cityId,

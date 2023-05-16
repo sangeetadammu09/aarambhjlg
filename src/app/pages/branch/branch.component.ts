@@ -26,6 +26,7 @@ export class BranchComponent implements OnInit {
   todayDate = new Date().toJSON();
   cityList: any;
   selectedBranchItem: any;
+  pageLoaded: boolean = false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addBranchForm = this._formBuilder.group({
@@ -68,11 +69,11 @@ export class BranchComponent implements OnInit {
     this._adminService.getAllBranch().subscribe((data) => {
     //  console.log(data,'all Branchs')
      if(data.length > 0){
-    //  this.productsFound = true;
+      this.pageLoaded = true;
        this.branchList = data;
       }else{
         this.branchList = [];
-       // this.productsFound = false;
+        this.pageLoaded = true;
       }
       
     })

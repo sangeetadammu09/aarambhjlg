@@ -27,6 +27,7 @@ export class GroupComponent implements OnInit {
   cityList: any;
   selectedGroupItem: any;
   cityId = localStorage.getItem('userCity');
+  pageLoaded = false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addGroupForm = this._formBuilder.group({
@@ -63,8 +64,10 @@ export class GroupComponent implements OnInit {
     this._adminService.getAllGroupsByCityId(this.cityId).subscribe((data) => {
      if(data.length > 0){
        this.groupList = data;
+       this.pageLoaded = true;
       }else{
         this.groupList = [];
+        this.pageLoaded = true
       }
       
     })

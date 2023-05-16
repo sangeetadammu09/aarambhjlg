@@ -21,7 +21,7 @@ export class InstallmentsComponent implements OnInit {
   editInstallmentForm: FormGroup;
   deleteInstallmentItem: any;
   p = 1;
-  productsFound: boolean = false;
+  pageLoaded: boolean = false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addInstallmentForm = this._formBuilder.group({
@@ -50,11 +50,11 @@ export class InstallmentsComponent implements OnInit {
     this._adminService.getAllInstallment().subscribe((data) => {
       console.log(data,'all Installments')
      if(data.length > 0){
-    //  this.productsFound = true;
+       this.pageLoaded = true
        this.installmentList = data;
       }else{
         this.installmentList = [];
-       // this.productsFound = false;
+        this.pageLoaded = true;
       }
       
     })

@@ -69,6 +69,7 @@ export class MemberComponent implements OnInit {
   fileUrl: any;
   pagenew = 1;
   roleNo = localStorage.getItem('roleNo');
+  pageLoaded :boolean = false;
   
 
   constructor(private _salesService: SalesRelationService, private _formBuilder : FormBuilder,
@@ -125,9 +126,11 @@ export class MemberComponent implements OnInit {
         console.log(data,'all memberDropdownList')
         if(data.length > 0){
           this.memberList = data;
+          this.pageLoaded = true;
    
          }else{
            this.memberList = [];
+           this.pageLoaded = true;
          } 
        })
    

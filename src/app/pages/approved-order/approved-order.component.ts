@@ -24,6 +24,7 @@ export class ApprovedOrderComponent implements OnInit {
   roleNo = localStorage.getItem('roleNo');
   approvedOrderDetailsObj :any ={};
   @ViewChild('approvedOrderPdf', {static: false}) approvedOrderPdf!: ElementRef;
+  pageLoaded: boolean = false;
 
 
   constructor(private _saleService: SalesRelationService,public print: NgxPrintElementService) { }
@@ -39,10 +40,12 @@ export class ApprovedOrderComponent implements OnInit {
       this._saleService.getApprovedOrdersForSoRoList(this.userId,this.pageSize,this.page).subscribe((data) => {
         console.log(data,'all orders')
         if(data.length > 0){
+        this.pageLoaded = true;
          this.approvedOrderList = data,
          this.total = data[0].totalCount;
          }else{
            this.approvedOrderList = [];
+         this.pageLoaded = true;
          } 
        })
 

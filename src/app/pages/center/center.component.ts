@@ -29,6 +29,7 @@ export class CenterComponent implements OnInit {
   relationOfficerList: any;
   salesManagerList: any;
   todayDate = new Date().toJSON();
+  pageLoaded: boolean = false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addCenterForm = this._formBuilder.group({
@@ -76,11 +77,11 @@ export class CenterComponent implements OnInit {
     this._adminService.getAllCenter(this.cityId).subscribe((data) => {
       console.log(data,'all Centers')
      if(data.length > 0){
-    //  this.productsFound = true;
+      this.pageLoaded = true;
        this.CenterList = data;
       }else{
         this.CenterList = [];
-       // this.productsFound = false;
+        this.pageLoaded = true;
       }
       
     })

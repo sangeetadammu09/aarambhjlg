@@ -21,7 +21,7 @@ export class CityComponent implements OnInit {
   editCityForm: FormGroup;
   deleteCityItem: any;
   p = 1;
-  productsFound: boolean = false;
+  pageLoaded: boolean = false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addCityForm = this._formBuilder.group({
@@ -50,11 +50,11 @@ export class CityComponent implements OnInit {
     this._adminService.getAllCity().subscribe((data) => {
       console.log(data,'all Citys')
      if(data.length > 0){
-    //  this.productsFound = true;
+      this.pageLoaded = true;
        this.CityList = data;
       }else{
         this.CityList = [];
-       // this.productsFound = false;
+        this.pageLoaded = true;
       }
       
     })

@@ -21,7 +21,7 @@ export class ExpenseTypeComponent implements OnInit {
   editExpenseTypeForm: FormGroup;
   deleteExpenseTypeItem: any;
   p = 1;
-  productsFound: boolean = false;
+  pageLoaded: boolean = false;
 
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
@@ -48,11 +48,11 @@ export class ExpenseTypeComponent implements OnInit {
     this._adminService.getAllExpenseType().subscribe((data) => {
       console.log(data,'all ExpenseTypes')
      if(data.length > 0){
-    //  this.productsFound = true;
+      this.pageLoaded = true;
        this.expenseTypeList = data;
       }else{
         this.expenseTypeList = [];
-       // this.productsFound = false;
+        this.pageLoaded = true;
       }
       
     })
