@@ -36,7 +36,8 @@ export class PaymentComponent implements OnInit {
   centerId: any;
   submitted : boolean = false;
   selectedPayment: any;
-  @ViewChild ("closededitCollectionBtn") closededitCollectionBtn : any
+  @ViewChild ("closededitCollectionBtn") closededitCollectionBtn : any;
+  pageLoaded : boolean= false;
   
 
   constructor(private _salesService: SalesRelationService, private fb :FormBuilder, private toastrService : ToastrService) { 
@@ -67,9 +68,10 @@ export class PaymentComponent implements OnInit {
       //console.log(data,'cco member')
         if(data.length > 0){
           this.centerDropdownList = data;
-   
+          this.pageLoaded = true;
          }else{
            this.centerDropdownList = [];
+           this.pageLoaded = true;
          } 
        })
    

@@ -26,6 +26,7 @@ export class UserroleComponent implements OnInit {
   userList: any;
   cityId = localStorage.getItem('userCity');
   roleList: any;
+  pageLoaded : boolean= false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addUserRoleForm = this._formBuilder.group({
@@ -52,9 +53,10 @@ export class UserroleComponent implements OnInit {
    //   console.log(data,'all UserRoles')
      if(data.length > 0){
        this.userRoleList = data;
-
+       this.pageLoaded = true;
       }else{
         this.userRoleList = [];
+        this.pageLoaded = true;
       } 
     })
   }

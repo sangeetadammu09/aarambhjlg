@@ -22,6 +22,7 @@ export class TaxSlotComponent implements OnInit {
   deleteTaxSlotItem: any;
   p = 1;
   productsFound: boolean = false;
+  pageLoaded : boolean= false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addTaxSlotForm = this._formBuilder.group({
@@ -58,11 +59,11 @@ export class TaxSlotComponent implements OnInit {
     this._adminService.getAllTaxSlot().subscribe((data) => {
       console.log(data,'all TaxSlots')
      if(data.length > 0){
-    //  this.productsFound = true;
+      this.pageLoaded = true;
        this.TaxSlotList = data;
       }else{
         this.TaxSlotList = [];
-       // this.productsFound = false;
+        this.pageLoaded = true;
       }
       
     })

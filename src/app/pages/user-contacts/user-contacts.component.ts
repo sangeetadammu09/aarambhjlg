@@ -14,6 +14,7 @@ export class UserContactsComponent implements OnInit {
   total = 20;
   pageSize = 10;
   cityId = localStorage.getItem('userCity');
+  pageLoaded : boolean= false;
   
   constructor(private _adminService: AdminService) { }
 

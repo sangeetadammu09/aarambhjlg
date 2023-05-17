@@ -18,6 +18,7 @@ export class UnitComponent implements OnInit {
   deleteUnitItem: any;
   p = 1;
   productsFound: boolean = false;
+  pageLoaded : boolean= false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addUnitForm = this._formBuilder.group({
@@ -41,11 +42,11 @@ export class UnitComponent implements OnInit {
     this._adminService.getAllUnits().subscribe((data) => {
       console.log(data,'all units')
      if(data.length > 0){
-    //  this.productsFound = true;
+      this.pageLoaded = true;
        this.UnitList = data;
       }else{
         this.UnitList = [];
-       // this.productsFound = false;
+        this.pageLoaded = true;
       }
       
     })

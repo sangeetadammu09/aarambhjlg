@@ -63,7 +63,7 @@ export class MemberKycComponent implements OnInit {
   documentAadhar: any;
   documentAddress: any;
   documentPan_VoterId: any;
-
+  pageLoaded : boolean= false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder,
      private _toastrService: ToastrService, private sanitizer: DomSanitizer, private _salesService: SalesManagerService) { 
@@ -102,9 +102,11 @@ export class MemberKycComponent implements OnInit {
       console.log(data,'cco member')
         if(data.length > 0){
           this.memberDropdownList = data;
+          this.pageLoaded = true;
    
          }else{
            this.memberDropdownList = [];
+           this.pageLoaded = true;
          } 
        })
    

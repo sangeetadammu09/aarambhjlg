@@ -47,6 +47,7 @@ export class NeworderComponent implements OnInit {
   newCart :any = {};
   createdCart: any;
   oldCartData: any;
+  pageLoaded : boolean= false;
 
   
 
@@ -80,9 +81,11 @@ export class NeworderComponent implements OnInit {
       //console.log(data,'cco member')
         if(data.length > 0){
           this.centerDropdownList = data;
+          this.pageLoaded = true;
    
          }else{
            this.centerDropdownList = [];
+           this.pageLoaded = true;
          } 
        })
    

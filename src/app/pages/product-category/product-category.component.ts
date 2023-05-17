@@ -28,6 +28,7 @@ export class ProductCategoryComponent implements OnInit {
   productsFound: boolean = false;
   editcategoryPhotoName = "Select File"
   addcategoryPhotoName = "Select File";
+  pageLoaded : boolean= false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addProdCategoryForm = this._formBuilder.group({
@@ -55,11 +56,11 @@ export class ProductCategoryComponent implements OnInit {
     this._adminService.getAllProductCategory().subscribe((data) => {
       console.log(data,'product category')
      if(data.length > 0){
-    //  this.productsFound = true;
+      this.pageLoaded = true;
        this.productCategoryList = data
       }else{
         this.productCategoryList = [];
-       // this.productsFound = false;
+        this.pageLoaded = true;
       }
       
     })

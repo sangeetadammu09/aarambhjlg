@@ -88,6 +88,7 @@ export class UserComponent implements OnInit {
   documentTypePdf : boolean = false;
   documentTypeImage : boolean = false;
   fileUrl: any;
+  pageLoaded : boolean= false;
   src = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
   sampleUrl: string = 'https://jlg.examfirst.in/Images/UserDocuments/15504358912023-04-07.pdf';
 
@@ -167,11 +168,11 @@ export class UserComponent implements OnInit {
     this._adminService.getAllCity().subscribe((data) => {
   //   console.log(data,'all Citys')
      if(data.length > 0){
-    //  this.productsFound = true;
+      this.pageLoaded = true;
        this.cityList = data;
       }else{
         this.cityList = [];
-       // this.productsFound = false;
+        this.pageLoaded = true;
       }
       
     })

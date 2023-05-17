@@ -17,8 +17,8 @@
                 </div>
               </div>
               
-              <div class="table-responsive" *ngIf="memberList.length != 0">
-                <table class="table card-table table-vcenter text-nowrap datatable" style="border-color: #fff;">
+              <div class="table-responsive" *ngIf="pageLoaded">
+                <table class="table card-table table-vcenter text-nowrap datatable" style="border-color: #fff;"  *ngIf="memberList.length != 0">
                     
                       <tr style="background-color:#1d4ed8;">
                         <th scope="col" style="color: #fff;">S No.</th>
@@ -44,16 +44,26 @@
                         </tr>        
                         </tbody>
                 
-            </table>
-        </div>
+               </table>
+        
 
-        <div class="card-footer d-flex align-items-center" style="background-color: #fff;"  *ngIf="memberList.length != 0">
-          <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
-              <pagination-controls previousLabel="Prev"nextLabel="Next" [responsive]="true"></pagination-controls>
-          </div>
-        </div>
-        <div class="row mt-3 mb-3" *ngIf="memberList.length == 0">
-          <p class="text-center">No Member found</p>
+                <div class="card-footer d-flex align-items-center" style="background-color: #fff;"  *ngIf="memberList.length != 0">
+                <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
+                    <pagination-controls previousLabel="Prev"nextLabel="Next" [responsive]="true"></pagination-controls>
+                </div>
+                </div>
+                <div class="row mt-3 mb-3" *ngIf="memberList.length == 0">
+                <p class="text-center">No Member found</p>
+                </div>
+           </div>
+           <div class="table-responsive mt-3" *ngIf="!pageLoaded">
+            <div class="d-flex justify-content-center">
+              <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+                    &nbsp;
+                <h3 class="text-center mr-2">Data loading. Please Hold on!</h3>
+            </div>
         </div>
       </div>
     </div>

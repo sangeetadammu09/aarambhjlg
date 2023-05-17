@@ -22,6 +22,7 @@ export class ProductBrandComponent implements OnInit {
   deleteProductBrandItem: any;
   p = 1;
   productsFound: boolean = false;
+  pageLoaded : boolean= false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addProductBrandForm = this._formBuilder.group({
@@ -53,11 +54,11 @@ export class ProductBrandComponent implements OnInit {
     this._adminService.getAllProductBrand().subscribe((data) => {
       //console.log(data,'all ProductBrands')
      if(data.length > 0){
-    //  this.productsFound = true;
+      this.pageLoaded = true;
        this.productBrandList = data;
       }else{
         this.productBrandList = [];
-       // this.productsFound = false;
+        this.pageLoaded = true;
       }
       
     })

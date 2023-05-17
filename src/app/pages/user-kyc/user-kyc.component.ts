@@ -47,7 +47,7 @@ export class UserKycComponent implements OnInit {
   disablePhotoDocumentBtn: boolean = false;
   disableAddressDocumentBtn: boolean = false;
   disableVoterDocumentBtn: boolean = false;
-  
+  pageLoaded : boolean= false;
   userDocImage: any ={};
   documentTypePdf : boolean = false;
   documentTypeImage : boolean = false;
@@ -91,11 +91,11 @@ export class UserKycComponent implements OnInit {
     this._adminService.getAllCity().subscribe((data) => {
   //   console.log(data,'all Citys')
      if(data.length > 0){
-    //  this.productsFound = true;
+      this.pageLoaded = true;
        this.cityList = data;
       }else{
         this.cityList = [];
-       // this.productsFound = false;
+        this.pageLoaded = true;
       }
       
     })

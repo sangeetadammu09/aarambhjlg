@@ -28,6 +28,7 @@ export class ReturnorderComponent implements OnInit {
   userRole = localStorage.getItem('roles');
   tempOrderArr:string[] = [];
   isIncreaseAmountError :any = false;
+  pageLoaded : boolean= false;
 
   constructor( private _saleService: SalesRelationService, private toastrService :ToastrService) { }
 
@@ -69,10 +70,11 @@ export class ReturnorderComponent implements OnInit {
         if(data.status == 200){
           this.orderFound = true;          
           this.returnedOrderList = data.body;
-         
+          this.pageLoaded = true;
         }else{
           this.orderFound = false;
-          this.returnedOrderList = []
+          this.returnedOrderList = [];
+          this.pageLoaded = true;
         }
       })
   }

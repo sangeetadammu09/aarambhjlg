@@ -32,6 +32,7 @@ export class OrderDetailsComponent implements OnInit {
   paymentInstallmentNo: any;
   gapList : any = [];
   paymentGapValue:any
+  pageLoaded : boolean= false;
 
   constructor(private _saleService: SalesRelationService,private toastrService :ToastrService,
     private _adminService:AdminService) { }
@@ -74,10 +75,11 @@ export class OrderDetailsComponent implements OnInit {
        console.log(data,'all orders')
        if(data.length > 0){
         this.orderListForApproval = data
-
+        this.pageLoaded = true;
         this.total = data[0].totalCount;
         }else{
           this.orderListForApproval = [];
+          this.pageLoaded = true;
         }
         
       })

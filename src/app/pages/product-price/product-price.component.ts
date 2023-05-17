@@ -31,6 +31,7 @@ export class ProductPriceComponent implements OnInit {
   rowEdit :boolean = false;
   productObj :any;
   searchProductPrice : any;
+  pageLoaded : boolean= false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     
@@ -58,14 +59,14 @@ export class ProductPriceComponent implements OnInit {
   getAllProductPrices(){
     this._adminService.getProducts(this.page,this.pageSize,this.cityId,'').subscribe((data) => {    
       if(data){
-     //  this.productsFound = true;
+        this.pageLoaded = true;
         this.productPriceList = data.products;
         this.total = data.pages.totalCount;
         console.log(this.productPriceList,'all ProductPrices', this.rowEdit)
 
        }else{
          this.productPriceList = [];
-        // this.productsFound = false;
+         this.pageLoaded = true;
        }
        
      })

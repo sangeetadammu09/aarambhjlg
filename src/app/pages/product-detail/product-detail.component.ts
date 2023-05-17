@@ -16,6 +16,7 @@ export class ProductDetailComponent implements OnInit {
   cityId = localStorage.getItem('userCity');
   userId = localStorage.getItem('userId');
   roleNo = localStorage.getItem('roleNo');
+  pageLoaded : boolean= false;
   
   constructor(private _salesService: SalesRelationService, private _adminService: AdminService ) { }
 
@@ -35,9 +36,10 @@ export class ProductDetailComponent implements OnInit {
           this.productList = data.products;
           this.total = data.page.totalCount;
           console.log(this.productList)
-   
+          this.pageLoaded = true;
          }else{
            this.productList = [];
+           this.pageLoaded = true;
          } 
        })
    

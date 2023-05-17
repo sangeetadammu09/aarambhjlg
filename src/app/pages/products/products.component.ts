@@ -55,6 +55,7 @@ export class ProductsComponent implements OnInit {
   productFiveImageName: any = "Choose Product";
   disableProdImageFiveBtn :boolean = false;
   productImageFiveFile: any;
+  pageLoaded : boolean= false;
  
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
@@ -116,9 +117,10 @@ export class ProductsComponent implements OnInit {
       //.map((item:any, indexNo:any) => ({indexNo, ...item}));
     //  console.log(this.productList)
        this.total = data.pages.totalCount;
+       this.pageLoaded = true;
       }else{
         this.productList = [];
-       // this.productsFound = false;
+        this.pageLoaded = true;
       }
       
     })
