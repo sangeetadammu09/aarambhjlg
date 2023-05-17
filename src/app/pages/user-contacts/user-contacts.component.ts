@@ -32,11 +32,12 @@ export class UserContactsComponent implements OnInit {
             user['modifiedRoles']= finalArray;
           })
           this.userList = data.users;
-
+          this.pageLoaded = true;
           this.total = data.page.totalCount;
 
          }else{
            this.userList = [];
+           this.pageLoaded = true;
          } 
        })
    

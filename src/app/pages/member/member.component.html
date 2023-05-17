@@ -35,7 +35,7 @@
                     (click)="showaddMemberModal()">Add Member</button>
                 </div>
               </div>      
-            <div class="table-responsive"  *ngIf="pageLoaded">
+            <div class="table-responsive">
             <table class="table card-table table-vcenter text-nowrap datatable" *ngIf="memberList.length != 0">
                
                   <tr style="background-color:#1d4ed8;">
@@ -84,7 +84,7 @@
                 <p class="text-center">No Member found</p>
               </div>
             </div>
-          <div class="table-responsive mt-3" *ngIf="!pageLoaded">
+          <!-- <div class="table-responsive mt-3">
             <div class="d-flex justify-content-center">
               <div class="spinner-border" role="status">
                 <span class="sr-only">Loading...</span>
@@ -92,7 +92,7 @@
                     &nbsp;
                 <h3 class="text-center mr-2">Data loading. Please Hold on!</h3>
             </div>
-        </div>
+        </div> -->
       </div>
       </div>
       </div>
