@@ -32,6 +32,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
 import { ApprovedOrderComponent } from './approved-order/approved-order.component';
 import { PaymentComponent } from './payment/payment.component';
 import { ReturnorderComponent } from './returnorder/returnorder.component';
+import { ReturnedOrdersComponent } from './returned-orders/returned-orders.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -67,7 +68,8 @@ import { ReturnorderComponent } from './returnorder/returnorder.component';
     OrderDetailsComponent,
     ApprovedOrderComponent,
     PaymentComponent,
-    ReturnorderComponent
+    ReturnorderComponent,
+    ReturnedOrdersComponent
   ]
 })
 

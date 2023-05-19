@@ -178,14 +178,14 @@
                                  </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <label class="form-control-label">Family Details</label>
-                                <input type="text" class="form-control" formControlName="familyMembers" name="familyMembers"  
-                                [ngClass]="{'is-invalid':(submitted && f['familyMembers'].errors) ||(f['familyMembers'].errors && f['familyMembers'].touched) }">
-                                <div *ngIf="(submitted && f['familyMembers'].errors) ||(f['familyMembers'].errors && f['familyMembers'].touched)" class="invalid-feedback">
-                                        <div *ngIf="f['familyMembers'].errors['required']">
-                                            Family Members is required
+                                <label class="form-control-label">Alternate Contact</label>
+                                <input type="text" class="form-control" formControlName="alternateMobileNo" name="alternateMobileNo"  
+                                [ngClass]="{'is-invalid':(submitted && f['alternateMobileNo'].errors) ||(f['alternateMobileNo'].errors && f['alternateMobileNo'].touched) }">
+                                    <div *ngIf="(submitted && f['alternateMobileNo'].errors) ||(f['alternateMobileNo'].errors && f['alternateMobileNo'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['alternateMobileNo'].errors['required']">
+                                            Alternate Contact is required
                                         </div>
-                                </div>
+                                 </div>
                             </div>
 
                         </div>             
@@ -297,6 +297,16 @@
                         </div>
 
                         <div class="row">
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Family Details</label>
+                                <input type="text" class="form-control" formControlName="familyMembers" name="familyMembers"  
+                                [ngClass]="{'is-invalid':(submitted && f['familyMembers'].errors) ||(f['familyMembers'].errors && f['familyMembers'].touched) }">
+                                <div *ngIf="(submitted && f['familyMembers'].errors) ||(f['familyMembers'].errors && f['familyMembers'].touched)" class="invalid-feedback">
+                                        <div *ngIf="f['familyMembers'].errors['required']">
+                                            Family Members is required
+                                        </div>
+                                </div>
+                            </div>
                             <div class="form-group col-lg-6">
                                 <label class="form-control-label">Address</label>
                                 <textarea formControlName="address" name="address"  class="form-control"  id="address" rows="3"

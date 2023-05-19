@@ -160,7 +160,10 @@ export const APP_DI_CONFIG: any = {
     OrderReturn:{
       addOrderReturnItems: '/OrderReturn/AddReturnItems',
       getOrderReturnedItems: '/OrderReturn/GetReturnedItems',
-      submitReturnRequest: '/OrderReturn/SubmitReturnRequest'
+      submitReturnRequest: '/OrderReturn/SubmitReturnRequest',
+      getReturnedRequestedList: '/OrderReturn/GetReturnedRequestedList',
+      getReturnOrderDetails: '/OrderReturn/GetReturnOrderDetails',
+      approveReturnRequest: '/OrderReturn/ApproveReturnRequest'
     }
   }
   

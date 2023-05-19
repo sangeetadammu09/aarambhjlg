@@ -222,7 +222,25 @@ export const SalesManagerList = {
                 icon : 'fa-book',
                 isActive: true, 
             }
+
           ]
+        },
+        {
+          id: 3,
+          parentMenu: 'Return',
+          icon : 'fa-undo',
+          isActive: true, 
+          url: 'return',
+          submenuList:[
+            {
+                id: 0,
+                menu: 'Returned Orders',
+                url: 'returned-orders',
+                icon : 'fa-undo',
+                isActive: true, 
+            },
+            
+        ]
         },
         
 

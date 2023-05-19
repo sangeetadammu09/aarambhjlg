@@ -54,9 +54,11 @@ export class ApprovedOrderComponent implements OnInit {
       this._saleService.getApprovedOrdersForManagerList(this.userId,this.pageSize,this.page).subscribe((data) => {
         console.log(data,'all orders')
         if(data.length > 0){
+          this.pageLoaded = true;
          this.approvedOrderList = data,
          this.total = data[0].totalCount;
          }else{
+          this.pageLoaded = true;
            this.approvedOrderList = [];
          } 
        })

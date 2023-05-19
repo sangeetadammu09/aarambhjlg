@@ -14,7 +14,6 @@ export class SalesManagerService {
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Center.GetSalesManagerCenterList+`?smId=${smId}`)
    }
 
-  
    //kyc 
    getMemberListForKycVerification(centerId:any){
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Kyc.GetMemberListForKycVerification+`?centerId=${centerId}`)
@@ -26,6 +25,18 @@ export class SalesManagerService {
  
    addMemberKycVerification(data:any){
      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Kyc.AddMemberKycVerification,data,{observe: 'response'})
+   }
+
+   getReturnedRequestedList(userId:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.OrderReturn.getReturnedRequestedList+`?userId=${userId}`)
+   }
+
+   getReturnOrderDetails(orderId:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.OrderReturn.getReturnOrderDetails+`?orderId=${orderId}`,{observe: 'response'})
+   }
+
+   approveReturnRequest(data:any){
+    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.OrderReturn.approveReturnRequest,data,{observe: 'response'})
    }
  
 

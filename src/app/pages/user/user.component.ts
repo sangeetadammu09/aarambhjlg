@@ -100,6 +100,7 @@ export class UserComponent implements OnInit {
       fullName: ['', Validators.required],
       email: ['', Validators.required],
       mobileNo: ['', Validators.required],
+      alternateMobileNo : ['', Validators.required],
       address: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
       familyDetails: ['', Validators.required],
@@ -268,6 +269,7 @@ export class UserComponent implements OnInit {
         addUserData.fullName = this.addUserForm.controls['fullName'].value;
         addUserData.email = this.addUserForm.controls['email'].value;
         addUserData.mobileNo= this.addUserForm.controls['mobileNo'].value;
+        addUserData.alternateMobileNo= this.addUserForm.controls['alternateMobileNo'].value;
         addUserData.address = this.addUserForm.controls['address'].value;
         addUserData.dateOfBirth = this.userDateofBirth;
         addUserData.familyDetails = this.addUserForm.controls['familyDetails'].value;

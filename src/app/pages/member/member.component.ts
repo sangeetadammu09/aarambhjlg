@@ -84,6 +84,7 @@ export class MemberComponent implements OnInit {
       spouseDateOfBirth: ['', Validators.required],
       address: ['', Validators.required],
       mobileNo: ['', Validators.required],
+      alternateMobileNo :['', Validators.required],
       stayThere: ['', Validators.required],
       workingAs: ['', Validators.required],
       familyMembers: [, Validators.required],
@@ -261,6 +262,7 @@ export class MemberComponent implements OnInit {
         addMemberData.fullName = this.addMemberForm.controls['fullName'].value;
         //addMemberData.email = this.addMemberForm.controls['email'].value;
         addMemberData.mobileNo= this.addMemberForm.controls['mobileNo'].value;
+        addMemberData.alternateMobileNo= this.addMemberForm.controls['alternateMobileNo'].value;
         addMemberData.address = this.addMemberForm.controls['address'].value;
         var dob = new Date(this.addMemberForm.controls['dateOfBirth'].value);
         addMemberData.dateOfBirth = dob.toISOString();
