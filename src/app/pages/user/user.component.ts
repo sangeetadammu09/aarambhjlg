@@ -97,10 +97,10 @@ export class UserComponent implements OnInit {
      private _toastrService: ToastrService, private sanitizer: DomSanitizer) { 
     this.addUserForm = this._formBuilder.group({
       userId: [],
-      fullName: ['', Validators.required],
-      email: ['', Validators.required],
-      mobileNo: ['', Validators.required],
-      alternateMobileNo : ['', Validators.required],
+      fullName: ['', [Validators.required,Validators.pattern('^[a-zA-Z ,]*$')]],
+      email: ['', [Validators.required,  Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"),]],
+      mobileNo: ['', [Validators.required,  Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"),]],
+      alternateMobileNo : ['', [Validators.required,  Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"),]],
       address: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
       familyDetails: ['', Validators.required],

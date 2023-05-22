@@ -28,7 +28,7 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                              <label for="searchMember">Select Member{{memberDropdownList | json}}</label>
+                              <label for="searchMember">Select Member</label>
                               <select class="custom-select" id="searchMember" [(ngModel)]="searchMember" (change)="createNewCart(searchMember)">
                                 <option value="" [selected]="''">Choose Member..</option>
                                 <option *ngFor="let item of memberDropdownList" [ngValue]="item.memberId">
