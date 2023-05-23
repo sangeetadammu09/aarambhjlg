@@ -358,6 +358,14 @@ export class AdminService {
    addUserKycVerification(data:any){
      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Kyc.AddUserKycVerification,data,{observe: 'response'})
    }
+
+   getCenterSummary(userId:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Dashboard.getCenterSummary+`?userId=${userId}`,{observe: 'response'})
+   }
+
+   getOrderSummary(userId:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Dashboard.getOrderSummary+`?userId=${userId}`,{observe: 'response'})
+   }
  
   
    

@@ -3,6 +3,7 @@ import { BranchComponent } from 'src/app/pages/branch/branch.component';
 import { CenterComponent } from 'src/app/pages/center/center.component';
 import { ChangePasswordComponent } from 'src/app/pages/change-password/change-password.component';
 import { CityComponent } from 'src/app/pages/city/city.component';
+import { DashboardComponent } from 'src/app/pages/dashboard/dashboard.component';
 import { ExpenseTypeComponent } from 'src/app/pages/expense-type/expense-type.component';
 import { GroupComponent } from 'src/app/pages/group/group.component';
 import { InstallmentsComponent } from 'src/app/pages/installments/installments.component';
@@ -44,5 +45,6 @@ export const AdminLayoutRoutes: Routes = [
      { path:'user-contacts', component: UserContactsComponent },
      { path:'member-contacts', component: MemberContactsComponent },
      { path:'my-profile', component: ProfileComponent },
+     { path:'dashboard', component: DashboardComponent },
    
 ];

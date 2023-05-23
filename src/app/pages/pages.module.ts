@@ -33,6 +33,7 @@ import { ApprovedOrderComponent } from './approved-order/approved-order.componen
 import { PaymentComponent } from './payment/payment.component';
 import { ReturnorderComponent } from './returnorder/returnorder.component';
 import { ReturnedOrdersComponent } from './returned-orders/returned-orders.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -69,7 +70,8 @@ import { ReturnedOrdersComponent } from './returned-orders/returned-orders.compo
     ApprovedOrderComponent,
     PaymentComponent,
     ReturnorderComponent,
-    ReturnedOrdersComponent
+    ReturnedOrdersComponent,
+    DashboardComponent
   ]
 })
 

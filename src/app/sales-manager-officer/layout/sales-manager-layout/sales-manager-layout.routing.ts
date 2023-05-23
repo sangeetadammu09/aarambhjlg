@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { ApprovedOrderComponent } from 'src/app/pages/approved-order/approved-order.component';
 import { ChangePasswordComponent } from 'src/app/pages/change-password/change-password.component';
+import { DashboardComponent } from 'src/app/pages/dashboard/dashboard.component';
 import { MemberKycComponent } from 'src/app/pages/member-kyc/member-kyc.component';
 import { OrderDetailsComponent } from 'src/app/pages/order-details/order-details.component';
 import { ProductDetailComponent } from 'src/app/pages/product-detail/product-detail.component';
@@ -16,6 +17,7 @@ export const SalesManagerLayoutRoutes: Routes = [
      { path:'change-password', component: ChangePasswordComponent },
      { path:'product-details', component: ProductDetailComponent },
      { path:'returned-orders', component: ReturnedOrdersComponent },
+     { path:'dashboard', component: DashboardComponent },
      
    
      

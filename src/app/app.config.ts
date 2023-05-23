@@ -164,6 +164,11 @@ export const APP_DI_CONFIG: any = {
       getReturnedRequestedList: '/OrderReturn/GetReturnedRequestedList',
       getReturnOrderDetails: '/OrderReturn/GetReturnOrderDetails',
       approveReturnRequest: '/OrderReturn/ApproveReturnRequest'
+    },
+    Dashboard:{
+      getCenterSummary: '/Dashboard/GetCenterSummary',
+      getOrderSummary: '/Dashboard/GetOrderSummary'
+    
     }
   }
   
