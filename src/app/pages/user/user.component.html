@@ -130,7 +130,7 @@
                         <div class="row">
                             <div class="form-group col-lg-6">
                                 <label class="form-control-label">Contact</label>
-                                <input type="text" class="form-control" formControlName="mobileNo" name="mobileNo"  
+                                <input type="text" class="form-control" formControlName="mobileNo" name="mobileNo"  (change)="verifyContact($event)"
                                 [ngClass]="{'is-invalid':(submitted && f['mobileNo'].errors) ||(f['mobileNo'].errors && f['mobileNo'].touched) }">
                                     <div *ngIf="(submitted && f['mobileNo'].errors) ||(f['mobileNo'].errors && f['mobileNo'].touched)" class="invalid-feedback">
                                         <div *ngIf="f['mobileNo'].errors['required']">
@@ -138,8 +138,10 @@
                                         </div>
                                         <div *ngIf="f['mobileNo'].errors['pattern']">
                                             Please, Enter 10 digit Contact Number
-                                          </div>
+                                        </div>
                                  </div>
+                                 <div *ngIf="isMobileExists" class="text-red">Mobile already exists</div>
+                                 
                             </div>
                             <div class="form-group col-lg-6">
                                 <label class="form-control-label">Alternate Contact</label>

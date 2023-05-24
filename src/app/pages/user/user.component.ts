@@ -91,6 +91,7 @@ export class UserComponent implements OnInit {
   pageLoaded : boolean= false;
   src = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
   sampleUrl: string = 'https://jlg.examfirst.in/Images/UserDocuments/15504358912023-04-07.pdf';
+  isMobileExists: boolean = false;
 
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder,
@@ -210,6 +211,7 @@ export class UserComponent implements OnInit {
     this.addUserDocumentForm.reset();
     this.addUserDocumentForm.markAsUntouched();
     this.addUserDocumentForm.markAsPristine();
+    this.isMobileExists = false;
     this.addUserForm.controls['cityId'].setValue('')
     this.addUserForm.controls['isActive'].setValue('true');
     this.familyPhotoName ="Choose File";
@@ -870,6 +872,20 @@ showUserModal(item:any){
        this.documentTypeImage = false;
        this.fileUrl = item.url;
        
+      }
+   }
+
+   verifyContact(event:any){
+       console.log(event.target.value,'mobileno');
+       let mobileNo = event.target.value;
+       if(mobileNo !== ''){
+       this._adminService.checkUserMobileNumberExists(mobileNo).subscribe((x:any) =>{
+      //  console.log(x)
+        x.exists == true ?this.isMobileExists = true : this.isMobileExists = false
+      
+       })
+      }else{
+        this.isMobileExists = false;
       }
    }
 

@@ -290,6 +290,10 @@ export class AdminService {
    getUserContacts(cityId : any,pageNo:any,pageSize:any){
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.GetUserContacts+`?cityId=${cityId}&PageNumber=${pageNo}&PageSize=${pageSize}`)
    }
+
+   checkUserMobileNumberExists(mobileNo:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.CheckUserMobileNumberExists+`?mobileNo=${mobileNo}`)
+   }
  
  
    addUser(data:any){

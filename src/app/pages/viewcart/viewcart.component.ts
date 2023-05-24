@@ -19,6 +19,7 @@ export class ViewcartComponent implements OnInit {
   demoText="demo"
   cartList: any = [];
   @ViewChild('closeDeleteItemBtn') closeDeleteItemBtn:any;
+  @ViewChild('closeMemberValidityBtn') closeMemberValidityBtn:any;
   cartItemId: any;
   serviceCharge: any =0;
   paymentInstallment :any;
@@ -29,7 +30,7 @@ export class ViewcartComponent implements OnInit {
   selectedCartId :any
   memberId :any
   itemId: any;
-  
+  isMemberValidityExpired :boolean = false;
 
   constructor(private _adminService:AdminService, private _salesService: SalesRelationService,
     private toastrService :ToastrService,private router: Router, private dataService:DataService) {
@@ -167,26 +168,42 @@ export class ViewcartComponent implements OnInit {
       this.paymentInstallmentId = item;
   }
 
-  placeOrder(){
-    var newOrder :any = {};
-    newOrder.cartId = this.updatedCartId,
-    newOrder.totalBill = this.cartDetailsObj.total ,
-    newOrder.serviceCharges = this.serviceCharge,
-    newOrder.totalBillWithServiceCharges = this.cartDetailsObj.finalAmount,
-    newOrder.requestedInstallmentId = this.paymentInstallmentId
-   
-    this._salesService.placeNewOrder(newOrder).subscribe((data:any) => {
-      if(data.status == 200){
-      this.toastrService.success('Order placed successfully')
-      this.router.navigate(['/sales-relation-officer/new-order']);
-      localStorage.removeItem(this.memberId);
-      localStorage.removeItem(this.selectedCartId);
-      this.showViewCartModal()
+  closeMemberValidityModal(){
+    this.closeMemberValidityBtn.nativeElement.click();
+    this.isMemberValidityExpired = false;
+  }
 
+  placeOrder(){
+    console.log(this.cartDetailsObj)
+    console.log(this.newCart,'new cart')
+    this._salesService.getOrderMemberValidity(this.cartDetailsObj.memberId).subscribe((data:any) => {
+      console.log(data.isEligible == false)
+      if(data.isEligible == false){
+        document.getElementById("openModalButton")?.click();
+        this.isMemberValidityExpired = true;
        }else{
-         this.toastrService.error('Error placing the order. Please try again')
-       } 
-     })
+        this.isMemberValidityExpired = false;  
+      var newOrder :any = {};
+      newOrder.cartId = this.updatedCartId,
+      newOrder.totalBill = this.cartDetailsObj.total ,
+      newOrder.serviceCharges = this.serviceCharge,
+      newOrder.totalBillWithServiceCharges = this.cartDetailsObj.finalAmount,
+      newOrder.requestedInstallmentId = this.paymentInstallmentId
+    
+      this._salesService.placeNewOrder(newOrder).subscribe((data:any) => {
+        if(data.status == 200){
+        this.toastrService.success('Order placed successfully')
+        this.router.navigate(['/sales-relation-officer/new-order']);
+        localStorage.removeItem(this.memberId);
+        localStorage.removeItem(this.selectedCartId);
+        this.showViewCartModal()
+
+        }else{
+          this.toastrService.error('Error placing the order. Please try again')
+        } 
+      })
+    } 
+  })
   }
 
   showGoToCartModal(){

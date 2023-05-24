@@ -48,7 +48,7 @@
             </table>
             <div class="card-footer d-flex align-items-center" style="background-color: #fff;"  *ngIf="approvedOrderList.length>0">
                 <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
-                    <pagination-controls (pageChange)="handlePageChange($event)"></pagination-controls>
+                    <pagination-controls (pageChange)="page = $event"></pagination-controls>
                 </div>
             </div>
               <div class="row card mb-3" *ngIf="approvedOrderList.length == 0">

@@ -171,7 +171,7 @@
                         <div class="row">
                             <div class="form-group col-lg-6">
                                 <label class="form-control-label">Contact</label>
-                                <input type="text" class="form-control" formControlName="mobileNo" name="mobileNo"  
+                                <input type="text" class="form-control" formControlName="mobileNo" name="mobileNo" (change)="verifyContact($event)" 
                                 [ngClass]="{'is-invalid':(submitted && f['mobileNo'].errors) ||(f['mobileNo'].errors && f['mobileNo'].touched) }">
                                     <div *ngIf="(submitted && f['mobileNo'].errors) ||(f['mobileNo'].errors && f['mobileNo'].touched)" class="invalid-feedback">
                                         <div *ngIf="f['mobileNo'].errors['required']">

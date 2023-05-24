@@ -87,6 +87,10 @@ export class SalesRelationService {
      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Members.AddMemberDocuments,data,{observe: 'response'})
    }
 
+   checkMemberMobileNumberExists(mobileNo:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Members.CheckMemberMobileNumberExists+`?mobileNo=${mobileNo}`)
+   }
+
    //kyc 
    getMemberListForKycVerification(centerId:any){
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Kyc.GetMemberListForKycVerification+`?centerId=${centerId}`)
@@ -98,6 +102,10 @@ export class SalesRelationService {
  
    addMemberKycVerification(data:any){
      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Kyc.AddMemberKycVerification,data,{observe: 'response'})
+   }
+
+   getKycFailedMembers(centerId:any,pagesize:any,pageno:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Kyc.GetKycFailedMembers+`?centerId=${centerId}&pageNumber=${pageno}&pageSize=${pagesize}`)
    }
 
    getProductAutocomplete(SearchTerm?:any){
@@ -132,6 +140,10 @@ export class SalesRelationService {
    
    placeNewOrder(data:any){
     return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.PlaceNewOrder,data,{observe: 'response'})
+   }
+
+   getOrderMemberValidity(memberId:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.GetOrderMemberValidity+`?memberId=${memberId}`)
    }
 
    cancelOrder(cartId:any){

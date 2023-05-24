@@ -63,7 +63,14 @@ export const SalesList = {
                   url: 'member-contacts',
                   icon : 'fa-phone',
                   isActive: true, 
-              }
+              },
+              {
+                id: 2,
+                menu: 'Kyc Failed Members',
+                url: 'kyc-failed-members',
+                icon : 'fa-phone',
+                isActive: true, 
+            }
             ]
           },
           {

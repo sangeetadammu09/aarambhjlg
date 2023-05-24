@@ -34,6 +34,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { ReturnorderComponent } from './returnorder/returnorder.component';
 import { ReturnedOrdersComponent } from './returned-orders/returned-orders.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { KycFailedMembersComponent } from './kyc-failed-members/kyc-failed-members.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -71,7 +72,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     PaymentComponent,
     ReturnorderComponent,
     ReturnedOrdersComponent,
-    DashboardComponent
+    DashboardComponent,
+    KycFailedMembersComponent
   ]
 })
 

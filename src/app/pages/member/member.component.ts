@@ -70,6 +70,7 @@ export class MemberComponent implements OnInit {
   pagenew = 1;
   roleNo = localStorage.getItem('roleNo');
   pageLoaded :boolean = false;
+  isMobileExists: boolean = false;
   
 
   constructor(private _salesService: SalesRelationService, private _formBuilder : FormBuilder,
@@ -218,6 +219,7 @@ export class MemberComponent implements OnInit {
     this.addMemberDocumentForm.reset();
     this.addMemberDocumentForm.markAsUntouched();
     this.addMemberDocumentForm.markAsPristine();
+    this.isMobileExists = false;
     this.addMemberForm.controls['cityId'].setValue('')
     this.addMemberForm.controls['centerId'].setValue('');
    
@@ -599,6 +601,21 @@ export class MemberComponent implements OnInit {
         
        }
     }
+
+    verifyContact(event:any){
+      console.log(event.target.value,'mobileno');
+      let mobileNo = event.target.value;
+      if(mobileNo !== ''){
+      this._salesService.checkMemberMobileNumberExists(mobileNo).subscribe((x:any) =>{
+     //  console.log(x)
+       x.exists == true ?this.isMobileExists = true : this.isMobileExists = false
+     
+      })
+     }else{
+       this.isMobileExists = false;
+     }
+  }
+
 
 }
 

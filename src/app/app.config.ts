@@ -25,6 +25,7 @@ export const APP_DI_CONFIG: any = {
       GetAllUserDetails : "/User/GetUserAllDetails",
       GetUserContacts: "/User/GetUserContacts",
       GetUserProfilePic: "/User/GetUserProfilePic",
+      CheckUserMobileNumberExists: "/User/CheckUserMobileNumberExists",
     },
     ProductCategory:{
       GetAllProductCategory : "/ProductCategory/GetAllProductCategory",
@@ -86,8 +87,7 @@ export const APP_DI_CONFIG: any = {
       GetCenterWiseMemberList : "/Members/GetCenterWiseMemberList",
       GetMemberListByCenter : "/Members/GetMemberListByCenter",
       GetMemberContacts : "/Members/GetMemberContacts",
-     // UpdateMembers : "/Members/UpdateMembers",
-     // DeleteMembers : "/Members/DeleteMembers"
+      CheckMemberMobileNumberExists: "/Members/CheckMemberMobileNumberExists",
     },
     TaxSlot:{
       GetAllTaxSlot : "/TaxSlot/GetAllTaxSlots",
@@ -133,7 +133,8 @@ export const APP_DI_CONFIG: any = {
       AddUserKycVerification:"/Kyc/AddUserKycVerification",
       GetMemberListForKycVerification : "/Kyc/GetMemberListForKycVerification",
       GetMemberKycDetails : "/Kyc/GetMemberKycDetails",
-      AddMemberKycVerification:"/Kyc/AddMemberKycVerification"
+      AddMemberKycVerification:"/Kyc/AddMemberKycVerification",
+      GetKycFailedMembers : "/Kyc/GetMemberFailedMembers",
     },
     ShoppingCart:{
       CreateNewCart: '/ShopingCart/CreateNewCart',
@@ -150,7 +151,8 @@ export const APP_DI_CONFIG: any = {
         GetInstallmentList : '/Order/GetInstallmentList',
         GetApprovedOrdersForSoRoList : '/Order/GetApprovedOrdersForSoRoList',
         GetApprovedOrdersForManagerList : '/Order/GetApprovedOrdersForManagerList',
-        GetApprovedOrderDetails : '/Order/GetApprovedOrderDetails'
+        GetApprovedOrderDetails : '/Order/GetApprovedOrderDetails',
+        GetOrderMemberValidity : '/Order/GetOrderMemberValidity',
     },
     OrderInstallment:{
       getOrderInstallmentCollectionList: '/OrderInstallment/GetOrderInstallmentCollectionList',

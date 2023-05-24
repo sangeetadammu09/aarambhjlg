@@ -12,6 +12,7 @@ import { ApprovedOrderComponent } from 'src/app/pages/approved-order/approved-or
 import { PaymentComponent } from 'src/app/pages/payment/payment.component';
 import { ReturnorderComponent } from 'src/app/pages/returnorder/returnorder.component';
 import { DashboardComponent } from 'src/app/pages/dashboard/dashboard.component';
+import { KycFailedMembersComponent } from 'src/app/pages/kyc-failed-members/kyc-failed-members.component';
 
 export const SalesRelationLayoutRoutes: Routes = [
 
@@ -28,11 +29,6 @@ export const SalesRelationLayoutRoutes: Routes = [
      { path:'collections', component: PaymentComponent },
      { path:'returnorder', component: ReturnorderComponent },
      { path:'dashboard', component: DashboardComponent },
-     
-
-    
-     
-   
-     
-   
+     { path:'kyc-failed-members', component: KycFailedMembersComponent },
+  
 ];
