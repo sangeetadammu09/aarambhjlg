@@ -10,33 +10,28 @@ import { SalesRelationService } from 'src/app/sales-relation-officer/service/sal
   styleUrls: ['./kyc-failed-members.component.css']
 })
 export class KycFailedMembersComponent implements OnInit {
-  memberList: any;
+  memberList: any =[];
   pageLoaded: boolean = false;
-  page: any;
-  pageSize: any;
+  page: number = 1;
+  pageSize: any = 10;
+  total:number = 0;
   roleNo = localStorage.getItem('roleNo');
-  memberDropdownList: any;
-  cityList: any;
-  centerList: any;
-  searchMember:any = null;
   cityid = localStorage.getItem('userCity');
+  cityList: any = [];
 
-  constructor(private _salesService: SalesRelationService, private _formBuilder : FormBuilder,
-    private _toastrService: ToastrService, private _adminService: AdminService,) { }
+  constructor(private _salesService: SalesRelationService, private _adminService: AdminService,) { }
 
   ngOnInit(): void {
-    this.getAllMemberDetails()
-    this.getCenterDropdownByCityId();
-    this.getOfficersCenterList();
-    this.searchMember ="";
+   this.getAllFailedMembersDetails()
   }
 
-  getAllMemberDetails(){
-    this._salesService.getCenterWiseMemberList(this.cityid).subscribe((data) => {
-        console.log(data,'all memberDropdownList')
+  getAllFailedMembersDetails(){
+    this._salesService.getKycFailedMembers(this.cityid, this.page, this.pageSize).subscribe((data) => {
+        // console.log(data,'all memberList')
         if(data.length > 0){
           this.memberList = data;
           this.pageLoaded = true;
+          this.total = data.pages.totalCount;
    
          }else{
            this.memberList = [];
@@ -45,54 +40,13 @@ export class KycFailedMembersComponent implements OnInit {
        })
    
   }
-  cityId(cityId: any) {
-    throw new Error('Method not implemented.');
-  }
 
-  getOfficersCenterList(){
-    var paginationObj :any ={};
-    paginationObj.pageNo =this.page;
-    paginationObj.pageSize = this.pageSize;
-    if(this.roleNo == '101'){
-      this._adminService.getCenterDropdownByCityId(this.cityId).subscribe((data) =>{
-        console.log(data,'admin member')
-        if(data.length > 0){
-          this.memberDropdownList = data;
-   
-         }else{
-           this.memberDropdownList = [];
-         } 
-       })
-
-    }else if(this.roleNo == '102')
-    this._salesService.getOfficersCenterList(this.cityId,this.userId).subscribe((data) => {
-      console.log(data,'cco member')
-        if(data.length > 0){
-          this.memberDropdownList = data;
-   
-         }else{
-           this.memberDropdownList = [];
-         } 
-       })
-   
-  }
-  userId(cityId: any, userId: any) {
-    throw new Error('Method not implemented.');
-  }
-
-  getMemberVal(event:any){
-      var searchMemberId = event;
-      this._salesService.getCenterWiseMemberList(searchMemberId).subscribe((data) => {
-        console.log(data,'all memberDropdownList')
-        if(data.length > 0){
-          this.memberList = data;
-   
-         }else{
-           this.memberList = [];
-         } 
-       })
+  handlePageChange(event: number){
     
-  }
+    this.page = event;
+    this.getAllFailedMembersDetails();
+}
+ 
 
   getAllCitys(){
     this._adminService.getAllCity().subscribe((data) => {
@@ -105,24 +59,6 @@ export class KycFailedMembersComponent implements OnInit {
     })
   }
 
-  getCenterDropdownByCityId(){
-    this._adminService.getCenterDropdownByCityId(this.cityId).subscribe((data) => {
-     // console.log(data,'all Managers')
-     if(data.length > 0){
-       this.centerList = data;
-      }else{
-        this.centerList = [];
-      }
-      
-    })
-  }
-
-
-
-  handlePageChange(event: number){
-    console.log(event)
-    this.page = event;
-    this.getAllMemberDetails();
-}
+  
 
 }
