@@ -49,6 +49,8 @@ export class PaymentComponent implements OnInit {
       orderId: [],
       payingAmt: ['', Validators.required],
       paidDate: [, Validators.required],
+      paymentMode:['', Validators.required],
+      paymentComment: [,''],
       paymentTakenById: ['']
     })
   }
@@ -160,6 +162,8 @@ submitUpdatePayment(){
   paymentObj.installmentNo = this.selectedPayment.installmentNo
   paymentObj.orderId =  this.selectedPayment.orderId,
   paymentObj.paidDate= moment().format(),
+  paymentObj.paymentMode = this.updatePaymentForm.controls['paymentMode'].value,
+  paymentObj.paymentComment= this.updatePaymentForm.controls['paymentComment'].value,
   paymentObj.paymentTakenById = Number(this.userId)
   paymentObj.payingAmt = Number( this.updatePaymentForm.controls['payingAmt'].value)
   this._salesService.makeInstallmentPayment(paymentObj).subscribe((data:any) => {

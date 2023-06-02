@@ -55,6 +55,7 @@ export const APP_DI_CONFIG: any = {
       GetCenterDropdownByCityId : "/Center/GetCenterDropdownByCityId",
       GetOfficersCenterList : "/Center/GetOfficersCenterList",
       GetSalesOfficersCenterList : "/Center/GetSalesOfficerCenterList",
+      AssignLeaderToCenter :"Center/AssignLearderToCenter",
       AddCenter : "/Center/AddCenter",
       UpdateCenter : "/Center/UpdateCenter",
       DeleteCenter : "/Center/DeleteCenter"

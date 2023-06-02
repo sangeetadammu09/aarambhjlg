@@ -1,0 +1,57 @@
+<!-- Page body -->
+<div class="page-body">
+    <div class="container-xl">
+      <div class="row row-cards">
+        <div class="col-6">
+            <div class="card">
+              <div class="card-header">
+                <div class="col-lg-10 mb-3 mt-2">
+                    <h3 class="card-title">Assign Leader</h3>
+                </div>
+              </div>
+  
+           <div class="container-xl">
+            <div class="row row-deck row-cards mb-3">
+               <div class="col-lg-12">
+                <form [formGroup]="assignLeaderForm" (ngSubmit)="submitAssignLeader()">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="form-control-label">Center</label>
+                            <select class="custom-select" id="searchCenter" formControlName="centerId" name="centerId" (change)="getCenterVal()"
+                            [ngClass]="{'is-invalid':(submitted && f['centerId'].errors) ||(f['centerId'].errors && f['centerId'].touched) }">
+                            <option value="" [selected]="''">Choose Center..</option>
+                            <option *ngFor="let item of centerDropdownList" [ngValue]="item.centerId">{{item.centerName}}</option>
+                            </select>
+                                <div *ngIf="(submitted && f['centerId'].errors) ||(f['centerId'].errors && f['centerId'].touched)" class="invalid-feedback">
+                                    <div *ngIf="f['centerId'].errors['required']">Center is required</div>
+                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">Member</label>
+                            <select class="custom-select" id="searchMember" formControlName="memberId" name="memberId"
+                            [ngClass]="{'is-invalid':(submitted && f['memberId'].errors) ||(f['memberId'].errors && f['memberId'].touched) }">
+                                <option value="" [selected]="''">Choose Member..</option>
+                                <option *ngFor="let item of memberDropdownList" [ngValue]="item.memberId">{{item.fullName}}</option>
+                            </select>
+                            <div *ngIf="(submitted && f['memberId'].errors) ||(f['memberId'].errors && f['memberId'].touched)" class="invalid-feedback">
+                                    <div *ngIf="f['memberId'].errors['required']">Member is required</div> 
+                            </div>
+                        </div>
+                       
+                    </div>
+                    
+    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                      </div>
+                </form>
+               </div>
+            
+        </div>
+            </div>
+          </div>
+      </div>
+      </div>
+      </div>
+  </div>
+

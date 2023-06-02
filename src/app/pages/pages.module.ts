@@ -35,6 +35,7 @@ import { ReturnorderComponent } from './returnorder/returnorder.component';
 import { ReturnedOrdersComponent } from './returned-orders/returned-orders.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { KycFailedMembersComponent } from './kyc-failed-members/kyc-failed-members.component';
+import { AssignLeaderComponent } from './assign-leader/assign-leader.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -73,7 +74,8 @@ import { KycFailedMembersComponent } from './kyc-failed-members/kyc-failed-membe
     ReturnorderComponent,
     ReturnedOrdersComponent,
     DashboardComponent,
-    KycFailedMembersComponent
+    KycFailedMembersComponent,
+    AssignLeaderComponent
   ]
 })
 

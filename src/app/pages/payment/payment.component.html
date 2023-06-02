@@ -132,11 +132,12 @@
             </div>
             <div class="form-group col-lg-6">
               <label class="form-control-label">Payment Date</label>
-              <input type="text" class="form-control" formControlName="paidDate" name="paidDate">     
+              <input type="text" class="form-control" formControlName="paidDate" name="paidDate" readonly>     
            </div>
              </div>
              
               <div class="form-row">
+
                 <div class="form-group col-lg-6">
                   <label class="form-control-label">Payment Amount</label>
                   <input type="text" class="form-control" formControlName="payingAmt" name="payingAmt"
@@ -147,6 +148,29 @@
                     </div>
                </div>   
               </div>
+              
+                <div class="form-group col-lg-6">
+                  <label class="form-control-label">Payment Mode(Cash, UPI, Card or Other)</label>
+                  <input type="text" class="form-control" formControlName="paymentMode" name="paymentMode"
+                  [ngClass]="{'is-invalid':(submitted && g['paymentMode'].errors) ||(g['paymentMode'].errors && g['paymentMode'].touched) }">  
+                  <div *ngIf="(submitted && g['paymentMode'].errors) ||(g['paymentMode'].errors && g['paymentMode'].touched)" class="invalid-feedback">
+                    <div *ngIf="g['paymentMode'].errors['required']">
+                        Payment Mode is required
+                    </div>
+               </div>   
+              </div>
+
+              <div class="form-group col-lg-6">
+                <label class="form-control-label">Payment Comment</label>
+                <input type="text" class="form-control" formControlName="paymentComment" name="paymentComment"
+                [ngClass]="{'is-invalid':(submitted && g['paymentComment'].errors) ||(g['paymentComment'].errors && g['paymentComment'].touched) }">  
+                <div *ngIf="(submitted && g['paymentComment'].errors) ||(g['paymentComment'].errors && g['paymentComment'].touched)" class="invalid-feedback">
+                  <div *ngIf="g['paymentComment'].errors['required']">
+                      Payment Comment is required
+                  </div>
+             </div>   
+            </div>
+
               </div>
              
 

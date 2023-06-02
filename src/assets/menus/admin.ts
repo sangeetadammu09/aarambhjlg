@@ -159,6 +159,13 @@ export const AdminList = {
                     isActive: true, 
                 },
                 {
+                    id: 0,
+                    menu: 'Assign Leader',
+                    url: 'assign-leader',
+                    icon : 'fa-user',
+                    isActive: true, 
+                },
+                {
                     id: 1,
                     menu: 'Group-List',
                     url: 'group-list',

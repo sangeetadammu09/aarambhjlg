@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AssignLeaderComponent } from 'src/app/pages/assign-leader/assign-leader.component';
 import { BranchComponent } from 'src/app/pages/branch/branch.component';
 import { CenterComponent } from 'src/app/pages/center/center.component';
 import { ChangePasswordComponent } from 'src/app/pages/change-password/change-password.component';
@@ -46,5 +47,6 @@ export const AdminLayoutRoutes: Routes = [
      { path:'member-contacts', component: MemberContactsComponent },
      { path:'my-profile', component: ProfileComponent },
      { path:'dashboard', component: DashboardComponent },
+     {path:'assign-leader', component:AssignLeaderComponent },
    
 ];

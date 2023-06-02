@@ -78,6 +78,10 @@ export class AdminService {
       return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Center.GetCenterDropdownByCityId+`?cityId=${cityId}`)
      }
 
+     assignLeaderToCenter(centerId:any,memberId:any){
+      return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Center.AssignLeaderToCenter+`?centerId=${centerId}&memberId=${memberId}`,null)
+     }
+
      getAllSalesOfficerByCity(cityId:any){
       return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Center.GetAllSalesOfficerByCity+`?cityId=${cityId}`)
      }
