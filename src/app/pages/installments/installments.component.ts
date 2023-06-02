@@ -48,7 +48,7 @@ export class InstallmentsComponent implements OnInit {
 
   getAllInstallments(){
     this._adminService.getAllInstallment().subscribe((data) => {
-      console.log(data,'all Installments')
+      //console.log(data,'all Installments')
      if(data.length > 0){
        this.pageLoaded = true
        this.installmentList = data;
@@ -73,15 +73,15 @@ export class InstallmentsComponent implements OnInit {
   submitNewInstallment(){
     this.submitted = true;
      if(this.addInstallmentForm.valid){
-      //  console.log(this.addInstallmentForm.value)
+      //  //console.log(this.addInstallmentForm.value)
         var addInstallmentData :any = {};
         addInstallmentData.id = 0;
         addInstallmentData.installment = this.addInstallmentForm.controls['installment'].value;
         addInstallmentData.installmentNo = this.addInstallmentForm.controls['installmentNo'].value;
        
         this._adminService.addInstallment(addInstallmentData).subscribe((data:any) => {
-          console.log(data.status);
-          //console.log(data.headers.get('X-Custom-Header'));
+          //console.log(data.status);
+          ////console.log(data.headers.get('X-Custom-Header'));
           if(data.status == 200){
             this._toastrService.success('Installment added successfully!');
             this.closeaddInstallmentBtn.nativeElement.click();
@@ -90,7 +90,7 @@ export class InstallmentsComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
@@ -98,7 +98,7 @@ export class InstallmentsComponent implements OnInit {
 
 
   showeditInstallmentModal(item:any){
-    console.log(item)
+    //console.log(item)
     this.addInstallment = false;
     this.editInstallment = true;
     this.editInstallmentForm.patchValue({
@@ -115,7 +115,7 @@ export class InstallmentsComponent implements OnInit {
   
   submitUpdateInstallment(){
     this.submitted = true;
-    console.log(this.editInstallmentForm.value)
+    //console.log(this.editInstallmentForm.value)
    
      if(this.editInstallmentForm.valid){
     
@@ -132,7 +132,7 @@ export class InstallmentsComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
@@ -145,7 +145,7 @@ export class InstallmentsComponent implements OnInit {
 
   deleteInstallment(){
       this._adminService.deleteInstallment(this.deleteInstallmentItem).subscribe((data:any) =>{
-        console.log(data)
+        //console.log(data)
         if(data.status == 200){
           this._toastrService.success('Installment deleted successfully!');
           this.getAllInstallments();

@@ -24,6 +24,7 @@
                     <th scope="col" style="color: #fff; font-family: sans-serif;">Number</th>
                     <th scope="col" style="color: #fff; font-family: sans-serif;">Address</th>
                     <th scope="col" style="color: #fff; font-family: sans-serif;">City</th>
+                    <th scope="col" style="color: #fff; font-family: sans-serif;">Branch</th>
                     <th scope="col" style="color: #fff; font-family: sans-serif;">Sales Officer</th>
                     <th scope="col" style="color: #fff; font-family: sans-serif;">Relation Officer</th>
                     <th scope="col" style="color: #fff; font-family: sans-serif;">Sales Manager</th>
@@ -39,6 +40,7 @@
                     <td>{{item.centerNo}}</td>
                     <td>{{item.centerAddress}}</td>
                     <td>{{item.city}}</td>
+                    <td>{{item.branchName}}</td>
                     <td>{{item.salesOfficer}}</td>
                     <td>{{item.relationOfficer}}</td>
                     <td>{{item.salesManager}}</td>
@@ -131,7 +133,7 @@
                 <div class="row">
                 <div class="form-group col-lg-6">
                     <label class="form-control-label">City</label>
-                    <select class="custom-select"  formControlName="cityId" name="cityId" id="cityId"
+                    <select class="custom-select"  formControlName="cityId" name="cityId" id="cityId" (change)="getBranchList()"
                     [ngClass]="{'is-invalid':(submitted && f['cityId'].errors) ||(f['cityId'].errors && f['cityId'].touched) }">
                     <option value="" [selected]="''">Choose..</option>
                         <option *ngFor="let item of cityList" [ngValue]="item.cityId">
@@ -143,22 +145,36 @@
                             </div>
                      </div>
                 </div>
+
                 <div class="form-group col-lg-6">
-                    <label class="form-control-label">Sales Officer</label>
-                    <select class="custom-select"  formControlName="soId" name="soId" id="soId"
-                    [ngClass]="{'is-invalid':(submitted && f['soId'].errors) ||(f['soId'].errors && f['soId'].touched) }">
+                    <label class="form-control-label">Branch</label>
+                    <select class="custom-select"  formControlName="branchId" name="branchId" id="branchId"
+                    [ngClass]="{'is-invalid':(submitted && f['branchId'].errors) ||(f['branchId'].errors && f['branchId'].touched) }">
                     <option value="" [selected]="''">Choose..</option>
-                        <option *ngFor="let item of salesOfficerList" [ngValue]="item.userId">
-                            {{item.fullName }}</option>
+                        <option *ngFor="let item of branchList" [ngValue]="item.branchId">{{item.branchName }}</option>
                     </select>
-                        <div *ngIf="(submitted && f['soId'].errors) ||(f['soId'].errors && f['soId'].touched)" class="invalid-feedback">
-                            <div *ngIf="f['soId'].errors['required']">
-                                Sales Officer is required
+                        <div *ngIf="(submitted && f['branchId'].errors) ||(f['branchId'].errors && f['branchId'].touched)" class="invalid-feedback">
+                            <div *ngIf="f['branchId'].errors['required']">
+                                Branch is required
                             </div>
                      </div>
                 </div>
                 </div>
                 <div class="row">
+                <div class="form-group col-lg-6">
+                        <label class="form-control-label">Sales Officer</label>
+                        <select class="custom-select"  formControlName="soId" name="soId" id="soId"
+                        [ngClass]="{'is-invalid':(submitted && f['soId'].errors) ||(f['soId'].errors && f['soId'].touched) }">
+                        <option value="" [selected]="''">Choose..</option>
+                            <option *ngFor="let item of salesOfficerList" [ngValue]="item.userId">
+                                {{item.fullName }}</option>
+                        </select>
+                            <div *ngIf="(submitted && f['soId'].errors) ||(f['soId'].errors && f['soId'].touched)" class="invalid-feedback">
+                                <div *ngIf="f['soId'].errors['required']">
+                                    Sales Officer is required
+                                </div>
+                         </div>
+                    </div>
                 <div class="form-group col-lg-6">
                     <label class="form-control-label">Relation Officer</label>
                     <select class="custom-select"  formControlName="roId" name="roId" id="roId"
@@ -237,7 +253,7 @@
                 <div class="row">
                 <div class="form-group col-lg-6">
                     <label class="form-control-label">City</label>
-                    <select class="custom-select"  formControlName="cityId" name="cityId" id="cityId"
+                    <select class="custom-select"  formControlName="cityId" name="cityId" id="cityId" (change)="getBranchList()"
                     [ngClass]="{'is-invalid':(submitted && g['cityId'].errors) ||(g['cityId'].errors && g['cityId'].touched) }">
                     <option value="" [selected]="''">Choose..</option>
                         <option *ngFor="let item of cityList" [ngValue]="item.cityId">
@@ -249,22 +265,40 @@
                             </div>
                      </div>
                 </div>
+
                 <div class="form-group col-lg-6">
-                    <label class="form-control-label">Sales Officer</label>
-                    <select class="custom-select"  formControlName="soId" name="soId" id="soId"
-                    [ngClass]="{'is-invalid':(submitted && g['soId'].errors) ||(g['soId'].errors && g['soId'].touched) }">
+                    <label class="form-control-label">Branch</label>
+                    <select class="custom-select"  formControlName="branchId" name="branchId" id="branchId"
+                    [ngClass]="{'is-invalid':(submitted && g['branchId'].errors) ||(g['branchId'].errors && g['branchId'].touched) }">
                     <option value="" [selected]="''">Choose..</option>
-                    <option *ngFor="let item of salesOfficerList" [ngValue]="item.userId">
-                        {{item.fullName }}</option>
+                        <option *ngFor="let item of branchList" [ngValue]="item.branchId">{{item.branchName }}</option>
                     </select>
-                        <div *ngIf="(submitted && g['soId'].errors) ||(g['soId'].errors && g['soId'].touched)" class="invalid-feedback">
-                            <div *ngIf="g['soId'].errors['required']">
-                                Sales Officer is required
+                        <div *ngIf="(submitted && g['branchId'].errors) ||(g['branchId'].errors && g['branchId'].touched)" class="invalid-feedback">
+                            <div *ngIf="g['branchId'].errors['required']">
+                                Branch is required
                             </div>
                      </div>
                 </div>
+
+                
+
+                
                 </div>
                 <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label class="form-control-label">Sales Officer</label>
+                        <select class="custom-select"  formControlName="soId" name="soId" id="soId"
+                        [ngClass]="{'is-invalid':(submitted && g['soId'].errors) ||(g['soId'].errors && g['soId'].touched) }">
+                        <option value="" [selected]="''">Choose..</option>
+                        <option *ngFor="let item of salesOfficerList" [ngValue]="item.userId">
+                            {{item.fullName }}</option>
+                        </select>
+                            <div *ngIf="(submitted && g['soId'].errors) ||(g['soId'].errors && g['soId'].touched)" class="invalid-feedback">
+                                <div *ngIf="g['soId'].errors['required']">
+                                    Sales Officer is required
+                                </div>
+                         </div>
+                    </div>
                 <div class="form-group col-lg-6">
                     <label class="form-control-label">Relation Officer</label>
                     <select class="custom-select"  formControlName="roId" name="roId" id="roId"

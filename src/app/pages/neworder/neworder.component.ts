@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AdminService } from 'src/app/admin/service/admin.service';
 import { SalesRelationService } from 'src/app/sales-relation-officer/service/sales-relation.service';
 import { DataService } from 'src/app/utils/data.service';
 
@@ -39,10 +40,12 @@ export class NeworderComponent implements OnInit {
   @ViewChild('closeproductModalBtn') closeproductModalBtn: any;
   @ViewChild('closeViewCartModalBtn') closeViewCartModalBtn: any;
   searchProductItem: any ={};
+  searchBranch:any;
   productObj:any ={};
   memberId: any;
   cartDetailsObj :any ={}
   cartList : any = [];
+  branchDropdownList :any =[];
   firstRole: any;
   newCart :any = {};
   createdCart: any;
@@ -52,13 +55,14 @@ export class NeworderComponent implements OnInit {
   
 
   constructor(private _salesService: SalesRelationService, private toastrService: ToastrService,
-    private router: Router, private dataService: DataService) { }
+    private router: Router, private dataService: DataService, private adminService: AdminService) { }
 
   ngOnInit(): void {
     this.getSalesOfficersCenterList();
     this.searchMember = "";
     this.searchCenter = "";
     this.searchProduct = "";
+    this.searchBranch = "";
     this.getRandomProductList();
     this.productObj = { 
       prodQuantityInput:"",
@@ -69,8 +73,10 @@ export class NeworderComponent implements OnInit {
       var temp = JSON.parse(this.roles);
       const finalArray = temp.map((item:any, index:number) => ({ id: index,name: item }))
       this.firstRole = finalArray[0].name;
-      console.log(this.firstRole);
+      //console.log(this.firstRole);
     }
+
+    this.getAllBranchesByCityId();
 
    
  
@@ -78,7 +84,7 @@ export class NeworderComponent implements OnInit {
 
   getSalesOfficersCenterList(){
     this._salesService.getSalesOfficersCenterList(this.userId,this.cityId).subscribe((data:any) => {
-      //console.log(data,'cco member')
+      ////console.log(data,'cco member')
         if(data.length > 0){
           this.centerDropdownList = data;
           this.pageLoaded = true;
@@ -91,10 +97,23 @@ export class NeworderComponent implements OnInit {
    
   }
 
+  getAllBranchesByCityId(){
+    this.adminService.getBranchesByCityId(this.cityId).subscribe((data:any) => {
+      console.log(data,'all getBranchesByCityId')
+      if(data.length > 0){
+        this.branchDropdownList = data;
+
+       }else{
+         this.branchDropdownList = [];
+       } 
+     })
+  
+  }
+
   getCenterVal(event:any){
     var searchMemberId = event;
     this._salesService.getMemberListByCenter(searchMemberId).subscribe((data:any) => {
-     // console.log(data,'all memberDropdownList')
+     // //console.log(data,'all memberDropdownList')
       if(data.length > 0){
         this.memberDropdownList = data;
 
@@ -110,7 +129,7 @@ export class NeworderComponent implements OnInit {
   getSearchedProducts(event: any){
     var searchProd = event;
     this._salesService.getProductAutocomplete(searchProd).subscribe((data:any) => {
-   //   console.log(data,'all productList')
+   //   //console.log(data,'all productList')
       if(data.length > 0){
         //this.searchProduct = ''
         this.productList = data;
@@ -145,10 +164,10 @@ export class NeworderComponent implements OnInit {
           this.dataService.oldCartData.subscribe((data:any) => {
             this.oldCartData = data;    
             if(this.oldCartData){
-              console.log(this.oldCartData.cartItems);
+              //console.log(this.oldCartData.cartItems);
             this.searchCenter = this.oldCartData.centerId;
             this.getCenterVal(this.searchCenter)
-            console.log(this.randomProductList)
+            //console.log(this.randomProductList)
             
             }
       
@@ -172,10 +191,11 @@ export class NeworderComponent implements OnInit {
     this.newCart.cityId = this.cityId ? JSON.parse(this.cityId) : null,
     this.newCart.centerId = this.searchCenter,
     this.newCart.memberId = item,
+    this.newCart.branchId = this.searchBranch,
     this.newCart.orderTakenById = this.userId ? JSON.parse(this.userId) : null,
     this.newCart.orderTakenByRole = this.roleNo == '102' && this.roles ? this.firstRole : null,
     this.newCart.cartDate = this.todayDate
-   // console.log(this.newCart)
+   // //console.log(this.newCart)
     this._salesService.getShoppingCart(this.newCart).subscribe((data:any) => {
       if(data){
         this.createdCart = data;

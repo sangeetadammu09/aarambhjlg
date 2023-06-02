@@ -40,7 +40,7 @@ export class UnitComponent implements OnInit {
 
   getAllUnits(){
     this._adminService.getAllUnits().subscribe((data) => {
-      console.log(data,'all units')
+      //console.log(data,'all units')
      if(data.length > 0){
       this.pageLoaded = true;
        this.UnitList = data;
@@ -67,15 +67,15 @@ export class UnitComponent implements OnInit {
   submitNewUnit(){
     this.submitted = true;
      if(this.addUnitForm.valid){
-      //  console.log(this.addUnitForm.value)
+      //  //console.log(this.addUnitForm.value)
         var addUnitData :any = {};
         addUnitData.unitId = 0;
         addUnitData.unitName = this.addUnitForm.controls['unitName'].value;
         addUnitData.unitCode = this.addUnitForm.controls['unitCode'].value;
         addUnitData.basicUnit = this.addUnitForm.controls['basicUnit'].value;
         this._adminService.addUnit(addUnitData).subscribe((data:any) => {
-          console.log(data.status);
-          //console.log(data.headers.get('X-Custom-Header'));
+          //console.log(data.status);
+          ////console.log(data.headers.get('X-Custom-Header'));
           if(data.status == 200){
             this._toastrService.success('Unit added successfully!');
             this.closeaddUnitBtn.nativeElement.click();
@@ -84,7 +84,7 @@ export class UnitComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }

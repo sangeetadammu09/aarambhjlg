@@ -41,7 +41,7 @@ export class OrderDetailsComponent implements OnInit {
     this.getOrderListForApproval();
     this.getAllInstallments();
     this.paymentInstallment = "";
-    console.log(this.todayDate)
+    //console.log(this.todayDate)
 
     this.gapList = [{"id" : 0,"value" : 0},{"id" : 1,"value" : 1},{"id" : 2,"value" : 2},{"id" : 3,"value" : 3},
     {"id" : 4,"value" : 4},{"id" : 5,"value" : 5},{"id" : 6,"value" : 6},{"id" : 7,"value" : 7}]
@@ -51,7 +51,7 @@ export class OrderDetailsComponent implements OnInit {
 
   getAllInstallments(){
     this._adminService.getAllInstallment().subscribe((data) => {
-      console.log(data,'all Installments')
+      //console.log(data,'all Installments')
      if(data.length > 0){
        this.installmentList = data;
       }else{
@@ -64,7 +64,7 @@ export class OrderDetailsComponent implements OnInit {
       var temp = JSON.parse(this.roles);
       const finalArray = temp.map((item:any, index:number) => ({ id: index,name: item }))
       this.firstRole = finalArray[0].name;
-      console.log(this.firstRole);
+      //console.log(this.firstRole);
     }
   }
 
@@ -72,7 +72,7 @@ export class OrderDetailsComponent implements OnInit {
 
   getOrderListForApproval(){
     this._saleService.getOrderListForApproval(this.userId,this.pageSize,this.page).subscribe((data) => {
-       console.log(data,'all orders')
+       //console.log(data,'all orders')
        if(data.length > 0){
         this.orderListForApproval = data
         this.pageLoaded = true;
@@ -86,18 +86,18 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   handlePageChange(event: number){
-    //console.log(event)
+    ////console.log(event)
     this.page = event;
     this.getOrderListForApproval();
 }
 
   showOrderModal(item:any){
     this._saleService.getOrderDetails(item.orderId).subscribe((data:any) =>{
-      console.log(data)
+      //console.log(data)
       if(data.status == 200){
         this.orderDetailsObj = data.body;
         this.selectedOrderList = data.body.orderItems;
-        console.log(this.orderDetailsObj)
+        //console.log(this.orderDetailsObj)
       }
     })
 
@@ -105,7 +105,7 @@ export class OrderDetailsComponent implements OnInit {
 
   showApproveOrderModal(item:any){
     this.approveOrderObj = item;
-    console.log(this.approveOrderObj)
+    //console.log(this.approveOrderObj)
    
   }
 
@@ -116,7 +116,7 @@ export class OrderDetailsComponent implements OnInit {
   getInstallmentDetails(item:any,orderDetailsObj:any){
     this.paymentInstallmentNo = item;
     this._saleService.getInstallmentList(orderDetailsObj.totalBillAmt,item.installmentNo,this.paymentGapValue).subscribe((data) => {
-      console.log(data,'all installment table')
+      //console.log(data,'all installment table')
       if(data.length > 0){
         data.forEach((item:any) => {
           item.installmentDate = moment(item.installmentDate).format("L");

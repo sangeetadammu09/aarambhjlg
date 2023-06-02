@@ -48,7 +48,6 @@ export class CityComponent implements OnInit {
 
   getAllCitys(){
     this._adminService.getAllCity().subscribe((data) => {
-      console.log(data,'all Citys')
      if(data.length > 0){
       this.pageLoaded = true;
        this.CityList = data;
@@ -73,15 +72,15 @@ export class CityComponent implements OnInit {
   submitNewCity(){
     this.submitted = true;
      if(this.addCityForm.valid){
-      //  console.log(this.addCityForm.value)
+      //  //console.log(this.addCityForm.value)
         var addCityData :any = {};
         addCityData.cityId = 0;
         addCityData.cityName = this.addCityForm.controls['cityName'].value;
         addCityData.registrationFees = this.addCityForm.controls['registrationFees'].value;
        
         this._adminService.addCity(addCityData).subscribe((data:any) => {
-          console.log(data.status);
-          //console.log(data.headers.get('X-Custom-Header'));
+          
+          ////console.log(data.headers.get('X-Custom-Header'));
           if(data.status == 200){
             this._toastrService.success('City added successfully!');
             this.closeaddCityBtn.nativeElement.click();
@@ -90,7 +89,7 @@ export class CityComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
@@ -98,7 +97,7 @@ export class CityComponent implements OnInit {
 
 
   showeditCityModal(item:any){
-    console.log(item)
+    //console.log(item)
     this.addCity = false;
     this.editCity = true;
     this.editCityForm.patchValue({
@@ -115,8 +114,6 @@ export class CityComponent implements OnInit {
   
   submitUpdateCity(){
     this.submitted = true;
-    console.log(this.editCityForm.value)
-   
      if(this.editCityForm.valid){
     
        var updateCityData :any = {};
@@ -132,7 +129,7 @@ export class CityComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
@@ -145,7 +142,6 @@ export class CityComponent implements OnInit {
 
   deleteCity(){
       this._adminService.deleteCity(this.deleteCityItem).subscribe((data:any) =>{
-        console.log(data)
         if(data.status == 200){
           this._toastrService.success('City delete successfully!');
           this.getAllCitys();

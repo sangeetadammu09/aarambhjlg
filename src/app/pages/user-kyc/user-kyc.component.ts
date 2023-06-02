@@ -89,7 +89,7 @@ export class UserKycComponent implements OnInit {
 
   getAllCitys(){
     this._adminService.getAllCity().subscribe((data) => {
-  //   console.log(data,'all Citys')
+  //   //console.log(data,'all Citys')
      if(data.length > 0){
       this.pageLoaded = true;
        this.cityList = data;
@@ -106,7 +106,7 @@ export class UserKycComponent implements OnInit {
     paginationObj.pageNo =this.page;
     paginationObj.pageSize = this.pageSize;
     this._adminService.getUserListForKycVerification(this.cityId).subscribe((data) => {
-      //   console.log(data,'all UserRoles')
+      //   //console.log(data,'all UserRoles')
         if(data.length > 0){
           this.userList = data;
    
@@ -119,7 +119,7 @@ export class UserKycComponent implements OnInit {
 
 
   handlePageChange(event: number){
-    console.log(event)
+    //console.log(event)
     this.page = event;
     this.getAllUserDetails();
 }
@@ -130,7 +130,7 @@ export class UserKycComponent implements OnInit {
 
 
   showUserModal(item:any){
-    //console.log(item, 'user item')
+    ////console.log(item, 'user item')
     this.submitted = false;
     this.addUserKycForm.reset();
     this.addUserKycForm.markAsUntouched();
@@ -142,12 +142,12 @@ export class UserKycComponent implements OnInit {
     this.addUserKycForm.controls['isPan_VoterIdVerified'].setValue('')
 
      this._adminService.getUserKycDetails(item.userId).subscribe((data:any) =>{
-      console.log(data.status)
+      //console.log(data.status)
        if(data.status == 200){
         this.noDocumentsFound = false;
          this.userDetailsObj = data.body;
          this.userDocuments = data.body.documents;
-         console.log(this.userDocuments)
+         //console.log(this.userDocuments)
         this.addUserKycForm.patchValue({userId: data.userId,})
         this.userDocuments.forEach((user:any) =>{
           if(user.documentName == "Photo" || user.documentName == "photo"){
@@ -191,9 +191,9 @@ export class UserKycComponent implements OnInit {
 
   submitNewUser(){
     this.submitted = true;
-    console.log(this.addUserKycForm.value)
+    //console.log(this.addUserKycForm.value)
      if(this.addUserKycForm.valid){
-      //  console.log(this.addUserForm.value)
+      //  //console.log(this.addUserForm.value)
          var addUserData :any = {};
         addUserData.userId = this.userDetailsObj.userId;
         addUserData.isAadharVerified = this.addUserKycForm.controls['isAadharVerified'].value == 'Yes' ? true : false;

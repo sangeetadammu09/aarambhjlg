@@ -27,7 +27,7 @@ export class ProductDetailComponent implements OnInit {
 
   getProductDetailsListBySale(){
       this._adminService.getProductDetailsForSale(this.cityId,this.page,this.pageSize).subscribe((data:any) =>{
-        console.log(data,'data');
+        //console.log(data,'data');
         
         if(data.products.length > 0){
           data.products.forEach((product:any) =>{
@@ -35,7 +35,7 @@ export class ProductDetailComponent implements OnInit {
           })
           this.productList = data.products;
           this.total = data.page.totalCount;
-          console.log(this.productList)
+          //console.log(this.productList)
           this.pageLoaded = true;
          }else{
            this.productList = [];
@@ -49,7 +49,7 @@ export class ProductDetailComponent implements OnInit {
 
 
   handlePageChange(event: number){
-    console.log(event)
+    //console.log(event)
     this.page = event;
     this.getProductDetailsListBySale();
 }

@@ -67,7 +67,7 @@ export class BranchComponent implements OnInit {
 
   getAllBranches(){
     this._adminService.getAllBranch().subscribe((data) => {
-    //  console.log(data,'all Branchs')
+    //  //console.log(data,'all Branchs')
      if(data.length > 0){
       this.pageLoaded = true;
        this.branchList = data;
@@ -81,7 +81,7 @@ export class BranchComponent implements OnInit {
 
   getAllCitys(){
     this._adminService.getAllCity().subscribe((data) => {
-    //  console.log(data,'all Citys')
+    //  //console.log(data,'all Citys')
      if(data.length > 0){
     //  this.productsFound = true;
        this.cityList = data;
@@ -95,7 +95,7 @@ export class BranchComponent implements OnInit {
 
   getAllManager(){
     this._adminService.getAllManager().subscribe((data) => {
-     // console.log(data,'all Managers')
+     //console.log(data,'all Managers')
      if(data.length > 0){
        this.managerList = data;
       }else{
@@ -121,7 +121,7 @@ export class BranchComponent implements OnInit {
   submitNewBranch(){
     this.submitted = true;
      if(this.addBranchForm.valid){
-      //  console.log(this.addBranchForm.value)
+      //  //console.log(this.addBranchForm.value)
         var addBranchData :any = {};
         addBranchData.branchId = 0;
         addBranchData.branchName = this.addBranchForm.controls['branchName'].value;
@@ -135,8 +135,8 @@ export class BranchComponent implements OnInit {
         addBranchData.updatedBy = 0;
         addBranchData.updatedDate = this.todayDate;
         this._adminService.addBranch(addBranchData).subscribe((data:any) => {
-          console.log(data.status);
-          //console.log(data.headers.get('X-Custom-Header'));
+          //console.log(data.status);
+          ////console.log(data.headers.get('X-Custom-Header'));
           if(data.status == 200){
             this._toastrService.success('Branch added successfully!');
             this.closeaddBranchBtn.nativeElement.click();
@@ -145,13 +145,13 @@ export class BranchComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
 
   showeditBranchModal(item:any){
-    console.log(item,item.managerId)
+    //console.log(item,item.managerId)
     this.selectedBranchItem = item;
     this.addBranch = false;
     this.editBranch = true;
@@ -171,7 +171,7 @@ export class BranchComponent implements OnInit {
 
   submitUpdateBranch(){
     this.submitted = true;
-    console.log(this.editBranchForm.value)
+    //console.log(this.editBranchForm.value)
    
      if(this.editBranchForm.valid){
         var updateBranchData :any = {};
@@ -195,7 +195,7 @@ export class BranchComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
@@ -208,7 +208,7 @@ export class BranchComponent implements OnInit {
 
   deleteBranch(){
       this._adminService.deleteBranch(this.deleteBranchItem).subscribe((data:any) =>{
-        console.log(data)
+        //console.log(data)
         if(data.status == 200){
           this._toastrService.success('Branch deleted successfully!');
           this.getAllBranches();

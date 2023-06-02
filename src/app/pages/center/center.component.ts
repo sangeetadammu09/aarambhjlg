@@ -11,6 +11,7 @@ import { AdminService } from 'src/app/admin/service/admin.service';
 export class CenterComponent implements OnInit {
 
   CenterList: any =[];
+  branchList:any=[];
   addCenterForm!: FormGroup;
   submitted: boolean = false;
   @ViewChild('closeaddCenterBtn') closeaddCenterBtn: any;
@@ -37,6 +38,7 @@ export class CenterComponent implements OnInit {
       centerNo: ['', Validators.required],
       centerAddress: ['', Validators.required],
       cityId: [, Validators.required],
+      branchId: [, Validators.required],
       soId: [, Validators.required],
       roId: [, Validators.required],
       smId: [, Validators.required],
@@ -51,6 +53,7 @@ export class CenterComponent implements OnInit {
       centerNo: ['', Validators.required],
       centerAddress: ['', Validators.required],
       cityId: [, Validators.required],
+      branchId: [, Validators.required],
       soId: [, Validators.required],
       roId: [, Validators.required],
       smId: [, Validators.required],
@@ -86,10 +89,29 @@ export class CenterComponent implements OnInit {
       
     })
   }
+  getBranchList(){
+    console.log(this.addCenterForm.controls['cityId'].value)
+     let cityId = this.addCenterForm.controls['cityId'].value;
+     if(cityId == undefined){
+     cityId = this.editCenterForm.controls['cityId'].value;
+     console.log(cityId)
+     }
+    this._adminService.getBranchesByCityId(cityId).subscribe((data) => {
+      console.log(data,'all branches')
+      this.addCenterForm.controls['branchId'].setValue('')
+     if(data.length > 0){
+       this.branchList = data;
+
+      }else{
+        this.branchList = [];
+      }
+      
+    })
+  }
 
   getAllCitys(){
     this._adminService.getAllCity().subscribe((data) => {
-     console.log(data,'all Citys')
+     //console.log(data,'all Citys')
      if(data.length > 0){
   
        this.cityList = data;
@@ -102,7 +124,7 @@ export class CenterComponent implements OnInit {
 
   getAllSalesOfficerByCity(){
     this._adminService.getAllSalesOfficerByCity(this.cityId).subscribe((data) => {
-   console.log(data,'all getAllSalesOfficerByCity')
+   //console.log(data,'all getAllSalesOfficerByCity')
      if(data.length > 0){
   
        this.salesOfficerList = data;
@@ -115,7 +137,7 @@ export class CenterComponent implements OnInit {
 
   getAllRelationOfficerByCity(){
     this._adminService.getAllRelationOfficerByCity(this.cityId).subscribe((data) => {
-     console.log(data,'all getAllRelationOfficerByCity')
+     //console.log(data,'all getAllRelationOfficerByCity')
      if(data.length > 0){
   
        this.relationOfficerList = data;
@@ -128,7 +150,7 @@ export class CenterComponent implements OnInit {
 
   getAllSalesManagersByCity(){
     this._adminService.getAllSalesManagersByCity(this.cityId).subscribe((data) => {
-    console.log(data,'all getAllSalesManagersByCity')
+    //console.log(data,'all getAllSalesManagersByCity')
      if(data.length > 0){
   
        this.salesManagerList = data;
@@ -156,13 +178,14 @@ export class CenterComponent implements OnInit {
   submitNewCenter(){
     this.submitted = true;
      if(this.addCenterForm.valid){
-      //  console.log(this.addCenterForm.value)
+      //  //console.log(this.addCenterForm.value)
         var addCenterData :any = {};
        // addCenterData.centerId = 0;
         addCenterData.centerName = this.addCenterForm.controls['centerName'].value;
         addCenterData.centerNo = this.addCenterForm.controls['centerNo'].value;
         addCenterData.centerAddress = this.addCenterForm.controls['centerAddress'].value;
         addCenterData.cityId = this.addCenterForm.controls['cityId'].value;
+        addCenterData.branchId = this.addCenterForm.controls['branchId'].value;
         addCenterData.soId = this.addCenterForm.controls['soId'].value;
         addCenterData.roId = this.addCenterForm.controls['roId'].value;
         addCenterData.smId = this.addCenterForm.controls['smId'].value;
@@ -170,8 +193,8 @@ export class CenterComponent implements OnInit {
         addCenterData.createdDate = this.todayDate;
        
         this._adminService.addCenter(addCenterData).subscribe((data:any) => {
-          console.log(data.status);
-          //console.log(data.headers.get('X-Custom-Header'));
+          //console.log(data.status);
+          ////console.log(data.headers.get('X-Custom-Header'));
           if(data.status == 200){
             this._toastrService.success('Center added successfully!');
             this.closeaddCenterBtn.nativeElement.click();
@@ -180,13 +203,13 @@ export class CenterComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
 
   showeditCenterModal(item:any){
-    console.log(item)
+    //console.log(item)
     this.addCenter = false;
     this.editCenter = true;
     this.editCenterForm.patchValue({
@@ -195,6 +218,7 @@ export class CenterComponent implements OnInit {
       centerNo: item.centerNo,
       centerAddress: item.centerAddress,
       cityId: item.cityId,
+      branchId: item.branchId,
       soId: item.soId,
       roId: item.roId,
       smId: item.smId,
@@ -207,7 +231,7 @@ export class CenterComponent implements OnInit {
   
   submitUpdateCenter(){
     this.submitted = true;
-    console.log(this.editCenterForm.value)
+    //console.log(this.editCenterForm.value)
    
      if(this.editCenterForm.valid){
     
@@ -217,6 +241,7 @@ export class CenterComponent implements OnInit {
         updateCenterData.centerNo = this.editCenterForm.controls['centerNo'].value;
         updateCenterData.centerAddress = this.editCenterForm.controls['centerAddress'].value;
         updateCenterData.cityId = this.editCenterForm.controls['cityId'].value;
+        updateCenterData.branchId = this.editCenterForm.controls['branchId'].value;
         updateCenterData.soId = this.editCenterForm.controls['soId'].value;
         updateCenterData.roId = this.editCenterForm.controls['roId'].value;
         updateCenterData.smId = this.editCenterForm.controls['smId'].value;
@@ -233,7 +258,7 @@ export class CenterComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
@@ -246,7 +271,7 @@ export class CenterComponent implements OnInit {
 
   deleteCenter(){
       this._adminService.deleteCenter(this.deleteCenterItem).subscribe((data:any) =>{
-        console.log(data)
+        //console.log(data)
         if(data.status == 200){
           this._toastrService.success('Center deleted successfully!');
           this.getAllCenters();

@@ -62,7 +62,7 @@ export class ProductPriceComponent implements OnInit {
         this.pageLoaded = true;
         this.productPriceList = data.products;
         this.total = data.pages.totalCount;
-        console.log(this.productPriceList,'all ProductPrices', this.rowEdit)
+        //console.log(this.productPriceList,'all ProductPrices', this.rowEdit)
 
        }else{
          this.productPriceList = [];
@@ -79,14 +79,14 @@ export class ProductPriceComponent implements OnInit {
 
 
   getProductPriceVal(event:any){
-    console.log(event.target.value)
+    //console.log(event.target.value)
     var searchTerm = event.target.value;
     this._adminService.getProducts(this.page,this.pageSize,this.cityId,searchTerm).subscribe((data) => {    
       if(data){
      //  this.productsFound = true;
         this.productPriceList = data.products;
         this.total = data.pages.totalCount;
-        console.log(this.productPriceList,'all ProductPrices', this.rowEdit)
+        //console.log(this.productPriceList,'all ProductPrices', this.rowEdit)
 
        }else{
          this.productPriceList = [];
@@ -98,7 +98,7 @@ export class ProductPriceComponent implements OnInit {
 
   getAllCitys(){
     this._adminService.getAllCity().subscribe((data) => {
-     // console.log(data,'all Citys')
+     // //console.log(data,'all Citys')
     if(data.length > 0){
     //  this.productsFound = true;
       this.cityList = data;
@@ -147,9 +147,9 @@ export class ProductPriceComponent implements OnInit {
         addProductPriceData.mrp = product.mrp;
         addProductPriceData.jlgSalePrice = product.jlgSalePrice;
         addProductPriceData.stock = product.stock;
-       console.log(addProductPriceData,'addddddddd')
+       //console.log(addProductPriceData,'addddddddd')
         this._adminService.addProductPrice(addProductPriceData).subscribe((data:any) => {
-          console.log(data.status);
+          //console.log(data.status);
       
           if(data.status == 200){
             this._toastrService.success('Product Price added successfully!');
@@ -164,7 +164,7 @@ export class ProductPriceComponent implements OnInit {
   }
 
   showeditProductPriceModal(item:any){
-    console.log(item)
+    //console.log(item)
     this.addProductPrice = false;
     this.editProductPrice = true;
     this.editProductPriceForm.patchValue({
@@ -177,7 +177,7 @@ export class ProductPriceComponent implements OnInit {
  
   submitUpdateProductPrice(){
     this.submitted = true;
-    console.log(this.editProductPriceForm.value)
+    //console.log(this.editProductPriceForm.value)
    
      if(this.editProductPriceForm.valid){
     
@@ -198,7 +198,7 @@ export class ProductPriceComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
@@ -209,7 +209,7 @@ export class ProductPriceComponent implements OnInit {
 
   deleteProductPrice(){
       this._adminService.deleteProductPrice(this.deleteProductPriceItem).subscribe((data:any) =>{
-        console.log(data)
+        //console.log(data)
         if(data.status == 200){
           this._toastrService.success('Product Price deleted successfully!');
           this.getAllProductPrices();

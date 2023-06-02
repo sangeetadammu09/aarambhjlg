@@ -50,7 +50,7 @@ export class UserroleComponent implements OnInit {
 
   getAllUserRoles(){
     this._adminService.getAllUsersByCity(this.cityId).subscribe((data) => {
-   //   console.log(data,'all UserRoles')
+   //   //console.log(data,'all UserRoles')
      if(data.length > 0){
        this.userRoleList = data;
        this.pageLoaded = true;
@@ -74,7 +74,7 @@ export class UserroleComponent implements OnInit {
          this.userList = data;
     })
     this._adminService.getAllRoles().subscribe((data:any) => {
-      console.log(data)
+      //console.log(data)
       if(data.length > 0){
       this.roleList = data;
       }
@@ -86,13 +86,13 @@ export class UserroleComponent implements OnInit {
   submitNewUserRole(){
     this.submitted = true;
      if(this.addUserRoleForm.valid){
-      //  console.log(this.addUserRoleForm.value)
+      //  //console.log(this.addUserRoleForm.value)
         var addUserRoleData :any = {};
         addUserRoleData.roleId = this.addUserRoleForm.controls['roleId'].value;
         addUserRoleData.userId = this.addUserRoleForm.controls['userId'].value;
        
         this._adminService.addUserRole(addUserRoleData).subscribe((data:any) => {
-          console.log(data.status);
+          //console.log(data.status);
           if(data.status == 200){
             this._toastrService.success('User Role added successfully!');
             this.closeaddUserRoleBtn.nativeElement.click();
@@ -101,13 +101,13 @@ export class UserroleComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
 
   showeditUserRoleModal(item:any){
-    console.log(item)
+    //console.log(item)
     this.addUserRole = false;
     this.editUserRole = true;
     this.editUserRoleForm.patchValue({
@@ -119,7 +119,7 @@ export class UserroleComponent implements OnInit {
   
   submitUpdateUserRole(){
     this.submitted = true;
-    console.log(this.editUserRoleForm.value)
+    //console.log(this.editUserRoleForm.value)
    
      if(this.editUserRoleForm.valid){
     
@@ -135,21 +135,21 @@ export class UserroleComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
 
 
   showdeleteUserRoleModal(item:any){
-    console.log(item)
+    //console.log(item)
       this.deleteUserRoleItem = item;
   }
 
 
   deleteUserRole(){
       this._adminService.deleteUserRole(this.deleteUserRoleItem).subscribe((data:any) =>{
-        console.log(data)
+        //console.log(data)
         if(data.status == 200){
           this._toastrService.success('UserRole delete successfully!');
           this.getAllUserRoles();

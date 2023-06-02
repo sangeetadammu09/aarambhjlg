@@ -54,7 +54,7 @@ export class ProductCategoryComponent implements OnInit {
 
   getAllProductCategories(){
     this._adminService.getAllProductCategory().subscribe((data) => {
-      console.log(data,'product category')
+      //console.log(data,'product category')
      if(data.length > 0){
       this.pageLoaded = true;
        this.productCategoryList = data
@@ -80,7 +80,7 @@ export class ProductCategoryComponent implements OnInit {
 
     this.addcategoryPhotoName = file.target.files[0].name;
     this.addcategoryFile = file.target.files[0];
-    console.log(this.addcategoryFile)
+    //console.log(this.addcategoryFile)
    
   }
 
@@ -88,14 +88,14 @@ export class ProductCategoryComponent implements OnInit {
   submitNewProductCategory(){
     this.submitted = true;
      if(this.addProdCategoryForm.valid){
-      //  console.log(this.addProdCategoryForm.value)
+      //  //console.log(this.addProdCategoryForm.value)
         var addProductCategoryData = new FormData();
         addProductCategoryData.append('CategoryId',JSON.parse('0'));
         addProductCategoryData.append('CategoryName',this.addProdCategoryForm.controls['categoryName'].value);
         addProductCategoryData.append('CategoryPhoto',this.addcategoryFile);
         this._adminService.addProductCategory(addProductCategoryData).subscribe((data:any) => {
-          console.log(data.status);
-          //console.log(data.headers.get('X-Custom-Header'));
+          //console.log(data.status);
+          ////console.log(data.headers.get('X-Custom-Header'));
           if(data.status == 200){
             this._toastrService.success('Product Category added successfully!');
             this.closeaddProdBtn.nativeElement.click();
@@ -104,7 +104,7 @@ export class ProductCategoryComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
@@ -112,7 +112,7 @@ export class ProductCategoryComponent implements OnInit {
 
 
   showeditProdCategoryModal(item:any){
-    console.log(item)
+    //console.log(item)
     // var tempStr = item.categoryPhoto
     // var tempStrVal = tempStr.indexOf("CategoryImages/")
     this.addProdCategory = false;
@@ -138,13 +138,13 @@ export class ProductCategoryComponent implements OnInit {
   
   submitUpdateProductCategory(){
     this.submitted = true;
-    console.log(this.editProdCategoryForm.value)
+    //console.log(this.editProdCategoryForm.value)
     // if(this.editProdCategoryForm.controls['categoryPhoto'].value == null){
     //   this.editProdCategoryForm.controls['categoryPhoto'].setValue("https://jlg.examfirst.in/Images/CategoryImages/17454759682023-03-06.png")
     //   this.editCategoryFile = "https://jlg.examfirst.in/Images/CategoryImages/17454759682023-03-06.png"
     // }
      if(this.editProdCategoryForm.valid){
-       console.log(this.editProdCategoryForm.value)
+       //console.log(this.editProdCategoryForm.value)
        
         var addProductCategoryData = new FormData();
         addProductCategoryData.append('CategoryId',this.editProdCategoryForm.controls['categoryId'].value);
@@ -159,7 +159,7 @@ export class ProductCategoryComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
@@ -172,7 +172,7 @@ export class ProductCategoryComponent implements OnInit {
 
   deleteProdCategory(){
       this._adminService.deleteProductCategory(this.deleteProdCategoryItem).subscribe((data:any) =>{
-        console.log(data)
+        //console.log(data)
         if(data.status == 200){
           this.getAllProductCategories();
           this.closeDeleteProdBtn.nativeElement.click();

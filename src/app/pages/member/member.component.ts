@@ -125,7 +125,7 @@ export class MemberComponent implements OnInit {
 
   getAllMemberDetails(){
     this._salesService.getCenterWiseMemberList(this.cityId).subscribe((data) => {
-        console.log(data,'all memberDropdownList')
+        //console.log(data,'all memberDropdownList')
         if(data.length > 0){
           this.memberList = data;
           this.pageLoaded = true;
@@ -144,7 +144,7 @@ export class MemberComponent implements OnInit {
     paginationObj.pageSize = this.pageSize;
     if(this.roleNo == '101'){
       this._adminService.getCenterDropdownByCityId(this.cityId).subscribe((data) =>{
-        console.log(data,'admin member')
+        //console.log(data,'admin member')
         if(data.length > 0){
           this.memberDropdownList = data;
    
@@ -155,7 +155,7 @@ export class MemberComponent implements OnInit {
 
     }else if(this.roleNo == '102')
     this._salesService.getOfficersCenterList(this.cityId,this.userId).subscribe((data) => {
-      console.log(data,'cco member')
+      //console.log(data,'cco member')
         if(data.length > 0){
           this.memberDropdownList = data;
    
@@ -169,7 +169,7 @@ export class MemberComponent implements OnInit {
   getMemberVal(event:any){
       var searchMemberId = event;
       this._salesService.getCenterWiseMemberList(searchMemberId).subscribe((data) => {
-        console.log(data,'all memberDropdownList')
+        //console.log(data,'all memberDropdownList')
         if(data.length > 0){
           this.memberList = data;
    
@@ -193,7 +193,7 @@ export class MemberComponent implements OnInit {
 
   getCenterDropdownByCityId(){
     this._adminService.getCenterDropdownByCityId(this.cityId).subscribe((data) => {
-     // console.log(data,'all Managers')
+     // //console.log(data,'all Managers')
      if(data.length > 0){
        this.centerList = data;
       }else{
@@ -206,7 +206,7 @@ export class MemberComponent implements OnInit {
 
 
   handlePageChange(event: number){
-    console.log(event)
+    //console.log(event)
     this.page = event;
     this.getAllMemberDetails();
 }
@@ -247,7 +247,7 @@ export class MemberComponent implements OnInit {
  
 
   // changeDateOfBirth(event:any){
-  //   //  console.log(event.target.value, 'event')
+  //   //  //console.log(event.target.value, 'event')
   //     var dob = event.target.value
   //     var dt = new Date(dob);
   //     this.MemberDateofBirth = dt.toISOString();
@@ -257,7 +257,7 @@ export class MemberComponent implements OnInit {
   submitNewMember(){
     this.submitted = true;
      if(this.addMemberForm.valid){
-      //  console.log(this.addMemberForm.value)
+      //  //console.log(this.addMemberForm.value)
       
         var addMemberData :any = {};
         addMemberData.memberId = 0;
@@ -291,8 +291,8 @@ export class MemberComponent implements OnInit {
         addMemberData.isKycVerified = true;
 
         this._salesService.addMember(addMemberData).subscribe((data:any) => {
-       //   console.log(data.status);
-          //console.log(data.headers.get('X-Custom-Header'));
+       //   //console.log(data.status);
+          ////console.log(data.headers.get('X-Custom-Header'));
           if(data.status == 200){
            
             this.addedMemberId = data.body;
@@ -306,7 +306,7 @@ export class MemberComponent implements OnInit {
          
       }else{
      
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
@@ -324,12 +324,12 @@ export class MemberComponent implements OnInit {
   }
 
   submitAFDocument(){
-    console.log('submitAFDocument',this.aadhaarFrontFile)
+    //console.log('submitAFDocument',this.aadhaarFrontFile)
     if(this.aadhaarFrontFile != undefined){
       this.MemberDocument =  this.aadhaarFrontDocumentName;
       this.MemberDocumentFile = this.aadhaarFrontFile;
       if(this.addedMemberId){
-        console.log(this.addedMemberId)
+        //console.log(this.addedMemberId)
         var addMemberDocumentData = new FormData();
         addMemberDocumentData.append('MemberId',this.addedMemberId);
         addMemberDocumentData.append('DocumentName',this.MemberDocument);
@@ -576,12 +576,12 @@ export class MemberComponent implements OnInit {
 
 
   showMemberModal(item:any){
-     console.log(item)
+     //console.log(item)
      this._salesService.getAllMemberDetails(item.memberId).subscribe((data:any) =>{
        if(data){
          this.memberDetailsObj = data;
          this.memberDocuments = data.documents;
-        // console.log(this.userDetailsObj)
+        // //console.log(this.userDetailsObj)
        }
       
      })
@@ -603,11 +603,11 @@ export class MemberComponent implements OnInit {
     }
 
     verifyContact(event:any){
-      console.log(event.target.value,'mobileno');
+      //console.log(event.target.value,'mobileno');
       let mobileNo = event.target.value;
       if(mobileNo !== ''){
       this._salesService.checkMemberMobileNumberExists(mobileNo).subscribe((x:any) =>{
-     //  console.log(x)
+     //  //console.log(x)
        x.exists == true ?this.isMobileExists = true : this.isMobileExists = false
      
       })

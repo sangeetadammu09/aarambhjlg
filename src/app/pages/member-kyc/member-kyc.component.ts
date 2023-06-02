@@ -99,7 +99,7 @@ export class MemberKycComponent implements OnInit {
     paginationObj.pageSize = this.pageSize;
     
     this._salesService.getSalesManagerCenterList(this.userId).subscribe((data:any) => {
-      console.log(data,'cco member')
+      //console.log(data,'cco member')
         if(data.length > 0){
           this.memberDropdownList = data;
           this.pageLoaded = true;
@@ -115,7 +115,7 @@ export class MemberKycComponent implements OnInit {
   getMemberVal(event:any){
     var searchMemberId = event;
     this._salesService.getMemberListForKycVerification(searchMemberId).subscribe((data:any) => {
-      console.log(data,'all memberDropdownList')
+      //console.log(data,'all memberDropdownList')
       if(data.length > 0){
         this.memberList = data;
       //  this.total = data.page.totalCount;
@@ -129,7 +129,7 @@ export class MemberKycComponent implements OnInit {
 
 
   handlePageChange(event: number){
-    console.log(event)
+    //console.log(event)
     this.page = event;
     this.getMemberVal(event);
 }
@@ -137,7 +137,7 @@ export class MemberKycComponent implements OnInit {
 
   getAllCitys(){
     this._adminService.getAllCity().subscribe((data) => {
-  //   console.log(data,'all Citys')
+  //   //console.log(data,'all Citys')
      if(data.length > 0){
     //  this.productsFound = true;
        this.cityList = data;
@@ -156,7 +156,7 @@ export class MemberKycComponent implements OnInit {
 
 
 //   handlePageChange(event: number){
-//     console.log(event)
+//     //console.log(event)
 //     this.page = event;
 //     this.getAllMemberDetails();
 // }
@@ -165,7 +165,7 @@ export class MemberKycComponent implements OnInit {
 
 
   showMemberModal(item:any){
-     console.log(item,'member item')
+     //console.log(item,'member item')
     this.submitted = false;
     this.addMemberKycForm.reset();
     this.addMemberKycForm.markAsUntouched();
@@ -177,7 +177,7 @@ export class MemberKycComponent implements OnInit {
     this.addMemberKycForm.controls['isAddressVerified'].setValue('')
     this.addMemberKycForm.controls['isPan_VoterIdVerified'].setValue('')
      this._salesService.getMemberKycDetails(item.memberId).subscribe((data:any) =>{
-      console.log(data.status)
+      //console.log(data.status)
        if(data.status == 200){
         this.noDocumentsFound = false;
          this.memberDetailsObj = data.body;

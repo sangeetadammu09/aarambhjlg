@@ -168,7 +168,7 @@ export class UserComponent implements OnInit {
 
   getAllCitys(){
     this._adminService.getAllCity().subscribe((data) => {
-  //   console.log(data,'all Citys')
+  //   //console.log(data,'all Citys')
      if(data.length > 0){
       this.pageLoaded = true;
        this.cityList = data;
@@ -185,7 +185,7 @@ export class UserComponent implements OnInit {
     paginationObj.pageNo =this.page;
     paginationObj.pageSize = this.pageSize;
     this._adminService.getAllUsersByCity(this.cityId).subscribe((data) => {
-      //   console.log(data,'all UserRoles')
+      //   //console.log(data,'all UserRoles')
         if(data.length > 0){
           this.userList = data;
    
@@ -198,7 +198,7 @@ export class UserComponent implements OnInit {
 
 
   handlePageChange(event: number){
-    console.log(event)
+    //console.log(event)
     this.page = event;
     this.getAllUserDetails();
 }
@@ -255,7 +255,7 @@ export class UserComponent implements OnInit {
   } 
 
   changeDateOfBirth(event: any){
-    //  console.log(event.target.value, 'event')
+    //  //console.log(event.target.value, 'event')
       var dob = event.target.value
       var dt = new Date(dob);
       this.userDateofBirth = dt.toISOString();
@@ -265,7 +265,7 @@ export class UserComponent implements OnInit {
   submitNewUser(){
     this.submitted = true;
      if(this.addUserForm.valid){
-      //  console.log(this.addUserForm.value)
+      //  //console.log(this.addUserForm.value)
         var addUserData :any = {};
         addUserData.userId = 0;
         addUserData.fullName = this.addUserForm.controls['fullName'].value;
@@ -286,8 +286,8 @@ export class UserComponent implements OnInit {
         addUserData.isDeleted = false;
 
         this._adminService.addUser(addUserData).subscribe((data:any) => {
-       //   console.log(data.status);
-          //console.log(data.headers.get('X-Custom-Header'));
+       //   //console.log(data.status);
+          ////console.log(data.headers.get('X-Custom-Header'));
           if(data.status == 200){
            
             this.addedUserId = data.body;
@@ -301,7 +301,7 @@ export class UserComponent implements OnInit {
          
       }else{
      
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
@@ -318,12 +318,12 @@ export class UserComponent implements OnInit {
   }
 
   submitAFDocument(){
-    console.log('submitAFDocument',this.aadhaarFrontFile)
+    //console.log('submitAFDocument',this.aadhaarFrontFile)
     if(this.aadhaarFrontFile != undefined){
       this.userDocument =  this.aadhaarFrontDocumentName;
       this.userDocumentFile = this.aadhaarFrontFile;
       if(this.addedUserId){
-        console.log(this.addedUserId)
+        //console.log(this.addedUserId)
         var addUserDocumentData = new FormData();
         addUserDocumentData.append('UserId',this.addedUserId);
         addUserDocumentData.append('DocumentName',this.userDocument);
@@ -634,7 +634,7 @@ export class UserComponent implements OnInit {
         addUserDocumentData.append('UserId',this.addedUserId);
         addUserDocumentData.append('DocumentName',this.userDocument);
         addUserDocumentData.append('file',this.userDocumentFile);   
-        console.log(addUserDocumentData,'joining') 
+        //console.log(addUserDocumentData,'joining') 
  
         this._adminService.addUserOtherDocuments(addUserDocumentData).subscribe((data:any) => {
           if(data.status == 200){
@@ -724,7 +724,7 @@ export class UserComponent implements OnInit {
         addUserDocumentData.append('UserId',this.addedUserId);
         addUserDocumentData.append('DocumentName',this.userDocument);
         addUserDocumentData.append('file',this.userDocumentFile);    
-        console.log(addUserDocumentData,'education');
+        //console.log(addUserDocumentData,'education');
         this._adminService.addUserOtherDocuments(addUserDocumentData).subscribe((data:any) => {
           if(data.status == 200){
            
@@ -837,7 +837,7 @@ export class UserComponent implements OnInit {
 
   deleteUser(){
   //     this._adminService.deleteUser(this.deleteUserItem).subscribe((data:any) =>{
-  //       console.log(data)
+  //       //console.log(data)
   //       if(data.status == 200){
   //         this._toastrService.success('User delete successfully!');
   //         this.getAllUserDetails();
@@ -848,12 +848,12 @@ export class UserComponent implements OnInit {
    }
 
 showUserModal(item:any){
-   // console.log(item)
+   // //console.log(item)
     this._adminService.getAllUserDetails(item.usersInfo.userId).subscribe((data:any) =>{
       if(data){
         this.userDetailsObj = data;
         this.userDocuments = data.documents;
-       // console.log(this.userDetailsObj)
+       // //console.log(this.userDetailsObj)
       }
      
     })
@@ -876,11 +876,11 @@ showUserModal(item:any){
    }
 
    verifyContact(event:any){
-       console.log(event.target.value,'mobileno');
+       //console.log(event.target.value,'mobileno');
        let mobileNo = event.target.value;
        if(mobileNo !== ''){
        this._adminService.checkUserMobileNumberExists(mobileNo).subscribe((x:any) =>{
-      //  console.log(x)
+      //  //console.log(x)
         x.exists == true ?this.isMobileExists = true : this.isMobileExists = false
       
        })

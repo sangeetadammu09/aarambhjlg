@@ -65,7 +65,7 @@ export class PaymentComponent implements OnInit {
 
   getSalesOfficersCenterList(){
     this._salesService.getSalesOfficersCenterList(this.userId,this.cityId).subscribe((data:any) => {
-      //console.log(data,'cco member')
+      ////console.log(data,'cco member')
         if(data.length > 0){
           this.centerDropdownList = data;
           this.pageLoaded = true;
@@ -81,7 +81,7 @@ export class PaymentComponent implements OnInit {
     var searchMemberId = event;
     this.centerId = event;
     this._salesService.getMemberListByCenter(searchMemberId).subscribe((data:any) => {
-     console.log(data,'all memberDropdownList')
+     //console.log(data,'all memberDropdownList')
       if(data.length > 0){
         this.memberDropdownList = data;
        }else{
@@ -113,7 +113,7 @@ export class PaymentComponent implements OnInit {
           item.installmentDate = moment(item.installmentDate).format('L')
         })
         this.installmentCollectionList = data.installments;
-        console.log(this.installmentCollectionList)
+        //console.log(this.installmentCollectionList)
         this.total = data.page.totalCount;
  
        }else{
@@ -124,13 +124,13 @@ export class PaymentComponent implements OnInit {
 
 
   handlePageChange(event: number){
-    //console.log(event)
+    ////console.log(event)
     this.page = event;
     this.getinstallmentDate(this.installmentDate);
 }
 
 showeditCollectionModal(item:any){
-   console.log(item)
+   //console.log(item)
    this.selectedPayment = item;
    this.updatePaymentForm.patchValue({
     orderInstallmentId: item.orderInstallmentId,
@@ -144,7 +144,7 @@ showeditCollectionModal(item:any){
    this._salesService.getOrderInstallmentHistory(item.orderId, item.memberId).subscribe((data:any) => {
     if(data){
       this.installmentCollectionHistoryList = data;
-      console.log(this.installmentCollectionHistoryList)
+      //console.log(this.installmentCollectionHistoryList)
     //  this.total = data.page.totalCount;
 
      }else{

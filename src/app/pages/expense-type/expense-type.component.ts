@@ -46,7 +46,7 @@ export class ExpenseTypeComponent implements OnInit {
 
   getAllExpenseTypes(){
     this._adminService.getAllExpenseType().subscribe((data) => {
-      console.log(data,'all ExpenseTypes')
+      //console.log(data,'all ExpenseTypes')
      if(data.length > 0){
       this.pageLoaded = true;
        this.expenseTypeList = data;
@@ -71,14 +71,14 @@ export class ExpenseTypeComponent implements OnInit {
   submitNewExpenseType(){
     this.submitted = true;
      if(this.addExpenseTypeForm.valid){
-      //  console.log(this.addExpenseTypeForm.value)
+      //  //console.log(this.addExpenseTypeForm.value)
         var addExpenseTypeData :any = {};
         addExpenseTypeData.typeId = 0;
         addExpenseTypeData.expenseName = this.addExpenseTypeForm.controls['expenseName'].value;
        
         this._adminService.addExpenseType(addExpenseTypeData).subscribe((data:any) => {
-          console.log(data.status);
-          //console.log(data.headers.get('X-Custom-Header'));
+          //console.log(data.status);
+          ////console.log(data.headers.get('X-Custom-Header'));
           if(data.status == 200){
             this._toastrService.success('Expense Type added successfully!');
             this.closeaddExpenseTypeBtn.nativeElement.click();
@@ -87,7 +87,7 @@ export class ExpenseTypeComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
@@ -95,7 +95,7 @@ export class ExpenseTypeComponent implements OnInit {
 
 
   showeditExpenseTypeModal(item:any){
-    console.log(item)
+    //console.log(item)
     this.addExpenseType = false;
     this.editExpenseType = true;
     this.editExpenseTypeForm.patchValue({
@@ -111,7 +111,7 @@ export class ExpenseTypeComponent implements OnInit {
   
   submitUpdateExpenseType(){
     this.submitted = true;
-   // console.log(this.editExpenseTypeForm.value)
+   // //console.log(this.editExpenseTypeForm.value)
    
      if(this.editExpenseTypeForm.valid){  
        var updateExpenseTypeData :any = {};
@@ -126,7 +126,7 @@ export class ExpenseTypeComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
@@ -139,7 +139,7 @@ export class ExpenseTypeComponent implements OnInit {
 
   deleteExpenseType(){
       this._adminService.deleteExpenseType(this.deleteExpenseTypeItem).subscribe((data:any) =>{
-        console.log(data)
+        //console.log(data)
         if(data.status == 200){
           this._toastrService.success('Expense Type delete successfully!');
           this.getAllExpenseTypes();

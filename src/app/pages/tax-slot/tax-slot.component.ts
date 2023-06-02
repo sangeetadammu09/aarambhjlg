@@ -57,7 +57,7 @@ export class TaxSlotComponent implements OnInit {
 
   getAllTaxSlots(){
     this._adminService.getAllTaxSlot().subscribe((data) => {
-      console.log(data,'all TaxSlots')
+      //console.log(data,'all TaxSlots')
      if(data.length > 0){
       this.pageLoaded = true;
        this.TaxSlotList = data;
@@ -82,7 +82,7 @@ export class TaxSlotComponent implements OnInit {
   submitNewTaxSlot(){
     this.submitted = true;
      if(this.addTaxSlotForm.valid){
-      //  console.log(this.addTaxSlotForm.value)
+      //  //console.log(this.addTaxSlotForm.value)
         var addTaxSlotData :any = {};
         addTaxSlotData.taxId = 0;
         addTaxSlotData.taxName = this.addTaxSlotForm.controls['taxName'].value;
@@ -92,8 +92,8 @@ export class TaxSlotComponent implements OnInit {
         addTaxSlotData.createdBy = '0';
         addTaxSlotData.updatedBy = '0';
         this._adminService.addTaxSlot(addTaxSlotData).subscribe((data:any) => {
-          console.log(data.status);
-          //console.log(data.headers.get('X-Custom-Header'));
+          //console.log(data.status);
+          ////console.log(data.headers.get('X-Custom-Header'));
           if(data.status == 200){
             this._toastrService.success('TaxSlot added successfully!');
             this.closeaddTaxSlotBtn.nativeElement.click();
@@ -102,7 +102,7 @@ export class TaxSlotComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
@@ -110,7 +110,7 @@ export class TaxSlotComponent implements OnInit {
 
 
   showeditTaxSlotModal(item:any){
-    console.log(item)
+    //console.log(item)
     this.addTaxSlot = false;
     this.editTaxSlot = true;
     this.editTaxSlotForm.patchValue({
@@ -129,7 +129,7 @@ export class TaxSlotComponent implements OnInit {
   
   submitUpdateTaxSlot(){
     this.submitted = true;
-    console.log(this.editTaxSlotForm.value)
+    //console.log(this.editTaxSlotForm.value)
    
      if(this.editTaxSlotForm.valid){
     
@@ -149,7 +149,7 @@ export class TaxSlotComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
@@ -162,7 +162,7 @@ export class TaxSlotComponent implements OnInit {
 
   deleteTaxSlot(){
       this._adminService.deleteTaxSlot(this.deleteTaxSlotItem).subscribe((data:any) =>{
-        console.log(data)
+        //console.log(data)
         if(data.status == 200){
           this._toastrService.success('TaxSlot delete successfully!');
           this.getAllTaxSlots();

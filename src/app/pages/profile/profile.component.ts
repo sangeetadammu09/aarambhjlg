@@ -23,13 +23,13 @@ export class ProfileComponent implements OnInit {
 
 
   showUserModal(){
-    // console.log(item)
+    // //console.log(item)
      this._adminService.getAllUserDetails(this.userId).subscribe((data:any) =>{
        if(data){
-        console.log(data,'0')
+        //console.log(data,'0')
          this.userDetailsObj = data;
          this.userDocuments = data.documents;
-         console.log(this.userDocuments)
+         //console.log(this.userDocuments)
        }
       
      })

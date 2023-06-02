@@ -38,7 +38,7 @@ export class ApprovedOrderComponent implements OnInit {
 
     if(this.roleNo == '102'){
       this._saleService.getApprovedOrdersForSoRoList(this.userId,this.pageSize,this.page).subscribe((data) => {
-        console.log(data,'all orders')
+        //console.log(data,'all orders')
         if(data.length > 0){
         this.pageLoaded = true;
          this.approvedOrderList = data,
@@ -52,7 +52,7 @@ export class ApprovedOrderComponent implements OnInit {
     }
     else if(this.roleNo == '103'){
       this._saleService.getApprovedOrdersForManagerList(this.userId,this.pageSize,this.page).subscribe((data) => {
-        console.log(data,'all orders')
+        //console.log(data,'all orders')
         if(data.length > 0){
           this.pageLoaded = true;
          this.approvedOrderList = data,
@@ -66,14 +66,14 @@ export class ApprovedOrderComponent implements OnInit {
   }
 
   handlePageChange(event: number){
-    //console.log(event)
+    ////console.log(event)
     this.page = event;
     this.getapprovedOrderList();
 }
 
   showOrderModal(item:any){
     this._saleService.getApprovedOrdersDetails(item.orderId).subscribe((data:any) =>{
-      console.log(data)
+      //console.log(data)
       if(data.status == 200){
         this.approvedOrderDetailsObj = data.body;
         this.selectedOrderList = data.body.orderItems;
@@ -98,7 +98,7 @@ export class ApprovedOrderComponent implements OnInit {
     // printDoc.output("dataurlnewwindow");
     var panel = this.approvedOrderPdf.nativeElement;
     if(panel){
-      console.log(this.approvedOrderPdf.nativeElement)
+      //console.log(this.approvedOrderPdf.nativeElement)
     var printWindow = window.open('', '', 'height=600,width=1000');
     printWindow?.document.write('<html><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css"><script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script><head>');
     printWindow?.document.write('<style>.logo-image{margin-left: auto;margin-right: auto;display: block;}</style></head><body>');

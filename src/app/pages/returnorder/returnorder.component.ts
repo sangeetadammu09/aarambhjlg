@@ -37,7 +37,7 @@ export class ReturnorderComponent implements OnInit {
     var temp = JSON.parse(this.userRole);
     const finalArray = temp.map((item:any, index:number) => ({ id: index,name: item }))
     this.userRole = finalArray[0].name;
-   // console.log(this.userRole);
+   // //console.log(this.userRole);
   }
 
   getSearchedOrder(searchOrder:any){
@@ -66,7 +66,7 @@ export class ReturnorderComponent implements OnInit {
 
   getOrderReturnedItems(){
       this._saleService.getOrderReturnedItems(this.orderId).subscribe((data:any) =>{
-        console.log(data)
+        //console.log(data)
         if(data.status == 200){
           this.orderFound = true;          
           this.returnedOrderList = data.body;
@@ -80,7 +80,7 @@ export class ReturnorderComponent implements OnInit {
   }
 
   editRow(item:any){
-    console.log(item.qty)
+    //console.log(item.qty)
     item.prodQuantityInput = item.qty
     item.rowEdited = !item.rowEdited;
   }
@@ -121,9 +121,9 @@ export class ReturnorderComponent implements OnInit {
     updateCart.salePrice = this.selectedReturnOrder.salePrice,
     updateCart.taxAmt = this.selectedReturnOrder.taxAmt? this.selectedReturnOrder.taxAmt : 0,
     updateCart.totalAmt = this.selectedReturnOrder.totalAmt 
-    console.log(updateCart);
+    //console.log(updateCart);
     this._saleService.addOrderReturnItems(updateCart).subscribe((data:any) => {
-      console.log(data.status)
+      //console.log(data.status)
       if(data.status == 200){
         this.toastrService.success('Item deleted successfully')
         this.closeDeleteItemBtn.nativeElement.click();
@@ -153,9 +153,9 @@ export class ReturnorderComponent implements OnInit {
     this.returnedOrderList.forEach((returnOrder:any) => { delete returnOrder.salePrice , delete returnOrder.productName})
     
     submitOrder.items = this.returnedOrderList
-    console.log(submitOrder);
+    //console.log(submitOrder);
     this._saleService.submitReturnRequest(submitOrder).subscribe((data:any) => {
-      console.log(data.status)
+      //console.log(data.status)
       if(data.status == 200){
         this.toastrService.success('Order return submitted successfully')
         this.closeDeleteItemBtn.nativeElement.click();

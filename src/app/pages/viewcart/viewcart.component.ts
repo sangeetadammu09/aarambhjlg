@@ -50,7 +50,7 @@ export class ViewcartComponent implements OnInit {
 
   showViewCartModal(){
     if(this.newCart != null){
-   //   console.log(this.newCart,'new cart')
+   //   //console.log(this.newCart,'new cart')
       this._salesService.getShoppingCart(this.newCart).subscribe((data:any) => {
         if(data){
          // debugger;
@@ -70,11 +70,11 @@ export class ViewcartComponent implements OnInit {
     }
 
     // this.dataService.currentCatObj.subscribe((data:any) => {
-    //     console.log(data,'dataaaaaaaaaaaaaaaaaa');
+    //     //console.log(data,'dataaaaaaaaaaaaaaaaaa');
     //       if(data){
     //      this.selectedCartId = data.cartId;
     //      this.memberId = data.memberId;
-    //      console.log(this.memberId,this.selectedCartId)
+    //      //console.log(this.memberId,this.selectedCartId)
         
      
     //       }
@@ -118,7 +118,7 @@ export class ViewcartComponent implements OnInit {
   }
 
   showdeleteCartModal(item:any){
-    console.log(item)
+    //console.log(item)
     this.cartItemId = item.cartId;
     this.itemId = item.itemId;
     
@@ -136,7 +136,7 @@ export class ViewcartComponent implements OnInit {
 
   getAllInstallments(){
     this._adminService.getAllInstallment().subscribe((data) => {
-   //   console.log(data,'all Installments')
+   //   //console.log(data,'all Installments')
      if(data.length > 0){
     //  this.productsFound = true;
        this.installmentList = data;
@@ -174,10 +174,10 @@ export class ViewcartComponent implements OnInit {
   }
 
   placeOrder(){
-    console.log(this.cartDetailsObj)
-    console.log(this.newCart,'new cart')
+    //console.log(this.cartDetailsObj)
+    //console.log(this.newCart,'new cart')
     this._salesService.getOrderMemberValidity(this.cartDetailsObj.memberId).subscribe((data:any) => {
-      console.log(data.isEligible == false)
+      //console.log(data.isEligible == false)
       if(data.isEligible == false){
         document.getElementById("openModalButton")?.click();
         this.isMemberValidityExpired = true;

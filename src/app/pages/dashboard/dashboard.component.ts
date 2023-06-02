@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
   getCenterSummary(){
       this.adminService.getCenterSummary(this.userId).subscribe((data:any) => {
         if(data.status == 200){
-        console.log(data.body);
+        //console.log(data.body);
         this.centerList = data.body;
         }
       })
@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
   getOrderSummary(){
     this.adminService.getOrderSummary(this.userId).subscribe((data:any) => {
       if(data.status == 200){
-        console.log(data.body);
+        //console.log(data.body);
         this.orderList = data.body;
       }
  })

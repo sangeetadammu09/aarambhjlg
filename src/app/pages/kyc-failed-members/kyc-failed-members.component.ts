@@ -27,7 +27,7 @@ export class KycFailedMembersComponent implements OnInit {
 
   getAllFailedMembersDetails(){
     this._salesService.getKycFailedMembers(this.cityid, this.page, this.pageSize).subscribe((data) => {
-        // console.log(data,'all memberList')
+        //console.log(data,'all memberList')
         if(data.length > 0){
           this.memberList = data;
           this.pageLoaded = true;

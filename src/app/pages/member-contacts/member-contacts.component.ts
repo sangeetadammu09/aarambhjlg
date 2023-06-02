@@ -33,7 +33,7 @@ export class MemberContactsComponent implements OnInit {
     paginationObj.pageSize = this.pageSize;
     if(this.roleNo == '101'){
       this._adminService.getCenterDropdownByCityId(this.cityId).subscribe((data:any) =>{
-        console.log(data,'admin member')
+        //console.log(data,'admin member')
         if(data.length > 0){
           this.memberDropdownList = data;
    
@@ -45,7 +45,7 @@ export class MemberContactsComponent implements OnInit {
     }
     else if(this.roleNo == '102'){
     this._salesService.getOfficersCenterList(this.cityId,this.userId).subscribe((data:any) => {
-      console.log(data,'cco member')
+      //console.log(data,'cco member')
         if(data.length > 0){
           this.memberDropdownList = data;
    
@@ -60,7 +60,7 @@ export class MemberContactsComponent implements OnInit {
   getMemberVal(event:any){
     var searchMemberId = event;
     this._salesService.getMemberContacts(searchMemberId,this.page,this.pageSize).subscribe((data:any) => {
-      console.log(data,'all memberDropdownList')
+      //console.log(data,'all memberDropdownList')
       if(data.members.length > 0){
         this.memberList = data.members;
 
@@ -75,7 +75,7 @@ export class MemberContactsComponent implements OnInit {
 
 
   handlePageChange(event: number){
-    console.log(event)
+    //console.log(event)
     this.page = event;
     this.getMemberVal(event);
 }

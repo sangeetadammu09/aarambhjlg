@@ -54,7 +54,7 @@ export class ReturnedOrdersComponent implements OnInit {
 
   getAllInstallments(){
     this._adminService.getAllInstallment().subscribe((data) => {
-   //   console.log(data,'all Installments')
+   //   //console.log(data,'all Installments')
      if(data.length > 0){
        this.installmentList = data;
       }else{
@@ -67,7 +67,7 @@ export class ReturnedOrdersComponent implements OnInit {
       var temp = JSON.parse(this.roles);
       const finalArray = temp.map((item:any, index:number) => ({ id: index,name: item }))
       this.firstRole = finalArray[0].name;
-      console.log(this.firstRole);
+      //console.log(this.firstRole);
     }
   }
 
@@ -75,7 +75,7 @@ export class ReturnedOrdersComponent implements OnInit {
 
   getreturnOrderListForApproval(){
     this._saleService.getReturnedRequestedList(this.userId).subscribe((data:any) => {
-    //   console.log(data,'all orders')
+    //   //console.log(data,'all orders')
        if(data.length > 0){
         this.returnOrderListForApproval = data
         this.pageLoaded = true;
@@ -89,7 +89,7 @@ export class ReturnedOrdersComponent implements OnInit {
   }
 
   handlePageChange(event: number){
-    //console.log(event)
+    ////console.log(event)
     this.page = event;
     this.getreturnOrderListForApproval();
 }
@@ -100,7 +100,7 @@ export class ReturnedOrdersComponent implements OnInit {
       if(data.status == 200){
         this.orderDetailsObj = data.body;
         this.selectedOrderList = data.body.orderItems;
-        console.log(this.orderDetailsObj)
+        //console.log(this.orderDetailsObj)
       }
     },(err:HttpErrorResponse)=>{
        if(err.status == 500){
@@ -113,7 +113,7 @@ export class ReturnedOrdersComponent implements OnInit {
 
   showApproveOrderModal(item:any){
     this.approveOrderObj = item;
-    console.log(this.approveOrderObj)
+    //console.log(this.approveOrderObj)
    
   }
 
@@ -124,7 +124,7 @@ export class ReturnedOrdersComponent implements OnInit {
   getInstallmentDetails(item:any,orderDetailsObj:any){
     this.paymentInstallmentNo = item;
     // this._saleService.getInstallmentList(orderDetailsObj.totalBillAmt,item.installmentNo,this.paymentGapValue).subscribe((data) => {
-    //   console.log(data,'all installment table')
+    //   //console.log(data,'all installment table')
     //   if(data.length > 0){
     //     data.forEach((item:any) => {
     //       item.installmentDate = moment(item.installmentDate).format("L");

@@ -45,7 +45,7 @@ export class UserContactsComponent implements OnInit {
 
 
   handlePageChange(event: number){
-    console.log(event)
+    //console.log(event)
     this.page = event;
     this.getUserContactsDetails();
 }

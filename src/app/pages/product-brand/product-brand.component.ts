@@ -77,7 +77,7 @@ export class ProductBrandComponent implements OnInit {
   submitNewProductBrand(){
     this.submitted = true;
      if(this.addProductBrandForm.valid){
-      //  console.log(this.addProductBrandForm.value)
+      //  //console.log(this.addProductBrandForm.value)
         var addProductBrandData :any = {};
         addProductBrandData.brandId = 0;
         addProductBrandData.brandName = this.addProductBrandForm.controls['brandName'].value;
@@ -85,8 +85,8 @@ export class ProductBrandComponent implements OnInit {
         addProductBrandData.description = this.addProductBrandForm.controls['description'].value;
        
         this._adminService.addProductBrand(addProductBrandData).subscribe((data:any) => {
-          console.log(data.status);
-          //console.log(data.headers.get('X-Custom-Header'));
+          //console.log(data.status);
+          ////console.log(data.headers.get('X-Custom-Header'));
           if(data.status == 200){
             this._toastrService.success('Product Brand added successfully!');
             this.closeaddProductBrandBtn.nativeElement.click();
@@ -95,7 +95,7 @@ export class ProductBrandComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
@@ -103,7 +103,7 @@ export class ProductBrandComponent implements OnInit {
 
 
   showeditProductBrandModal(item:any){
-    console.log(item)
+    //console.log(item)
     this.addProductBrand = false;
     this.editProductBrand = true;
     
@@ -122,7 +122,7 @@ export class ProductBrandComponent implements OnInit {
   
   submitUpdateProductBrand(){
     this.submitted = true;
-    console.log(this.editProductBrandForm.value)
+    //console.log(this.editProductBrandForm.value)
    
      if(this.editProductBrandForm.valid){
     
@@ -140,7 +140,7 @@ export class ProductBrandComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
@@ -153,7 +153,7 @@ export class ProductBrandComponent implements OnInit {
 
   deleteProductBrand(){
       this._adminService.deleteProductBrand(this.deleteProductBrandItem).subscribe((data:any) =>{
-        console.log(data)
+        //console.log(data)
         if(data.status == 200){
           this._toastrService.success('Product Brand deleted successfully!');
           this.getAllProductBrands();

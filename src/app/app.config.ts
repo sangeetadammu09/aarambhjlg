@@ -123,6 +123,7 @@ export const APP_DI_CONFIG: any = {
     },
     Branch:{
       GetAllBranches : "/Branch/GetAllBranches",
+      GetBranchesByCityId : "/Branch/GetBranchesByCityId",
       AddBranch : "/Branch/AddBranch",
       UpdateBranch : "/Branch/UpdateBranch",
       DeleteBranch : "/Branch/DeleteBranch"

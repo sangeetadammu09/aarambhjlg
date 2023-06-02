@@ -110,12 +110,12 @@ export class ProductsComponent implements OnInit {
 
   getAllProducts(){
     this._adminService.getAllProduct(this.page,this.pageSize).subscribe((data) => {
-    //  console.log(data,'all Products')
+    //  //console.log(data,'all Products')
      if(data.products.length > 0){
       var productArray = data.products;
       this.productList = productArray
       //.map((item:any, indexNo:any) => ({indexNo, ...item}));
-    //  console.log(this.productList)
+    //  //console.log(this.productList)
        this.total = data.pages.totalCount;
        this.pageLoaded = true;
       }else{
@@ -128,7 +128,7 @@ export class ProductsComponent implements OnInit {
 
   getAllProductBrands(){
     this._adminService.getAllProductBrand().subscribe((data) => {
-     // console.log(data,'all ProductBrands')
+     // //console.log(data,'all ProductBrands')
      if(data.length > 0){
     //  this.productsFound = true;
        this.productBrandList = data;
@@ -142,7 +142,7 @@ export class ProductsComponent implements OnInit {
 
   getAllProductCategories(){
     this._adminService.getAllProductCategory().subscribe((data) => {
-      //console.log(data,'product category')
+      ////console.log(data,'product category')
      if(data.length > 0){
        this.productCategoryList = data
       }else{
@@ -154,7 +154,7 @@ export class ProductsComponent implements OnInit {
   
   getAllUnits(){
     this._adminService.getAllUnits().subscribe((data) => {
-    //  console.log(data,'all units')
+    //  //console.log(data,'all units')
      if(data.length > 0){
     //  this.productsFound = true;
        this.unitList = data;
@@ -168,7 +168,7 @@ export class ProductsComponent implements OnInit {
 
   getAllTaxSlots(){
     this._adminService.getAllTaxSlot().subscribe((data) => {
-     // console.log(data,'all TaxSlots')
+     // //console.log(data,'all TaxSlots')
      if(data.length > 0){
     //  this.productsFound = true;
        this.taxSlotList = data;
@@ -181,7 +181,7 @@ export class ProductsComponent implements OnInit {
   }
 
   handlePageChange(event: number){
-    //console.log(event)
+    ////console.log(event)
     this.page = event;
     this.getAllProducts();
 }
@@ -221,7 +221,7 @@ export class ProductsComponent implements OnInit {
     this.submitted = true;
    
      if(this.addProductForm.valid){
-       console.log(this.addProductForm.value)
+       //console.log(this.addProductForm.value)
         var addProductData :any = {};
         addProductData.productId = 0;
         addProductData.productName = this.addProductForm.controls['productName'].value;
@@ -239,8 +239,8 @@ export class ProductsComponent implements OnInit {
         
 
         this._adminService.addProduct(addProductData).subscribe((data:any) => {
-          console.log(data.status);
-          //console.log(data.headers.get('X-Custom-Header'));
+          //console.log(data.status);
+          ////console.log(data.headers.get('X-Custom-Header'));
           if(data.status == 200){
             this.addedProductId = data.body;
             this._toastrService.success('Product added successfully!');
@@ -251,13 +251,14 @@ export class ProductsComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
 
   showeditProductModal(item:any){
     console.log(item)
+    this.addProductTitle = "Edit Product"
     this.addProduct = false;
     this.editProduct = true;
     this.editProductForm.patchValue({    
@@ -281,7 +282,7 @@ export class ProductsComponent implements OnInit {
   
   submitUpdateProduct(){
     this.submitted = true;
-    console.log(this.editProductForm.value)
+    //console.log(this.editProductForm.value)
    
      if(this.editProductForm.valid){
     
@@ -309,7 +310,7 @@ export class ProductsComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
@@ -322,7 +323,7 @@ export class ProductsComponent implements OnInit {
 
   deleteProduct(){
       this._adminService.deleteProduct(this.deleteProductItem).subscribe((data:any) =>{
-        console.log(data)
+        //console.log(data)
         if(data.status == 200){
           this._toastrService.success('Product delete successfully!');
           this.getAllProducts();
@@ -344,7 +345,7 @@ export class ProductsComponent implements OnInit {
   }
 
   submitProdImageOne(){
-    console.log('submitProdImages',this.productImageOneFile)
+    //console.log('submitProdImages',this.productImageOneFile)
     if(this.productImageOneFile != undefined){
       if(this.addedProductId){
         var addProductImageData = new FormData();
@@ -388,7 +389,7 @@ export class ProductsComponent implements OnInit {
   }
 
   submitProdImageTwo(){
-    console.log('submitProdImages',this.productImageTwoFile)
+    //console.log('submitProdImages',this.productImageTwoFile)
     if(this.productImageTwoFile != undefined){
       if(this.addedProductId){
         var addProductImageData = new FormData();
@@ -431,7 +432,7 @@ export class ProductsComponent implements OnInit {
   }
 
   submitProdImageThree(){
-    console.log('submitProdImages',this.productImageThreeFile)
+    //console.log('submitProdImages',this.productImageThreeFile)
     if(this.productImageThreeFile != undefined){
       if(this.addedProductId){
         var addProductImageData = new FormData();
@@ -475,7 +476,7 @@ export class ProductsComponent implements OnInit {
   }
 
   submitProdImageFour(){
-   // console.log('submitProdImages',this.productImageFourFile)
+   // //console.log('submitProdImages',this.productImageFourFile)
     if(this.productImageFourFile != undefined){
       if(this.addedProductId){
         var addProductImageData = new FormData();
@@ -519,7 +520,7 @@ export class ProductsComponent implements OnInit {
   }
 
   submitProdImageFive(){
-    console.log('submitProdImages',this.productImageFiveFile)
+    //console.log('submitProdImages',this.productImageFiveFile)
     if(this.productImageFiveFile != undefined){
       if(this.addedProductId){
         var addProductImageData = new FormData();

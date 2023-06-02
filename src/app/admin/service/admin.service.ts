@@ -259,6 +259,10 @@ export class AdminService {
    getAllBranch(){
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Branch.GetAllBranches)
    }
+
+   getBranchesByCityId(id:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Branch.GetBranchesByCityId+`/${id}`)
+   }
  
    addBranch(data:any){
      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Branch.AddBranch,data,{observe: 'response'})

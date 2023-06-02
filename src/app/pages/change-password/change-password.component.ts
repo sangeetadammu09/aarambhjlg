@@ -38,8 +38,8 @@ export class ChangePasswordComponent implements OnInit {
        addGroupData.newPassword = this.changePasswordForm.controls['newPassword'].value;
        
        this._adminService.changePassword(addGroupData).subscribe((data:any) => {
-         console.log(data.status);
-         //console.log(data.headers.get('X-Custom-Header'));
+         //console.log(data.status);
+         ////console.log(data.headers.get('X-Custom-Header'));
          if(data.status == 200){
            this._toastrService.success('Password changed successfully!');
            this.submitted = false;
@@ -50,7 +50,7 @@ export class ChangePasswordComponent implements OnInit {
        })
         
      }else{
-       console.log('invalid form')
+       //console.log('invalid form')
      }  
   }
 

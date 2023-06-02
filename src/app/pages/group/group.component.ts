@@ -86,7 +86,7 @@ export class GroupComponent implements OnInit {
 
   getCenterDropdownByCityId(){
     this._adminService.getCenterDropdownByCityId(this.cityId).subscribe((data) => {
-     // console.log(data,'all Managers')
+     // //console.log(data,'all Managers')
      if(data.length > 0){
        this.centerList = data;
       }else{
@@ -111,7 +111,7 @@ export class GroupComponent implements OnInit {
   submitNewGroup(){
     this.submitted = true;
      if(this.addGroupForm.valid){
-      //  console.log(this.addGroupForm.value)
+      //  //console.log(this.addGroupForm.value)
         var addGroupData :any = {};
        // addGroupData.groupId = 0;
         addGroupData.groupName = this.addGroupForm.controls['groupName'].value;
@@ -121,8 +121,8 @@ export class GroupComponent implements OnInit {
         addGroupData.createdBy = "0";
         
         this._adminService.addGroup(addGroupData).subscribe((data:any) => {
-          console.log(data.status);
-          //console.log(data.headers.get('X-Custom-Header'));
+          //console.log(data.status);
+          ////console.log(data.headers.get('X-Custom-Header'));
           if(data.status == 200){
             this._toastrService.success('Group added successfully!');
             this.closeaddGroupBtn.nativeElement.click();
@@ -131,13 +131,13 @@ export class GroupComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
 
   showeditGroupModal(item:any){
-    console.log(item,item.managerId)
+    //console.log(item,item.managerId)
     this.selectedGroupItem = item;
     this.addGroup = false;
     this.editGroup = true;
@@ -153,7 +153,7 @@ export class GroupComponent implements OnInit {
 
   submitUpdateGroup(){
     this.submitted = true;
-  //  console.log(this.editGroupForm.value)
+  //  //console.log(this.editGroupForm.value)
    
      if(this.editGroupForm.valid){
         var updateGroupData :any = {};
@@ -173,7 +173,7 @@ export class GroupComponent implements OnInit {
         })
          
       }else{
-        console.log('invalid form')
+        //console.log('invalid form')
       }  
 
   }
@@ -186,7 +186,7 @@ export class GroupComponent implements OnInit {
 
   deleteGroup(){
       this._adminService.deleteGroup(this.deleteGroupItem).subscribe((data:any) =>{
-        console.log(data)
+        //console.log(data)
         if(data.status == 200){
           this._toastrService.success('Group deleted successfully!');
           this.getAllGroups();
