@@ -91,6 +91,10 @@ export class SalesRelationService {
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Members.CheckMemberMobileNumberExists+`?mobileNo=${mobileNo}`)
    }
 
+   getValidityExpiringMembers(centerId:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Members.GetValidityExpiringMembers+`?centerId=${centerId}`)
+   }
+
    //kyc 
    getMemberListForKycVerification(centerId:any){
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Kyc.GetMemberListForKycVerification+`?centerId=${centerId}`)

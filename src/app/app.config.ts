@@ -89,6 +89,7 @@ export const APP_DI_CONFIG: any = {
       GetMemberListByCenter : "/Members/GetMemberListByCenter",
       GetMemberContacts : "/Members/GetMemberContacts",
       CheckMemberMobileNumberExists: "/Members/CheckMemberMobileNumberExists",
+      GetValidityExpiringMembers: "/Members/GetValidityExpiringMembers"
     },
     TaxSlot:{
       GetAllTaxSlot : "/TaxSlot/GetAllTaxSlots",

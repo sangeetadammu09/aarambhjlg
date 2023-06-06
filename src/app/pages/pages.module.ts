@@ -37,6 +37,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { KycFailedMembersComponent } from './kyc-failed-members/kyc-failed-members.component';
 import { AssignLeaderComponent } from './assign-leader/assign-leader.component';
 import { KycFailedUsersComponent } from './kyc-failed-users/kyc-failed-users.component';
+import { ValidityExpiringMembersComponent } from './validity-expiring-members/validity-expiring-members.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -77,7 +78,8 @@ import { KycFailedUsersComponent } from './kyc-failed-users/kyc-failed-users.com
     DashboardComponent,
     KycFailedMembersComponent,
     AssignLeaderComponent,
-    KycFailedUsersComponent
+    KycFailedUsersComponent,
+    ValidityExpiringMembersComponent
   ]
 })
 

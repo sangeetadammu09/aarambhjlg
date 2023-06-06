@@ -1,0 +1,72 @@
+<!-- Page body -->
+<div class="page-body">
+    <div class="container-xl">
+      <div class="row row-cards">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="col-lg-8 mb-3 mt-2">
+                <h3 class="card-title">List of Validity Expiring Members</h3>
+              </div>
+              <div class="col-lg-4 mb-3 mt-2">
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="searchCenter">Select Center</label>
+                    <select class="custom-select" id="searchCenter" [(ngModel)]="searchCenter"
+                      (change)="getAllValidityExpiringMembers(searchCenter)">
+                      <option value="" [selected]="''">Choose Center..</option>
+                      <option *ngFor="let item of centerDropdownList" [ngValue]="item.centerId">
+                        {{item.centerName}}</option>
+                    </select>
+                  </div>
+                </div>
+  
+              </div>
+  
+            </div>
+            <div class="table-responsive" *ngIf="pageLoaded">
+              <table class="table card-table table-vcenter text-nowrap datatable" *ngIf="memberList.length != 0">
+  
+                <tr style="background-color:#1d4ed8;">
+                  <th scope="col" style="color: #fff; font-family: sans-serif;">S No.</th>
+                  <th scope="col" style="color: #fff; font-family: sans-serif;">Name</th>
+                  <th scope="col" style="color: #fff; font-family: sans-serif;">Date of Join</th>
+                  <th scope="col" style="color: #fff; font-family: sans-serif;">Valid Till</th>
+                </tr>
+  
+                <tbody
+                  *ngFor="let item of memberList| paginate: { itemsPerPage: pageSize, currentPage: page} ; let i = index ">
+                  <tr>
+                    <td>{{pageSize*(page-1)+i+1}}</td>
+                    <td>{{item.fullName}}</td>
+                    <td>{{item.centerName}}</td>
+                    <td>{{item.dateOfJoining | date : "dd-MM-YYYY"}}</td>
+                    <td>{{item.validTillDate | date : "dd-MM-YYYY"}}</td>
+                  </tr>
+                </tbody>
+  
+              </table>
+  
+              <div class="card-footer d-flex align-items-center" style="background-color: #fff;" *ngIf="memberList.length != 0">
+                <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
+                  <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                </div>
+              </div>
+              <div class="row card mb-3" *ngIf="memberList.length == 0">
+                <p class="text-center">No Member found</p>
+              </div>
+            </div>
+            <div class="table-responsive" *ngIf="!pageLoaded">
+              <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                &nbsp;
+                <h3 class="text-center mr-2">Data loading. Please Hold on!</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

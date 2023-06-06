@@ -13,6 +13,7 @@ import { PaymentComponent } from 'src/app/pages/payment/payment.component';
 import { ReturnorderComponent } from 'src/app/pages/returnorder/returnorder.component';
 import { DashboardComponent } from 'src/app/pages/dashboard/dashboard.component';
 import { KycFailedMembersComponent } from 'src/app/pages/kyc-failed-members/kyc-failed-members.component';
+import { ValidityExpiringMembersComponent } from 'src/app/pages/validity-expiring-members/validity-expiring-members.component';
 
 export const SalesRelationLayoutRoutes: Routes = [
 
@@ -30,5 +31,6 @@ export const SalesRelationLayoutRoutes: Routes = [
      { path:'returnorder', component: ReturnorderComponent },
      { path:'dashboard', component: DashboardComponent },
      { path:'kyc-failed-members', component: KycFailedMembersComponent },
+     {path: 'validity-expiring-members', component: ValidityExpiringMembersComponent },
   
 ];

@@ -70,6 +70,13 @@ export const SalesList = {
                 url: 'kyc-failed-members',
                 icon : 'fa-phone',
                 isActive: true, 
+            },
+            {
+              id: 2,
+              menu: 'Validity Expiring',
+              url: 'validity-expiring-members',
+              icon : 'fa-check',
+              isActive: true, 
             }
             ]
           },
@@ -181,12 +188,19 @@ export const SalesManagerList = {
           url: 'member',
           submenuList: [
             {
-              id: 2,
+              id: 1,
               menu: 'KYC',
               url: 'member-kyc',
               icon : 'fa-check',
               isActive: true, 
-          }
+            },
+            {
+              id: 2,
+              menu: 'Validity Expiring',
+              url: 'validity-expiring-members',
+              icon : 'fa-check',
+              isActive: true, 
+            }
           
           ]
         },
