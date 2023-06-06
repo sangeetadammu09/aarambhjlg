@@ -153,10 +153,7 @@ export const SalesList = {
             isActive: true, 
             url: 'setting',
             submenuList: []
-          },
-
-          
-
+          }
     ],
     message: null,
 };
@@ -190,6 +187,23 @@ export const SalesManagerList = {
               icon : 'fa-check',
               isActive: true, 
           }
+          
+          ]
+        },
+        {
+          id: 3,
+          parentMenu: 'Users',
+          icon : 'fa-user-circle',
+          isActive: true, 
+          url: 'users',
+          submenuList: [
+            {
+              id: 2,
+              menu: 'Kyc Failed Users',
+              url: 'kyc-failed-users',
+              icon : 'fa-phone',
+              isActive: true, 
+          }  
           ]
         },
         {
@@ -249,6 +263,7 @@ export const SalesManagerList = {
             
         ]
         },
+
         
 
     

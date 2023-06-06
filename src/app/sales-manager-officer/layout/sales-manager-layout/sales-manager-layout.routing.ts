@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { ApprovedOrderComponent } from 'src/app/pages/approved-order/approved-order.component';
 import { ChangePasswordComponent } from 'src/app/pages/change-password/change-password.component';
 import { DashboardComponent } from 'src/app/pages/dashboard/dashboard.component';
+import { KycFailedUsersComponent } from 'src/app/pages/kyc-failed-users/kyc-failed-users.component';
 import { MemberKycComponent } from 'src/app/pages/member-kyc/member-kyc.component';
 import { OrderDetailsComponent } from 'src/app/pages/order-details/order-details.component';
 import { ProductDetailComponent } from 'src/app/pages/product-detail/product-detail.component';
@@ -18,6 +19,7 @@ export const SalesManagerLayoutRoutes: Routes = [
      { path:'product-details', component: ProductDetailComponent },
      { path:'returned-orders', component: ReturnedOrdersComponent },
      { path:'dashboard', component: DashboardComponent },
+     { path:'kyc-failed-users', component: KycFailedUsersComponent },
      
    
      

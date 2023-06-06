@@ -35,7 +35,7 @@ export class AssignLeaderComponent implements OnInit {
   get f(){ return this.assignLeaderForm.controls}
 
   getCenterList(){
-    this._adminService.getAllCenter(this.cityId).subscribe((data:any) => {
+    this._adminService.getAllCentersByCityId(this.cityId).subscribe((data:any) => {
       console.log(data,'center')
         if(data.length > 0){
           this.centerDropdownList = data;

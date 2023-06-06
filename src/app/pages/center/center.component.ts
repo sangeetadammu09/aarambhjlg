@@ -77,7 +77,7 @@ export class CenterComponent implements OnInit {
 
 
   getAllCenters(){
-    this._adminService.getAllCenter(this.cityId).subscribe((data) => {
+    this._adminService.getAllCentersByCityId(this.cityId).subscribe((data) => {
       console.log(data,'all Centers')
      if(data.length > 0){
       this.pageLoaded = true;

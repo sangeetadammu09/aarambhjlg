@@ -70,7 +70,7 @@ export class AdminService {
 
     //city apis
 
-     getAllCenter(cityId:any){
+    getAllCentersByCityId(cityId:any){
       return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Center.GetAllCentersListByCity+`?cityId=${cityId}`)
      }
 
@@ -361,6 +361,14 @@ export class AdminService {
 
    getUserListForKycVerification(cityId:any){
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Kyc.GetUserListForKycVerification+`?cityId=${cityId}`)
+   }
+
+   getKycFailedUsers(cityId:any,pageNo:any,pageSize:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Kyc.GetKycFailedUsers+`?cityId=${cityId}&pageNumber=${pageNo}&pageSize=${pageSize}`)
+   }
+
+   getUserKycStatus(userId:any,cityId:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Kyc.GetUserKycStatus+`?userId=${userId}&cityId=${cityId}`)
    }
 
    getUserKycDetails(userId:any){

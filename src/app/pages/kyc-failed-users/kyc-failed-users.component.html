@@ -6,44 +6,30 @@
         <div class="card">
           <div class="card-header">
             <div class="col-lg-8 mb-3 mt-2">
-              <h3 class="card-title">List of Failed Kyc Members</h3>
-            </div>
-            <div class="col-lg-4 mb-3 mt-2">
-              <div class="form-row">
-                <div class="form-group col-md-12">
-                  <label for="searchCenter">Select Center</label>
-                  <select class="custom-select" id="searchCenter" [(ngModel)]="searchCenter"
-                    (change)="getAllFailedMembersDetails(searchCenter)">
-                    <option value="" [selected]="''">Choose Center..</option>
-                    <option *ngFor="let item of centerDropdownList" [ngValue]="item.centerId">
-                      {{item.centerName}}</option>
-                  </select>
-                </div>
-              </div>
-
-            </div>
+              <h3 class="card-title">List of Failed Kyc Users</h3>
+            </div>      
 
           </div>
           <div class="table-responsive" *ngIf="pageLoaded">
-            <table class="table card-table table-vcenter text-nowrap datatable" *ngIf="memberList.length != 0">
+            <table class="table card-table table-vcenter text-nowrap datatable" *ngIf="userList.length != 0">
 
               <tr style="background-color:#1d4ed8;">
                 <th scope="col" style="color: #fff; font-family: sans-serif;">S No.</th>
                 <th scope="col" style="color: #fff; font-family: sans-serif;">Name</th>
-                <th scope="col" style="color: #fff; font-family: sans-serif;">Center</th>
+                <th scope="col" style="color: #fff; font-family: sans-serif;">City</th>
                 <th scope="col" style="color: #fff; font-family: sans-serif;">Date of Join</th>
                 <th scope="col" style="color: #fff; font-family: sans-serif;">Details</th>
               </tr>
 
               <tbody
-                *ngFor="let item of memberList| paginate: { itemsPerPage: pageSize, currentPage: page} ; let i = index ">
+                *ngFor="let item of userList| paginate: { itemsPerPage: pageSize, currentPage: page} ; let i = index ">
                 <tr>
                   <td>{{pageSize*(page-1)+i+1}}</td>
                   <td>{{item.fullName}}</td>
-                  <td>{{item.centerName}}</td>
+                  <td>{{item.cityName}}</td>
                   <td>{{item.dateOfJoining | date : "dd-MM-YYYY"}}</td>
 
-                  <td (click)="showMemberModal(item)" data-toggle="modal" data-target="#showMemberModal">
+                  <td (click)="showUserModal(item)" data-toggle="modal" data-target="#showUserModal">
                     <svg enable-background="new 0 0 48 48" height="32px" id="Layer_1" version="1.1" viewBox="0 0 48 48"
                       width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
                       xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -58,13 +44,13 @@
             </table>
 
             <div class="card-footer d-flex align-items-center" style="background-color: #fff;"
-              *ngIf="memberList.length != 0">
+              *ngIf="userList.length != 0">
               <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
                 <pagination-controls (pageChange)="page = $event"></pagination-controls>
               </div>
             </div>
-            <div class="row card mb-3" *ngIf="memberList.length == 0">
-              <p class="text-center">No Member found</p>
+            <div class="row card mb-3" *ngIf="userList.length == 0">
+              <p class="text-center">No User found</p>
             </div>
           </div>
           <div class="table-responsive" *ngIf="!pageLoaded">
@@ -83,12 +69,12 @@
 </div>
 
 
-<!-- show Member modal -->
-<div class="modal fade" id="showMemberModal" tabindex="-1" role="dialog">
+<!-- show User modal -->
+<div class="modal fade" id="showUserModal" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">   
-        <h5 class="modal-title" id="exampleModalLabel">Member Details</h5>    
+        <h5 class="modal-title" id="exampleModalLabel">User Details</h5>    
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeeditUserBtn>
           <span aria-hidden="true">&times;</span>
         </button>
@@ -96,9 +82,9 @@
       <div class="modal-body scrollable-modal"> 
         <div class="card p-3 mb-2">
           <div class="card-body">
-                      <div class="row row-deck row-cards" *ngIf="memberDetailsObj">
-                         <div class="col-lg-6"> <b class="mr-2">Name : </b> {{memberDetailsObj.fullName}}</div>
-                         <div class="col-lg-6"> <b class="mr-2">Center : </b> {{memberDetailsObj.centerName}}</div>
+                      <div class="row row-deck row-cards" *ngIf="userDetailsObj">
+                         <div class="col-lg-6"> <b class="mr-2">Name : </b> {{userDetailsObj.fullName}}</div>
+                         <div class="col-lg-6"> <b class="mr-2">City : </b> {{userDetailsObj.cityName}}</div>
                       </div>
           </div>   
          </div>  

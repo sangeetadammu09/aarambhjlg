@@ -65,15 +65,15 @@ export class UserKycComponent implements OnInit {
 
     this.addUserKycForm = this._formBuilder.group({
       userId: [],
-      isAadharVerified: [, Validators.required],
+      isAadharVerified: [],
       aadharComment: [],
-      isPan_VoterIdVerified: [, Validators.required],
+      isPan_VoterIdVerified: [],
       panComment: [],
-      isAddressVerified: [, Validators.required],
+      isAddressVerified: [],
       addressComment: [],
-      isPhotoVerified: [, Validators.required],
+      isPhotoVerified: [],
       photoComment: [],
-      isKycCompleted: [, Validators.required]
+      isKycCompleted: []
     })  
 
   }

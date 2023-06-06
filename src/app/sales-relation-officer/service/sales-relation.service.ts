@@ -108,6 +108,10 @@ export class SalesRelationService {
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Kyc.GetKycFailedMembers+`?centerId=${centerId}&pageNumber=${pageno}&pageSize=${pagesize}`)
    }
 
+   getMemberKycStatus(memberId:any, cityId:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Kyc.GetMemberKycStatus+`?memberId=${memberId}&cityId=${cityId}`,)
+   }
+
    getProductAutocomplete(SearchTerm?:any){
    
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.GetProductAutoComplete+`?SearchTerm=${SearchTerm}`)

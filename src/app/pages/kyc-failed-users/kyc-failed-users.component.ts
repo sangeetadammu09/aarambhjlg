@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/admin/service/admin.service';
 import { SalesRelationService } from 'src/app/sales-relation-officer/service/sales-relation.service';
 
 @Component({
-  selector: 'app-kyc-failed-members',
-  templateUrl: './kyc-failed-members.component.html',
-  styleUrls: ['./kyc-failed-members.component.css']
+  selector: 'app-kyc-failed-users',
+  templateUrl: './kyc-failed-users.component.html',
+  styleUrls: ['./kyc-failed-users.component.css']
 })
-export class KycFailedMembersComponent implements OnInit {
-  memberList: any =[];
+export class KycFailedUsersComponent implements OnInit {
+
+  userList: any =[];
   pageLoaded: boolean = true;
   page: number = 1;
   pageSize: any = 10;
@@ -20,23 +20,23 @@ export class KycFailedMembersComponent implements OnInit {
   centerDropdownList: any = [];
   searchCenter:any='';
   centerId:any;
-  memberDetailsObj:any;
+  userDetailsObj:any;
   aadhaarFrontDocumentName: any ="Choose File";
   aadhaarBackDocumentName: any ="Choose File";
   photoDocumentName: any ="Choose File";
   addressDocumentName: any ="Choose File";
   securityDocumentName : any ="Choose File";
   voterDocumentName: any ="Choose File";
-  addedMemberId: any;
+  addedUserId: any;
 
   aadhaarFrontFile: any;
   aadhaarBackFile: any;
   photoFile: any;
   addressFile: any;
-  MemberDocument: any;
+  UserDocument: any;
   voterFile: any;
   securityFile: any;
-  memberDocumentFile: any;
+  UserDocumentFile: any;
 
   disableAFDocumentBtn: boolean = false;
   disableABDocumentBtn: boolean = false;
@@ -51,34 +51,23 @@ export class KycFailedMembersComponent implements OnInit {
   showPhotoVerifyForm : boolean = false;
  
 
-  constructor(private _salesService: SalesRelationService, private _adminService: AdminService, private _toastrService: ToastrService) { }
+  constructor(private _adminService: AdminService, private _toastrService: ToastrService) { }
 
   ngOnInit(): void {
-   this.getAllCentersByCityId();
+     this.getAllFailedUsersDetails();
   }
 
-  getAllCentersByCityId(){
-    this._adminService.getAllCentersByCityId(this.cityid).subscribe((data:any) => {
-     if(data.length > 0){
-       this.centerDropdownList = data;
-      }else{
-        this.centerDropdownList = [];
-      }
-      
-    })
-  }
-
-  getAllFailedMembersDetails(val:any){
+  getAllFailedUsersDetails(){
     this.pageLoaded = false;
-    this._salesService.getKycFailedMembers(val,this.pageSize,this.page).subscribe((data) => {
-        //console.log(data,'all memberList')
+    this._adminService.getKycFailedUsers(this.cityid,this.page,this.pageSize).subscribe((data:any) => {
+        console.log(data,'all KycFailedUsers')
        
         if(data.length > 0){
-          this.memberList = data;
+          this.userList = data;
           this.pageLoaded = true;
    
          }else{
-           this.memberList = [];
+           this.userList = [];
            this.pageLoaded = true;
          } 
        })
@@ -86,15 +75,16 @@ export class KycFailedMembersComponent implements OnInit {
   }
 
 
-showMemberModal(item:any){
-   this._salesService.getMemberKycStatus(item.memberId, this.cityid).subscribe((data) => {
-    data ? this.memberDetailsObj = data : this.memberDetailsObj = {};
-    if(this.memberDetailsObj){
-      this.addedMemberId = this.memberDetailsObj.memberId;
-      this.memberDetailsObj.isAadharVerified == true  ? this.showAadharVerifyForm = true : this.showAadharVerifyForm = false;
-      this.memberDetailsObj.isPan_VoterIdVerified == true  ? this.showPan_VoterIdVerifyForm = true : this.showPan_VoterIdVerifyForm = false;
-      this.memberDetailsObj.isAddressVerified == true  ? this.showAddressVerifyForm = true: this.showAddressVerifyForm = false;
-      this.memberDetailsObj.isPhotoVerified == true  ? this.showPhotoVerifyForm = true : this.showPhotoVerifyForm = false;
+showUserModal(item:any){
+   this._adminService.getUserKycStatus(item.userId, this.cityid).subscribe((data) => {
+    console.log(data)
+    data ? this.userDetailsObj = data : this.userDetailsObj = {};
+    if(this.userDetailsObj){
+      this.addedUserId = this.userDetailsObj.userId;
+      this.userDetailsObj.isAadharVerified == true  ? this.showAadharVerifyForm = true : this.showAadharVerifyForm = false;
+      this.userDetailsObj.isPan_VoterIdVerified == true  ? this.showPan_VoterIdVerifyForm = true : this.showPan_VoterIdVerifyForm = false;
+      this.userDetailsObj.isAddressVerified == true  ? this.showAddressVerifyForm = true: this.showAddressVerifyForm = false;
+      this.userDetailsObj.isPhotoVerified == true  ? this.showPhotoVerifyForm = true : this.showPhotoVerifyForm = false;
     }
    })
  }
@@ -113,22 +103,22 @@ showMemberModal(item:any){
 submitAFDocument(){
   //console.log('submitAFDocument',this.aadhaarFrontFile)
   if(this.aadhaarFrontFile != undefined){
-    this.MemberDocument =  this.aadhaarFrontDocumentName;
-    this.memberDocumentFile = this.aadhaarFrontFile;
-    if(this.addedMemberId){
-      //console.log(this.addedMemberId)
-      var addMemberDocumentData = new FormData();
-      addMemberDocumentData.append('MemberId',this.addedMemberId);
-      addMemberDocumentData.append('DocumentName',this.MemberDocument);
-      addMemberDocumentData.append('file',this.memberDocumentFile);    
+    this.UserDocument =  this.aadhaarFrontDocumentName;
+    this.UserDocumentFile = this.aadhaarFrontFile;
+    if(this.addedUserId){
+      //console.log(this.addedUserId)
+      var addUserDocumentData = new FormData();
+      addUserDocumentData.append('UserId',this.addedUserId);
+      addUserDocumentData.append('DocumentName',this.UserDocument);
+      addUserDocumentData.append('file',this.UserDocumentFile);    
 
-      this._salesService.addMemberDocuments(addMemberDocumentData).subscribe((data:any) => {
+      this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
         if(data.status == 200){
          
           this._toastrService.success('Aadhaar Front  added successfully!');
-        // this.closeaddMemberBtn.nativeElement.click();
+        // this.closeaddUserBtn.nativeElement.click();
           this.disableAFDocumentBtn = true;
-         this.getAllCentersByCityId();
+         this.getAllFailedUsersDetails();
         } 
       }
       ,(error:any) => {
@@ -139,7 +129,7 @@ submitAFDocument(){
       )
        
     }else{
-      this._toastrService.error('No Member found');
+      this._toastrService.error('No User found');
     }
  }else{
   this._toastrService.error('Please upload Aadhaar Front');
@@ -159,20 +149,20 @@ uploadAadhaarBackDocument(file: any) {
 
 submitABDocument(){
   if(this.aadhaarBackFile != undefined){
-    this.MemberDocument =  this.aadhaarBackDocumentName;
-    this.memberDocumentFile = this.aadhaarBackFile;
-    if(this.addedMemberId){
-      var addMemberDocumentData = new FormData();
-      addMemberDocumentData.append('MemberId',this.addedMemberId);
-      addMemberDocumentData.append('DocumentName',this.MemberDocument);
-      addMemberDocumentData.append('file',this.memberDocumentFile);    
+    this.UserDocument =  this.aadhaarBackDocumentName;
+    this.UserDocumentFile = this.aadhaarBackFile;
+    if(this.addedUserId){
+      var addUserDocumentData = new FormData();
+      addUserDocumentData.append('UserId',this.addedUserId);
+      addUserDocumentData.append('DocumentName',this.UserDocument);
+      addUserDocumentData.append('file',this.UserDocumentFile);    
 
-      this._salesService.addMemberDocuments(addMemberDocumentData).subscribe((data:any) => {
+      this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
         if(data.status == 200){        
           this._toastrService.success('Aadhaar Back added successfully!');
-         // this.closeaddMemberBtn.nativeElement.click();
+         // this.closeaddUserBtn.nativeElement.click();
          this.disableABDocumentBtn = true;
-          this.getAllCentersByCityId();
+          this.getAllFailedUsersDetails();
         } 
       },(error:any) => {
        if(error.status == 500){
@@ -181,7 +171,7 @@ submitABDocument(){
       })
        
    }else{
-    this._toastrService.error('No Member found');
+    this._toastrService.error('No User found');
   }
  }else{
   this._toastrService.error("Please upload Aadhaar Back")
@@ -201,21 +191,21 @@ uploadPhotoDocument(file: any) {
 
 submitPhoto(){
   if(this.photoFile != undefined){
-    this.MemberDocument =  this.photoDocumentName;
-    this.memberDocumentFile = this.photoFile;
-    if(this.addedMemberId){
-      var addMemberDocumentData = new FormData();
-      addMemberDocumentData.append('MemberId',this.addedMemberId);
-      addMemberDocumentData.append('DocumentName',this.MemberDocument);
-      addMemberDocumentData.append('file',this.memberDocumentFile);    
+    this.UserDocument =  this.photoDocumentName;
+    this.UserDocumentFile = this.photoFile;
+    if(this.addedUserId){
+      var addUserDocumentData = new FormData();
+      addUserDocumentData.append('UserId',this.addedUserId);
+      addUserDocumentData.append('DocumentName',this.UserDocument);
+      addUserDocumentData.append('file',this.UserDocumentFile);    
 
-      this._salesService.addMemberDocuments(addMemberDocumentData).subscribe((data:any) => {
+      this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
         if(data.status == 200){
          
           this._toastrService.success('Photo added successfully!');
-         // this.closeaddMemberBtn.nativeElement.click();
+         // this.closeaddUserBtn.nativeElement.click();
          this.disablePhotoDocumentBtn = true;
-          this.getAllCentersByCityId();
+          this.getAllFailedUsersDetails();
         } 
       },(error:any) => {
        if(error.status == 500){
@@ -224,7 +214,7 @@ submitPhoto(){
       })
        
     }else{
-      this._toastrService.error('No Member found');
+      this._toastrService.error('No User found');
     }
     }else{
       this._toastrService.error("Please upload Photo")
@@ -244,21 +234,21 @@ uploadAddressDocument(file: any) {
 
 submitAddress(){
   if(this.addressFile != undefined){
-    this.MemberDocument =  this.addressDocumentName;
-    this.memberDocumentFile = this.addressFile;
-    if(this.addedMemberId){
-      var addMemberDocumentData = new FormData();
-      addMemberDocumentData.append('MemberId',this.addedMemberId);
-      addMemberDocumentData.append('DocumentName',this.MemberDocument);
-      addMemberDocumentData.append('file',this.memberDocumentFile);    
+    this.UserDocument =  this.addressDocumentName;
+    this.UserDocumentFile = this.addressFile;
+    if(this.addedUserId){
+      var addUserDocumentData = new FormData();
+      addUserDocumentData.append('UserId',this.addedUserId);
+      addUserDocumentData.append('DocumentName',this.UserDocument);
+      addUserDocumentData.append('file',this.UserDocumentFile);    
 
-      this._salesService.addMemberDocuments(addMemberDocumentData).subscribe((data:any) => {
+      this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
         if(data.status == 200){
          
           this._toastrService.success('Address Document added successfully!');
-        //  this.closeaddMemberBtn.nativeElement.click();
+        //  this.closeaddUserBtn.nativeElement.click();
         this.disableAddressDocumentBtn = true;
-          this.getAllCentersByCityId();
+          this.getAllFailedUsersDetails();
         } 
       },(error:any) => {
        if(error.status == 500){
@@ -267,7 +257,7 @@ submitAddress(){
       })
        
     }else{
-      this._toastrService.error('No Member found');
+      this._toastrService.error('No User found');
     }
  }else{
   this._toastrService.error("Please upload Address Document")
@@ -287,21 +277,21 @@ uploadVoterDocument(file: any) {
 
 submitVoterDoc(){
   if(this.voterFile != undefined){
-    this.MemberDocument =  this.voterDocumentName;
-    this.memberDocumentFile = this.voterFile;
-    if(this.addedMemberId){
-      var addMemberDocumentData = new FormData();
-      addMemberDocumentData.append('MemberId',this.addedMemberId);
-      addMemberDocumentData.append('DocumentName',this.MemberDocument);
-      addMemberDocumentData.append('file',this.memberDocumentFile);    
+    this.UserDocument =  this.voterDocumentName;
+    this.UserDocumentFile = this.voterFile;
+    if(this.addedUserId){
+      var addUserDocumentData = new FormData();
+      addUserDocumentData.append('UserId',this.addedUserId);
+      addUserDocumentData.append('DocumentName',this.UserDocument);
+      addUserDocumentData.append('file',this.UserDocumentFile);    
 
-      this._salesService.addMemberDocuments(addMemberDocumentData).subscribe((data:any) => {
+      this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
         if(data.status == 200){
          
           this._toastrService.success('Voter/PAN added successfully!');
-       //   this.closeaddMemberBtn.nativeElement.click();
+       //   this.closeaddUserBtn.nativeElement.click();
        this.disableVoterDocumentBtn = true;
-          this.getAllCentersByCityId();
+          this.getAllFailedUsersDetails();
         } 
       },(error:any) => {
        if(error.status == 500){
@@ -310,7 +300,7 @@ submitVoterDoc(){
       })
        
     }else{
-      this._toastrService.error('No Member found');
+      this._toastrService.error('No User found');
     }
     }else{
       this._toastrService.error("Please upload Voter/PAN")
@@ -331,21 +321,21 @@ uploadSecurityDocument(file: any) {
 
 submitSecurityDoc(){
   if(this.securityFile != undefined){
-    this.MemberDocument =  this.securityDocumentName;
-    this.memberDocumentFile = this.securityFile;
-    if(this.addedMemberId){
-      var addMemberDocumentData = new FormData();
-      addMemberDocumentData.append('MemberId',this.addedMemberId);
-      addMemberDocumentData.append('DocumentName',this.MemberDocument);
-      addMemberDocumentData.append('file',this.memberDocumentFile);    
+    this.UserDocument =  this.securityDocumentName;
+    this.UserDocumentFile = this.securityFile;
+    if(this.addedUserId){
+      var addUserDocumentData = new FormData();
+      addUserDocumentData.append('UserId',this.addedUserId);
+      addUserDocumentData.append('DocumentName',this.UserDocument);
+      addUserDocumentData.append('file',this.UserDocumentFile);    
 
-      this._salesService.addMemberDocuments(addMemberDocumentData).subscribe((data:any) => {
+      this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
         if(data.status == 200){
          
           this._toastrService.success('Security Check added successfully!');
-       //   this.closeaddMemberBtn.nativeElement.click();
+       //   this.closeaddUserBtn.nativeElement.click();
        this.disableSecurityDocumentBtn = true;
-          this.getAllCentersByCityId();
+          this.getAllFailedUsersDetails();
         } 
       },(error:any) => {
        if(error.status == 500){
@@ -354,7 +344,7 @@ submitSecurityDoc(){
       })
        
     }else{
-      this._toastrService.error('No Member found');
+      this._toastrService.error('No User found');
     }
     }else{
       this._toastrService.error("Please upload Voter/PAN")

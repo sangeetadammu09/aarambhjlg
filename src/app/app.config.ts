@@ -137,6 +137,9 @@ export const APP_DI_CONFIG: any = {
       GetMemberKycDetails : "/Kyc/GetMemberKycDetails",
       AddMemberKycVerification:"/Kyc/AddMemberKycVerification",
       GetKycFailedMembers : "/Kyc/GetKycFailedMembers",
+      GetKycFailedUsers : "/Kyc/GetKycFailedUsers",
+      GetMemberKycStatus : "/Kyc/GetMemberKycStatus",
+      GetUserKycStatus : "/Kyc/GetUserKycStatus"
     },
     ShoppingCart:{
       CreateNewCart: '/ShopingCart/CreateNewCart',

@@ -46,7 +46,7 @@ export class MemberComponent implements OnInit {
   MemberDocument: any;
   voterFile: any;
   securityFile: any;
-  voterDocumentName: any;
+  voterDocumentName: any  ="Choose File";;
   cityId = localStorage.getItem('userCity');
   userId = localStorage.getItem('userId');
   MemberId = localStorage.getItem('MemberId');
