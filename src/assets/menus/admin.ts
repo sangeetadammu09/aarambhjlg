@@ -209,3 +209,63 @@ export const AdminList = {
     ],
     message: null,
 };
+
+
+export const SuperAdminList = {
+
+    statusCode: 200,
+
+    data: [
+        {
+            id: 1,
+            parentMenu: 'Dashboard',
+            icon : 'fa-cog',
+            isActive: true, 
+            url: 'dashboard',
+            submenuList: []
+          },
+        {
+            id: 1,
+            parentMenu: 'Admin Master',
+            icon : 'fa-users',
+            isActive: true,
+            url: 'admin-master',
+            submenuList: [
+                {
+                    id: 0,
+                    menu: 'City',
+                    url: 'city',
+                    icon : 'fa-building',
+                    isActive: true, 
+                },
+                {
+                    id: 1,
+                    menu: 'Branch',
+                    url: 'branch',
+                    icon : 'fa-building',
+                    isActive: true, 
+                }
+                
+            ]
+        },
+        {
+            id: 2,
+            parentMenu: 'Product',
+            icon : 'fa-list',
+            isActive: true, 
+            url: 'product',
+            submenuList: [ 
+                {
+                    id: 0,
+                    menu: 'Product Category',
+                    url: 'product-category',
+                    icon : 'fa-building',
+                    isActive: true, 
+                }
+                   
+        ]
+          },
+         
+    ],
+    message: null,
+};

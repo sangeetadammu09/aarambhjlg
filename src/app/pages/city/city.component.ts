@@ -22,6 +22,10 @@ export class CityComponent implements OnInit {
   deleteCityItem: any;
   p = 1;
   pageLoaded: boolean = false;
+  roleNo = localStorage.getItem('roleNo');
+  showAddBtn:boolean = true;
+  showEditBtn:boolean = true;
+  showDeleteBtn:boolean = true;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addCityForm = this._formBuilder.group({
@@ -39,7 +43,13 @@ export class CityComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllCitys()
+    this.getAllCitys();
+    if(this.roleNo == "104"){
+      this.showAddBtn = false;
+      this.showEditBtn = false;
+      this.showDeleteBtn = false;
+    }
+
   }
 
   get f(){ return this.addCityForm.controls}

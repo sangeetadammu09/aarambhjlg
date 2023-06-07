@@ -4,6 +4,7 @@ import { LoginComponent } from './common/login/login.component';
 import { AuthGuard } from './guard/auth.guard';
 import { SalesRelationLayoutComponent } from './sales-relation-officer/layout/sales-relation-layout/sales-relation-layout/sales-relation-layout.component';
 import { SalesManagerLayoutComponent } from './sales-manager-officer/layout/sales-manager-layout/sales-manager-layout/sales-manager-layout.component';
+import { SuperAdminLayoutComponent } from './super-admin/layout/super-admin-layout/super-admin-layout.component';
 
 export const AppRoutes: Routes = [
   {path: '', redirectTo: 'login',pathMatch: 'full'}, 
@@ -16,6 +17,14 @@ export const AppRoutes: Routes = [
     children: [
         {
       path: '',loadChildren: () => import('./admin/layout/admin-layout/admin-layout.module').then(x => x.AdminLayoutModule)
+  }]},
+  {
+    path: 'super-admin',
+    component: SuperAdminLayoutComponent,
+    canActivate:[AuthGuard],
+    children: [
+        {
+      path: '',loadChildren: () => import('./super-admin/layout/super-admin-layout/super-admin-layout.module').then(x => x.SuperAdminLayoutModule)
   }]},
   {
     path: 'sales-relation-officer',

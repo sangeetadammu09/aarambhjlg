@@ -14,6 +14,8 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import { AuthInterceptor } from "./auth.interceptor";
 import { AdminLayoutModule } from "./admin/layout/admin-layout/admin-layout.module";
 import { SalesRelationLayoutModule } from "./sales-relation-officer/layout/sales-relation-layout/sales-relation-layout.module";
+import { SuperAdminLayoutModule } from "./super-admin/layout/super-admin-layout/super-admin-layout.module";
+
 
 
 
@@ -31,9 +33,10 @@ import { SalesRelationLayoutModule } from "./sales-relation-officer/layout/sales
     }),
    HttpClientModule, NgxPaginationModule,
     CustomSharedModule,AdminLayoutModule,SalesRelationLayoutModule,
+    SuperAdminLayoutModule,
     ToastrModule.forRoot({
       closeButton: true,
-      timeOut: 3000, // 3 seconds
+      timeOut: 3000,// 3 seconds
       progressBar: true,
       positionClass: "toast-top-center",
     })

@@ -27,6 +27,10 @@ export class BranchComponent implements OnInit {
   cityList: any;
   selectedBranchItem: any;
   pageLoaded: boolean = false;
+  roleNo = localStorage.getItem('roleNo');
+  showAddBtn:boolean = true;
+  showEditBtn:boolean = true;
+  showDeleteBtn:boolean = true;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addBranchForm = this._formBuilder.group({
@@ -58,6 +62,11 @@ export class BranchComponent implements OnInit {
     this.getAllBranches()
     this.getAllManager()
     this.getAllCitys()
+    if(this.roleNo == "104"){
+      this.showAddBtn = false;
+      this.showEditBtn = false;
+      this.showDeleteBtn = false;
+    }
     
   }
 
