@@ -26,8 +26,8 @@
                   <tr style="background-color:#1d4ed8;">
                     <th style="color: #fff;">Sr No</th>
                     <th style="color: #fff;">Product Name</th>
-                    <th style="color: #fff;">JLG Price</th>
                     <th style="color: #fff;">MRP</th>
+                    <th style="color: #fff;">JLG Price</th>
                     <th style="color: #fff;">Regional Name</th>
                     <th style="color: #fff;">Stock</th>
                     <th style="color: #fff;">Add Price</th>
@@ -44,19 +44,20 @@
                     </td> 
                     <td>
                         <span *ngIf="rowEdit">
-                            <input type="text" class="form-control prime-edit-input" [(ngModel)]="item.jlgSalePrice">
-                        </span>
-                        <span *ngIf="!rowEdit">{{item.jlgSalePrice | currency: 'INR'}}
-                        </span>
-                    </td>
-                    <td>
-                        <span *ngIf="rowEdit">
                         <input type="text" class="form-control prime-edit-input" [(ngModel)]="item.mrp">
                        </span>
                         <span *ngIf="!rowEdit">
                             {{item.mrp | currency: 'INR'}}
                         </span>
                     </td>
+                    <td>
+                        <span *ngIf="rowEdit">
+                            <input type="text" class="form-control prime-edit-input" [(ngModel)]="item.jlgSalePrice">
+                        </span>
+                        <span *ngIf="!rowEdit">{{item.jlgSalePrice | currency: 'INR'}}
+                        </span>
+                    </td>
+                    
                     <td>
                         <span *ngIf="rowEdit">
                             <input  type="text" class="form-control prime-edit-input" [(ngModel)]="item.reginalName">

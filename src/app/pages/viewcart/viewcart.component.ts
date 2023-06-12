@@ -31,6 +31,7 @@ export class ViewcartComponent implements OnInit {
   memberId :any
   itemId: any;
   isMemberValidityExpired :boolean = false;
+  notEligibleTxt: any;
 
   constructor(private _adminService:AdminService, private _salesService: SalesRelationService,
     private toastrService :ToastrService,private router: Router, private dataService:DataService) {
@@ -181,6 +182,7 @@ export class ViewcartComponent implements OnInit {
       if(data.isEligible == false){
         document.getElementById("openModalButton")?.click();
         this.isMemberValidityExpired = true;
+        this.notEligibleTxt = data.failureReasons;
        }else{
         this.isMemberValidityExpired = false;  
       var newOrder :any = {};

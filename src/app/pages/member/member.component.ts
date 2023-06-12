@@ -555,7 +555,7 @@ export class MemberComponent implements OnInit {
         this._salesService.addMemberDocuments(addMemberDocumentData).subscribe((data:any) => {
           if(data.status == 200){
            
-            this._toastrService.success('Security Check added successfully!');
+            this._toastrService.success('Security Cheque  added successfully!');
          //   this.closeaddMemberBtn.nativeElement.click();
          this.disableSecurityDocumentBtn = true;
             this.getAllMemberDetails();

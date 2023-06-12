@@ -33,6 +33,9 @@
                                <div class="card-title col-lg-3">City :</div>
                                <div class="col-lg-3">{{cartDetailsObj?.cityName}}</div>
 
+                               <div class="card-title col-lg-3">Branch :</div>
+                               <div class="col-lg-3">{{cartDetailsObj?.branchName}}</div>
+
                                <div class="card-title col-lg-3">Center :</div>
                                <div class="col-lg-3">{{cartDetailsObj?.centerName}}</div>
                               
@@ -181,7 +184,6 @@
 </div>
 
 <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal"></button>
-
 <div class="modal fade" id="memberValidityModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -193,7 +195,7 @@
         </button>
       </div>
       <div class="modal-body">
-           <h4>Sorry, Member validity has expired</h4>
+           <h4>{{notEligibleTxt}}</h4>
            <div class="modal-footer">
               <button type="submit" class="btn btn-primary" (click)="closeMemberValidityModal()">Okay</button>
             </div>

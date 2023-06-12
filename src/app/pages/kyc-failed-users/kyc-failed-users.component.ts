@@ -332,7 +332,7 @@ submitSecurityDoc(){
       this._adminService.addUserDocuments(addUserDocumentData).subscribe((data:any) => {
         if(data.status == 200){
          
-          this._toastrService.success('Security Check added successfully!');
+          this._toastrService.success('Security Cheque  added successfully!');
        //   this.closeaddUserBtn.nativeElement.click();
        this.disableSecurityDocumentBtn = true;
           this.getAllFailedUsersDetails();
