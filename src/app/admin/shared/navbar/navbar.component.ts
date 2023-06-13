@@ -152,11 +152,11 @@ export class NavbarComponent implements OnInit{
       }
       
       myProfile(){
-        this.router.navigate(['/sales-manager-officer/my-profile'])
+        this.router.navigate(['/admin/my-profile'])
       }
 
       changePassword(){
-        this.router.navigate(['/sales-manager-officer/change-password'])
+        this.router.navigate(['/admin/change-password'])
       }
 
 

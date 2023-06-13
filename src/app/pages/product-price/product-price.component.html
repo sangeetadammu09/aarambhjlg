@@ -6,15 +6,19 @@
         <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <div class="col-lg-8 mb-3 mt-2">
+                
+                <div class="col-12 mb-3 mt-2">
                     <h3 class="card-title">List of Product Prices</h3>
                 </div>
-               
+              </div>
+
+              <div class="card-header">
                 
-                <div class="col-lg-4 mb-3 mt-2">
+                <div class="offset-md-8 col-md-4  mb-3 mt-2">
                     <input type="text"  class="form-control searchProductPrice"  placeholder="Seach Product"
                     id="searchProductPrice" [(ngModel)]="searchProductPrice" (change)="getProductPriceVal($event)">
                 </div>
+
               </div>
 
 
