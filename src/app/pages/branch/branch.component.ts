@@ -62,7 +62,7 @@ export class BranchComponent implements OnInit {
     this.getAllBranches()
     this.getAllManager()
     this.getAllCitys()
-    if(this.roleNo == "104"){
+    if(this.roleNo == "104" || this.roleNo == "101"){
       this.showAddBtn = false;
       this.showEditBtn = false;
       this.showDeleteBtn = false;

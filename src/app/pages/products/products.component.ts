@@ -32,6 +32,8 @@ export class ProductsComponent implements OnInit {
   todayDate = new Date().toJSON();
   productBrandList: any;
   addedProductId: any;
+  showAddBtn:boolean = true;
+  roleNo = localStorage.getItem('roleNo');
 
   productOneImageName: any = "Choose Product";
   disableProdImageOneBtn :boolean = false;
@@ -102,6 +104,9 @@ export class ProductsComponent implements OnInit {
     this.getAllUnits();
     this.getAllTaxSlots();
     this.getAllProductBrands();
+    if(this.roleNo == "104" || this.roleNo == "101"){
+      this.showAddBtn = false;
+    }
   }
 
   get f(){ return this.addProductForm.controls}

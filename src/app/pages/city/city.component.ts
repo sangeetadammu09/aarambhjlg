@@ -44,7 +44,7 @@ export class CityComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllCitys();
-    if(this.roleNo == "104"){
+    if(this.roleNo == "104" || this.roleNo == "101"){
       this.showAddBtn = false;
       this.showEditBtn = false;
       this.showDeleteBtn = false;

@@ -31,7 +31,6 @@ export class ProductCategoryComponent implements OnInit {
   pageLoaded : boolean= false;
   roleNo = localStorage.getItem('roleNo');
   showAddBtn:boolean = true;
-  showEditBtn:boolean = true;
   showDeleteBtn:boolean = true;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
@@ -50,9 +49,8 @@ export class ProductCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllProductCategories();
-    if(this.roleNo == "104"){
+    if(this.roleNo == "104" || this.roleNo == "101"){
       this.showAddBtn = false;
-      this.showEditBtn = false;
       this.showDeleteBtn = false;
     }
   }

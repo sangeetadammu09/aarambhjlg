@@ -23,6 +23,8 @@ export class ProductBrandComponent implements OnInit {
   p = 1;
   productsFound: boolean = false;
   pageLoaded : boolean= false;
+  showAddBtn:boolean = true;
+  roleNo = localStorage.getItem('roleNo');
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addProductBrandForm = this._formBuilder.group({
@@ -43,7 +45,10 @@ export class ProductBrandComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllProductBrands()
+    this.getAllProductBrands();
+    if(this.roleNo == "104" || this.roleNo == "101"){
+      this.showAddBtn = false;
+    }
   }
 
   get f(){ return this.addProductBrandForm.controls}
