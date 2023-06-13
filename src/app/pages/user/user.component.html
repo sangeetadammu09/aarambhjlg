@@ -31,7 +31,7 @@
                     
                  
              
-                <tbody *ngFor="let item of userList| paginate: { itemsPerPage: pageSize, currentPage: page } ; let i = index ">
+                <tbody *ngFor="let item of userList| paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: total } ; let i = index ">
                   <tr>
                     <td>{{pageSize*(page-1)+i+1}}</td>
                     <td>{{item.usersInfo.fullName}}</td> 
@@ -52,7 +52,8 @@
                </table>
                <div class="card-footer d-flex align-items-center" style="background-color: #fff;" *ngIf="userList.length != 0">
                 <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
-                    <pagination-controls previousLabel="Prev"nextLabel="Next" [responsive]="true"></pagination-controls>
+                    <pagination-controls previousLabel="Prev"nextLabel="Next" [responsive]="true"
+                    (pageChange)="handlePageChange($event)"></pagination-controls>
                 </div>
               </div>
               <div class="row card mb-3" *ngIf="userList.length == 0">
@@ -259,7 +260,7 @@
                     <form>
                         <div class="row">
                             <div class="form-group col-lg-8">
-                                <label class="form-control-label">Aadhaar Front</label>
+                                <label class="form-control-label">Aadhaar Front <span class="info-text">(png/jpg)</span></label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="aadhaarFrontDocument" 
                                     (change)="uploadAadhaarFrontDocument($event)">
@@ -273,7 +274,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-lg-8">
-                                <label class="form-control-label">Aadhaar Back</label>
+                                <label class="form-control-label">Aadhaar Back<span class="info-text">(png/jpg)</span></label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="aadhaarBackDocument" 
                                     (change)="uploadAadhaarBackDocument($event)">
@@ -288,7 +289,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-lg-8">
-                                <label class="form-control-label">Photo</label>
+                                <label class="form-control-label">Photo<span class="info-text">(png/jpg)</span></label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="photoDocument" 
                                     (change)="uploadPhotoDocument($event)"
@@ -304,7 +305,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-lg-8">
-                                <label class="form-control-label">Address </label>
+                                <label class="form-control-label">Address<span class="info-text">(png/jpg)</span></label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="addressDocument" 
                                     (change)="uploadAddressDocument($event)">
@@ -320,7 +321,7 @@
 
                         <div class="row">
                             <div class="form-group col-lg-8">
-                                <label class="form-control-label">VoterId/Pancard</label>
+                                <label class="form-control-label">VoterId/Pancard<span class="info-text">(png/jpg)</span></label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="addressDocument" 
                                     (change)="uploadVoterDocument($event)">
@@ -344,7 +345,7 @@
                     <form>
                         <div class="row">
                             <div class="form-group col-lg-8">
-                                <label class="form-control-label">Family Photo</label>
+                                <label class="form-control-label">Family Photo<span class="info-text">(png/jpg)</span></label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="familyPhoto" 
                                     (change)="uploadFamilyPhotoDoc($event)">
@@ -358,7 +359,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-lg-8">
-                                <label class="form-control-label">Driving License</label>
+                                <label class="form-control-label">Driving License<span class="info-text">(png/jpg)</span></label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="drivingLicense" 
                                     (change)="uploadDrivingLicenseDoc($event)">
@@ -372,7 +373,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-lg-8">
-                                <label class="form-control-label">Joining Letter</label>
+                                <label class="form-control-label">Joining Letter<span class="info-text">(pdf only)</span></label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="joiningLetter" 
                                     (change)="uploadJoiningLetterDoc($event)"
@@ -388,7 +389,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-lg-8">
-                                <label class="form-control-label">Bank Passbook</label>
+                                <label class="form-control-label">Bank Passbook<span class="info-text">(pdf only)</span></label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="bankPassbook" 
                                     (change)="uploadBankPassbookDoc($event)">
@@ -403,7 +404,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-lg-8">
-                                <label class="form-control-label">Education Document</label>
+                                <label class="form-control-label">Education Document<span class="info-text">(pdf only)</span></label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="educationDocument" 
                                     (change)="uploadEducationDoc($event)">
@@ -418,7 +419,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-lg-8">
-                                <label class="form-control-label">Releaving Letter</label>
+                                <label class="form-control-label">Releaving Letter<span class="info-text">(pdf only))</span></label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="releavingLetter" 
                                     (change)="uploadReleavingLetter($event)">
@@ -433,7 +434,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-lg-8">
-                                <label class="form-control-label">Previous Salary Slips</label>
+                                <label class="form-control-label">Previous Salary Slips<span class="info-text">(pdf only))</span></label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="previousSalarySlips" 
                                     (change)="uploadpreviousSalarySlips($event)">
@@ -525,7 +526,7 @@
                                 <th scope="col" style="color: #fff; font-family: sans-serif;">Details</th>
                             </tr>
                             
-                            <tbody *ngFor="let item of userDocuments| paginate: { itemsPerPage: 5, currentPage: pagenew } ; let i = index ">
+                            <tbody *ngFor="let item of userDocuments| paginate: { itemsPerPage: 5, currentPage: page } ; let i = index ">
                             <tr>
                                 <td>{{5*(pagenew-1)+i+1}}</td>
                                 <td>{{item.documentName}}</td> 
@@ -543,7 +544,7 @@
                         </table>
                         <div class="card-footer d-flex align-items-center" style="background-color: #fff;">
                             <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
-                                <pagination-controls previousLabel="Prev"nextLabel="Next" (pageChange)="pagenew = $event" [responsive]="true"></pagination-controls>
+                                <pagination-controls previousLabel="Prev"nextLabel="Next" (pageChange)="page = $event" [responsive]="true"></pagination-controls>
                             </div>
                         </div>
                         </div>

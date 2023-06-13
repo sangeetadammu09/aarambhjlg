@@ -26,7 +26,6 @@ export class UserComponent implements OnInit {
   deleteUserItem: any;
   usersFound: boolean = false;
   page = 1;
-  pagenew = 1;
   total = 20;
   pageSize = 10;
   userCategoryList: any;
@@ -184,10 +183,11 @@ export class UserComponent implements OnInit {
     var paginationObj :any ={};
     paginationObj.pageNo =this.page;
     paginationObj.pageSize = this.pageSize;
-    this._adminService.getAllUsersByCity(this.cityId).subscribe((data) => {
-      //   //console.log(data,'all UserRoles')
+    this._adminService.getAllUsersByCity(this.cityId, this.page,this.pageSize).subscribe((data) => {
+      console.log(data,'all UserRoles')
         if(data.length > 0){
           this.userList = data;
+          this.total = data.pages.totalCount;
    
          }else{
            this.userList = [];

@@ -330,8 +330,8 @@ export class AdminService {
       return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.GetUsersListByCity+`?cityId=${cityId}`)
      }
 
-     getAllUsersByCity(cityId:any){
-      return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.GetUsersByCity+`?cityId=${cityId}`)
+     getAllUsersByCity(cityId:any,pageNo:any,pageSize:any){
+      return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.User.GetUsersByCity+`?cityId=${cityId}&pageNumber=${pageNo}&pageSize=${pageSize}`)
      }
 
 

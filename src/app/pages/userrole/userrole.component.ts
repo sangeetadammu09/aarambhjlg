@@ -49,10 +49,11 @@ export class UserroleComponent implements OnInit {
 
 
   getAllUserRoles(){
-    this._adminService.getAllUsersByCity(this.cityId).subscribe((data) => {
+    this._adminService.getAllUsersByCity(this.cityId,this.page,this.pageSize).subscribe((data) => {
    //   //console.log(data,'all UserRoles')
      if(data.length > 0){
        this.userRoleList = data;
+       this.total = data.pages.totalCount;
        this.pageLoaded = true;
       }else{
         this.userRoleList = [];
