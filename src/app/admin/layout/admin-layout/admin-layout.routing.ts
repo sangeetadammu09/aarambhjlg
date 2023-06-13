@@ -8,6 +8,7 @@ import { DashboardComponent } from 'src/app/pages/dashboard/dashboard.component'
 import { ExpenseTypeComponent } from 'src/app/pages/expense-type/expense-type.component';
 import { GroupComponent } from 'src/app/pages/group/group.component';
 import { InstallmentsComponent } from 'src/app/pages/installments/installments.component';
+import { KycFailedUsersComponent } from 'src/app/pages/kyc-failed-users/kyc-failed-users.component';
 import { MemberContactsComponent } from 'src/app/pages/member-contacts/member-contacts.component';
 import { MemberComponent } from 'src/app/pages/member/member.component';
 import { ProductBrandComponent } from 'src/app/pages/product-brand/product-brand.component';
@@ -48,5 +49,5 @@ export const AdminLayoutRoutes: Routes = [
      { path:'my-profile', component: ProfileComponent },
      { path:'dashboard', component: DashboardComponent },
      {path:'assign-leader', component:AssignLeaderComponent },
-   
+     { path:'kyc-failed-users', component: KycFailedUsersComponent },
 ];

@@ -141,7 +141,14 @@ export const AdminList = {
                     url: 'user-kyc',
                     icon : 'fa-check',
                     isActive: true, 
-                }
+                },
+                {
+                    id: 2,
+                    menu: 'Kyc Failed Users',
+                    url: 'kyc-failed-users',
+                    icon : 'fa-phone',
+                    isActive: true, 
+                }  
             ]
           },
           {
@@ -264,7 +271,7 @@ export const SuperAdminList = {
                 }
                    
         ]
-          },
+        },
          
     ],
     message: null,

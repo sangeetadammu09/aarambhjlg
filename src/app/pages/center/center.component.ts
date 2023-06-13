@@ -31,6 +31,7 @@ export class CenterComponent implements OnInit {
   salesManagerList: any;
   todayDate = new Date().toJSON();
   pageLoaded: boolean = false;
+  showAddBtn: boolean = false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addCenterForm = this._formBuilder.group({
@@ -70,6 +71,10 @@ export class CenterComponent implements OnInit {
     this.getAllRelationOfficerByCity();
     this.getAllSalesManagersByCity();
     this.getAllSalesOfficerByCity();
+    if(this.roleNo == "104" || this.roleNo == "101"){
+      this.showAddBtn = false;
+      
+    }
   }
 
   get f(){ return this.addCenterForm.controls}
