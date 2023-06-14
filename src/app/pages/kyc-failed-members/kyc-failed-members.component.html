@@ -4,14 +4,14 @@
     <div class="row row-cards">
       <div class="col-12">
         <div class="card">
-          <div class="card-header">
-            <div class="col-lg-8 mb-3 mt-2">
+          <div class="row card-header">
+            <div class="col-lg-8 col-sm-12 mb-3 mt-2">
               <h3 class="card-title">List of Failed Kyc Members</h3>
             </div>
-            <div class="col-lg-4 mb-3 mt-2">
+            <div class="col-lg-4 col-sm-12 mb-3 mt-2">
               <div class="form-row">
                 <div class="form-group col-md-12">
-                  <label for="searchCenter">Select Center</label>
+                 
                   <select class="custom-select" id="searchCenter" [(ngModel)]="searchCenter"
                     (change)="getAllFailedMembersDetails(searchCenter)">
                     <option value="" [selected]="''">Choose Center..</option>

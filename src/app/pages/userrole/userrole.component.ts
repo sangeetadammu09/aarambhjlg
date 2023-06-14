@@ -53,7 +53,7 @@ export class UserroleComponent implements OnInit {
    //   //console.log(data,'all UserRoles')
      if(data.length > 0){
        this.userRoleList = data;
-       this.total = data.pages.totalCount;
+       this.total = data[0].totalCount;
        this.pageLoaded = true;
       }else{
         this.userRoleList = [];

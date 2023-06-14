@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
       this.loginText = "Please Wait! Logging In";
     
       this._commonService.login(loginFormData).subscribe((data:any) => {
-        //console.log(data)
+       
         if(data){
        
           this.decodedToken = decodeToken(data.access_token);
@@ -87,6 +87,7 @@ export class LoginComponent implements OnInit {
         }(err:any) =>{
          console.log(err)
         }}, (error:HttpErrorResponse)=>{
+          console.log(error)
           this._toastrService.error(error.error.message)
         }
       )
