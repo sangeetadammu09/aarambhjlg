@@ -258,80 +258,68 @@
                 </div>
                 <div id="tab2" class="tab-slider--body" *ngSwitchCase="'tab2'">
                     <form>
-                        <div class="form-row">
-                            <div class="form-group col-sm-8">
-                                <label class="form-control-label">Aadhaar Front <span class="info-text">(png/jpg)</span></label>
+                        <div class="form-row mb-3">
+                            <label class="form-control-label">Aadhaar Front <span class="info-text">(png/jpg)</span></label>
+                            
+                            <div class="input-group col-sm-12">     
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="aadhaarFrontDocument" 
                                     (change)="uploadAadhaarFrontDocument($event)">
                                     <label class="custom-file-label" for="file">{{aadhaarFrontDocumentName}}</label>    
                                 </div>
-                                
-                            </div>
-                            <div class="col-sm-4 mt-button">
                                 <button class="btn btn-primary btn-md" type="button" [disabled]="disableAFDocumentBtn" (click)="submitAFDocument()">Upload</button>
                             </div>
+
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-lg-8">
-                                <label class="form-control-label">Aadhaar Back<span class="info-text">(png/jpg)</span></label>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="customFile" name="aadhaarBackDocument" 
+                        <div class="form-row mb-3">
+                            <label class="form-control-label">Aadhaar Back<span class="info-text">(png/jpg)</span></label>
+                          
+                                <div class="input-group col-sm-12">     
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile" name="aadhaarBackDocument" 
                                     (change)="uploadAadhaarBackDocument($event)">
-                                    <label class="custom-file-label" for="customFile">{{aadhaarBackDocumentName}}</label>
-                                    
-                                </div>
-                                
-                            </div>
-                            <div class="col-lg-4 mt-button">
-                                <button class="btn btn-primary btn-md" type="button"  [disabled]="disableABDocumentBtn" (click)="submitABDocument()">Upload</button>
-                            </div>
+                                    <label class="custom-file-label" for="customFile">{{aadhaarBackDocumentName}}</label>  
+                                    </div>
+                                    <button class="btn btn-primary btn-md" type="button"  [disabled]="disableABDocumentBtn" (click)="submitABDocument()">Upload</button>
+                                </div>  
                         </div>
-                        <div class="row">
-                            <div class="form-group col-lg-8">
-                                <label class="form-control-label">Photo<span class="info-text">(png/jpg)</span></label>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="customFile" name="photoDocument" 
-                                    (change)="uploadPhotoDocument($event)"
-                                    >
-                                    <label class="custom-file-label" for="customFile">{{photoDocumentName}}</label>
-                                    
-                                </div>
+                        <div class="form-row mb-3">
+                            <label class="form-control-label">Photo<span class="info-text">(png/jpg)</span></label>
+                    
+                                    <div class="input-group col-sm-12">     
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="customFile" name="photoDocument" 
+                                            (change)="uploadPhotoDocument($event)">
+                                            <label class="custom-file-label" for="customFile">{{photoDocumentName}}</label>
+                                        </div>
+                                        <button class="btn btn-primary btn-md" type="button" 
+                                        [disabled]="disablePhotoDocumentBtn" (click)="submitPhoto()">Upload</button>
+                                    </div>
                                 
-                            </div>
-                            <div class="col-lg-4 mt-button">
-                                <button class="btn btn-primary btn-md" type="button" [disabled]="disablePhotoDocumentBtn" (click)="submitPhoto()">Upload</button>
-                            </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-lg-8">
-                                <label class="form-control-label">Address<span class="info-text">(png/jpg)</span></label>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="customFile" name="addressDocument" 
-                                    (change)="uploadAddressDocument($event)">
-                                    <label class="custom-file-label" for="customFile">{{addressDocumentName}}</label>
-                                    
-                                </div>
-                                
-                            </div>
-                            <div class="col-lg-4 mt-button">
-                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableAddressDocumentBtn" (click)="submitAddress()">Upload</button>
-                            </div>
+                        <div class="form-row mb-3">
+                            <label class="form-control-label">Address<span class="info-text">(png/jpg)</span></label>
+                                    <div class="input-group col-sm-12">     
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="customFile" name="addressDocument" 
+                                            (change)="uploadAddressDocument($event)">
+                                            <label class="custom-file-label" for="customFile">{{addressDocumentName}}</label>
+                                        </div>
+                                        <button class="btn btn-primary btn-md" type="button"
+                                        [disabled]="disableAddressDocumentBtn" (click)="submitAddress()">Upload</button>
+                                </div> 
                         </div>
 
-                        <div class="row">
-                            <div class="form-group col-lg-8">
-                                <label class="form-control-label">VoterId/Pancard<span class="info-text">(png/jpg)</span></label>
+                        <div class="form-row mb-3">
+                            <label class="form-control-label">VoterId/Pancard<span class="info-text">(png/jpg)</span></label>
+                            <div class="input-group col-sm-12">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="addressDocument" 
                                     (change)="uploadVoterDocument($event)">
                                     <label class="custom-file-label" for="customFile">{{voterDocumentName}}</label>
-                                    
                                 </div>
-                                
-                            </div>
-                            <div class="col-lg-4 mt-button">
-                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableVoterDocumentBtn" (click)="submitVoterDoc()">Upload</button>
+                                <button class="btn btn-primary btn-md" type="button" 
+                                [disabled]="disableVoterDocumentBtn" (click)="submitVoterDoc()">Upload</button>  
                             </div>
                         </div>
 
@@ -343,110 +331,97 @@
                 </div>
                 <div id="tab3" class="tab-slider--body" *ngSwitchCase="'tab3'">
                     <form>
-                        <div class="row">
-                            <div class="form-group col-lg-8">
-                                <label class="form-control-label">Family Photo<span class="info-text">(png/jpg)</span></label>
+                        <div class="form-row mb-3">
+                            <label class="form-control-label">Family Photo<span class="info-text">(png/jpg)</span></label>
+                            <div class="input-group col-sm-12">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="familyPhoto" 
                                     (change)="uploadFamilyPhotoDoc($event)">
                                     <label class="custom-file-label" for="file">{{familyPhotoName}}</label>    
                                 </div>
-                                
-                            </div>
-                            <div class="col-lg-4 mt-button">
-                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableFamilyDocumentBtn" (click)="submitFamilyPhoto()">Upload</button>
+                                <button class="btn btn-primary btn-md" type="button" 
+                                [disabled]="disableFamilyDocumentBtn" (click)="submitFamilyPhoto()">Upload</button>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-lg-8">
-                                <label class="form-control-label">Driving License<span class="info-text">(png/jpg)</span></label>
+                        <div class="form-row mb-3">
+                            <label class="form-control-label">Driving License<span class="info-text">(png/jpg)</span></label>
+                            <div class="input-group col-sm-12">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="drivingLicense" 
                                     (change)="uploadDrivingLicenseDoc($event)">
                                     <label class="custom-file-label" for="customFile">{{drivingLicenseName}}</label>                
                                 </div>
+                                <button class="btn btn-primary btn-md" type="button" 
+                                [disabled]="disableDLDocumentBtn" (click)="submitDrivingLicense()">Upload</button>
                                 
                             </div>
-                            <div class="col-lg-4 mt-button">
-                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableDLDocumentBtn" (click)="submitDrivingLicense()">Upload</button>
-                            </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-lg-8">
-                                <label class="form-control-label">Joining Letter<span class="info-text">(pdf only)</span></label>
+                        <div class="form-row mb-3">
+                            <label class="form-control-label">Joining Letter<span class="info-text">(pdf only)</span></label>
+                            <div class="input-group col-sm-12">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="joiningLetter" 
-                                    (change)="uploadJoiningLetterDoc($event)"
-                                    >
+                                    (change)="uploadJoiningLetterDoc($event)">
                                     <label class="custom-file-label" for="customFile">{{joiningLetterName}}</label>
-                                    
                                 </div>
+                                <button class="btn btn-primary btn-md" type="button"
+                                 [disabled]="disableJoiningLetterBtn" (click)="submitJoiningLetter()">Upload</button>
                                 
                             </div>
-                            <div class="col-lg-4 mt-button">
-                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableJoiningLetterBtn" (click)="submitJoiningLetter()">Upload</button>
-                            </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-lg-8">
-                                <label class="form-control-label">Bank Passbook<span class="info-text">(pdf only)</span></label>
+
+                        <div class="form-row mb-3">
+                            <label class="form-control-label">Bank Passbook<span class="info-text">(pdf only)</span></label>
+                            <div class="input-group col-sm-12">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="bankPassbook" 
                                     (change)="uploadBankPassbookDoc($event)">
                                     <label class="custom-file-label" for="customFile">{{bankPassbookName}}</label>
-                                    
                                 </div>
+                                <button class="btn btn-primary btn-md" type="button" 
+                                [disabled]="disablePassbookBtn" (click)="submitBankPassbook()">Upload</button>
                                 
                             </div>
-                            <div class="col-lg-4 mt-button">
-                                <button class="btn btn-primary btn-md" type="button" [disabled]="disablePassbookBtn" (click)="submitBankPassbook()">Upload</button>
-                            </div>
+                        
                         </div>
-                        <div class="row">
-                            <div class="form-group col-lg-8">
-                                <label class="form-control-label">Education Document<span class="info-text">(pdf only)</span></label>
+                        <div class="form-row mb-3">
+                            <label class="form-control-label">Education Document<span class="info-text">(pdf only)</span></label>
+                            <div class="input-group col-sm-12">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="educationDocument" 
                                     (change)="uploadEducationDoc($event)">
-                                    <label class="custom-file-label" for="customFile">{{educationDocName}}</label>
-                                    
+                                    <label class="custom-file-label" for="customFile">{{educationDocName}}</label>  
                                 </div>
-                                
-                            </div>
-                            <div class="col-lg-4 mt-button">
-                                <button class="btn btn-primary btn-md"type="button" [disabled]="disableEducationBtn" (click)="submitEducationDoc()">Upload</button>
+                                <button class="btn btn-primary btn-md"type="button"
+                                [disabled]="disableEducationBtn" (click)="submitEducationDoc()">Upload</button>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-lg-8">
-                                <label class="form-control-label">Releaving Letter<span class="info-text">(pdf only))</span></label>
+                        <div class="form-row mb-3">
+                            <label class="form-control-label">Releaving Letter<span class="info-text">(pdf only))</span></label>
+                            <div class="form-group col-sm-12">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="releavingLetter" 
                                     (change)="uploadReleavingLetter($event)">
                                     <label class="custom-file-label" for="customFile">{{releavingLetterName}}</label>
-                                    
                                 </div>
+                                <button class="btn btn-primary btn-md" type="button" 
+                                [disabled]="disableReleavingLetterBtn" (click)="submitReleavingLetter()">Upload</button>
                                 
                             </div>
-                            <div class="col-lg-4 mt-button">
-                                <button class="btn btn-primary btn-md" type="button" [disabled]="disableReleavingLetterBtn" (click)="submitReleavingLetter()">Upload</button>
-                            </div>
+                    
                         </div>
-                        <div class="row">
-                            <div class="form-group col-lg-8">
-                                <label class="form-control-label">Previous Salary Slips<span class="info-text">(pdf only))</span></label>
+                        <div class="form-row mb-3">
+                            <label class="form-control-label">Previous Salary Slips<span class="info-text">(pdf only))</span></label>
+                            <div class="form-group col-lg-12">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="previousSalarySlips" 
                                     (change)="uploadpreviousSalarySlips($event)">
                                     <label class="custom-file-label" for="customFile">{{previousSalarySlipsName}}</label>
-                                    
                                 </div>
-                                
-                            </div>
-                            <div class="col-lg-4 mt-button">
                                 <button class="btn btn-primary btn-md" type="button" [disabled]="disablepreviousSalarySlipsBtn"
                                 (click)="submitpreviousSalarySlips()">Upload</button>
                             </div>
+                            
                         </div>
                         <div class="row">
                             <small class="col-lg-12" style="color: red; font-weight: bold">Please upload one document at a time</small>
