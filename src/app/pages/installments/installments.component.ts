@@ -22,6 +22,8 @@ export class InstallmentsComponent implements OnInit {
   deleteInstallmentItem: any;
   p = 1;
   pageLoaded: boolean = false;
+  showAddBtn: boolean = true;
+  roleNo = localStorage.getItem('roleNo');
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addInstallmentForm = this._formBuilder.group({
@@ -39,7 +41,11 @@ export class InstallmentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllInstallments()
+    this.getAllInstallments();
+    if(this.roleNo == "104" || this.roleNo == "101"){
+      this.showAddBtn = false;
+      
+    }
   }
 
   get f(){ return this.addInstallmentForm.controls}
@@ -67,6 +73,7 @@ export class InstallmentsComponent implements OnInit {
     this.addInstallmentForm.reset();
     this.addInstallmentForm.markAsUntouched();
     this.addInstallmentForm.markAsPristine();
+   
     
   }
 

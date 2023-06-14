@@ -23,6 +23,8 @@ export class TaxSlotComponent implements OnInit {
   p = 1;
   productsFound: boolean = false;
   pageLoaded : boolean= false;
+  roleNo = localStorage.getItem('roleNo');
+  showAddBtn: boolean = true;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addTaxSlotForm = this._formBuilder.group({
@@ -48,7 +50,11 @@ export class TaxSlotComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllTaxSlots()
+    this.getAllTaxSlots();
+    if(this.roleNo == "104" || this.roleNo == "101"){
+      this.showAddBtn = false;
+      
+    }
   }
 
   get f(){ return this.addTaxSlotForm.controls}

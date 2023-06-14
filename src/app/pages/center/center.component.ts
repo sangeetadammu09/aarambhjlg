@@ -31,7 +31,7 @@ export class CenterComponent implements OnInit {
   salesManagerList: any;
   todayDate = new Date().toJSON();
   pageLoaded: boolean = false;
-  showAddBtn: boolean = false;
+  showAddBtn: boolean = true;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addCenterForm = this._formBuilder.group({
