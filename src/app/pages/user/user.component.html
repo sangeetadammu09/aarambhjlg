@@ -92,8 +92,8 @@
             <div class="tab-slider--nav">
                 <ul class="tab-slider--tabs">
                   <li class="tab-slider--trigger" [class.active]="viewMode == 'tab1'" rel="tab1" (click)="viewMode ='tab1';addProdTab()">Add User</li>
-                  <li class="tab-slider--trigger" [class.active]="viewMode == 'tab2'" rel="tab2" (click)="viewMode ='tab2';uploadProdImages()">Upload User Documents</li>
-                  <li class="tab-slider--trigger" [class.active]="viewMode == 'tab3'" rel="tab3" (click)="viewMode ='tab3';uploadKycDocument()">Upload KYC Documents</li>
+                  <li class="tab-slider--trigger" [class.active]="viewMode == 'tab2'" rel="tab2" (click)="viewMode ='tab2';uploadProdImages()">Documents</li>
+                  <li class="tab-slider--trigger" [class.active]="viewMode == 'tab3'" rel="tab3" (click)="viewMode ='tab3';uploadKycDocument()">KYC Documents</li>
                 </ul>
             </div>
             <div class="tab-slider--container" [ngSwitch]="viewMode">
@@ -258,8 +258,8 @@
                 </div>
                 <div id="tab2" class="tab-slider--body" *ngSwitchCase="'tab2'">
                     <form>
-                        <div class="row">
-                            <div class="form-group col-lg-8">
+                        <div class="form-row">
+                            <div class="form-group col-sm-8">
                                 <label class="form-control-label">Aadhaar Front <span class="info-text">(png/jpg)</span></label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="aadhaarFrontDocument" 
@@ -268,11 +268,11 @@
                                 </div>
                                 
                             </div>
-                            <div class="col-lg-4 mt-button">
+                            <div class="col-sm-4 mt-button">
                                 <button class="btn btn-primary btn-md" type="button" [disabled]="disableAFDocumentBtn" (click)="submitAFDocument()">Upload</button>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="form-row">
                             <div class="form-group col-lg-8">
                                 <label class="form-control-label">Aadhaar Back<span class="info-text">(png/jpg)</span></label>
                                 <div class="custom-file">
