@@ -45,7 +45,7 @@
                     <th scope="col" style="color: #fff; font-family: sans-serif;">Mobile</th>
                     <th scope="col" style="color: #fff; font-family: sans-serif;">Date of Join</th>
                     
-                    <th scope="col" *ngIf="roleNo == 101" style="color: #fff; font-family: sans-serif;">Delete</th>
+                    <th scope="col" *ngIf="roleNo == 101" style="color: #fff; font-family: sans-serif;">Details</th>
                   </tr>
                 
                   <tbody *ngFor="let item of memberList| paginate: { itemsPerPage: pageSize, currentPage: page } ; let i = index ">
