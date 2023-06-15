@@ -371,7 +371,7 @@
                         </div>
 
                         <div class="form-row mb-3">
-                            <label class="form-control-label">Bank Passbook<span class="info-text">(pdf only)</span></label>
+                            <label class="form-control-label">Bank Passbook<span class="info-text">(png/jpg)</span></label>
                             <div class="input-group col-sm-12">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="bankPassbook" 
@@ -398,7 +398,7 @@
                         </div>
                         <div class="form-row mb-3">
                             <label class="form-control-label">Releaving Letter<span class="info-text">(pdf only))</span></label>
-                            <div class="form-group col-sm-12">
+                            <div class="input-group col-sm-12">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="releavingLetter" 
                                     (change)="uploadReleavingLetter($event)">
@@ -412,7 +412,7 @@
                         </div>
                         <div class="form-row mb-3">
                             <label class="form-control-label">Previous Salary Slips<span class="info-text">(pdf only))</span></label>
-                            <div class="form-group col-lg-12">
+                            <div class="input-group col-lg-12">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="previousSalarySlips" 
                                     (change)="uploadpreviousSalarySlips($event)">
@@ -503,9 +503,9 @@
                             
                             <tbody *ngFor="let item of userDocuments| paginate: { itemsPerPage: 5, currentPage: page } ; let i = index ">
                             <tr>
-                                <td>{{5*(pagenew-1)+i+1}}</td>
+                                <td>{{5*(page-1)+i+1}}</td>
                                 <td>{{item.documentName}}</td> 
-                                <td (click)="showUserDocuments(item)" data-toggle="modal" data-target="#showUserDocModal" *ngIf="item.fileType == '.png' || item.fileType == '.jpg'">
+                                <td (click)="showUserDocuments(item)" data-toggle="modal" data-target="#showUserDocModal" *ngIf="item.fileType == '.png' || item.fileType == '.jpg' || item.fileType == '.jpeg'">
                                     <button class="btn btn-primary">View Image</button>
                                 
                                 </td>

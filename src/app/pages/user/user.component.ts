@@ -310,7 +310,7 @@ export class UserComponent implements OnInit {
     this.aadhaarFrontFile='';
     this.aadhaarFrontDocumentName =  "Aadhaar Front"
     var temp = file.target.files[0].name;
-    if(temp.includes('.png') || temp.includes('.jpg')) {
+    if(temp.includes('.png') || temp.includes('.jpg') || temp.includes('.jpeg')) {
       this.aadhaarFrontFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
@@ -357,7 +357,7 @@ export class UserComponent implements OnInit {
     this.aadhaarBackFile='';
     this.aadhaarBackDocumentName = "Aadhaar Back" 
     var temp = file.target.files[0].name;
-    if(temp.includes('.png') || temp.includes('.jpg')) {
+    if(temp.includes('.png') || temp.includes('.jpg')|| temp.includes('.jpeg')) {
       this.aadhaarBackFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
@@ -442,7 +442,7 @@ export class UserComponent implements OnInit {
     this.addressFile='';
     this.addressDocumentName = "Address";
     var temp = file.target.files[0].name
-    if(temp.includes('.png') || temp.includes('.jpg')) {
+    if(temp.includes('.png') || temp.includes('.jpg')|| temp.includes('.jpeg')) {
       this.addressFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
@@ -485,7 +485,7 @@ export class UserComponent implements OnInit {
     this.voterFile='';
     this.voterDocumentName = "Voter";
     var temp = file.target.files[0].name;
-    if(temp.includes('.png') || temp.includes('.jpg')) {
+    if(temp.includes('.png') || temp.includes('.jpg')|| temp.includes('.jpeg')) {
       this.voterFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
@@ -529,7 +529,7 @@ export class UserComponent implements OnInit {
     this.familyPhotoFile='';
     this.familyPhotoName = "Family Photo";
     var temp = file.target.files[0].name;
-    if(temp.includes('.png') || temp.includes('.jpg')) {
+    if(temp.includes('.png') || temp.includes('.jpg') || temp.includes('.jpeg')) {
       this.familyPhotoFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
@@ -574,7 +574,7 @@ export class UserComponent implements OnInit {
     this.drivingLicenseFile='';
     this.drivingLicenseName = "Driving License";
     var temp = file.target.files[0].name;
-    if(temp.includes('.png') || temp.includes('.jpg')) {
+    if(temp.includes('.png') || temp.includes('.jpg') || temp.includes('.jpeg')) {
       this.drivingLicenseFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
@@ -628,7 +628,6 @@ export class UserComponent implements OnInit {
     if(this.joiningLetterFile != undefined){
       this.userDocument =  this.joiningLetterName;
       this.userDocumentFile = this.joiningLetterFile;
-      this.addedUserId = 45
       if(this.addedUserId){
         var addUserDocumentData = new FormData();
         addUserDocumentData.append('UserId',this.addedUserId);
@@ -662,7 +661,7 @@ export class UserComponent implements OnInit {
     this.bankPassbookFile='';
     this.bankPassbookName = "Bank Passbook";
     var temp = file.target.files[0].name;
-    if(temp.includes('.png') || temp.includes('.jpg')) {
+    if(temp.includes('.png') || temp.includes('.jpg') || temp.includes('.jpeg')) {
       this.bankPassbookFile = file.target.files[0];
     }else{
       this._toastrService.error('Only PNG or JPG document is allowed')
@@ -718,7 +717,6 @@ export class UserComponent implements OnInit {
     if(this.educationDocFile != undefined){
       this.userDocument =  this.educationDocName;
       this.userDocumentFile = this.educationDocFile;
-      this.addedUserId = 45
       if(this.addedUserId){
         var addUserDocumentData = new FormData();
         addUserDocumentData.append('UserId',this.addedUserId);
@@ -853,7 +851,7 @@ showUserModal(item:any){
       if(data){
         this.userDetailsObj = data;
         this.userDocuments = data.documents;
-       // //console.log(this.userDetailsObj)
+       console.log(this.userDetailsObj)
       }
      
     })
@@ -862,8 +860,9 @@ showUserModal(item:any){
 
   showUserDocuments(item:any){
      this.userDocImage = item;
+     console.log(item)
   //   this.fileUrl = 'https://jlg.examfirst.in/Images/UserDocuments/15504358912023-04-07.pdf';
-     if(item.fileType == ".png" || item.fileType == ".jpg"){
+     if(item.fileType == ".png" || item.fileType == ".jpg" || item.fileType  == ".jpeg"){
         this.documentTypePdf = false;
         this.documentTypeImage = true;
         this.fileUrl =  item.url;
