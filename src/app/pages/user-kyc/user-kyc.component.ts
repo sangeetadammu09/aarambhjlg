@@ -130,7 +130,8 @@ export class UserKycComponent implements OnInit {
 
 
   showUserModal(item:any){
-    ////console.log(item, 'user item')
+  console.log(item, 'user item')
+  this.userDetailsObj = item;
     this.submitted = false;
     this.addUserKycForm.reset();
     this.addUserKycForm.markAsUntouched();
@@ -191,20 +192,21 @@ export class UserKycComponent implements OnInit {
 
   submitNewUser(){
     this.submitted = true;
-    //console.log(this.addUserKycForm.value)
+    console.log(this.userDetailsObj)
      if(this.addUserKycForm.valid){
-      //  //console.log(this.addUserForm.value)
+       // console.log(this.addUserKycForm.value)
          var addUserData :any = {};
         addUserData.userId = this.userDetailsObj.userId;
-        addUserData.isAadharVerified = this.addUserKycForm.controls['isAadharVerified'].value == 'Yes' ? true : false;
+        addUserData.isAadharVerified = this.addUserKycForm.controls['isAadharVerified'].value == 'true' ? true : false;
         addUserData.aadharComment = this.addUserKycForm.controls['aadharComment'].value;
-        addUserData.isPan_VoterIdVerified= this.addUserKycForm.controls['isPan_VoterIdVerified'].value  == 'Yes' ? true : false;
+        addUserData.isPan_VoterIdVerified= this.addUserKycForm.controls['isPan_VoterIdVerified'].value  == 'true' ? true : false;
         addUserData.panComment = this.addUserKycForm.controls['panComment'].value;
-        addUserData.isAddressVerified = this.addUserKycForm.controls['isAddressVerified'].value  == 'Yes' ? true : false;
+        addUserData.isAddressVerified = this.addUserKycForm.controls['isAddressVerified'].value  == 'true' ? true : false;
         addUserData.addressComment = this.addUserKycForm.controls['addressComment'].value;
-        addUserData.isPhotoVerified = this.addUserKycForm.controls['isPhotoVerified'].value  == 'Yes' ? true : false;
+        addUserData.isPhotoVerified = this.addUserKycForm.controls['isPhotoVerified'].value  == 'true' ? true : false;
         addUserData.photoComment = this.addUserKycForm.controls['photoComment'].value;
         addUserData.isKycCompleted = this.addUserKycForm.controls['isKycCompleted'].value== 'true' ? true : false;
+        console.log(addUserData)
         this._adminService.addUserKycVerification(addUserData).subscribe((data:any) => {
           if(data.status == 200){
            

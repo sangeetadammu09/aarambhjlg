@@ -63,9 +63,9 @@
                   <tr style="background-color:#1d4ed8;">
                     <th scope="col" style="color: #fff;">S No.</th>
                     <th scope="col" style="color: #fff;">Name</th>
-                    <th scope="col" style="color: #fff;">Quantity</th>
                     <th scope="col" style="color: #fff;">MRP</th>
                     <th scope="col" style="color: #fff;">Sales Price</th>
+                    <th scope="col" style="color: #fff;">Quantity</th>
                     <th scope="col" style="color: #fff;">Sub Total</th>
                     <th scope="col" style="color: #fff;">Edit</th>
                     <th scope="col" style="color: #fff;">Delete</th>
@@ -75,6 +75,8 @@
                   <tr>
                     <td>{{10*(page-1)+i+1}}</td>
                     <td>{{item.itemName}}</td> 
+                    <td> {{item.mrp | currency: 'INR'}}</td>
+                    <td> {{item.salePrice | currency: 'INR'}}</td>
                     <td *ngIf="!item.rowEdited">{{item.qty}}</td>
                     <td *ngIf="item.rowEdited">
                       <div class="quantity">
@@ -86,8 +88,6 @@
                       </div>
                       </div>
                    </td>
-                    <td> {{item.mrp | currency: 'INR'}}</td>
-                    <td> {{item.salePrice | currency: 'INR'}}</td>
                     <td>{{item.subTotal | currency: 'INR'}}</td>
                     <td> <i class="fa fa-pencil" (click)="editRow(item)"></i> </td>
                     <td  (click)="showdeleteCartModal(item)" data-toggle="modal"  data-target="#deleteCartModal">

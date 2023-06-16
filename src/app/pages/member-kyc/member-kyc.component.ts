@@ -166,6 +166,7 @@ export class MemberKycComponent implements OnInit {
 
   showMemberModal(item:any){
      //console.log(item,'member item')
+     this.memberDetailsObj = item;
     this.submitted = false;
     this.addMemberKycForm.reset();
     this.addMemberKycForm.markAsUntouched();
