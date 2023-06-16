@@ -167,7 +167,12 @@ export class NeworderComponent implements OnInit {
               //console.log(this.oldCartData.cartItems);
             this.searchCenter = this.oldCartData.centerId;
             this.getCenterVal(this.searchCenter)
+            this.searchBranch = this.oldCartData.branchId;
+            this.searchMember = this.oldCartData.memberId;
+            this.selectedCartId = this.oldCartData.cartId;
+            this.memberId = this.oldCartData.memberId;
             //console.log(this.randomProductList)
+           // this.createNewCart(this.searchMember)
             
             }
       
@@ -212,7 +217,7 @@ export class NeworderComponent implements OnInit {
      
   }
 
-  showProductModal(item:any,index:any){
+  showProductModal(item:any){
     this.productObj.prodQuantityInput = null;
      this.searchProductItem = item;
      let tempCartArr = this.oldCartData.cartItems;
@@ -256,8 +261,13 @@ export class NeworderComponent implements OnInit {
 
   showViewCartModal(){
     if(this.selectedCartId && this.memberId){
-   //   localStorage.setItem('newCart',JSON.stringify(this.createdCart))
-      this.dataService.sendMemberIdAndCartId(this.createdCart)
+       if(this.createdCart){
+        this.dataService.sendMemberIdAndCartId(this.createdCart)
+       }else{
+        this.createdCart = this.oldCartData;
+        this.dataService.sendMemberIdAndCartId(this.createdCart)
+       }
+       
        this.router.navigate(['/sales-relation-officer/view-cart'])
       
     }

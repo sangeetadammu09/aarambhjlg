@@ -87,10 +87,10 @@
                   <div class="card p-2 h-100">
                     <img class="card-img-top"  [src]="item.productPhoto" alt="User Document" height="250px" 
                     data-toggle="modal" data-target="#productModal"
-                    (click)="showProductModal(item,i)">
+                    (click)="showProductModal(item)">
                     <div class="card-body">
                       <h5 class="card-title" style="height: 40px" data-toggle="modal" data-target="#productModal"
-                      (click)="showProductModal(item,i)">{{item.productName}}</h5>
+                      (click)="showProductModal(item)">{{item.productName}}</h5>
                       <p class="card-text">Regional Name: {{item.regionalName}}</p>
                       <p class="card-text">MRP: {{item.mrp | currency: 'INR'}}</p>
                       <p class="card-text">Sale Price: {{item.jlgSalePrice | currency: 'INR'}}</p>
@@ -184,7 +184,7 @@
                               <div class="card-title col-lg-6">Member Name :</div>
                               <div class="col-lg-6">{{cartDetailsObj.fullName}}</div>
                               <div class="card-title col-lg-6">DOB :</div>
-                              <div class="col-lg-6">{{cartDetailsObj.cartDate | date : "dd-mm-yyyy"}}</div>
+                              <div class="col-lg-6">{{cartDetailsObj.cartDate | date : "dd-MM-YYYY"}}</div>
                            </div>
                       </div>
               </div>  

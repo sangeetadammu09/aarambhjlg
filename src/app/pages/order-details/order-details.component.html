@@ -26,7 +26,7 @@
                 <tbody *ngFor="let item of orderListForApproval | paginate: { itemsPerPage: 10, currentPage: page , totalItems: total}; let i = index ">
                   <tr>
                     <td>{{10*(page-1)+i+1}}</td>
-                    <td>{{item.orderDate | date : "dd-mm-yyyy"}}</td> 
+                    <td>{{item.orderDate | date : "dd-MM-YYYY"}}</td> 
                     <td>{{item.memberName}}</td>
                     <td> {{item.centerName}}</td>
                     <td> {{item.orderTakenBy}}</td>
@@ -115,7 +115,7 @@
                                <div class="col-lg-3 mt-2 mb-2">{{orderDetailsObj?.address}}</div>
 
                                <div class="card-title col-lg-3 mt-2 mb-2">Order Date :</div>
-                               <div class="col-lg-3 mt-2 mb-2">{{orderDetailsObj?.orderDate | date : "dd-mm-yyyy"}}</div>
+                               <div class="col-lg-3 mt-2 mb-2">{{orderDetailsObj?.orderDate | date : "dd-MM-YYYY"}}</div>
 
                                <div class="card-title col-lg-3 mt-2 mb-2">Order Taken By :</div>
                                <div class="col-lg-3 mt-2 mb-2">{{orderDetailsObj?.orderTakenByName}},<span>{{orderDetailsObj?.orderTakenByRole}}</span> </div>

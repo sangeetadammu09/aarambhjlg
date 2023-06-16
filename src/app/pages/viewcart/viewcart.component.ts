@@ -43,6 +43,7 @@ export class ViewcartComponent implements OnInit {
     this.getAllInstallments();
     this.paymentInstallment = "";
     this.dataService.currentCatObj.subscribe((data:any) => {
+      console.log(data);
       this.newCart = data;
       this.showViewCartModal();
     })
@@ -209,6 +210,7 @@ export class ViewcartComponent implements OnInit {
   }
 
   showGoToCartModal(){
+   
     if(this.newCart != null){
           this.dataService.sendOldCartData(this.cartDetailsObj)
           this.router.navigate(['/sales-relation-officer/new-order']) 
