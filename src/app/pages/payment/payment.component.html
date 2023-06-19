@@ -149,10 +149,14 @@
                </div>   
               </div>
               
-                <div class="form-group col-lg-6">
+              <div class="form-group col-lg-6">
                   <label class="form-control-label">Payment Mode(Cash, UPI, Card or Other)</label>
-                  <input type="text" class="form-control" formControlName="paymentMode" name="paymentMode"
-                  [ngClass]="{'is-invalid':(submitted && g['paymentMode'].errors) ||(g['paymentMode'].errors && g['paymentMode'].touched) }">  
+                  <select class="custom-select" id="paymentMode" formControlName="paymentMode" name="paymentMode"
+                  [ngClass]="{'is-invalid':(submitted && g['paymentMode'].errors) ||(g['paymentMode'].errors && g['paymentMode'].touched) }">
+                    <option value="" [selected]="''">Choose Payment Mode..</option>
+                    <option *ngFor="let item of paymentModeList" [ngValue]="item.name">
+                        {{item.name}}</option>
+                    </select> 
                   <div *ngIf="(submitted && g['paymentMode'].errors) ||(g['paymentMode'].errors && g['paymentMode'].touched)" class="invalid-feedback">
                     <div *ngIf="g['paymentMode'].errors['required']">
                         Payment Mode is required
@@ -169,14 +173,14 @@
                       Payment Comment is required
                   </div>
              </div>   
-            </div>
+              </div>
 
               </div>
              
 
       
               <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary">Update</button>
+                  <button type="submit" class="btn btn-primary" [disabled]="isItemAdded">Update</button>
                 </div>
           </form>
 

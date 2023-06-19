@@ -38,8 +38,11 @@ export class PaymentComponent implements OnInit {
   selectedPayment: any;
   @ViewChild ("closededitCollectionBtn") closededitCollectionBtn : any;
   pageLoaded : boolean= false;
-  
+  paymentModeList = [{id:1, name: "Cash"}, {id:2, name: "UPI"},
+                     {id:3, name: "Card"},{id:4, name: "Other"}]
 
+  isItemAdded : boolean = false;
+  
   constructor(private _salesService: SalesRelationService, private fb :FormBuilder, private toastrService : ToastrService) { 
     this.updatePaymentForm = this.fb.group({
       orderInstallmentId: [],
@@ -165,10 +168,12 @@ submitUpdatePayment(){
   paymentObj.paymentMode = this.updatePaymentForm.controls['paymentMode'].value,
   paymentObj.paymentComment= this.updatePaymentForm.controls['paymentComment'].value,
   paymentObj.paymentTakenById = Number(this.userId)
-  paymentObj.payingAmt = Number( this.updatePaymentForm.controls['payingAmt'].value)
+  paymentObj.payingAmt = Number( this.updatePaymentForm.controls['payingAmt'].value);
+  this.isItemAdded = true;
   this._salesService.makeInstallmentPayment(paymentObj).subscribe((data:any) => {
     if(data){
       this.closededitCollectionBtn.nativeElement.click();
+      this.isItemAdded = false;
       this.toastrService.success("Installment paid successfully")
      }else{
        this.toastrService.error("Error while updating payment")

@@ -64,6 +64,7 @@ export class MemberKycComponent implements OnInit {
   documentAddress: any;
   documentPan_VoterId: any;
   pageLoaded : boolean= false;
+  isItemAdded: boolean = false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder,
      private _toastrService: ToastrService, private sanitizer: DomSanitizer, private _salesService: SalesManagerService) { 
@@ -233,9 +234,10 @@ export class MemberKycComponent implements OnInit {
         addMemberData.isPhotoVerified = this.addMemberKycForm.controls['isPhotoVerified'].value  == 'true' ? true : false;
         addMemberData.photoComment = this.addMemberKycForm.controls['photoComment'].value;
         addMemberData.isKycCompleted = this.addMemberKycForm.controls['isKycCompleted'].value == 'true' ? true : false;
+        this.isItemAdded = true;
         this._salesService.addMemberKycVerification(addMemberData).subscribe((data:any) => {
           if(data.status == 200){
-           
+            this.isItemAdded = false;
             this.addedMemberId = data.body;
             this._toastrService.success('member Kyc completed successfully!');
             this.closeaddMemberBtn.nativeElement.click();

@@ -32,6 +32,7 @@ export class ProductPriceComponent implements OnInit {
   productObj :any;
   searchProductPrice : any;
   pageLoaded : boolean= false;
+  isItemAdded : boolean = false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     
@@ -148,12 +149,14 @@ export class ProductPriceComponent implements OnInit {
         addProductPriceData.jlgSalePrice = product.jlgSalePrice;
         addProductPriceData.stock = product.stock;
        //console.log(addProductPriceData,'addddddddd')
+       this.isItemAdded = true;
         this._adminService.addProductPrice(addProductPriceData).subscribe((data:any) => {
           //console.log(data.status);
       
           if(data.status == 200){
             this._toastrService.success('Product Price added successfully!');
             this.rowEdit = false;
+            this.isItemAdded = false;
           //  this.closeaddProductPriceBtn.nativeElement.click();
             this.getAllProductPrices();
           }
@@ -189,10 +192,12 @@ export class ProductPriceComponent implements OnInit {
         updateProductPriceData.mrp = this.editProductPriceForm.controls['mrp'].value;
         updateProductPriceData.jlgSalePrice = this.editProductPriceForm.controls['jlgSalePrice'].value;
         updateProductPriceData.stock = this.editProductPriceForm.controls['stock'].value;
+        this.isItemAdded = true
         this._adminService.updateProductPrice(updateProductPriceData).subscribe((data:any) => {
           if(data){
             this._toastrService.success('Product Price updated successfully!');
             this.closeeditProductPriceBtn.nativeElement.click();
+            this.isItemAdded = false;
             this.getAllProductPrices();
           }
         })
@@ -208,12 +213,14 @@ export class ProductPriceComponent implements OnInit {
   }
 
   deleteProductPrice(){
+    this.isItemAdded = true;
       this._adminService.deleteProductPrice(this.deleteProductPriceItem).subscribe((data:any) =>{
         //console.log(data)
         if(data.status == 200){
           this._toastrService.success('Product Price deleted successfully!');
           this.getAllProductPrices();
           this.closeDeleteProductPriceBtn.nativeElement.click();
+          this.isItemAdded = false;
         }
        
       })

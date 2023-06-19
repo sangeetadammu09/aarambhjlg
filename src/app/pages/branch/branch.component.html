@@ -121,7 +121,7 @@
                 
                 <div class="row">
                     <div class="form-group col-lg-6">
-                        <label class="form-control-label">Cty</label>
+                        <label class="form-control-label">City</label>
                         <select class="custom-select"  formControlName="cityId" name="cityId" id="cityId"
                         [ngClass]="{'is-invalid':(submitted && f['cityId'].errors) ||(f['cityId'].errors && f['cityId'].touched) }">
                         <option value="" [selected]="''">Choose..</option>
@@ -159,13 +159,13 @@
                 <div class="form-group col-lg-6">
                     <label class="form-control-label">Status</label><br/>
                     <div class="form-check form-check-inline">
-                        <label class="form-check-label p-0" for="active">
+                        <label class="form-check-label p-0 mt-3" for="active">
                         <input class="form-check-input" type="radio" formControlName="isActive" name="isActive" id="status" value="true"
                         [ngClass]="{'is-invalid':(submitted && f['isActive'].errors) ||(f['isActive'].errors && f['isActive'].touched) }">Active
                         </label>
                         </div>
                         <div class="form-check form-check-inline">
-                        <label class="form-check-label p-0" for="inactive">
+                        <label class="form-check-label p-0 mt-3" for="inactive">
                         <input class="form-check-input" type="radio" formControlName="isActive" name="isActive" id="status" value="false"
                         [ngClass]="{'is-invalid':(submitted && f['isActive'].errors) ||(f['isActive'].errors && f['isActive'].touched) }">Inactive
                         </label>
@@ -177,7 +177,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="isItemAdded">Save</button>
                   </div>
             </form>
         </div>
@@ -261,7 +261,7 @@
                 </div>
                
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="isItemAdded">Save</button>
                   </div>
             </form>
         </div>
@@ -284,7 +284,8 @@
         <div class="modal-body">
              <p>Are you sure you want to delete this branch?</p>
              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" (click)="deleteBranch()">Yes</button>
+                <button type="submit" class="btn btn-primary" 
+                (click)="deleteBranch()" [disabled]="isItemAdded">Yes</button>
               </div>
         </div>
       </div>

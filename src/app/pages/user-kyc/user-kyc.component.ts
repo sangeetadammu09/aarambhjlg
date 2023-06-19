@@ -58,6 +58,7 @@ export class UserKycComponent implements OnInit {
   documentAadhar: any;
   documentAddress: any;
   documentPan_VoterId: any;
+  isItemAdded: boolean = false;
 
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder,
@@ -207,6 +208,7 @@ export class UserKycComponent implements OnInit {
         addUserData.photoComment = this.addUserKycForm.controls['photoComment'].value;
         addUserData.isKycCompleted = this.addUserKycForm.controls['isKycCompleted'].value== 'true' ? true : false;
         console.log(addUserData)
+        this.isItemAdded = true;
         this._adminService.addUserKycVerification(addUserData).subscribe((data:any) => {
           if(data.status == 200){
            
@@ -214,6 +216,7 @@ export class UserKycComponent implements OnInit {
             this._toastrService.success('User Kyc completed successfully!');
             this.closeaddUserBtn.nativeElement.click();
             this.getAllUserDetails();
+            this.isItemAdded = false;
           }
         })
          

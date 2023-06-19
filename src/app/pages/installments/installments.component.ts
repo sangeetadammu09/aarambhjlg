@@ -24,6 +24,7 @@ export class InstallmentsComponent implements OnInit {
   pageLoaded: boolean = false;
   showAddBtn: boolean = true;
   roleNo = localStorage.getItem('roleNo');
+  isItemAdded: boolean = false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addInstallmentForm = this._formBuilder.group({
@@ -81,6 +82,7 @@ export class InstallmentsComponent implements OnInit {
     this.submitted = true;
      if(this.addInstallmentForm.valid){
       //  //console.log(this.addInstallmentForm.value)
+      this.isItemAdded = true;
         var addInstallmentData :any = {};
         addInstallmentData.id = 0;
         addInstallmentData.installment = this.addInstallmentForm.controls['installment'].value;
@@ -92,6 +94,7 @@ export class InstallmentsComponent implements OnInit {
           if(data.status == 200){
             this._toastrService.success('Installment added successfully!');
             this.closeaddInstallmentBtn.nativeElement.click();
+            this.isItemAdded = false;
             this.getAllInstallments();
           }
         })
@@ -125,7 +128,7 @@ export class InstallmentsComponent implements OnInit {
     //console.log(this.editInstallmentForm.value)
    
      if(this.editInstallmentForm.valid){
-    
+       this.isItemAdded = true;
        var updateInstallmentData :any = {};
        updateInstallmentData.id = this.editInstallmentForm.controls['id'].value;
        updateInstallmentData.installment = this.editInstallmentForm.controls['installment'].value;
@@ -134,6 +137,7 @@ export class InstallmentsComponent implements OnInit {
           if(data){
             this._toastrService.success('Installment updated successfully!');
             this.closeeditInstallmentBtn.nativeElement.click();
+            this.isItemAdded = false;
             this.getAllInstallments();
           }
         })
@@ -151,10 +155,12 @@ export class InstallmentsComponent implements OnInit {
 
 
   deleteInstallment(){
+    this.isItemAdded = true;
       this._adminService.deleteInstallment(this.deleteInstallmentItem).subscribe((data:any) =>{
         //console.log(data)
         if(data.status == 200){
           this._toastrService.success('Installment deleted successfully!');
+          this.isItemAdded = false;
           this.getAllInstallments();
           this.closeDeleteInstallmentBtn.nativeElement.click();
         }

@@ -25,6 +25,7 @@ export class ProductBrandComponent implements OnInit {
   pageLoaded : boolean= false;
   showAddBtn:boolean = true;
   roleNo = localStorage.getItem('roleNo');
+  isItemAdded: boolean = false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addProductBrandForm = this._formBuilder.group({
@@ -88,13 +89,14 @@ export class ProductBrandComponent implements OnInit {
         addProductBrandData.brandName = this.addProductBrandForm.controls['brandName'].value;
         addProductBrandData.manufacturer = this.addProductBrandForm.controls['manufacturer'].value;
         addProductBrandData.description = this.addProductBrandForm.controls['description'].value;
-       
+        this.isItemAdded = true;
         this._adminService.addProductBrand(addProductBrandData).subscribe((data:any) => {
           //console.log(data.status);
           ////console.log(data.headers.get('X-Custom-Header'));
           if(data.status == 200){
             this._toastrService.success('Product Brand added successfully!');
             this.closeaddProductBrandBtn.nativeElement.click();
+            this.isItemAdded = false;
             this.getAllProductBrands();
           }
         })
@@ -136,10 +138,12 @@ export class ProductBrandComponent implements OnInit {
        updateProductBrandData.brandName = this.editProductBrandForm.controls['brandName'].value;
        updateProductBrandData.manufacturer = this.editProductBrandForm.controls['manufacturer'].value;
        updateProductBrandData.description = this.editProductBrandForm.controls['description'].value;
+       this.isItemAdded = true;
         this._adminService.updateProductBrand(updateProductBrandData).subscribe((data:any) => {
           if(data){
             this._toastrService.success('Product Brand updated successfully!');
             this.closeeditProductBrandBtn.nativeElement.click();
+            this.isItemAdded = false;
             this.getAllProductBrands();
           }
         })
@@ -157,12 +161,14 @@ export class ProductBrandComponent implements OnInit {
 
 
   deleteProductBrand(){
+    this.isItemAdded = true;
       this._adminService.deleteProductBrand(this.deleteProductBrandItem).subscribe((data:any) =>{
         //console.log(data)
         if(data.status == 200){
           this._toastrService.success('Product Brand deleted successfully!');
           this.getAllProductBrands();
           this.closeDeleteProductBrandBtn.nativeElement.click();
+          this.isItemAdded = false;
         }
        
       })

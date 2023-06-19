@@ -51,6 +51,7 @@ export class NeworderComponent implements OnInit {
   createdCart: any;
   oldCartData: any;
   pageLoaded : boolean= false;
+  salesPriceZero: boolean = false;
 
   
 
@@ -242,6 +243,10 @@ export class NeworderComponent implements OnInit {
     addCart.mrp = product.mrp,
     addCart.subTotal = addCart.salePrice * addCart.qty,
     addCart.itemUrl = product.productPhoto
+    console.log(product.jlgSalePrice)
+    if(product.jlgSalePrice == 0){
+      this.salesPriceZero = true;
+    }else{
     this._salesService.addItemToCart(addCart).subscribe((data:any) => {
       if(data.status == 200){
         this.toastrService.success('Items added successfully')
@@ -249,10 +254,12 @@ export class NeworderComponent implements OnInit {
         this.cartText = "Added To Cart"
         this.productObj.prodQuantityInput = null;
         this.closeproductModalBtn.nativeElement.click();
+        this.salesPriceZero = false;
        }else{
          this.toastrService.error('No Items added. Please try again')
        } 
      })
+    }
     }else{
       this.toastrService.error('No Cart Found')
     }

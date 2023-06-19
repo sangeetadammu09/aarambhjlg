@@ -19,6 +19,7 @@ export class UnitComponent implements OnInit {
   p = 1;
   productsFound: boolean = false;
   pageLoaded : boolean= false;
+  isItemAdded: boolean = false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addUnitForm = this._formBuilder.group({
@@ -73,12 +74,14 @@ export class UnitComponent implements OnInit {
         addUnitData.unitName = this.addUnitForm.controls['unitName'].value;
         addUnitData.unitCode = this.addUnitForm.controls['unitCode'].value;
         addUnitData.basicUnit = this.addUnitForm.controls['basicUnit'].value;
+        this.isItemAdded = true;
         this._adminService.addUnit(addUnitData).subscribe((data:any) => {
           //console.log(data.status);
           ////console.log(data.headers.get('X-Custom-Header'));
           if(data.status == 200){
             this._toastrService.success('Unit added successfully!');
             this.closeaddUnitBtn.nativeElement.click();
+            this.isItemAdded = false;
             this.getAllUnits();
           }
         })

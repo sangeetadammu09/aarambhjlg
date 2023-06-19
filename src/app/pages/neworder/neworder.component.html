@@ -56,7 +56,7 @@
                                 (input)="getSearchedProducts(searchProduct)" placeholder="Search Product">
                               </div>
                         
-                            <div class="dropdown-menu search-dropdown-menu">
+                            <div class="dropdown-menu search-dropdown-menu scrollable-modal">
                               <div *ngIf="productList.length > 0">
                                 <a class="dropdown-item search-dropdown-item" *ngFor="let item of productList"
                                  (click)="listSearchedProduct(item)" >
@@ -150,10 +150,9 @@
               <p class="text-red" *ngIf="prodQuantityInput.errors?.pattern">Only Numbers are required</p>
             </div>
             </div>
-           <button (click)="addToCart(prodQuantityInput,searchProductItem)" 
-            [ngClass]="itemsAdded ? 'btn btn-success w-100': 'btn btn-primary w-100'"
-            [disabled]="itemsAdded ? true : false">
+           <button (click)="addToCart(prodQuantityInput,searchProductItem)" class="btn btn-primary w-100">
             {{cartText}}</button>
+            <p class="text-red mt-3 text-bold" *ngIf="salesPriceZero">Sales cannot be less than zero. Please add Sales Price.</p>
         </div>
       </div>
     </div>

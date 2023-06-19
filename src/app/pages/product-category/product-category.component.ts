@@ -32,6 +32,7 @@ export class ProductCategoryComponent implements OnInit {
   roleNo = localStorage.getItem('roleNo');
   showAddBtn:boolean = true;
   showDeleteBtn:boolean = true;
+  isItemAdded = false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addProdCategoryForm = this._formBuilder.group({
@@ -100,12 +101,14 @@ export class ProductCategoryComponent implements OnInit {
         addProductCategoryData.append('CategoryId',JSON.parse('0'));
         addProductCategoryData.append('CategoryName',this.addProdCategoryForm.controls['categoryName'].value);
         addProductCategoryData.append('CategoryPhoto',this.addcategoryFile);
+        this.isItemAdded = true;
         this._adminService.addProductCategory(addProductCategoryData).subscribe((data:any) => {
           //console.log(data.status);
           ////console.log(data.headers.get('X-Custom-Header'));
           if(data.status == 200){
             this._toastrService.success('Product Category added successfully!');
             this.closeaddProdBtn.nativeElement.click();
+            this.isItemAdded = false;
             this.getAllProductCategories();
           }
         })
@@ -157,10 +160,12 @@ export class ProductCategoryComponent implements OnInit {
         addProductCategoryData.append('CategoryId',this.editProdCategoryForm.controls['categoryId'].value);
         addProductCategoryData.append('CategoryName',this.editProdCategoryForm.controls['categoryName'].value);
         addProductCategoryData.append('CategoryPhoto',this.editCategoryFile);
+        this.isItemAdded = true;
         this._adminService.updateProductCategory(addProductCategoryData).subscribe((data:any) => {
           if(data){
             this._toastrService.success('Product Category updated successfully!');
             this.closeeditProdBtn.nativeElement.click();
+            this.isItemAdded = false;
             this.getAllProductCategories();
           }
         })
@@ -178,11 +183,13 @@ export class ProductCategoryComponent implements OnInit {
 
 
   deleteProdCategory(){
+    this.isItemAdded = true;
       this._adminService.deleteProductCategory(this.deleteProdCategoryItem).subscribe((data:any) =>{
         //console.log(data)
         if(data.status == 200){
           this.getAllProductCategories();
           this.closeDeleteProdBtn.nativeElement.click();
+          this.isItemAdded = false;
         }
        
       })

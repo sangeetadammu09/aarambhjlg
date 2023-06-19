@@ -46,7 +46,9 @@ export class MemberComponent implements OnInit {
   MemberDocument: any;
   voterFile: any;
   securityFile: any;
-  voterDocumentName: any  ="Choose File";;
+  voterDocumentName: any  ="Choose File";
+  isItemAdded: boolean = false;
+;
   cityId = localStorage.getItem('userCity');
   userId = localStorage.getItem('userId');
   MemberId = localStorage.getItem('MemberId');
@@ -71,6 +73,8 @@ export class MemberComponent implements OnInit {
   roleNo = localStorage.getItem('roleNo');
   pageLoaded :boolean = false;
   isMobileExists: boolean = false;
+  paymentModeList = [{id:1, name: "Cash"}, {id:2, name: "UPI"},
+  {id:3, name: "Card"},{id:4, name: "Other"}]
   
 
   constructor(private _salesService: SalesRelationService, private _formBuilder : FormBuilder,
@@ -94,6 +98,8 @@ export class MemberComponent implements OnInit {
       validTillDate: ['', Validators.required],
       isKycVerified: [],
       paidRegistrationFees: [, Validators.required] ,
+      paymentComment:[],
+      paymentMode: ['', Validators.required],
       isActive: [],
       isDeleted: [],
       createdBy: [] ,
@@ -222,6 +228,7 @@ export class MemberComponent implements OnInit {
     this.isMobileExists = false;
     this.addMemberForm.controls['cityId'].setValue('')
     this.addMemberForm.controls['centerId'].setValue('');
+    this.addMemberForm.controls['paymentMode'].setValue('');
    
     this.voterDocumentName ="Choose File";
     this.aadhaarFrontDocumentName ="Choose File";
@@ -284,12 +291,14 @@ export class MemberComponent implements OnInit {
         var vt = new Date(this.addMemberForm.controls['validTillDate'].value);
         addMemberData.validTillDate = vt.toISOString();
         addMemberData.paidRegistrationFees = this.addMemberForm.controls['paidRegistrationFees'].value,
+        addMemberData.paymentComment = this.addMemberForm.controls['paymentComment'].value,
+        addMemberData.paymentMode = this.addMemberForm.controls['paymentMode'].value,
         addMemberData.createdBy = 0;
         addMemberData.createdDate =this.todayDate;
         addMemberData.isActive =true;
         addMemberData.isDeleted = false;
         addMemberData.isKycVerified = true;
-
+        this.isItemAdded = true;
         this._salesService.addMember(addMemberData).subscribe((data:any) => {
        //   //console.log(data.status);
           ////console.log(data.headers.get('X-Custom-Header'));
@@ -299,6 +308,7 @@ export class MemberComponent implements OnInit {
             this._toastrService.success('Member added successfully!');
             this.viewMode = 'tab2';
            // this.closeaddMemberBtn.nativeElement.click();
+           this.isItemAdded = false;
           
             this.getAllMemberDetails();
           }

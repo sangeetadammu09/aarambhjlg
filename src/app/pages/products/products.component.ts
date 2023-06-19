@@ -58,6 +58,7 @@ export class ProductsComponent implements OnInit {
   disableProdImageFiveBtn :boolean = false;
   productImageFiveFile: any;
   pageLoaded : boolean= false;
+  isItemAdded : boolean= false;
  
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
@@ -242,13 +243,14 @@ export class ProductsComponent implements OnInit {
         addProductData.createdBy = this.addProductForm.controls['createdBy'].value;
         addProductData.createdDate = this.todayDate;
         
-
+        this.isItemAdded = true;
         this._adminService.addProduct(addProductData).subscribe((data:any) => {
           //console.log(data.status);
           ////console.log(data.headers.get('X-Custom-Header'));
           if(data.status == 200){
             this.addedProductId = data.body;
             this._toastrService.success('Product added successfully!');
+            this.isItemAdded = false;
            // this.closeaddProductBtn.nativeElement.click();
             this.viewMode = 'tab2';
             this.getAllProducts();
@@ -305,11 +307,12 @@ export class ProductsComponent implements OnInit {
         updateProductData.productEngName = this.editProductForm.controls['productEngName'].value;
         updateProductData.createdBy = this.editProductForm.controls['createdBy'].value == null ? 0 : this.editProductForm.controls['createdBy'].value;
         updateProductData.createdDate =  this.editProductForm.controls['createdDate'].value;;
-      
+        this.isItemAdded = true;
         this._adminService.updateProduct(updateProductData).subscribe((data:any) => {
           if(data){
             this._toastrService.success('Product updated successfully!');
             this.closeeditProductBtn.nativeElement.click();
+            this.isItemAdded = false;
             this.getAllProducts();
           }
         })
@@ -327,11 +330,13 @@ export class ProductsComponent implements OnInit {
 
 
   deleteProduct(){
+     this.isItemAdded = true;
       this._adminService.deleteProduct(this.deleteProductItem).subscribe((data:any) =>{
         //console.log(data)
         if(data.status == 200){
           this._toastrService.success('Product delete successfully!');
           this.getAllProducts();
+          this.isItemAdded = false
           this.closeDeleteProductBtn.nativeElement.click();
         }
        

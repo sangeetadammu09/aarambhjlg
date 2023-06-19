@@ -91,6 +91,7 @@ export class UserComponent implements OnInit {
   src = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
   sampleUrl: string = 'https://jlg.examfirst.in/Images/UserDocuments/15504358912023-04-07.pdf';
   isMobileExists: boolean = false;
+  isItemAdded: boolean = false;
 
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder,
@@ -284,7 +285,7 @@ export class UserComponent implements OnInit {
         addUserData.createdBy = 0;
         addUserData.createdDate =this.todayDate;
         addUserData.isDeleted = false;
-
+        this.isItemAdded = true;
         this._adminService.addUser(addUserData).subscribe((data:any) => {
        //   //console.log(data.status);
           ////console.log(data.headers.get('X-Custom-Header'));
@@ -292,6 +293,7 @@ export class UserComponent implements OnInit {
            
             this.addedUserId = data.body;
             this._toastrService.success('User added successfully!');
+            this.isItemAdded = false;
             this.viewMode = 'tab2';
            // this.closeaddUserBtn.nativeElement.click();
           

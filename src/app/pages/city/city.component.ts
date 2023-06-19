@@ -26,6 +26,7 @@ export class CityComponent implements OnInit {
   showAddBtn:boolean = true;
   showEditBtn:boolean = true;
   showDeleteBtn:boolean = true;
+  isItemAdded:boolean = false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addCityForm = this._formBuilder.group({
@@ -81,6 +82,7 @@ export class CityComponent implements OnInit {
 
   submitNewCity(){
     this.submitted = true;
+    this.isItemAdded = true;
      if(this.addCityForm.valid){
       //  //console.log(this.addCityForm.value)
         var addCityData :any = {};
@@ -94,6 +96,7 @@ export class CityComponent implements OnInit {
           if(data.status == 200){
             this._toastrService.success('City added successfully!');
             this.closeaddCityBtn.nativeElement.click();
+            this.isItemAdded = false;
             this.getAllCitys();
           }
         })
@@ -124,6 +127,7 @@ export class CityComponent implements OnInit {
   
   submitUpdateCity(){
     this.submitted = true;
+    this.isItemAdded = true;
      if(this.editCityForm.valid){
     
        var updateCityData :any = {};
@@ -134,6 +138,7 @@ export class CityComponent implements OnInit {
           if(data){
             this._toastrService.success('City updated successfully!');
             this.closeeditCityBtn.nativeElement.click();
+            this.isItemAdded = false;
             this.getAllCitys();
           }
         })
@@ -151,11 +156,13 @@ export class CityComponent implements OnInit {
 
 
   deleteCity(){
+    this.isItemAdded = true;
       this._adminService.deleteCity(this.deleteCityItem).subscribe((data:any) =>{
         if(data.status == 200){
           this._toastrService.success('City delete successfully!');
           this.getAllCitys();
           this.closeDeleteCityBtn.nativeElement.click();
+          this.isItemAdded = false;
         }
        
       })

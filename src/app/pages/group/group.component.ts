@@ -28,6 +28,7 @@ export class GroupComponent implements OnInit {
   selectedGroupItem: any;
   cityId = localStorage.getItem('userCity');
   pageLoaded = false;
+  isItemAdded: boolean = false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addGroupForm = this._formBuilder.group({
@@ -112,6 +113,7 @@ export class GroupComponent implements OnInit {
     this.submitted = true;
      if(this.addGroupForm.valid){
       //  //console.log(this.addGroupForm.value)
+      this.isItemAdded = true;
         var addGroupData :any = {};
        // addGroupData.groupId = 0;
         addGroupData.groupName = this.addGroupForm.controls['groupName'].value;
@@ -126,6 +128,7 @@ export class GroupComponent implements OnInit {
           if(data.status == 200){
             this._toastrService.success('Group added successfully!');
             this.closeaddGroupBtn.nativeElement.click();
+            this.isItemAdded = false;
             this.getAllGroups();
           }
         })
@@ -156,6 +159,7 @@ export class GroupComponent implements OnInit {
   //  //console.log(this.editGroupForm.value)
    
      if(this.editGroupForm.valid){
+      this.isItemAdded = true;
         var updateGroupData :any = {};
         updateGroupData.groupId = this.editGroupForm.controls['groupId'].value;
         updateGroupData.groupName = this.editGroupForm.controls['groupName'].value;
@@ -163,11 +167,12 @@ export class GroupComponent implements OnInit {
       //  updateGroupData.cityId = this.editGroupForm.controls['cityId'].value;
         updateGroupData.centerId = this.editGroupForm.controls['centerId'].value;
         updateGroupData.updatedBy = "0";
-
+     
         this._adminService.updateGroup(updateGroupData).subscribe((data:any) => {
           if(data){
             this._toastrService.success('Group updated successfully!');
             this.closeeditGroupBtn.nativeElement.click();
+            this.isItemAdded = false;
             this.getAllGroups();
           }
         })
@@ -185,12 +190,14 @@ export class GroupComponent implements OnInit {
 
 
   deleteGroup(){
+    this.isItemAdded = true;
       this._adminService.deleteGroup(this.deleteGroupItem).subscribe((data:any) =>{
         //console.log(data)
         if(data.status == 200){
           this._toastrService.success('Group deleted successfully!');
           this.getAllGroups();
           this.closeDeleteGroupBtn.nativeElement.click();
+          this.isItemAdded = false;
         }
        
       })

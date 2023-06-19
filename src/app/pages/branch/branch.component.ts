@@ -31,6 +31,7 @@ export class BranchComponent implements OnInit {
   showAddBtn:boolean = true;
   showEditBtn:boolean = true;
   showDeleteBtn:boolean = true;
+  isItemAdded:boolean = false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addBranchForm = this._formBuilder.group({
@@ -129,6 +130,7 @@ export class BranchComponent implements OnInit {
 
   submitNewBranch(){
     this.submitted = true;
+    this.isItemAdded = true;
      if(this.addBranchForm.valid){
       //  //console.log(this.addBranchForm.value)
         var addBranchData :any = {};
@@ -149,6 +151,7 @@ export class BranchComponent implements OnInit {
           if(data.status == 200){
             this._toastrService.success('Branch added successfully!');
             this.closeaddBranchBtn.nativeElement.click();
+            this.isItemAdded = false;
             this.getAllBranches();
           }
         })
@@ -181,7 +184,7 @@ export class BranchComponent implements OnInit {
   submitUpdateBranch(){
     this.submitted = true;
     //console.log(this.editBranchForm.value)
-   
+     this.isItemAdded = true;
      if(this.editBranchForm.valid){
         var updateBranchData :any = {};
         updateBranchData.branchId = this.editBranchForm.controls['branchId'].value;
@@ -199,6 +202,7 @@ export class BranchComponent implements OnInit {
           if(data){
             this._toastrService.success('Branch updated successfully!');
             this.closeeditBranchBtn.nativeElement.click();
+            this.isItemAdded = false;
             this.getAllBranches();
           }
         })
@@ -216,12 +220,14 @@ export class BranchComponent implements OnInit {
 
 
   deleteBranch(){
+      this.isItemAdded = false;
       this._adminService.deleteBranch(this.deleteBranchItem).subscribe((data:any) =>{
         //console.log(data)
         if(data.status == 200){
           this._toastrService.success('Branch deleted successfully!');
           this.getAllBranches();
           this.closeDeleteBranchBtn.nativeElement.click();
+          this.isItemAdded = false;
         }
        
       })

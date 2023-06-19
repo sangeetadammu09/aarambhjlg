@@ -27,6 +27,7 @@ export class UserroleComponent implements OnInit {
   cityId = localStorage.getItem('userCity');
   roleList: any;
   pageLoaded : boolean= false;
+  isItemAdded: boolean = false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addUserRoleForm = this._formBuilder.group({
@@ -74,6 +75,7 @@ export class UserroleComponent implements OnInit {
     this._adminService.getAllUsersListByCity(this.cityId).subscribe((data:any) => {
          this.userList = data;
     })
+    
     this._adminService.getAllRoles().subscribe((data:any) => {
       //console.log(data)
       if(data.length > 0){
@@ -91,13 +93,14 @@ export class UserroleComponent implements OnInit {
         var addUserRoleData :any = {};
         addUserRoleData.roleId = this.addUserRoleForm.controls['roleId'].value;
         addUserRoleData.userId = this.addUserRoleForm.controls['userId'].value;
-       
+        this.isItemAdded = true;
         this._adminService.addUserRole(addUserRoleData).subscribe((data:any) => {
           //console.log(data.status);
           if(data.status == 200){
             this._toastrService.success('User Role added successfully!');
             this.closeaddUserRoleBtn.nativeElement.click();
             this.getAllUserRoles();
+            this.isItemAdded = false;
           }
         })
          
@@ -127,10 +130,12 @@ export class UserroleComponent implements OnInit {
        var updateUserRoleData :any = {};
        updateUserRoleData.roleId = this.editUserRoleForm.controls['roleId'].value;
        updateUserRoleData.userId = this.editUserRoleForm.controls['userId'].value;
+       this.isItemAdded = true;
         this._adminService.updateUserRole(updateUserRoleData).subscribe((data:any) => {
           if(data){
             this._toastrService.success('UserRole updated successfully!');
             this.closeeditUserRoleBtn.nativeElement.click();
+            this.isItemAdded = false;
             this.getAllUserRoles();
           }
         })
@@ -149,12 +154,14 @@ export class UserroleComponent implements OnInit {
 
 
   deleteUserRole(){
+    this.isItemAdded = true;
       this._adminService.deleteUserRole(this.deleteUserRoleItem).subscribe((data:any) =>{
         //console.log(data)
         if(data.status == 200){
           this._toastrService.success('UserRole delete successfully!');
           this.getAllUserRoles();
           this.closeDeleteUserRoleBtn.nativeElement.click();
+          this.isItemAdded = false
        }
        
       })

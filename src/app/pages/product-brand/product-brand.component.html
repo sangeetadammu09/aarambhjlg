@@ -126,7 +126,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="isItemAdded">Save</button>
                   </div>
             </form>
         </div>
@@ -164,7 +164,7 @@
                 </div>
                
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="isItemAdded">Save</button>
                   </div>
             </form>
         </div>
@@ -187,7 +187,7 @@
         <div class="modal-body">
              <p>Are you sure you want to delete this ProductBrand?</p>
              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" (click)="deleteProductBrand()">Yes</button>
+                <button type="submit" class="btn btn-primary" (click)="deleteProductBrand()" [disabled]="isItemAdded">Yes</button>
               </div>
         </div>
       </div>

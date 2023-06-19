@@ -25,6 +25,7 @@ export class TaxSlotComponent implements OnInit {
   pageLoaded : boolean= false;
   roleNo = localStorage.getItem('roleNo');
   showAddBtn: boolean = true;
+  isItemAdded: boolean = false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addTaxSlotForm = this._formBuilder.group({
@@ -97,6 +98,7 @@ export class TaxSlotComponent implements OnInit {
         addTaxSlotData.totalTaxPercent = this.addTaxSlotForm.controls['totalTaxPercent'].value;
         addTaxSlotData.createdBy = '0';
         addTaxSlotData.updatedBy = '0';
+        this.isItemAdded = true;
         this._adminService.addTaxSlot(addTaxSlotData).subscribe((data:any) => {
           //console.log(data.status);
           ////console.log(data.headers.get('X-Custom-Header'));
@@ -104,6 +106,7 @@ export class TaxSlotComponent implements OnInit {
             this._toastrService.success('TaxSlot added successfully!');
             this.closeaddTaxSlotBtn.nativeElement.click();
             this.getAllTaxSlots();
+            this.isItemAdded = false;
           }
         })
          
@@ -146,11 +149,13 @@ export class TaxSlotComponent implements OnInit {
        updateTaxSlotData.totalTaxPercent = this.editTaxSlotForm.controls['totalTaxPercent'].value;
        updateTaxSlotData.createdBy = this.editTaxSlotForm.controls['createdBy'].value;
        updateTaxSlotData.updatedBy = this.editTaxSlotForm.controls['updatedBy'].value;
+       this.isItemAdded = true;
         this._adminService.updateTaxSlot(updateTaxSlotData).subscribe((data:any) => {
           if(data){
             this._toastrService.success('TaxSlot updated successfully!');
             this.closeeditTaxSlotBtn.nativeElement.click();
             this.getAllTaxSlots();
+            this.isItemAdded = false;
           }
         })
          
@@ -167,12 +172,14 @@ export class TaxSlotComponent implements OnInit {
 
 
   deleteTaxSlot(){
+     this.isItemAdded = true;
       this._adminService.deleteTaxSlot(this.deleteTaxSlotItem).subscribe((data:any) =>{
         //console.log(data)
         if(data.status == 200){
           this._toastrService.success('TaxSlot delete successfully!');
           this.getAllTaxSlots();
           this.closeDeleteTaxSlotBtn.nativeElement.click();
+          this.isItemAdded = false;
         }
        
       })

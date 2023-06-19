@@ -22,6 +22,9 @@ export class ExpenseTypeComponent implements OnInit {
   deleteExpenseTypeItem: any;
   p = 1;
   pageLoaded: boolean = false;
+  isItemAdded: boolean = false;
+  showAddBtn: boolean = true;
+  roleNo = localStorage.getItem('roleNo');
 
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
@@ -37,7 +40,11 @@ export class ExpenseTypeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllExpenseTypes()
+    this.getAllExpenseTypes();
+    if(this.roleNo == "104" || this.roleNo == "101"){
+      this.showAddBtn = false;
+   
+    }
   }
 
   get f(){ return this.addExpenseTypeForm.controls}
@@ -70,6 +77,7 @@ export class ExpenseTypeComponent implements OnInit {
 
   submitNewExpenseType(){
     this.submitted = true;
+    this.isItemAdded = true;
      if(this.addExpenseTypeForm.valid){
       //  //console.log(this.addExpenseTypeForm.value)
         var addExpenseTypeData :any = {};
@@ -82,6 +90,7 @@ export class ExpenseTypeComponent implements OnInit {
           if(data.status == 200){
             this._toastrService.success('Expense Type added successfully!');
             this.closeaddExpenseTypeBtn.nativeElement.click();
+            this.isItemAdded = false;
             this.getAllExpenseTypes();
           }
         })
@@ -111,6 +120,7 @@ export class ExpenseTypeComponent implements OnInit {
   
   submitUpdateExpenseType(){
     this.submitted = true;
+    this.isItemAdded = false;
    // //console.log(this.editExpenseTypeForm.value)
    
      if(this.editExpenseTypeForm.valid){  
@@ -121,6 +131,7 @@ export class ExpenseTypeComponent implements OnInit {
           if(data){
             this._toastrService.success('Expense Type updated successfully!');
             this.closeeditExpenseTypeBtn.nativeElement.click();
+            this.isItemAdded = false;
             this.getAllExpenseTypes();
           }
         })
@@ -138,12 +149,14 @@ export class ExpenseTypeComponent implements OnInit {
 
 
   deleteExpenseType(){
+    this.isItemAdded = true;
       this._adminService.deleteExpenseType(this.deleteExpenseTypeItem).subscribe((data:any) =>{
         //console.log(data)
         if(data.status == 200){
           this._toastrService.success('Expense Type delete successfully!');
           this.getAllExpenseTypes();
           this.closeDeleteExpenseTypeBtn.nativeElement.click();
+          this.isItemAdded = false
         }
        
       })

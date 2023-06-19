@@ -32,6 +32,7 @@ export class CenterComponent implements OnInit {
   todayDate = new Date().toJSON();
   pageLoaded: boolean = false;
   showAddBtn: boolean = true;
+  isItemAdded:boolean = false;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder, private _toastrService: ToastrService) { 
     this.addCenterForm = this._formBuilder.group({
@@ -182,6 +183,7 @@ export class CenterComponent implements OnInit {
 
   submitNewCenter(){
     this.submitted = true;
+    this.isItemAdded = true;
      if(this.addCenterForm.valid){
       //  //console.log(this.addCenterForm.value)
         var addCenterData :any = {};
@@ -203,6 +205,7 @@ export class CenterComponent implements OnInit {
           if(data.status == 200){
             this._toastrService.success('Center added successfully!');
             this.closeaddCenterBtn.nativeElement.click();
+            this.isItemAdded = false;
             this.getAllCenters();
           }
         })
@@ -237,7 +240,7 @@ export class CenterComponent implements OnInit {
   submitUpdateCenter(){
     this.submitted = true;
     //console.log(this.editCenterForm.value)
-   
+    this.isItemAdded  = true;
      if(this.editCenterForm.valid){
     
        var updateCenterData :any = {};
@@ -258,6 +261,7 @@ export class CenterComponent implements OnInit {
           if(data){
             this._toastrService.success('Center updated successfully!');
             this.closeeditCenterBtn.nativeElement.click();
+            this.isItemAdded = false;
             this.getAllCenters();
           }
         })
@@ -275,12 +279,14 @@ export class CenterComponent implements OnInit {
 
 
   deleteCenter(){
+    this.isItemAdded = true;
       this._adminService.deleteCenter(this.deleteCenterItem).subscribe((data:any) =>{
         //console.log(data)
         if(data.status == 200){
           this._toastrService.success('Center deleted successfully!');
           this.getAllCenters();
           this.closeDeleteCenterBtn.nativeElement.click();
+          this.isItemAdded = false;
         }
        
       })
