@@ -1,0 +1,135 @@
+<!-- Page body -->
+<div class="page-body">
+    <div class="container-xl">
+      <div class="row row-cards">
+        <div class="col-lg-6">
+            <div class="card">
+              <div class="card-header">
+                <div class="col-lg-10 mb-3 mt-2">
+                    <h3 class="card-title">Renew Membership Form</h3>
+                </div>
+              </div>
+  
+           <div class="container-xl">
+            <div class="row row-deck row-cards mb-3 mt-3">
+               <div class="col-lg-12">
+                <form [formGroup]="renewMembershipForm" (ngSubmit)="submitRenewMembership()">
+               
+                    <div class="form-row">
+                        <div class="form-group col-lg-6">
+                            <label for="searchCenter">Select Center</label>
+                            <select class="custom-select" id="searchCenter"  (change)="getCenterVal($event)"
+                            [ngClass]="{'is-invalid':(submitted && g['centerId'].errors) ||(g['centerId'].errors && g['centerId'].touched) }">
+                              <option value="" [selected]="''">Choose Center..</option>
+                              <option *ngFor="let item of centerDropdownList" [ngValue]="item.centerId">
+                                  {{item.centerName}}</option>
+                              </select>
+                              <div *ngIf="(submitted && g['centerId'].errors) ||(g['centerId'].errors && g['centerId'].touched)" class="invalid-feedback">
+                                <div *ngIf="g['centerId'].errors['required']">
+                                    Center is required
+                                </div>
+                           </div> 
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label for="searchMember">Select Member</label>
+                              <select class="custom-select" id="searchMember" 
+                              [ngClass]="{'is-invalid':(submitted && g['memberId'].errors) ||(g['memberId'].errors && g['memberId'].touched) }">
+                                <option value="" [selected]="''">Choose Member..</option>
+                                <option *ngFor="let item of memberDropdownList" [ngValue]="item.memberId">
+                                    {{item.fullName}}
+                                </option>
+                              </select>
+                              <div *ngIf="(submitted && g['memberId'].errors) ||(g['memberId'].errors && g['memberId'].touched)" class="invalid-feedback">
+                                <div *ngIf="g['memberId'].errors['required']">
+                                    Member is required
+                                </div>
+                           </div> 
+
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label class="form-control-label">Start Date</label>
+                            <input type="date" class="form-control" formControlName="startDate" name="startDate" 
+                            [ngClass]="{'is-invalid':(submitted && g['startDate'].errors) ||(g['startDate'].errors && g['startDate'].touched) }"> 
+                            <div *ngIf="(submitted && g['startDate'].errors) ||(g['startDate'].errors && g['startDate'].touched)" class="invalid-feedback">
+                                <div *ngIf="g['startDate'].errors['required']">
+                                    Start Date is required
+                                </div>
+                           </div>     
+                         </div>
+
+                         <div class="form-group col-lg-6">
+                            <label class="form-control-label">Expiry Date</label>
+                            <input type="date" class="form-control" formControlName="expiryDate" name="expiryDate" 
+                            [ngClass]="{'is-invalid':(submitted && g['expiryDate'].errors) ||(g['expiryDate'].errors && g['expiryDate'].touched) }"> 
+                            <div *ngIf="(submitted && g['expiryDate'].errors) ||(g['expiryDate'].errors && g['expiryDate'].touched)" class="invalid-feedback">
+                                <div *ngIf="g['expiryDate'].errors['required']">
+                                    Expiry Date is required
+                                </div>
+                           </div>     
+                         </div>
+
+                         <div class="form-group col-lg-6">
+                            <label class="form-control-label">Payment Date</label>
+                            <input type="date" class="form-control" formControlName="paymentDate" name="paymentDate" 
+                            [ngClass]="{'is-invalid':(submitted && g['paymentDate'].errors) ||(g['paymentDate'].errors && g['paymentDate'].touched) }"> 
+                            <div *ngIf="(submitted && g['paymentDate'].errors) ||(g['paymentDate'].errors && g['paymentDate'].touched)" class="invalid-feedback">
+                                <div *ngIf="g['paymentDate'].errors['required']">
+                                    Payment Date is required
+                                </div>
+                           </div>     
+                         </div>
+
+                      <div class="form-group col-lg-6">
+                        <label class="form-control-label">Payment Amount</label>
+                        <input type="text" class="form-control" formControlName="payingAmt" name="payingAmt"
+                        [ngClass]="{'is-invalid':(submitted && g['payingAmt'].errors) ||(g['payingAmt'].errors && g['payingAmt'].touched) }">  
+                        <div *ngIf="(submitted && g['payingAmt'].errors) ||(g['payingAmt'].errors && g['payingAmt'].touched)" class="invalid-feedback">
+                          <div *ngIf="g['payingAmt'].errors['required']">
+                              Payment Amount is required
+                          </div>
+                     </div>   
+                    </div>
+                    
+                    <div class="form-group col-lg-6">
+                        <label class="form-control-label">Payment Mode</label>
+                        <select class="custom-select" id="paymentMode" formControlName="paymentMode" name="paymentMode"
+                        [ngClass]="{'is-invalid':(submitted && g['paymentMode'].errors) ||(g['paymentMode'].errors && g['paymentMode'].touched) }">
+                          <option value="" [selected]="''">Choose Payment Mode..</option>
+                          <option *ngFor="let item of paymentModeList" [ngValue]="item.name">
+                              {{item.name}}</option>
+                          </select> 
+                        <div *ngIf="(submitted && g['paymentMode'].errors) ||(g['paymentMode'].errors && g['paymentMode'].touched)" class="invalid-feedback">
+                          <div *ngIf="g['paymentMode'].errors['required']">
+                              Payment Mode is required
+                          </div>
+                     </div>   
+                    </div>
+      
+                    <div class="form-group col-lg-6">
+                      <label class="form-control-label">Payment Comment</label>
+                      <input type="text" class="form-control" formControlName="paymentComment" name="paymentComment"
+                      [ngClass]="{'is-invalid':(submitted && g['paymentComment'].errors) ||(g['paymentComment'].errors && g['paymentComment'].touched) }">  
+                      <div *ngIf="(submitted && g['paymentComment'].errors) ||(g['paymentComment'].errors && g['paymentComment'].touched)" class="invalid-feedback">
+                        <div *ngIf="g['paymentComment'].errors['required']">
+                            Payment Comment is required
+                        </div>
+                   </div>   
+                    </div>
+      
+                    </div>
+                   
+      
+            
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" [disabled]="isItemAdded">Save</button>
+                      </div>
+                </form> 
+               </div>
+            
+        </div>
+            </div>
+          </div>
+      </div>
+      </div>
+      </div>
+  </div>

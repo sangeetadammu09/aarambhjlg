@@ -293,7 +293,7 @@ export class MemberComponent implements OnInit {
         addMemberData.paidRegistrationFees = this.addMemberForm.controls['paidRegistrationFees'].value,
         addMemberData.paymentComment = this.addMemberForm.controls['paymentComment'].value,
         addMemberData.paymentMode = this.addMemberForm.controls['paymentMode'].value,
-        addMemberData.createdBy = 0;
+        addMemberData.createdBy = this.userId;
         addMemberData.createdDate =this.todayDate;
         addMemberData.isActive =true;
         addMemberData.isDeleted = false;

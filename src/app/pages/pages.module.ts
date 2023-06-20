@@ -38,6 +38,9 @@ import { KycFailedMembersComponent } from './kyc-failed-members/kyc-failed-membe
 import { AssignLeaderComponent } from './assign-leader/assign-leader.component';
 import { KycFailedUsersComponent } from './kyc-failed-users/kyc-failed-users.component';
 import { ValidityExpiringMembersComponent } from './validity-expiring-members/validity-expiring-members.component';
+import { MembershipComponent } from './membership/membership.component';
+import { MembershipHistoryComponent } from './membership-history/membership-history.component';
+import { RenewMembershipComponent } from './renew-membership/renew-membership.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -79,7 +82,10 @@ import { ValidityExpiringMembersComponent } from './validity-expiring-members/va
     KycFailedMembersComponent,
     AssignLeaderComponent,
     KycFailedUsersComponent,
-    ValidityExpiringMembersComponent
+    ValidityExpiringMembersComponent,
+    MembershipComponent,
+    MembershipHistoryComponent,
+    RenewMembershipComponent
   ]
 })
 

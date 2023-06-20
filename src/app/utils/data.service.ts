@@ -16,7 +16,7 @@ export class DataService {
   }
 
   private cartData = new BehaviorSubject(null);
-  oldCartData = this.cartSource.asObservable();
+  oldCartData = this.cartData.asObservable();
 
   sendOldCartData(cartObj: any) {
     this.cartData.next(cartObj);

@@ -213,6 +213,29 @@ export class SalesRelationService {
     return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.OrderReturn.submitReturnRequest,data,{observe: 'response'})
    }
 
+   getMembershipsOverview(centerId:any,PageNo:any,PageSize:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Membership.GetMembershipsOverview+
+      `?centerId=${centerId}&PageNo=${PageNo}&PageSize=${PageSize}`)
+   }
+
+   getMembershipPendingFeesDetails(memberId:any,subcriptionId:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Membership.GetMembershipPendingFeesDetails+
+      `?memberId=${memberId}&subcriptionId=${subcriptionId}`)
+   }
+
+   getIndividualMembershipPendingFeesHistory(memberId:any,PageNo:any,PageSize:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Membership.GetIndividualMembershipPendingFeesHistory+
+      `?memberId=${memberId}&PageNo=${PageNo}&PageSize=${PageSize}`)
+   }
+
+   collectFees(data:any){
+    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Membership.CollectFees,data,{observe: 'response'})
+   }
+
+   renewMembership(data:any){
+    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Membership.RenewMembership,data,{observe: 'response'})
+   }
+
 
 
 

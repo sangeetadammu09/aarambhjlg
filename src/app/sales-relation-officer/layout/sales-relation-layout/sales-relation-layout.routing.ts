@@ -14,6 +14,9 @@ import { ReturnorderComponent } from 'src/app/pages/returnorder/returnorder.comp
 import { DashboardComponent } from 'src/app/pages/dashboard/dashboard.component';
 import { KycFailedMembersComponent } from 'src/app/pages/kyc-failed-members/kyc-failed-members.component';
 import { ValidityExpiringMembersComponent } from 'src/app/pages/validity-expiring-members/validity-expiring-members.component';
+import { MembershipComponent } from 'src/app/pages/membership/membership.component';
+import { MembershipHistoryComponent } from 'src/app/pages/membership-history/membership-history.component';
+import { RenewMembershipComponent } from 'src/app/pages/renew-membership/renew-membership.component';
 
 export const SalesRelationLayoutRoutes: Routes = [
 
@@ -32,5 +35,8 @@ export const SalesRelationLayoutRoutes: Routes = [
      { path:'dashboard', component: DashboardComponent },
      { path:'kyc-failed-members', component: KycFailedMembersComponent },
      {path: 'validity-expiring-members', component: ValidityExpiringMembersComponent },
+     {path: 'membership', component: MembershipComponent },
+     {path: 'membership-history', component: MembershipHistoryComponent },
+     {path: 'renew-membership', component: RenewMembershipComponent },
   
 ];

@@ -77,6 +77,27 @@ export const SalesList = {
               url: 'validity-expiring-members',
               icon : 'fa-check',
               isActive: true, 
+            },
+            {
+              id: 2,
+              menu: 'Membership',
+              url: 'membership',
+              icon : 'fa-check',
+              isActive: true, 
+            },
+            {
+              id: 2,
+              menu: 'Membership History',
+              url: 'membership-history',
+              icon : 'fa-check',
+              isActive: true, 
+            },
+            {
+              id: 2,
+              menu: 'Renew Membership',
+              url: 'renew-membership',
+              icon : 'fa-check',
+              isActive: true, 
             }
             ]
           },

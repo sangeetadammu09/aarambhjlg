@@ -177,7 +177,14 @@ export const APP_DI_CONFIG: any = {
       getCenterSummary: '/Dashboard/GetCenterSummary',
       getOrderSummary: '/Dashboard/GetOrderSummary'
     
-    }
+    },
+    Membership:{
+      GetMembershipsOverview : "/Membership/GetMembershipsOverview",
+      GetMembershipPendingFeesDetails : "/Membership/GetMembershipPendingFeesDetails",
+      GetIndividualMembershipPendingFeesHistory : "/Membership/GetIndividualMembershipPendingFeesHistory",
+      CollectFees : "/Membership/CollectFees",
+      RenewMembership : "/Membership/RenewMembership"
+    },
   }
   
 };
