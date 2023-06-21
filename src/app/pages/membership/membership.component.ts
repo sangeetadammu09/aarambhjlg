@@ -106,11 +106,12 @@ export class MembershipComponent implements OnInit {
 }
 
   showMemberModal(item:any){
-    console.log(item)
+   // console.log(item)
     this.memberDetailsObj = item;
     this._salesService.getMembershipPendingFeesDetails(item.memberId,item.subcriptionId).subscribe((data:any) =>{
       if(data){
-        this.memberDetails = data;
+        console.log(data)
+        this.memberDetails = data[0];
       }
     
     })

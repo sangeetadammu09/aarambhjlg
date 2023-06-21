@@ -23,12 +23,8 @@
                                 </select>
                             </div>
 
-                            <div class="form-group col-md-6">
-                              <label for="searchMember">Select Date</label>
-                              <input type="date" class="form-control" [(ngModel)]="installmentDate" 
-                              (change)="getinstallmentDate(installmentDate)" placeholder="Search Installment Date">
-                            </div>
-                          </div>
+                            
+                         
 
                           <div class="form-group col-md-6">
                             <label for="searchMember">Select Member</label>
@@ -39,6 +35,12 @@
                               </option>
                               </select>
                           </div>
+                          <div class="form-group col-md-6">
+                            <label for="searchMember">Select Date</label>
+                            <input type="date" class="form-control" [(ngModel)]="installmentDate" 
+                            (change)="getinstallmentDate(installmentDate)" placeholder="Search Installment Date">
+                          </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -53,6 +55,7 @@
                             <th scope="col" style="color: #fff;">Installment No</th>
                             <th scope="col" style="color: #fff;">Installment Date</th>
                             <th scope="col" style="color: #fff;">Installment Amount</th>
+                            <th scope="col" style="color: #fff;">Payable Amount</th>
                             <th scope="col" style="color: #fff;">Address</th>
                             <th scope="col" style="color: #fff;">Status</th>
                             <th scope="col" style="color: #fff;">Edit</th>
@@ -68,6 +71,7 @@
                             <td>{{item.installmentNo}}</td>
                             <td>{{item.installmentDate}}</td>
                             <td>{{item.installmentAmt}}</td>
+                            <td>{{item.payableAmt}}</td>
                             <td>{{item.address}}</td>
                             <td [ngClass]="{'data-blue' :item.status == 'Future','data-green' : item.status == 'Todays','data-red' : item.status == 'Pending' }">{{item.status}}</td>
                             <td (click)="showeditCollectionModal(item)" data-toggle="modal" data-target="#addeditProductBrandModal">
@@ -140,13 +144,8 @@
 
                 <div class="form-group col-lg-6">
                   <label class="form-control-label">Payment Amount</label>
-                  <input type="text" class="form-control" formControlName="payingAmt" name="payingAmt"
-                  [ngClass]="{'is-invalid':(submitted && g['payingAmt'].errors) ||(g['payingAmt'].errors && g['payingAmt'].touched) }">  
-                  <div *ngIf="(submitted && g['payingAmt'].errors) ||(g['payingAmt'].errors && g['payingAmt'].touched)" class="invalid-feedback">
-                    <div *ngIf="g['payingAmt'].errors['required']">
-                        Payment Amount is required
-                    </div>
-               </div>   
+                  <input type="text" class="form-control" formControlName="payingAmt" name="payingAmt" readonly>  
+                     
               </div>
               
               <div class="form-group col-lg-6">

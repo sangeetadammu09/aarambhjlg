@@ -98,6 +98,8 @@ export class PaymentComponent implements OnInit {
 
   getMemberVal(event:any){
     this.memberId = event;
+  
+    console.log(event);
   }
 
  
@@ -111,7 +113,6 @@ export class PaymentComponent implements OnInit {
     paymentObj.userId = this.userId,
     paymentObj.installmentDate = this.installmentDate,
     paymentObj.memberId = this.memberId ? this.memberId : 0
-    
     this._salesService.getOrderInstallmentCollectionList(paymentObj).subscribe((data:any) => {
       if(data){
         data.installments.forEach((item:any) => {
@@ -142,6 +143,7 @@ showeditCollectionModal(item:any){
     memberId: item.memberId,
     memberName: item.fullName,
     installmentNo: item.installmentNo,
+    payingAmt: item.payableAmt,
     orderId: item.orderId,
     paidDate: moment().format('L'),
     paymentTakenById: this.userId

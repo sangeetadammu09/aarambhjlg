@@ -42,6 +42,8 @@ export class RenewMembershipComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSalesOfficersCenterList();
+    this.renewMembershipForm.controls['centerId'].setValue('');
+    this.renewMembershipForm.controls['memberId'].setValue('');
   }
 
   get g(){ return this.renewMembershipForm.controls};
@@ -60,7 +62,8 @@ export class RenewMembershipComponent implements OnInit {
   }
 
   getCenterVal(event:any){
-    var searchMemberId = event.target.value;
+    console.log(event)
+    var searchMemberId = this.renewMembershipForm.controls['centerId'].value;
     this._salesService.getMemberListByCenter(searchMemberId).subscribe((data:any) => {
      // //console.log(data,'all memberDropdownList')
       if(data.length > 0){

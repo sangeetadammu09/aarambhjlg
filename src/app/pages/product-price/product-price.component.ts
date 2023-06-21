@@ -60,6 +60,7 @@ export class ProductPriceComponent implements OnInit {
   getAllProductPrices(){
     this._adminService.getProducts(this.page,this.pageSize,this.cityId,'').subscribe((data) => {    
       if(data){
+        console.log(data)
         this.pageLoaded = true;
         this.productPriceList = data.products;
         this.total = data.pages.totalCount;

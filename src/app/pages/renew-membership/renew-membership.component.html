@@ -18,7 +18,7 @@
                     <div class="form-row">
                         <div class="form-group col-lg-6">
                             <label for="searchCenter">Select Center</label>
-                            <select class="custom-select" id="searchCenter"  (change)="getCenterVal($event)"
+                            <select class="custom-select" id="searchCenter"  (change)="getCenterVal($event)" formControlName="centerId" name="centerId" 
                             [ngClass]="{'is-invalid':(submitted && g['centerId'].errors) ||(g['centerId'].errors && g['centerId'].touched) }">
                               <option value="" [selected]="''">Choose Center..</option>
                               <option *ngFor="let item of centerDropdownList" [ngValue]="item.centerId">
@@ -32,7 +32,7 @@
                         </div>
                         <div class="form-group col-lg-6">
                             <label for="searchMember">Select Member</label>
-                              <select class="custom-select" id="searchMember" 
+                              <select class="custom-select" id="searchMember"  formControlName="memberId" name="memberId" 
                               [ngClass]="{'is-invalid':(submitted && g['memberId'].errors) ||(g['memberId'].errors && g['memberId'].touched) }">
                                 <option value="" [selected]="''">Choose Member..</option>
                                 <option *ngFor="let item of memberDropdownList" [ngValue]="item.memberId">

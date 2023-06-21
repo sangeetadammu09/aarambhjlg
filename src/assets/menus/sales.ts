@@ -101,22 +101,7 @@ export const SalesList = {
             }
             ]
           },
-          {
-            id: 1,
-            parentMenu: 'My Profile',
-            icon : 'fa-user',
-            isActive: true, 
-            url: 'my-profile',
-            submenuList: [
-                // {
-                //     id: 0,
-                //     menu: 'My Profile',
-                //     url: 'my-profile',
-                //     icon : 'fa-user',
-                //     isActive: true, 
-                // }
-            ]
-          },
+          
           {
             id: 1,
             parentMenu: 'Order',

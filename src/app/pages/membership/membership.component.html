@@ -98,7 +98,51 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body scrollable-modal">  
+        <div class="modal-body scrollable-modal"> 
+            <div class="card p-3 mb-2">
+                <div class="card-body">
+                <div class="d-flex justify-content-between">
+                <div class="d-flex flex-row align-items-center">
+                    <div class="icon"> 
+                        <i class="bx bxl-mailchimp"></i> </div>
+                            <div class="ms-2 c-details">
+                                 <div class="row d-flex">
+                                    <div class="card-title col-lg-6">Name :</div>
+                                    <div class="col-lg-6">{{memberDetails.memberName}}</div>
+
+                                    <div class="card-title col-lg-6">Fee Collected By :</div>
+                                    <div class="col-lg-6">{{memberDetails.feesCollectedByUser}}</div>
+
+                                    <div class="card-title col-lg-6">Payment Date :</div>
+                                    <div class="col-lg-6">{{memberDetails.paymentDate | date : "dd-MM-YYYY"}}</div>
+
+                                    <div class="card-title col-lg-6">Payment Mode :</div>
+                                    <div class="col-lg-6">{{memberDetails.paymentMode}}</div>
+
+                                    <div class="card-title col-lg-6">Comments :</div>
+                                    <div class="col-lg-6" >{{memberDetails.paymentComment}}</div>
+
+                                    <div class="card-title col-lg-6">Paid Fees :</div>
+                                    <div class="col-lg-6" >{{memberDetailsObj.paidFees}}</div>
+
+                                    <div class="card-title col-lg-6">Balance Fees :</div>
+                                    <div class="col-lg-6" >{{memberDetailsObj.balanceFees}}</div>
+
+                                    <div class="card-title col-lg-6">Total Fees :</div>
+                                    <div class="col-lg-6" >{{memberDetailsObj.totalFees}}</div>
+
+                                    <div class="card-title col-lg-6">Start Date :</div>
+                                    <div class="col-lg-6">{{memberDetails.startDate | date : "dd-MM-YYYY"}}</div>
+
+                                    <div class="card-title col-lg-6">End Date :</div>
+                                    <div class="col-lg-6">{{memberDetails.expiryDate | date : "dd-MM-YYYY"}}</div>
+  
+                                 </div>
+                            </div>
+                        </div>  
+                        </div>
+                        </div>   
+            </div> 
             <form [formGroup]="collectFeesForm" (ngSubmit)="submitFees()">
                
                 <div class="form-row">
@@ -164,10 +208,7 @@
                             <tr style="background-color:#1d4ed8;">
                                 <th scope="col" style="color: #fff; font-family: sans-serif;">S No.</th>
                                 <th scope="col" style="color: #fff; font-family: sans-serif;">Name</th>
-                                <th scope="col" style="color: #fff; font-family: sans-serif;">Fee Collected By</th>
-                                <!-- <th scope="col" style="color: #fff; font-family: sans-serif;">Paid Fees</th>
-                                <th scope="col" style="color: #fff; font-family: sans-serif;">Balance Fees</th>
-                                <th scope="col" style="color: #fff; font-family: sans-serif;">Total Fees</th> -->
+                                <th scope="col" style="color: #fff; font-family: sans-serif;"></th>
                                 <th scope="col" style="color: #fff; font-family: sans-serif;">Payment Date</th>
                                 <th scope="col" style="color: #fff; font-family: sans-serif;">Payment Mode</th>
                                 <th scope="col" style="color: #fff; font-family: sans-serif;">Comments</th>
@@ -180,9 +221,7 @@
                                 <td>{{5*(pagenew-1)+i+1}}</td>
                                 <td>{{item.memberName}}</td> 
                                 <td>{{item.feesCollectedByUser}}</td> 
-                                <!-- <td>{{item.paidFees}}</td>
-                                <td>{{item.balanceFees}}</td> 
-                                <td>{{item.totalFees}}</td>  -->
+        
                                 <td>{{item.paymentDate | date : "dd-MM-YYYY"}}</td> 
                                 <td>{{item.paymentMode}}</td> 
                                 <td>{{item.paymentComment}}</td> 
