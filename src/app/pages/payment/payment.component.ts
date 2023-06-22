@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from 'express';
 import * as moment from 'moment';
@@ -38,10 +38,16 @@ export class PaymentComponent implements OnInit {
   selectedPayment: any;
   @ViewChild ("closededitCollectionBtn") closededitCollectionBtn : any;
   pageLoaded : boolean= false;
+  statusVal='';
   paymentModeList = [{id:1, name: "Cash"}, {id:2, name: "UPI"},
                      {id:3, name: "Card"},{id:4, name: "Other"}]
+  filterList = [{id:1, name: "Select All"}, {id:2, name: "Pending"},
+                     {id:3, name: "Todays"},{id:4, name: "Future"}]
 
   isItemAdded : boolean = false;
+  @ViewChild ("statusChecked") statusChecked :any;
+  collectableAmount: any;
+
   
   constructor(private _salesService: SalesRelationService, private fb :FormBuilder, private toastrService : ToastrService) { 
     this.updatePaymentForm = this.fb.group({
@@ -113,11 +119,14 @@ export class PaymentComponent implements OnInit {
     paymentObj.userId = this.userId,
     paymentObj.installmentDate = this.installmentDate,
     paymentObj.memberId = this.memberId ? this.memberId : 0
+    let total =0;
     this._salesService.getOrderInstallmentCollectionList(paymentObj).subscribe((data:any) => {
       if(data){
         data.installments.forEach((item:any) => {
           item.installmentDate = moment(item.installmentDate).format('L')
+           total = total + item.payableAmt
         })
+        this.collectableAmount = total;
         this.installmentCollectionList = data.installments;
         //console.log(this.installmentCollectionList)
         this.total = data.page.totalCount;
@@ -181,6 +190,38 @@ submitUpdatePayment(){
        this.toastrService.error("Error while updating payment")
      } 
    })
+}
+
+getCheckBoxVal(event:any,status:any){
+  let checkStatus = event.target.checked;
+  let filterVal = status.name;
+
+  if(filterVal == 'Select All' && checkStatus == true){
+    this.getinstallmentDate(this.installmentDate)
+  }
+  
+  if(filterVal == 'Pending' && checkStatus == true){
+  this.installmentCollectionList = this.installmentCollectionList.filter((x:any)=>x.status == "Pending");
+  }else if(filterVal == 'Pending' && checkStatus == false){
+  this.getinstallmentDate(this.installmentDate)
+  }
+
+  if(filterVal == 'Future' && checkStatus == true){
+    this.installmentCollectionList = this.installmentCollectionList.filter((x:any)=>x.status == "Future");
+  }else if(filterVal == 'Future' && checkStatus == false){
+    this.getinstallmentDate(this.installmentDate)
+  }
+
+  if(filterVal == 'Todays' && checkStatus == true){
+    this.installmentCollectionList = this.installmentCollectionList.filter((x:any)=>x.status == "Todays");
+    console.log(this.installmentCollectionList)
+    }else if(filterVal == 'Todays' && checkStatus == false){
+    this.getinstallmentDate(this.installmentDate)
+    }
+
+
+
+
 }
 
 
