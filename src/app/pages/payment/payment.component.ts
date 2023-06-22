@@ -136,16 +136,16 @@ export class PaymentComponent implements OnInit {
 }
 
 showeditCollectionModal(item:any){
-   //console.log(item)
+   console.log(item)
    this.selectedPayment = item;
    this.updatePaymentForm.patchValue({
     orderInstallmentId: item.orderInstallmentId,
     memberId: item.memberId,
     memberName: item.fullName,
     installmentNo: item.installmentNo,
-    payingAmt: item.payableAmt,
+    //payingAmt: item.payableAmt,
     orderId: item.orderId,
-    paidDate: moment().format('L'),
+   // paidDate: moment().format('L'),
     paymentTakenById: this.userId
    })
    this._salesService.getOrderInstallmentHistory(item.orderId, item.memberId).subscribe((data:any) => {

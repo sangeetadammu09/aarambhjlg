@@ -22,10 +22,12 @@
                                     {{item.centerName}}</option>
                                 </select>
                             </div>
-
-                            
-                         
-
+                       
+                          <div class="form-group col-md-6">
+                            <label for="searchMember">Select Date</label>
+                            <input type="date" class="form-control" [(ngModel)]="installmentDate" 
+                            (change)="getinstallmentDate(installmentDate)" placeholder="Search Installment Date">
+                          </div>
                           <div class="form-group col-md-6">
                             <label for="searchMember">Select Member</label>
                             <select class="custom-select" id="searchMember" [(ngModel)]="searchMember" (change)="getMemberVal(searchMember)">
@@ -34,11 +36,6 @@
                                   {{item.fullName}}
                               </option>
                               </select>
-                          </div>
-                          <div class="form-group col-md-6">
-                            <label for="searchMember">Select Date</label>
-                            <input type="date" class="form-control" [(ngModel)]="installmentDate" 
-                            (change)="getinstallmentDate(installmentDate)" placeholder="Search Installment Date">
                           </div>
                         </div>
                     </div>
@@ -136,16 +133,27 @@
             </div>
             <div class="form-group col-lg-6">
               <label class="form-control-label">Payment Date</label>
-              <input type="text" class="form-control" formControlName="paidDate" name="paidDate" readonly>     
+              <input type="date" class="form-control" formControlName="paidDate" name="paidDate" 
+              [ngClass]="{'is-invalid':(submitted && g['paidDate'].errors) ||(g['paidDate'].errors && g['paidDate'].touched) }">  
+              <div *ngIf="(submitted && g['paidDate'].errors) ||(g['paidDate'].errors && g['paidDate'].touched)" class="invalid-feedback">
+                <div *ngIf="g['paidDate'].errors['required']">
+                    Payment Date is required
+                </div>
+              </div>    
            </div>
              </div>
              
               <div class="form-row">
 
                 <div class="form-group col-lg-6">
-                  <label class="form-control-label">Payment Amount</label>
-                  <input type="text" class="form-control" formControlName="payingAmt" name="payingAmt" readonly>  
-                     
+                  <label class="form-control-label">Payment Amount<span>({{selectedPayment?.payableAmt}})</span></label>
+                  <input type="text" class="form-control" formControlName="payingAmt" name="payingAmt" 
+                  [ngClass]="{'is-invalid':(submitted && g['payingAmt'].errors) ||(g['payingAmt'].errors && g['payingAmt'].touched) }">  
+                  <div *ngIf="(submitted && g['payingAmt'].errors) ||(g['payingAmt'].errors && g['payingAmt'].touched)" class="invalid-feedback">
+                    <div *ngIf="g['payingAmt'].errors['required']">
+                        Payment Amount is required
+                    </div>
+                  </div>  
               </div>
               
               <div class="form-group col-lg-6">
@@ -162,7 +170,6 @@
                     </div>
                </div>   
               </div>
-
               <div class="form-group col-lg-6">
                 <label class="form-control-label">Payment Comment</label>
                 <input type="text" class="form-control" formControlName="paymentComment" name="paymentComment"
@@ -173,11 +180,7 @@
                   </div>
              </div>   
               </div>
-
               </div>
-             
-
-      
               <div class="modal-footer">
                   <button type="submit" class="btn btn-primary" [disabled]="isItemAdded">Update</button>
                 </div>
