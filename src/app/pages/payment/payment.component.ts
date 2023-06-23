@@ -39,16 +39,15 @@ export class PaymentComponent implements OnInit {
   @ViewChild ("closededitCollectionBtn") closededitCollectionBtn : any;
   pageLoaded : boolean= false;
   statusVal='';
-  paymentModeList = [{id:1, name: "Cash"}, {id:2, name: "UPI"},
-                     {id:3, name: "Card"},{id:4, name: "Other"}]
-  filterList = [{id:1, name: "Select All"}, {id:2, name: "Pending"},
-                     {id:3, name: "Todays"},{id:4, name: "Future"}]
+  paymentModeList = [{id:1, name: "Cash"}, {id:2, name: "UPI"},{id:3, name: "Card"},{id:4, name: "Other"}]
+  filterList = [{id:1, name: "Pending"},{id:2, name: "Todays"},{id:3, name: "Future"}]
 
   isItemAdded : boolean = false;
   @ViewChild ("statusChecked") statusChecked :any;
   collectableAmount: any;
-
-  
+  filteredData: any[] = []
+  noFilterApplied  = true;
+  masterSelected = false;
   constructor(private _salesService: SalesRelationService, private fb :FormBuilder, private toastrService : ToastrService) { 
     this.updatePaymentForm = this.fb.group({
       orderInstallmentId: [],
@@ -68,7 +67,6 @@ export class PaymentComponent implements OnInit {
     this.getSalesOfficersCenterList();
     this.searchCenter = "";
     this.searchMember ="";
-
  
   }
 
@@ -123,12 +121,13 @@ export class PaymentComponent implements OnInit {
     this._salesService.getOrderInstallmentCollectionList(paymentObj).subscribe((data:any) => {
       if(data){
         data.installments.forEach((item:any) => {
-          item.installmentDate = moment(item.installmentDate).format('L')
+          item.installmentDate = moment(item.installmentDate).format('L');
+          item.selected = null;
            total = total + item.payableAmt
         })
         this.collectableAmount = total;
         this.installmentCollectionList = data.installments;
-        //console.log(this.installmentCollectionList)
+     //   console.log(this.installmentCollectionList)
         this.total = data.page.totalCount;
  
        }else{
@@ -219,10 +218,26 @@ getCheckBoxVal(event:any,status:any){
     this.getinstallmentDate(this.installmentDate)
     }
 
-
-
-
 }
+
+
+sendCheckedCollection(){
+  this.noFilterApplied = false;
+  let temp;
+  let selectedItem = this.filterList.filter((x:any) => x.checked );
+  this.masterSelected = this.filterList.every((item:any) => item.checked == true);
+  this.filteredData= selectedItem.map((x:any) =>{
+   temp = this.installmentCollectionList.find((y:any)=> x.name == y.status);
+   return {...temp} 
+  })
+}
+
+checkUncheckAll(evt:any) {
+  this.filterList.forEach((c:any) => c.checked = evt.target.checked)
+  this.sendCheckedCollection()
+}
+
+
 
 
 }
