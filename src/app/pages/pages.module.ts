@@ -41,6 +41,7 @@ import { ValidityExpiringMembersComponent } from './validity-expiring-members/va
 import { MembershipComponent } from './membership/membership.component';
 import { MembershipHistoryComponent } from './membership-history/membership-history.component';
 import { RenewMembershipComponent } from './renew-membership/renew-membership.component';
+import { TruncatePipe } from '../common/trim.pipe';
 @NgModule({
   imports: [
     CommonModule,
@@ -85,7 +86,7 @@ import { RenewMembershipComponent } from './renew-membership/renew-membership.co
     ValidityExpiringMembersComponent,
     MembershipComponent,
     MembershipHistoryComponent,
-    RenewMembershipComponent
+    RenewMembershipComponent,TruncatePipe
   ]
 })
 

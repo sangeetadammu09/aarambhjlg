@@ -226,15 +226,17 @@ sendCheckedCollection(){
   let temp;
   let selectedItem = this.filterList.filter((x:any) => x.checked );
   this.masterSelected = this.filterList.every((item:any) => item.checked == true);
-  this.filteredData= selectedItem.map((x:any) =>{
+  this.filteredData = selectedItem.map((x:any) =>{
    temp = this.installmentCollectionList.find((y:any)=> x.name == y.status);
    return {...temp} 
   })
+  console.log(this.filteredData);
 }
 
 checkUncheckAll(evt:any) {
   this.filterList.forEach((c:any) => c.checked = evt.target.checked)
-  this.sendCheckedCollection()
+  this.sendCheckedCollection();
+
 }
 
 

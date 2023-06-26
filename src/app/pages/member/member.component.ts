@@ -92,7 +92,7 @@ export class MemberComponent implements OnInit {
       alternateMobileNo :['',[Validators.required,  Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"),]],
       stayThere: ['', Validators.required],
       workingAs: ['', Validators.required],
-      familyMembers: [, Validators.required],
+      familyMembers: [, [Validators.required,,Validators.pattern('^[0-9,]*$')]],
       anyOneStudying: ['', Validators.required],
       dateOfJoining: ['', Validators.required],
       validTillDate: ['', Validators.required],

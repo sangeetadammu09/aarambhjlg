@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -63,6 +64,9 @@ export class ProductPriceComponent implements OnInit {
         console.log(data)
         this.pageLoaded = true;
         this.productPriceList = data.products;
+        this.productPriceList.forEach((item:any,index:number) => {
+          item['rowEdited'] = false;
+        }) 
         this.total = data.pages.totalCount;
         //console.log(this.productPriceList,'all ProductPrices', this.rowEdit)
 
@@ -83,6 +87,11 @@ export class ProductPriceComponent implements OnInit {
   getProductPriceVal(event:any){
     //console.log(event.target.value)
     var searchTerm = event.target.value;
+    console.log(searchTerm.length)
+    if(searchTerm.length == 0){
+      this.getAllProductPrices();
+    }
+    if(searchTerm.length >=3){
     this._adminService.getProducts(this.page,this.pageSize,this.cityId,searchTerm).subscribe((data) => {    
       if(data){
      //  this.productsFound = true;
@@ -95,7 +104,10 @@ export class ProductPriceComponent implements OnInit {
         // this.productsFound = false;
        }
        
+     }, (error:HttpErrorResponse) => {
+         this.productPriceList = []; 
      })
+    }
   }
 
   getAllCitys(){
@@ -124,7 +136,8 @@ export class ProductPriceComponent implements OnInit {
   }
 
   onRowEditInit(product: any) {
-    this.rowEdit = true;
+   // this.rowEdit = true;
+    product.rowEdited = !product.rowEdited;
     
 }
 

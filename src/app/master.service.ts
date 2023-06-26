@@ -27,12 +27,12 @@ export class MasterService {
   }
 
   signOut(): void {
-    window.sessionStorage.clear();
+    window.localStorage.clear();
   }
 
   public saveToken(token: string): void {
-    window.sessionStorage.removeItem(TOKEN_KEY);
-    window.sessionStorage.setItem(TOKEN_KEY, token);
+    window.localStorage.removeItem(TOKEN_KEY);
+    window.localStorage.setItem(TOKEN_KEY, token);
 
     // const user = this.getUser();
     // if (user.id) {
@@ -41,25 +41,25 @@ export class MasterService {
   }
 
   public getToken(): string | null {
-    return window.sessionStorage.getItem(TOKEN_KEY);
+    return window.localStorage.getItem(TOKEN_KEY);
   }
 
   public saveRefreshToken(token: string): void {
-    window.sessionStorage.removeItem(REFRESHTOKEN_KEY);
-    window.sessionStorage.setItem(REFRESHTOKEN_KEY, token);
+    window.localStorage.removeItem(REFRESHTOKEN_KEY);
+    window.localStorage.setItem(REFRESHTOKEN_KEY, token);
   }
 
   public getRefreshToken(): string | null {
-    return window.sessionStorage.getItem(REFRESHTOKEN_KEY);
+    return window.localStorage.getItem(REFRESHTOKEN_KEY);
   }
 
   public saveUser(user: any): void {
-    window.sessionStorage.removeItem(USER_KEY);
-    window.sessionStorage.setItem(USER_KEY, user);
+    window.localStorage.removeItem(USER_KEY);
+    window.localStorage.setItem(USER_KEY, user);
   }
 
   public getUser(): any {
-     window.sessionStorage.getItem(USER_KEY);
+     window.localStorage.getItem(USER_KEY);
   
   }
 

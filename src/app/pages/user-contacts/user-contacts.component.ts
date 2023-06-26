@@ -31,7 +31,9 @@ export class UserContactsComponent implements OnInit {
               });
             user['modifiedRoles']= finalArray;
           })
+
           this.userList = data.users;
+          console.log(this.userList);
           this.pageLoaded = true;
           this.total = data.page.totalCount;
 

@@ -51,7 +51,7 @@ import { NgxPrintElementModule } from "ngx-print-element";
     ProgressBarModule,
     ProgressSpinnerModule,
     HttpClientModule,
-    FormsModule,ReactiveFormsModule,NgxPrintElementModule
+    FormsModule,ReactiveFormsModule,NgxPrintElementModule,
   ],
   providers: []
 })

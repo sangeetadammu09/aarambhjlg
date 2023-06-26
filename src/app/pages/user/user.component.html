@@ -201,21 +201,22 @@
                                         </div>
                                 </div>
                             </div>
-                            <div class="form-group col-lg-12">
-                                <label class="form-control-label">Family Details</label>
-                                <textarea formControlName="familyDetails" name="familyDetails"  class="form-control"  id="familyDetails" rows="3"
+                            <div class="form-group col-lg-6">
+                                <label class="form-control-label">Family Members</label>
+                                <!-- <textarea formControlName="familyDetails" name="familyDetails"  class="form-control"  id="familyDetails" rows="3"
                                 [ngClass]="{'is-invalid':(submitted && f['familyDetails'].errors) ||(f['familyDetails'].errors && f['familyDetails'].touched) }"
-                                ></textarea>
+                                ></textarea> -->
+                                <input type="text" class="form-control" formControlName="familyDetails" name="familyDetails"  
+                                [ngClass]="{'is-invalid':(submitted && f['familyDetails'].errors) ||(f['familyDetails'].errors && f['familyDetails'].touched) }">
                                 <div *ngIf="(submitted && f['familyDetails'].errors) ||(f['familyDetails'].errors && f['familyDetails'].touched)" class="invalid-feedback">
                                         <div *ngIf="f['familyDetails'].errors['required']">
-                                            Family Details is required
+                                            Family Members is required
+                                        </div>
+                                        <div *ngIf="f['familyDetails'].errors['pattern']">
+                                           Only Numbers are accepted
                                         </div>
                                 </div>
                             </div>
-                           
-                        </div>
-
-                        <div class="row">
                             <div class="form-group col-lg-6">
                                 <label class="form-control-label">City</label>
                                 <select class="custom-select"  formControlName="cityId" name="cityId" id="cityId"

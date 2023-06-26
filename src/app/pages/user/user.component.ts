@@ -104,7 +104,7 @@ export class UserComponent implements OnInit {
       alternateMobileNo : ['', [Validators.required,  Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"),]],
       address: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
-      familyDetails: ['', Validators.required],
+      familyDetails: ['', [Validators.required,,Validators.pattern('^[0-9,]*$')]],
       username: ['', Validators.required],
       password:[] ,
       passwordHash: [],

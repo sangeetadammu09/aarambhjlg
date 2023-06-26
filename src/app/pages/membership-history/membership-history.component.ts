@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/admin/service/admin.service';
 import { SalesRelationService } from 'src/app/sales-relation-officer/service/sales-relation.service';
@@ -75,6 +76,12 @@ export class MembershipHistoryComponent implements OnInit {
          this.memberList = [];
          this.pageLoaded = false
        }
+     },(error:HttpErrorResponse) => {
+        console.log(error,'error')
+        if(error.status == 404){
+          this.pageLoaded = true
+          this.memberList = [];
+        }
      })
   
 }

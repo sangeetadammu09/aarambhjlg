@@ -3,10 +3,21 @@
     font-family: C, sans-serif;
 } */
 
+.price-alert{
+    color:red;
+    font-weight: bold;
+}
+
+.product-view{
+    height: 200px;
+    padding: 20px; 
+}
+
 .navbar-brand-image{
     width: 100%;
     height: 15vh !important;
 }
+
 
 
 .ngx-pagination .current {

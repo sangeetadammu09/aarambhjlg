@@ -49,13 +49,21 @@
                           <div class="row">
                           <div class="form-row">
                           <div class="form-group col-md-10 col-sm-12">
-                            <label for="inputAddress">Select Product</label>
+                            
+                              
+                              
+                            <label for="inputAddress">Search Product</label>
                             <div class="dropdown">
                               <div  data-bs-toggle="dropdown">
+                                <div class="input-icon">
                                 <input type="text" class="form-control" [(ngModel)]="searchProduct" 
-                                (input)="getSearchedProducts(searchProduct)" placeholder="Search Product">
+                                (input)="getSearchedProducts(searchProduct)" placeholder="Search Product ...">
+                                <span class="input-icon-addon">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M21 21l-6 -6"></path></svg>
+                                </span>
                               </div>
-                        
+                              </div>
+                             
                             <div class="dropdown-menu search-dropdown-menu scrollable-modal">
                               <div *ngIf="productList.length > 0">
                                 <a class="dropdown-item search-dropdown-item" *ngFor="let item of productList"
@@ -85,15 +93,16 @@
                   <div class="col-sm-6 col-lg-3" *ngFor="let item of randomProductList| paginate: { itemsPerPage: 12, currentPage: page};
                   let i = index">
                   <div class="card p-2 h-100">
-                    <img class="card-img-top"  [src]="item.productPhoto" alt="User Document" height="250px" 
+                    <img class="card-img-top product-view"  [src]="item.productPhoto" alt="Product Image" 
                     data-toggle="modal" data-target="#productModal"
                     (click)="showProductModal(item)">
                     <div class="card-body">
                       <h5 class="card-title" style="height: 40px" data-toggle="modal" data-target="#productModal"
                       (click)="showProductModal(item)">{{item.productName}}</h5>
-                      <p class="card-text">Regional Name: {{item.regionalName}}</p>
+                      <!-- <p class="card-text">Regional Name: {{item.regionalName}}</p> -->
                       <p class="card-text">MRP: {{item.mrp | currency: 'INR'}}</p>
                       <p class="card-text">Sale Price: {{item.jlgSalePrice | currency: 'INR'}}</p>
+                      <p class="card-text price-alert" *ngIf="item.priceUpdateMsg!=null">Alert : {{item.priceUpdateMsg}}</p>
                     </div>
 
                   </div>
@@ -135,10 +144,10 @@
       </div>
       <div class="modal-body scrollable-modal" *ngIf="searchProductItem">
         <div class="card p-2">
-          <img  [src]="searchProductItem.productPhoto" alt="cart image" class="logo-image" width="130px" height="auto">
+          <img  [src]="searchProductItem.productPhoto" alt="cart image" class="logo-image product-view">
           <div class="card-body">
-            <h5 class="card-title">Name: {{searchProductItem.productName}}</h5>
-            <p class="card-text">Regional Name: {{searchProductItem.regionalName}}</p>
+            <h5 class="card-title">{{searchProductItem.productName}}</h5>
+            <!-- <p class="card-text">Regional Name: {{searchProductItem.regionalName}}</p> -->
             <p class="card-text">MRP: {{searchProductItem.mrp | currency: 'INR'}}</p>
             <p class="card-text">Sale Price: {{searchProductItem.jlgSalePrice | currency: 'INR'}}</p>
             <p>{{searchProductItem.qty}}</p>
@@ -195,8 +204,13 @@
           <div class="container-xl">
           <div class="row row-cards">
               <div class="col-12">
-
+                
+                  
                 <div class="container mt-3 mb-3" *ngIf="cartList.length != 0">
+                  <div class="ribbon ribbon-top ribbon-bookmark bg-green">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-filled" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path></svg>
+                </div>
                   <div class="row">
                     <div class="col col-3 mb-3" *ngFor="let item of cartList| paginate: { itemsPerPage: 10, currentPage: page};
                     let i = index">

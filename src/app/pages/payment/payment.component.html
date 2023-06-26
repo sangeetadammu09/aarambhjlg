@@ -8,7 +8,7 @@
                     <div class="container d-block">
                     <div class="mt-3 mb-3 row">
                         <div class="col-lg-10 col-sm-6 mb-3 mt-2">
-                            <h3 class="card-title" >List of Installment Collections</h3>
+                            <h3 class="card-title" >Installment Payment Collections</h3>
                         </div>
                         
                     </div>
@@ -76,7 +76,7 @@
                             <th scope="col" style="color: #fff;">Payable Amount</th>
                             <th scope="col" style="color: #fff;">Address</th>
                             <th scope="col" style="color: #fff;">Status</th>
-                            <th scope="col" style="color: #fff;">Edit</th>
+                            <th scope="col" style="color: #fff;">Take Payment</th>
                             
                           </tr>
                         
@@ -132,7 +132,7 @@
                             <th scope="col" style="color: #fff;">Payable Amount</th>
                             <th scope="col" style="color: #fff;">Address</th>
                             <th scope="col" style="color: #fff;">Status</th>
-                            <th scope="col" style="color: #fff;">Edit</th>
+                            <th scope="col" style="color: #fff;">Take Payment</th>
                           </tr>
                         <tbody *ngFor="let item of filteredData| paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: total } ; let i = index ">
                           <tr *ngIf="item.orderInstallmentId">
