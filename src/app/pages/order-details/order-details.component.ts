@@ -25,6 +25,7 @@ export class OrderDetailsComponent implements OnInit {
   paymentInstallmentObj:any;
   @ViewChild('closeApproveOrderModal') closeApproveOrderModal:any;
   @ViewChild('closeCancelOrderModal') closeCancelOrderModal:any;
+  @ViewChild('closeOrderDetailsBtn') closeOrderDetailsBtn:any;
   selectedOrderInstallmentList: any= [];
   todayDate = moment();
   approveOrderObj: any;
@@ -168,6 +169,10 @@ export class OrderDetailsComponent implements OnInit {
      if(data.status == 200){
       this.toastrService.success('Order approved successfully')
       this.closeApproveOrderModal.nativeElement.click();
+      this.selectedOrderInstallmentList = [];
+      this.closeOrderDetailsBtn.nativeElement.click();
+      this.getOrderListForApproval();
+
 
       }else{
         this.toastrService.success('Error approving the order')
@@ -181,7 +186,9 @@ export class OrderDetailsComponent implements OnInit {
     this._saleService.cancelOrder(this.selectedOrderId).subscribe((data) => {
      if(data.status == 200){
       this.closeCancelOrderModal.nativeElement.click();
+      this.closeOrderDetailsBtn.nativeElement.click();
       this.toastrService.success('Order cancelled successfully')
+      this.getOrderListForApproval();
 
       }else{
         this.toastrService.success('Error cancelling the order')
