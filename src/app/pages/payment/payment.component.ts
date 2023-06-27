@@ -122,7 +122,7 @@ export class PaymentComponent implements OnInit {
       if(data){
         data.installments.forEach((item:any) => {
           item.installmentDate = moment(item.installmentDate).format('L');
-          item.selected = null;
+          item.checked = false;
            total = total + item.payableAmt
         })
         this.collectableAmount = total;
@@ -223,14 +223,20 @@ getCheckBoxVal(event:any,status:any){
 
 sendCheckedCollection(){
   this.noFilterApplied = false;
-  let temp;
-  let selectedItem = this.filterList.filter((x:any) => x.checked );
-  this.masterSelected = this.filterList.every((item:any) => item.checked == true);
-  this.filteredData = selectedItem.map((x:any) =>{
-   temp = this.installmentCollectionList.find((y:any)=> x.name == y.status);
-   return {...temp} 
+   console.log(this.filterList)
+  // console.log(this.installmentCollectionList)
+  this.filterList.forEach((x:any) => {
+     this.installmentCollectionList.forEach((y:any) => {
+       if(x.name == y.status && x.checked == true) {
+         y.checked = true;
+       }else if(x.name == y.status && x.checked == false){
+        y.checked = false;
+       }
+     })
   })
-  console.log(this.filteredData);
+  this.filteredData = this.installmentCollectionList.filter((x:any) => x.checked );
+  this.masterSelected = this.installmentCollectionList.every((item:any) => item.checked == true);
+  //console.log(this.filteredData);
 }
 
 checkUncheckAll(evt:any) {
