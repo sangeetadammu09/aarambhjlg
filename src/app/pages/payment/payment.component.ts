@@ -48,6 +48,9 @@ export class PaymentComponent implements OnInit {
   filteredData: any[] = []
   noFilterApplied  = true;
   masterSelected = false;
+  totalAmount =0;
+
+
   constructor(private _salesService: SalesRelationService, private fb :FormBuilder, private toastrService : ToastrService) { 
     this.updatePaymentForm = this.fb.group({
       orderInstallmentId: [],
@@ -117,15 +120,15 @@ export class PaymentComponent implements OnInit {
     paymentObj.userId = this.userId,
     paymentObj.installmentDate = this.installmentDate,
     paymentObj.memberId = this.memberId ? this.memberId : 0
-    let total =0;
+ 
     this._salesService.getOrderInstallmentCollectionList(paymentObj).subscribe((data:any) => {
       if(data){
         data.installments.forEach((item:any) => {
           item.installmentDate = moment(item.installmentDate).format('L');
           item.checked = false;
-           total = total + item.payableAmt
+           this.totalAmount = this.totalAmount + item.payableAmt
         })
-        this.collectableAmount = total;
+        this.collectableAmount = this.totalAmount;
         this.installmentCollectionList = data.installments;
      //   console.log(this.installmentCollectionList)
         this.total = data.page.totalCount;
@@ -223,7 +226,6 @@ getCheckBoxVal(event:any,status:any){
 
 sendCheckedCollection(){
   this.noFilterApplied = false;
-   console.log(this.filterList)
   // console.log(this.installmentCollectionList)
   this.filterList.forEach((x:any) => {
      this.installmentCollectionList.forEach((y:any) => {
@@ -235,6 +237,13 @@ sendCheckedCollection(){
      })
   })
   this.filteredData = this.installmentCollectionList.filter((x:any) => x.checked );
+  this.totalAmount = 0;
+   this.filteredData.forEach((item:any) => {
+     this.totalAmount = this.totalAmount + item.payableAmt
+  })
+  console.log(this.totalAmount)
+  this.collectableAmount = this.totalAmount;
+
   this.masterSelected = this.installmentCollectionList.every((item:any) => item.checked == true);
   //console.log(this.filteredData);
 }
