@@ -254,7 +254,8 @@
         </div>
         <div class="modal-body">
              <p>Are you sure you want to approve this order?</p>
-             <div class="modal-footer">
+              <div class="modal-footer">
+               <button type="button" class="btn btn-danger" (click)="cancelApproveOrder()">No</button>
                 <button type="submit" class="btn btn-primary" (click)="approveOrder()">Yes</button>
               </div>
         </div>

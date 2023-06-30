@@ -17,44 +17,54 @@
   
          <div class="table-responsive mt-3">
           
+          <div class="wrapper">
             <div class="d-flex justify-content-center">
-                <div class="d-flex flex-row align-items-center">
-                    <div class="icon"> 
-                        <i class="bx bxl-mailchimp"></i> </div>
-                        <div class="ms-2 c-details">
-                          <div class="row mt-3 mb-3">
-                            <img src="../../../../assets/images/aalogo.png" alt="AarambhJLG" class="navbar-brand-image logo-image">
-                              <h2 class="text-center">Order and Payment Installment Details</h2>
-                           </div>
-                            <div class="row d-flex">
-                               <div class="card-title col-lg-3">Member Name :</div>
-                               <div class="col-lg-3">{{cartDetailsObj?.fullName}}</div>
-
-                               <div class="card-title col-lg-3">City :</div>
-                               <div class="col-lg-3">{{cartDetailsObj?.cityName}}</div>
-
-                               <div class="card-title col-lg-3">Branch :</div>
-                               <div class="col-lg-3">{{cartDetailsObj?.branchName}}</div>
-
-                               <div class="card-title col-lg-3">Center :</div>
-                               <div class="col-lg-3">{{cartDetailsObj?.centerName}}</div>
-                              
-                               <div class="card-title col-lg-3">Center No :</div>
-                               <div class="col-lg-3">{{cartDetailsObj?.centerNo}}</div>
-
-                               <div class="card-title col-lg-3">Mobile :</div>
-                               <div class="col-lg-3">{{cartDetailsObj?.mobileNo}}</div>
-
-                               <div class="card-title col-lg-3">Address :</div>
-                               <div class="col-lg-3">{{cartDetailsObj?.address}}</div>
-
-                               <div class="card-title col-lg-3">Cart Date :</div>
-                               <div class="col-lg-3">{{cartDetailsObj?.cartDate | date : "dd-MM-YYYY"}}</div>
-
-                               <div class="card-title col-lg-3">Order Taken By :</div>
-                               <div class="col-lg-3">{{cartDetailsObj?.orderTakenByName}},<span>{{cartDetailsObj?.orderTakenByRole}}</span> </div>
-
-                            </div>
+                <div class="container-xl mt-3">
+                    <div class="row row-deck row-cards mb-3">
+                        <h2 class="text-center">Order and Payment Installment Details</h2>
+                     </div>    
+                           <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" class="col-lg-3">Member Name :</th>
+                                        <td class="col-lg-3">{{cartDetailsObj?.fullName}}</td>
+                        
+                                        <th scope="row" class="col-lg-3">City :</th>
+                                        <td class="col-lg-3">{{cartDetailsObj?.cityName}}</td>
+                                    </tr>
+                        
+                                    <tr>
+                                        <th scope="row" class="col-lg-3">Branch :</th>
+                                        <td class="col-lg-3">{{cartDetailsObj?.branchName}}</td>
+                        
+                                        <th scope="row" class="col-lg-3">Center :</th>
+                                        <td class="col-lg-3">{{cartDetailsObj?.centerName}}</td>
+                                    </tr>
+                        
+                                    <tr>
+                                        <th scope="row" class="col-lg-3">Center No :</th>
+                                        <td class="col-lg-3">{{cartDetailsObj?.centerNo}}</td>
+                        
+                                        <th scope="row" class="col-lg-3">Mobile :</th>
+                                        <td class="col-lg-3">{{cartDetailsObj?.mobileNo}}</td>
+                                    </tr>
+                        
+                                    <tr>
+                                        <th scope="row" class="col-lg-3">Address :</th>
+                                        <td class="col-lg-3">{{cartDetailsObj?.address}}</td>
+                        
+                                        <th scope="row" class="col-lg-3">Cart Date :</th>
+                                        <td class="col-lg-3">{{cartDetailsObj?.cartDate | date : "dd-MM-YYYY"}}</td>
+                                    </tr>
+                        
+                                    <tr>
+                                        <th scope="row" class="col-lg-3">Order Taken By :</th>
+                                        <td class="col-lg-3">{{cartDetailsObj?.orderTakenByName}},<span>{{cartDetailsObj?.orderTakenByRole}}</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                        </div>
                 </div>  
             </div>
@@ -100,11 +110,11 @@
                 </tbody>
                 
             </table>
-            <div class="card-footer d-flex align-items-center" style="background-color: #fff;"  *ngIf="viewCartList.length>0">
+            <!-- <div class="card-footer d-flex align-items-center" style="background-color: #fff;"  *ngIf="viewCartList.length>0">
                 <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2">
                     <pagination-controls (pageChange)="page = $event"></pagination-controls>
                 </div>
-            </div>
+            </div> -->
               <div class="row card mb-3" *ngIf="viewCartList.length == 0">
                 <p class="text-center">No Order found</p>
               </div>
@@ -114,43 +124,53 @@
                     <div class="icon"> 
                         <i class="bx bxl-mailchimp"></i> </div>
                         <div class="ms-2 c-details">
-                            <div class="row d-flex">
-                               <div class="card-title col-lg-6">Total Bill Amount :</div>
-                               <div class="col-lg-6">{{cartDetailsObj.total | currency: 'INR'}}</div>
-
-                               <div class="card-title col-lg-6">Service Charges :</div>
-                               <div class="col-lg-4">
-                               <div class="serviceCharge">
-                                    <input type="text" class="form-control" id="serviceCharge"  [(ngModel)]="productObj.prodServiceChangeInput" 
-                                    placeholder="Enter Quantity" #prodServiceChangeInput=ngModel pattern="^(0|[1-9][0-9]*)$" 
-                                    (input)="addServiceCharge(productObj.prodServiceChangeInput)">
+                          <div class="row d-flex">
+                            <div class="card-title col-lg-3" style="padding: 10px;"></div>
+                            <div class="col-lg-3"></div>
+                            <div class="card-title col-lg-2">Total Bill Amount :</div>
+                            <div class="col-lg-2">{{cartDetailsObj.total | currency: 'INR'}}</div>
+                            <div class="col-lg-2"></div>
+                            <div class="card-title col-lg-3" style="padding: 10px;"></div>
+                            <div class="col-lg-3"></div>
+                            <div class="card-title col-lg-2">Service Charges :</div>
+                            <div class="col-lg-2">
+                                <div class="serviceCharge">
+                                    <input type="text" class="form-control" id="serviceCharge" [(ngModel)]="productObj.prodServiceChangeInput" placeholder="Enter Quantity"
+                                        #prodServiceChangeInput="ngModel" pattern="^(0|[1-9][0-9]*)$" (input)="addServiceCharge(productObj.prodServiceChangeInput)">
                                     <div *ngIf="prodServiceChangeInput.touched">
-                                      <p class="text-red" *ngIf="prodServiceChangeInput.errors?.pattern">Only Numbers are required</p>
+                                        <p class="text-red" *ngIf="prodServiceChangeInput.errors?.pattern">Only Numbers are required</p>
                                     </div>
-                                    </div>
-                                
-                               </div>
-
-                               <div class="card-title col-lg-6">Bill Amount + Service Charges  :</div>
-                               <div class="col-lg-6">{{cartDetailsObj.finalAmount | currency: 'INR'}}</div>
-
-                               <div class="card-title col-lg-6">Payment Installments  :</div>
-                               <div class="col-lg-4">
-                                <select class="custom-select" id="searchInstallment" [(ngModel)]="paymentInstallment" 
-                                (change)="getInstallmentDetails(paymentInstallment)">
-                                    <option value="" [selected]="''">Choose Payment Installment..</option>
-                                    <option *ngFor="let item of installmentList" [ngValue]="item.installmentNo">
-                                        {{item.installment}}</option>
-                                    </select>
-                               </div>
-
-                                <div class="row mt-3">
-                                       <div class="offset-lg-4 col-lg-4">
-                                        <button class="btn btn-primary  mr-2" (click)="cancelOrder()">Cancel Order</button>
-                                        <button class="btn btn-primary" (click)="placeOrder()">Place Order</button>
-                                       </div>
-                                </div>      
+                                </div>
                             </div>
+                            <div class="col-lg-2"></div>
+                            <div class="card-title col-lg-3" style="padding: 10px;"></div>
+                            <div class="card-title col-lg-3"></div>
+                            <div class="card-title col-lg-3">Bill Amount + Service Charges :</div>
+                            <div class="col-lg-3">{{cartDetailsObj.finalAmount | currency: 'INR'}}</div>
+                            <div class="card-title col-lg-3" style="padding: 10px;"></div>
+                            <div class="card-title col-lg-3"></div>
+                            <div class="card-title col-lg-2">Payment Installments :</div>
+                            <div class="col-lg-2">
+                                <select class="custom-select" id="searchInstallment" [(ngModel)]="paymentInstallment" (change)="getInstallmentDetails(paymentInstallment)">
+                                    <option value="" selected>Choose Payment Installment..</option>
+                                    <option *ngFor="let item of installmentList" [ngValue]="item.installmentNo">{{item.installment}}</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-2"></div>
+                            <div class="row mt-3">
+                                <div class="offset-lg-4 col-lg-4">
+                                    <button class="btn btn-primary mr-2" (click)="cancelOrder()">Cancel Order</button>
+                                    <button class="btn btn-primary" (click)="placeOrder()">Place Order</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- <div class="row mt-3">
+                            <div class="offset-lg-4 col-lg-4">
+                                <button class="btn btn-primary mr-2" (click)="cancelOrder()">Cancel Order</button>
+                                <button class="btn btn-primary" (click)="placeOrder()">Place Order</button>
+                            </div>
+                        </div> -->
                        </div>
                 </div>  
               </div>

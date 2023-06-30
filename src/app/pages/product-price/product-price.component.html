@@ -47,16 +47,16 @@
                   <tr>
                     <td>{{pageSize*(page-1)+i+1}}</td>
                     <td>
-                        <span *ngIf="item.rowEdited">
-                            <input type="text" class="form-control prime-edit-input" [(ngModel)]="item.productName">
+                        <span *ngIf="item.rowEdited" >
+                            <input type="text" class="form-control prime-edit-input"  [(ngModel)]="item.productName">
                         </span>
-                        <span *ngIf="!item.rowEdited"> {{item.productName}}</span>
+                        <span *ngIf="!item.rowEdited" style="font-family:Tiro Devanagari Marathi;"> {{item.productName}}</span>
                     </td> 
                     <td>
                         <span *ngIf="item.rowEdited">
                         <input type="text" class="form-control prime-edit-input" [(ngModel)]="item.mrp">
                        </span>
-                        <span *ngIf="!item.rowEdited">
+                        <span *ngIf="!item.rowEdited" class="number-font">
                             {{item.mrp | currency: 'INR'}}
                         </span>
                     </td>
@@ -66,21 +66,22 @@
                         <span *ngIf="item.rowEdited">
                             <input type="text" class="form-control prime-edit-input" [(ngModel)]="item.jlgSalePrice">
                         </span>
-                        <span *ngIf="!item.rowEdited">{{item.jlgSalePrice | currency: 'INR'}}
+                        <span *ngIf="!item.rowEdited" class="number-font">{{item.jlgSalePrice | currency: 'INR'}}
                         </span>
                     </td>
 
                     <td>
-                       {{item.purchasePrice | currency: 'INR'}}
-                        
+                        <span class="number-font">
+                            {{item.purchasePrice | currency: 'INR'}}
+                        </span>
                     </td>
                     <td>
-                        <span [class.price-alert] = "item.mrpUpdated != 0" >
+                        <span [class.price-alert] = "item.mrpUpdated != 0"  class="number-font">
                             {{item.mrpUpdated | currency: 'INR'}}
                         </span>
                     </td>
                     <td>
-                        <span [class.price-alert] = "item.purchasePriceUpdated != 0">
+                        <span [class.price-alert] = "item.purchasePriceUpdated != 0" class="number-font">
                             {{item.purchasePriceUpdated | currency: 'INR'}}
                         </span>
                     </td>

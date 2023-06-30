@@ -2,6 +2,30 @@
 /* *{
     font-family: C, sans-serif;
 } */
+.file-format{
+    color:black; 
+    font-weight: bold;  
+    font-size: small;
+}
+
+.number-font{
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: medium;
+}
+
+.dropdown-item {
+    position: relative;
+  }
+
+  .dropdown-item:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #d6d2d2;
+  }
 
 .price-alert{
     color:red;
@@ -11,6 +35,7 @@
 .product-view{
     height: 200px;
     padding: 20px; 
+    padding-top: 40px;
 }
 
 .navbar-brand-image{

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SalesRelationService } from 'src/app/sales-relation-officer/service/sales-relation.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-returnorder',
@@ -21,9 +22,10 @@ export class ReturnorderComponent implements OnInit {
   _salesService: any;
   page = 1;
   @ViewChild('closeDeleteItemBtn') closeDeleteItemBtn:any;
+  @ViewChild('closeSubmitBtn') closeSubmitBtn:any;
   updatedCartId: any;
   selectedReturnOrder: any;
-  returnedOrderList: any;
+  returnedOrderList: any =[];
   userId = localStorage.getItem('userId');
   userRole = localStorage.getItem('roles');
   tempOrderArr:string[] = [];
@@ -60,15 +62,20 @@ export class ReturnorderComponent implements OnInit {
           this.orderFound = false;
           this.selectedOrderList = []
         }
+      },(error:HttpErrorResponse) => {
+         if(error.status == 500){
+          this.orderFound = false;
+          this.selectedOrderList = [];
+         }
       })
     }
   }
 
   getOrderReturnedItems(){
       this._saleService.getOrderReturnedItems(this.orderId).subscribe((data:any) =>{
-        //console.log(data)
+      //  console.log(data)
         if(data.status == 200){
-          this.orderFound = true;          
+          this.orderFound = true;    
           this.returnedOrderList = data.body;
           this.pageLoaded = true;
         }else{
@@ -86,7 +93,7 @@ export class ReturnorderComponent implements OnInit {
   }
 
   updateItemQuantity(item:any){
-    
+
     if(JSON.parse(item.prodQuantityInput) > item.qty){
       this.isIncreaseAmountError = true;
     }else{
@@ -104,6 +111,7 @@ export class ReturnorderComponent implements OnInit {
    
     this.tempOrderArr.push(updateCart)
     this.returnedOrderList  = this.tempOrderArr;
+    console.log(this.returnedOrderList,'returnedOrderList')
     }
    
 }
@@ -147,6 +155,7 @@ export class ReturnorderComponent implements OnInit {
     submitOrder.cityId = selectedReturnOrder.cityId,
     submitOrder.centerId = selectedReturnOrder.centerId,
     submitOrder.memberId = selectedReturnOrder.memberId,
+    submitOrder.branchId = selectedReturnOrder.branchId,
     submitOrder.returnRequestedById = this.userId ? JSON.parse(this.userId) : null,
     submitOrder.returnRequestedRole =  this.userRole,
     submitOrder.totalActualBillAmt = selectedReturnOrder.orderItems[0].totalAmt 
@@ -158,13 +167,18 @@ export class ReturnorderComponent implements OnInit {
       //console.log(data.status)
       if(data.status == 200){
         this.toastrService.success('Order return submitted successfully')
-        this.closeDeleteItemBtn.nativeElement.click();
-        this.getSearchedOrder(this.selectedReturnOrder.orderId)
+        this.closeSubmitBtn.nativeElement.click();
+        this.getSearchedOrder(selectedReturnOrder.orderId)
 
        }else{
          this.toastrService.error('No Items deleted. Please try again')
        } 
      })
+  }
+
+  cancelReturnRequest(){
+        this.closeSubmitBtn.nativeElement.click();
+        this.getSearchedOrder(this.approvedOrderDetailsObj.orderId)
   }
 
 

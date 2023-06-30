@@ -1,0 +1,32 @@
+.invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+.invoice-table .row {
+    display: table-row;
+}
+
+.invoice-table .card-title,
+.invoice-table .col {
+    display: table-cell;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.invoice-table .card-title {
+    font-weight: bold;
+    background-color: #f9f9f9;
+    
+}
+
+.invoice-table .col:nth-child(odd) {
+    background-color: #f9f9f9;
+    width: 20%;
+}
+
+.invoice-table .col:nth-child(even) {
+    background-color: #fff;
+    width: 30%;
+}

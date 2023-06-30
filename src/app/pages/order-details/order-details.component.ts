@@ -181,6 +181,10 @@ export class OrderDetailsComponent implements OnInit {
     })
   }
 
+  cancelApproveOrder(){
+    this.closeApproveOrderModal.nativeElement.click();
+  }
+
   
   cancelOrder(){
     this._saleService.cancelOrder(this.selectedOrderId).subscribe((data) => {

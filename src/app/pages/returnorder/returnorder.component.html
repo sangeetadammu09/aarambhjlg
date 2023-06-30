@@ -11,9 +11,11 @@
                                 <h2 class="card-title" >Return Order</h2>
                             </div>
                             
-                            <div class="form-group col-lg-6 col-sm-12">
-                                <input type="text" class="form-control" [(ngModel)]="searchOrder" 
-                                (input)="getSearchedOrder(searchOrder)" placeholder="Enter Order">
+                            <div class="form-group col-lg-4 col-sm-12">
+                              <input type="text" class="form-control" [(ngModel)]="searchOrder" placeholder="Enter Order">
+                            </div>
+                            <div class="form-group col-lg-2 col-sm-12">
+                              <button class="btn btn-primary" (click)="getSearchedOrder(searchOrder)" >Submit</button>
                             </div>
                             
                         </div>
@@ -25,40 +27,63 @@
                                 <div class="row row-deck row-cards mb-3">
                                     <h2 class="text-center">Order and Payment Installment Details</h2>
                                  </div>             
-                                        <div class="row row-deck row-cards">
-                                          <div class="card-title col-lg-3 col-sm-3">Bill Id :</div>
-                                           <div class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.orderId}}</div>
-                    
-                                           <div class="card-title col-lg-3 col-sm-3">Member Name :</div>
-                                           <div class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.fullName}}</div>
-                    
-                                           <div class="card-title col-lg-3 col-sm-3">City :</div>
-                                           <div class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.cityName}}</div>
-                    
-                                           <div class="card-title col-lg-3 col-sm-3">Center :</div>
-                                           <div class=" col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.centerName}}</div>
-                                          
-                                           <div class="card-title col-lg-3 col-sm-3">Center No :</div>
-                                           <div class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.centerNo}}</div>
-                    
-                                           <div class="card-title col-lg-3 col-sm-3">Mobile :</div>
-                                           <div class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.mobileNo}}</div>
-                    
-                                           <div class="card-title col-lg-3 col-sm-3">Address :</div>
-                                           <div class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.address}}</div>
-                    
-                                           <div class="card-title col-lg-3 col-sm-3">Order Date :</div>
-                                           <div class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.orderDate | date : "dd-MM-YYYY"}}</div>
-                    
-                                           <div class="card-title col-lg-3 col-sm-3">Order Taken By :</div>
-                                           <div class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.orderTakenByName}},<span>{{approvedOrderDetailsObj?.orderTakenByRole}}</span> </div>
-                                           
-                                           <div class="card-title col-lg-3 col-sm-3">Pending Registration Fees :</div>
-                                           <div class="col-lg-3 col-sm-3">₹ 0.0</div>
-                                          
-                    
-                                        </div>
+                                      
+                                 <div class="table-responsive">
+                                  <table class="table">
+                                      <tbody>
+                                          <tr>
+                                              <th scope="row" class="col-lg-3 col-sm-2">Bill No :</th>
+                                              <td class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.orderId}}</td>
                               
+                                              <th scope="row" class="col-lg-3 col-sm-2">Member Name :</th>
+                                              <td class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.fullName}}</td>
+                                          </tr>
+                              
+                                          <tr>
+                                              <th scope="row" class="col-lg-3 col-sm-2">City :</th>
+                                              <td class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.cityName}}</td>
+                              
+                                              <th scope="row" class="col-lg-3 col-sm-2">Center :</th>
+                                              <td class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.centerName}}</td>
+
+                                          </tr>
+                              
+
+                                          <tr>
+                                            
+                                            <th scope="row" class="col-lg-3 col-sm-2">Branch :</th>
+                                            <td class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.branchName}}</td>
+
+                                            <th scope="row" class="col-lg-3 col-sm-2">Center No :</th>
+                                            <td class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.centerNo}}</td>
+                                        </tr>
+                            
+
+                                          <tr>
+                                              <th scope="row" class="col-lg-3 col-sm-2">Mobile :</th>
+                                              <td class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.mobileNo}}</td>
+
+                                              <th scope="row" class="col-lg-3 col-sm-2">Address :</th>
+                                              <td class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.address}}</td>
+                                          </tr>
+                              
+                                          <tr>
+                                            <th scope="row" class="col-lg-3 col-sm-2">Order Taken By :</th>
+                                            <td class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.orderTakenByName}},<span>{{approvedOrderDetailsObj?.orderTakenByRole}}</span></td>
+                              
+                                              <th scope="row" class="col-lg-3 col-sm-2">Order Date :</th>
+                                              <td class="col-lg-3 col-sm-3">{{approvedOrderDetailsObj?.orderDate | date : "dd-MM-YYYY"}}</td>
+                                          </tr>
+                              
+                                          <tr>
+                                            
+                                              <th scope="row" class="col-lg-3 col-sm-2">Pending Registration Fees :</th>
+                                              <td class="col-lg-3 col-sm-2">₹ 0.0</td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                                      
                             </div> 
                         </div>
                             
@@ -68,7 +93,8 @@
                                 <tr style="background-color:#1d4ed8;">
                                   <th scope="col" style="color: #fff;">S No.</th>
                                   <th scope="col" style="color: #fff;">Product Name</th>
-                                  <th scope="col" style="color: #fff;">Quantity</th>
+                                  <th scope="col" style="color: #fff;">Original Quantity</th>
+                                  <th scope="col" style="color: #fff;">Return Quantity</th>
                                   <th scope="col" style="color: #fff;">Sales Price</th>
                                   <th scope="col" style="color: #fff;">Total</th>
                                   <th scope="col" style="color: #fff;">Edit</th>
@@ -79,6 +105,7 @@
                                 <tr>
                                   <td>{{10*(page-1)+i+1}}</td>
                                   <td>{{item.productName}}</td> 
+                                  <td>{{item.qty}}</td>
                                   <td *ngIf="!item.rowEdited">{{item.qty}}</td>
                                   <td *ngIf="item.rowEdited">
                                     <div class="quantity">
@@ -123,7 +150,7 @@
                                  <div class="col-lg-2 col-sm-2">{{approvedOrderDetailsObj?.totalBillAmt}}</div>
                               </div>
                         </div>
-                        <div class="container-xl mt-3">
+                        <!-- <div class="container-xl mt-3">
                             <div class="row row-deck row-cards mb-3">
                                 <h2 class="text-center" *ngIf="returnedOrderList.length>0">Returned Order Details</h2>
                              </div>   
@@ -153,7 +180,7 @@
                               </tbody>
                               
                           </table>
-                        </div>
+                        </div> -->
                         <div class="container-xl mt-3">
                             <div class="row row-deck row-cards mb-3">
                                 <h2 class="text-center">Installment Order Details</h2>
@@ -221,13 +248,14 @@
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
          
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeDeleteItemBtn>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeSubmitBtn>
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
              <p>Are you sure you want to submit this order?</p>
              <div class="modal-footer">
+              <button type="button" class="btn btn-danger" (click)="cancelReturnRequest()">No</button>
                 <button type="submit" class="btn btn-primary" (click)="submitReturnRequest()">Yes</button>
               </div>
         </div>
