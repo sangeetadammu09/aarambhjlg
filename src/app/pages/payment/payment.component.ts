@@ -17,7 +17,7 @@ export class PaymentComponent implements OnInit {
   MembersFound: boolean = false;
   page = 1;
   total = 20;
-  pageSize = 10;
+  pageSize = 100;
   cityId = localStorage.getItem('userCity');
   userId = localStorage.getItem('userId');
   roleNo = localStorage.getItem('roleNo');

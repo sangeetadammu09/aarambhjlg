@@ -102,6 +102,8 @@
                               
                                <div class="card-title col-lg-3">Center No :</div>
                                <div class="col-lg-3">{{orderDetailsObj?.centerNo}}</div>
+                               <div class="card-title col-lg-3">Branch :</div>
+                               <div class="col-lg-3">{{orderDetailsObj?.branchName}}</div>
 
                                <div class="card-title col-lg-3">Mobile :</div>
                                <div class="col-lg-3">{{orderDetailsObj?.mobileNo}}</div>
@@ -123,30 +125,29 @@
                 <table class="table card-table table-vcenter text-nowrap datatable" *ngIf="selectedOrderList?.length>0">
                
                     <tr style="background-color:#1d4ed8;">
-                      <th scope="col" style="color: #fff;">S No.</th>
+                      <th scope="col" style="color: #fff; width: 60px;">S No.</th>
                       <th scope="col" style="color: #fff;">Product Name</th>
-                      <th scope="col" style="color: #fff;">Quantity</th>
+                      <th scope="col" style="color: #fff;">Original Qty</th>
+                      <th scope="col" style="color: #fff;">Return Qty</th>
                       <th scope="col" style="color: #fff;">Sales Price</th>
-                      <th scope="col" style="color: #fff;">Total</th>
+                      <th scope="col" style="color: #fff;">Original Total</th>
+                      <th scope="col" style="color: #fff;">Return Total</th>
                     </tr>
                  
                   <tbody *ngFor="let item of selectedOrderList | paginate: { itemsPerPage: 10, currentPage: page }; let i = index ">
                     <tr>
-                      <td>{{10*(page-1)+i+1}}</td>
+                      <td style="width: 60px;">{{10*(page-1)+i+1}}</td>
                       <td>{{item.productName}}</td> 
                       <td> {{item.qty}}</td>
+                      <td> {{item.returnQty}}</td>
                       <td> {{item.salePrice | currency: 'INR'}}</td>
                       <td>{{item.totalAmt | currency: 'INR'}}</td>
+                      <td>{{item.totalReturnAmt | currency: 'INR'}}</td>
                     </tr>        
                   </tbody>
                   
                 </table>
-                <div class="card-footer d-flex align-items-center" style="background-color: #fff;">
-                    <div class="col-lg-12 d-flex justify-content-end pagination-custom pt-2" *ngIf="selectedOrderList.length != 0">
-                        <pagination-controls previousLabel="Prev"nextLabel="Next" [responsive]="true"
-                        (pageChange)="page = $event"></pagination-controls>
-                    </div>
-                </div>          
+                 
             </div>
             <div class="row mb-3" *ngIf="selectedOrderList.length == 0">
               <p class="text-center">No Order found</p>
@@ -172,7 +173,7 @@
              <!-- <button class="btn btn-primary mr-2" data-toggle="modal" data-target="#cancelOrderModal" 
              (click)="showCancelOrderModal(orderDetailsObj)">Cancel Order</button> -->
              <button class="btn btn-primary" data-toggle="modal" data-target="#approveOrderModal" 
-             (click)="showApproveOrderModal(orderDetailsObj)">Approve Order</button>
+             (click)="showApproveOrderModal(orderDetailsObj)">Approve Return</button>
             </div>
          </div> 
             

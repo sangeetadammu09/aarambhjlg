@@ -106,16 +106,12 @@
                                   <td>{{10*(page-1)+i+1}}</td>
                                   <td>{{item.productName}}</td> 
                                   <td>{{item.qty}}</td>
-                                  <td *ngIf="!item.rowEdited">{{item.qty}}</td>
+                                  <td *ngIf="!item.rowEdited">{{item.returnQty}}</td>
                                   <td *ngIf="item.rowEdited">
                                     <div class="quantity">
-                                    <input type="text" class="form-control" [(ngModel)]="selectedOrderList[i].prodQuantityInput" 
-                                    placeholder="Enter Quantity" #prodQuantityInput=ngModel name="{{'quantity' + i}}" id="{{'quantity' + i}}"
-                                     pattern="^(0|[1-9][0-9]*)$" (change)="updateItemQuantity(item)">
-                                    <div *ngIf="prodQuantityInput.touched">
-                                      <p class="text-red" *ngIf="prodQuantityInput.errors?.pattern">Only Numbers are required</p>
-                                      <p class="text-red" *ngIf="isIncreaseAmountError">Quantity cannot be increased</p>
-                                    </div>
+                                    <input type="number" class="form-control" [(ngModel)]="item.returnQty" 
+                                    placeholder="Enter Quantity" (change)="validate(item)">
+                                  
                                     </div>
                                  </td>
                                   <td> {{item.salePrice | currency: 'INR'}}</td>

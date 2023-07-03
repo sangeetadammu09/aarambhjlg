@@ -141,7 +141,7 @@
                   <tbody *ngFor="let item of selectedOrderList | paginate: { itemsPerPage: 10, currentPage: page }; let i = index ">
                     <tr>
                       <td>{{10*(page-1)+i+1}}</td>
-                      <td>{{item.productName}}</td> 
+                      <td style="font-family:Tiro Devanagari Marathi; font-size: 16px;">{{item.productName}}</td> 
                       <td> {{item.qty}}</td>
                       <td> {{item.salePrice | currency: 'INR'}}</td>
                       <td>{{item.totalAmt | currency: 'INR'}}</td>

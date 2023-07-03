@@ -147,12 +147,10 @@ export class ReturnedOrdersComponent implements OnInit {
      var approveObject :any ={};
      approveObject.orderId=  this.approveOrderObj.orderId,
      approveObject.memberId=  this.approveOrderObj.memberId,
-     approveObject.isApproved=  true,
      approveObject.returnApprovedById=  Number(this.userId),
      approveObject.returnApprovedByRole=  this.firstRole,
      approveObject.rejectionComment=  '',
-    
-   
+     approveObject.isApproved=  true,
     
     this._saleService.approveReturnRequest(approveObject).subscribe((data) => {
      if(data.status == 200){

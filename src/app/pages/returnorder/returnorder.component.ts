@@ -52,12 +52,13 @@ export class ReturnorderComponent implements OnInit {
           this.selectedOrderList = data.body.orderItems;
           this.selectedOrderList.forEach((item:any,index:number) => {
             item['rowEdited'] = false;
+            item.returnQty = undefined;
           }) 
           this.orderinstallmentList = data.body.installments;
           this.orderinstallmentList.forEach((item:any) => {
             item.installmentDate = moment(item.installmentDate).format("L");
           })
-          this.getOrderReturnedItems()
+         // this.getOrderReturnedItems()
         }else{
           this.orderFound = false;
           this.selectedOrderList = []
@@ -88,8 +89,15 @@ export class ReturnorderComponent implements OnInit {
 
   editRow(item:any){
     //console.log(item.qty)
-    item.prodQuantityInput = item.qty
+   // item.prodQuantityInput = item.qty
     item.rowEdited = !item.rowEdited;
+  }
+
+  validate(item:any)
+  {
+    if(JSON.parse(item.returnQty) > item.qty || item.returnQty < 0){
+      item.returnQty = 0;
+    }
   }
 
   updateItemQuantity(item:any){
@@ -144,8 +152,34 @@ export class ReturnorderComponent implements OnInit {
     
   }
 
+
   submitReturnRequest(){
-    var selectedReturnOrder :any = this.approvedOrderDetailsObj;
+    this.closeSubmitBtn.nativeElement.click();
+    let returnedItemsCount = 0;
+    this.selectedOrderList.forEach((item:any) => 
+    { 
+      if(item.returnQty)
+      returnedItemsCount = returnedItemsCount + item.returnQty;
+    });
+    if(returnedItemsCount == 0)
+    {
+     
+       alert("Please enter the return items");
+    }
+    else
+    {
+      var returnedItems : any[] = [] ; 
+      this.selectedOrderList.forEach((item:any) => 
+      { 
+        if(item.returnQty > 0)
+        {
+          item.qty = item.returnQty;
+          returnedItems.push(item);
+        }
+      });
+
+      var selectedReturnOrder :any = this.approvedOrderDetailsObj;
+
    // if(this.userRole)
     // var temp = JSON.parse(this.userRole);
     // const finalArray = temp.map((item:any, index:number) => ({ id: index,name: item }))
@@ -159,21 +193,25 @@ export class ReturnorderComponent implements OnInit {
     submitOrder.returnRequestedById = this.userId ? JSON.parse(this.userId) : null,
     submitOrder.returnRequestedRole =  this.userRole,
     submitOrder.totalActualBillAmt = selectedReturnOrder.orderItems[0].totalAmt 
-    this.returnedOrderList.forEach((returnOrder:any) => { delete returnOrder.salePrice , delete returnOrder.productName})
+    //this.returnedOrderList.forEach((returnOrder:any) => { delete returnOrder.salePrice , delete returnOrder.productName})
     
-    submitOrder.items = this.returnedOrderList
+   // submitOrder.items = this.returnedOrderList
     //console.log(submitOrder);
+    submitOrder.items = returnedItems;
+   
     this._saleService.submitReturnRequest(submitOrder).subscribe((data:any) => {
       //console.log(data.status)
       if(data.status == 200){
         this.toastrService.success('Order return submitted successfully')
-        this.closeSubmitBtn.nativeElement.click();
         this.getSearchedOrder(selectedReturnOrder.orderId)
 
-       }else{
+       }
+       else{
          this.toastrService.error('No Items deleted. Please try again')
        } 
      })
+    }
+    
   }
 
   cancelReturnRequest(){

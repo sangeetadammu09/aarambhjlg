@@ -120,7 +120,7 @@
                     <form [formGroup]="addMemberForm" (ngSubmit)="submitNewMember()">
                         <div class="row">
                             <div class="form-group col-lg-6">
-                                <label class="form-control-label">Name</label>
+                                <label class="form-control-label">Name<span style="color: crimson; font-weight: bold; font-size: large;"> *</span></label>
                                 <input type="text" class="form-control" formControlName="fullName" name="fullName"  
                                 [ngClass]="{'is-invalid':(submitted && f['fullName'].errors) ||(f['fullName'].errors && f['fullName'].touched) }">
                                     <div *ngIf="(submitted && f['fullName'].errors) ||(f['fullName'].errors && f['fullName'].touched)" class="invalid-feedback">
@@ -133,7 +133,7 @@
                                  </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <label class="form-control-label">Date of Birth</label>
+                                <label class="form-control-label">Date of Birth<span style="color: crimson; font-weight: bold; font-size: large;"> *</span></label>
                                 <input type="date" class="form-control" formControlName="dateOfBirth" name="dateOfBirth"  
                                 [ngClass]="{'is-invalid':(submitted && f['dateOfBirth'].errors) ||(f['dateOfBirth'].errors && f['dateOfBirth'].touched) }">
                                     <div *ngIf="(submitted && f['dateOfBirth'].errors) ||(f['dateOfBirth'].errors && f['dateOfBirth'].touched)" class="invalid-feedback">
@@ -146,7 +146,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-lg-6">
-                                <label class="form-control-label">Spouse Name</label>
+                                <label class="form-control-label">Spouse Name<span style="color: crimson; font-weight: bold; font-size: large;"> *</span></label>
                                 <input type="text" class="form-control" formControlName="spouse" name="spouse"  
                                 [ngClass]="{'is-invalid':(submitted && f['spouse'].errors) ||(f['spouse'].errors && f['spouse'].touched) }">
                                     <div *ngIf="(submitted && f['spouse'].errors) ||(f['spouse'].errors && f['spouse'].touched)" class="invalid-feedback">
@@ -156,7 +156,7 @@
                                  </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <label class="form-control-label">Spouse Date of Birth</label>
+                                <label class="form-control-label">Spouse Date of Birth<span style="color: crimson; font-weight: bold; font-size: large;"> *</span></label>
                                 <input type="date" class="form-control" formControlName="spouseDateOfBirth" name="spouseDateOfBirth"  
                                 [ngClass]="{'is-invalid':(submitted && f['spouseDateOfBirth'].errors) ||(f['spouseDateOfBirth'].errors && f['spouseDateOfBirth'].touched) }">
                                     <div *ngIf="(submitted && f['spouseDateOfBirth'].errors) ||(f['spouseDateOfBirth'].errors && f['spouseDateOfBirth'].touched)" class="invalid-feedback">
@@ -169,7 +169,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-lg-6">
-                                <label class="form-control-label">Contact</label>
+                                <label class="form-control-label">Contact<span style="color: crimson; font-weight: bold; font-size: large;"> *</span></label>
                                 <input type="text" class="form-control" formControlName="mobileNo" name="mobileNo" (change)="verifyContact($event)" 
                                 [ngClass]="{'is-invalid':(submitted && f['mobileNo'].errors) ||(f['mobileNo'].errors && f['mobileNo'].touched) }">
                                     <div *ngIf="(submitted && f['mobileNo'].errors) ||(f['mobileNo'].errors && f['mobileNo'].touched)" class="invalid-feedback">
@@ -183,7 +183,7 @@
                                  <div *ngIf="isMobileExists" class="text-red">Mobile already exists</div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <label class="form-control-label">Alternate Contact</label>
+                                <label class="form-control-label">Alternate Contact<span style="color: crimson; font-weight: bold; font-size: large;"> *</span></label>
                                 <input type="text" class="form-control" formControlName="alternateMobileNo" name="alternateMobileNo"  
                                 [ngClass]="{'is-invalid':(submitted && f['alternateMobileNo'].errors) ||(f['alternateMobileNo'].errors && f['alternateMobileNo'].touched) }">
                                     <div *ngIf="(submitted && f['alternateMobileNo'].errors) ||(f['alternateMobileNo'].errors && f['alternateMobileNo'].touched)" class="invalid-feedback">
@@ -199,7 +199,7 @@
                         </div>             
                         <div class="row">
                             <div class="form-group col-lg-6">
-                                <label class="form-control-label">City</label>
+                                <label class="form-control-label">City<span style="color: crimson; font-weight: bold; font-size: large;"> *</span></label>
                                 <select class="custom-select"  formControlName="cityId" name="cityId" id="cityId"
                                 [ngClass]="{'is-invalid':(submitted && f['cityId'].errors) ||(f['cityId'].errors && f['cityId'].touched) }">
                                 <option value="" [selected]="''">Choose..</option>
@@ -214,7 +214,7 @@
                             </div>
                             
                             <div class="form-group col-lg-6">
-                                <label class="form-control-label">Center</label>
+                                <label class="form-control-label">Center<span style="color: crimson; font-weight: bold; font-size: large;"> *</span></label>
                                 <select class="custom-select"  formControlName="centerId" name="centerId" id="centerId"
                                 [ngClass]="{'is-invalid':(submitted && f['centerId'].errors) ||(f['centerId'].errors && f['centerId'].touched) }">
                                 <option value="" [selected]="''">Choose..</option>
@@ -233,7 +233,7 @@
 
                         <div class="row">
                             <div class="form-group col-lg-6">
-                                <label class="form-control-label">Stay There</label>
+                                <label class="form-control-label">Stay There<span style="color: crimson; font-weight: bold; font-size: large;"> *</span></label>
                                 <input type="text" class="form-control" formControlName="stayThere" name="stayThere"  
                                 [ngClass]="{'is-invalid':(submitted && f['stayThere'].errors) ||(f['stayThere'].errors && f['stayThere'].touched) }">
                                     <div *ngIf="(submitted && f['stayThere'].errors) ||(f['stayThere'].errors && f['stayThere'].touched)" class="invalid-feedback">
@@ -243,7 +243,7 @@
                                  </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <label class="form-control-label">Occupation</label>
+                                <label class="form-control-label">Occupation<span style="color: crimson; font-weight: bold; font-size: large;"> *</span></label>
                                 <input type="text" class="form-control" formControlName="workingAs" name="workingAs"  
                                 [ngClass]="{'is-invalid':(submitted && f['workingAs'].errors) ||(f['workingAs'].errors && f['workingAs'].touched) }">
                                     <div *ngIf="(submitted && f['workingAs'].errors) ||(f['workingAs'].errors && f['workingAs'].touched)" class="invalid-feedback">
@@ -258,7 +258,7 @@
                             
                             
                             <div class="form-group col-lg-6">
-                                <label class="form-control-label">Anyone Studying</label>
+                                <label class="form-control-label">Anyone Studying<span style="color: crimson; font-weight: bold; font-size: large;"> *</span></label>
                                 <input type="text" class="form-control" formControlName="anyOneStudying" name="anyOneStudying"  
                                 [ngClass]="{'is-invalid':(submitted && f['anyOneStudying'].errors) ||(f['anyOneStudying'].errors && f['anyOneStudying'].touched) }">
                                 <div *ngIf="(submitted && f['anyOneStudying'].errors) ||(f['anyOneStudying'].errors && f['anyOneStudying'].touched)" class="invalid-feedback">
@@ -268,7 +268,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <label class="form-control-label">Registration Fees</label>
+                                <label class="form-control-label">Registration Fees<span style="color: crimson; font-weight: bold; font-size: large;"> *</span></label>
                                 <input type="text" class="form-control" formControlName="paidRegistrationFees" name="paidRegistrationFees"  
                                 [ngClass]="{'is-invalid':(submitted && f['paidRegistrationFees'].errors) ||(f['paidRegistrationFees'].errors && f['paidRegistrationFees'].touched) }">
                                 <div *ngIf="(submitted && f['paidRegistrationFees'].errors) ||(f['paidRegistrationFees'].errors && f['paidRegistrationFees'].touched)" class="invalid-feedback">
@@ -283,7 +283,7 @@
 
                         <div class="row">
                             <div class="form-group col-lg-6">
-                                <label class="form-control-label">Payment Mode</label>
+                                <label class="form-control-label">Payment Mode<span style="color: crimson; font-weight: bold; font-size: large;"> *</span></label>
                                 <select class="custom-select" id="paymentMode" formControlName="paymentMode" name="paymentMode"
                                 [ngClass]="{'is-invalid':(submitted && f['paymentMode'].errors) ||(f['paymentMode'].errors && f['paymentMode'].touched) }">
                                   <option value="" [selected]="''">Choose Payment Mode..</option>
@@ -306,7 +306,7 @@
 
                         <div class="row">
                             <div class="form-group col-lg-6">
-                                <label class="form-control-label">Date of Joining</label>
+                                <label class="form-control-label">Date of Joining<span style="color: crimson; font-weight: bold; font-size: large;"> *</span></label>
                                 <input type="date" class="form-control" formControlName="dateOfJoining" name="dateOfJoining"  
                                 [ngClass]="{'is-invalid':(submitted && f['dateOfJoining'].errors) ||(f['dateOfJoining'].errors && f['dateOfJoining'].touched) }">
                                     <div *ngIf="(submitted && f['dateOfJoining'].errors) ||(f['dateOfJoining'].errors && f['dateOfJoining'].touched)" class="invalid-feedback">
@@ -316,7 +316,7 @@
                                  </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <label class="form-control-label">Valid Till</label>
+                                <label class="form-control-label">Valid Till<span style="color: crimson; font-weight: bold; font-size: large;"> *</span></label>
                                 <input type="date" class="form-control" formControlName="validTillDate" name="validTillDate"  
                                 [ngClass]="{'is-invalid':(submitted && f['validTillDate'].errors) ||(f['validTillDate'].errors && f['validTillDate'].touched) }">
                                     <div *ngIf="(submitted && f['validTillDate'].errors) ||(f['validTillDate'].errors && f['validTillDate'].touched)" class="invalid-feedback">
@@ -329,7 +329,7 @@
 
                         <div class="row">
                             <div class="form-group col-lg-6">
-                                <label class="form-control-label">Family Members</label>
+                                <label class="form-control-label">Family Members<span style="color: crimson; font-weight: bold; font-size: large;"> *</span></label>
                                 <input type="text" class="form-control" formControlName="familyMembers" name="familyMembers"  
                                 [ngClass]="{'is-invalid':(submitted && f['familyMembers'].errors) ||(f['familyMembers'].errors && f['familyMembers'].touched) }">
                                 <div *ngIf="(submitted && f['familyMembers'].errors) ||(f['familyMembers'].errors && f['familyMembers'].touched)" class="invalid-feedback">
@@ -342,7 +342,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <label class="form-control-label">Address</label>
+                                <label class="form-control-label">Address<span style="color: crimson; font-weight: bold; font-size: large;"> *</span></label>
                                 <textarea formControlName="address" name="address"  class="form-control"  id="address" rows="3"
                                 [ngClass]="{'is-invalid':(submitted && f['address'].errors) ||(f['address'].errors && f['address'].touched) }"
                                 ></textarea>
