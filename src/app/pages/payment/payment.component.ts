@@ -198,7 +198,7 @@ submitUpdatePayment(){
       this.closePaymentBtn.nativeElement.click();
       this.closededitCollectionBtn.nativeElement.click();
       this.getSalesOfficersCenterList();
-      this.updatePaymentForm.reset()
+      this.updatePaymentForm.reset();
       this.isItemAdded = false;
       this.toastrService.success("Installment paid successfully")
      }else{
