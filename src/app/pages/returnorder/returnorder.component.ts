@@ -52,7 +52,8 @@ export class ReturnorderComponent implements OnInit {
           this.selectedOrderList = data.body.orderItems;
           this.selectedOrderList.forEach((item:any,index:number) => {
             item['rowEdited'] = false;
-            item.returnQty = undefined;
+            item.returnQty = 0;
+            item.totalReturnAmt = 0;
           }) 
           this.orderinstallmentList = data.body.installments;
           this.orderinstallmentList.forEach((item:any) => {
@@ -93,10 +94,11 @@ export class ReturnorderComponent implements OnInit {
     item.rowEdited = !item.rowEdited;
   }
 
-  validate(item:any)
-  {
+  validate(item:any){
     if(JSON.parse(item.returnQty) > item.qty || item.returnQty < 0){
       item.returnQty = 0;
+    }else{
+      item.totalReturnAmt = item.returnQty * item.salePrice;
     }
   }
 
@@ -161,16 +163,11 @@ export class ReturnorderComponent implements OnInit {
       if(item.returnQty)
       returnedItemsCount = returnedItemsCount + item.returnQty;
     });
-    if(returnedItemsCount == 0)
-    {
-     
-       alert("Please enter the return items");
-    }
-    else
-    {
+    if(returnedItemsCount == 0){ 
+       this.toastrService.error("Please enter the return items");
+    }else{
       var returnedItems : any[] = [] ; 
-      this.selectedOrderList.forEach((item:any) => 
-      { 
+      this.selectedOrderList.forEach((item:any) => { 
         if(item.returnQty > 0)
         {
           item.qty = item.returnQty;

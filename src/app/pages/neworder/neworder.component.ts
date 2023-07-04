@@ -221,12 +221,14 @@ export class NeworderComponent implements OnInit {
   showProductModal(item:any){
     this.productObj.prodQuantityInput = null;
      this.searchProductItem = item;
+     if(this.oldCartData){
      let tempCartArr = this.oldCartData.cartItems;
       tempCartArr.forEach((y:any)=>{
         if(item.productId == y.itemId){
           this.productObj.prodQuantityInput = y.qty
         }
       }) 
+    }
     
      this.itemsAdded = false;
      this.cartText = "Add To Cart";

@@ -1,10 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from 'express';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { SalesRelationService } from 'src/app/sales-relation-officer/service/sales-relation.service';
-import { DataService } from 'src/app/utils/data.service';
 
 @Component({
   selector: 'app-payment',
@@ -37,6 +35,7 @@ export class PaymentComponent implements OnInit {
   submitted : boolean = false;
   selectedPayment: any;
   @ViewChild ("closededitCollectionBtn") closededitCollectionBtn : any;
+  @ViewChild ("closePaymentBtn") closePaymentBtn :any;
   pageLoaded : boolean= false;
   statusVal='';
   paymentModeList = [{id:1, name: "Cash"}, {id:2, name: "UPI"},{id:3, name: "Card"},{id:4, name: "Other"}]
@@ -49,6 +48,7 @@ export class PaymentComponent implements OnInit {
   noFilterApplied  = true;
   masterSelected = false;
   totalAmount =0;
+  paymentDetails: any ={};
 
 
   constructor(private _salesService: SalesRelationService, private fb :FormBuilder, private toastrService : ToastrService) { 
@@ -140,7 +140,7 @@ export class PaymentComponent implements OnInit {
   }
 
 
-  handlePageChange(event: number){
+handlePageChange(event: number){
     ////console.log(event)
     this.page = event;
     this.getinstallmentDate(this.installmentDate);
@@ -171,6 +171,15 @@ showeditCollectionModal(item:any){
    })
 }
 
+showPayentModal(){
+  //console.log(this.updatePaymentForm.value)
+  this.paymentDetails =this.updatePaymentForm.value;
+}
+
+cancelPayment(){
+    this.closePaymentBtn.nativeElement.click();
+}
+
 submitUpdatePayment(){
   var paymentObj :any = {};
   paymentObj.orderInstallmentId = this.selectedPayment.orderInstallmentId,
@@ -184,8 +193,12 @@ submitUpdatePayment(){
   paymentObj.payingAmt = Number( this.updatePaymentForm.controls['payingAmt'].value);
   this.isItemAdded = true;
   this._salesService.makeInstallmentPayment(paymentObj).subscribe((data:any) => {
-    if(data){
+   // console.log(data.status)
+    if(data.status == 200){
+      this.closePaymentBtn.nativeElement.click();
       this.closededitCollectionBtn.nativeElement.click();
+      this.getSalesOfficersCenterList();
+      this.updatePaymentForm.reset()
       this.isItemAdded = false;
       this.toastrService.success("Installment paid successfully")
      }else{
@@ -222,7 +235,6 @@ getCheckBoxVal(event:any,status:any){
     }
 
 }
-
 
 sendCheckedCollection(){
   this.noFilterApplied = false;

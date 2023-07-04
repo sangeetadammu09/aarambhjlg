@@ -65,6 +65,7 @@ export class MemberKycComponent implements OnInit {
   documentPan_VoterId: any;
   pageLoaded : boolean= false;
   isItemAdded: boolean = false;
+  selectedMemberId: any;
 
   constructor(private _adminService: AdminService, private _formBuilder : FormBuilder,
      private _toastrService: ToastrService, private sanitizer: DomSanitizer, private _salesService: SalesManagerService) { 
@@ -115,6 +116,7 @@ export class MemberKycComponent implements OnInit {
 
   getMemberVal(event:any){
     var searchMemberId = event;
+    this.selectedMemberId = event;
     this._salesService.getMemberListForKycVerification(searchMemberId).subscribe((data:any) => {
       //console.log(data,'all memberDropdownList')
       if(data.length > 0){
@@ -239,9 +241,10 @@ export class MemberKycComponent implements OnInit {
           if(data.status == 200){
             this.isItemAdded = false;
             this.addedMemberId = data.body;
-            this._toastrService.success('member Kyc completed successfully!');
+            this._toastrService.success('Member Kyc completed successfully!');
             this.closeaddMemberBtn.nativeElement.click();
-            this.getAllMemberDetails();
+          //  this.getAllMemberDetails();
+          this.getMemberVal(this.selectedMemberId)
           }
         })
          

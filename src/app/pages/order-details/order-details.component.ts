@@ -34,6 +34,7 @@ export class OrderDetailsComponent implements OnInit {
   gapList : any = [];
   paymentGapValue:any
   pageLoaded : boolean= false;
+  paymentGap='';
 
   constructor(private _saleService: SalesRelationService,private toastrService :ToastrService,
     private _adminService:AdminService) { }
@@ -106,6 +107,7 @@ export class OrderDetailsComponent implements OnInit {
 
   showApproveOrderModal(item:any){
     this.approveOrderObj = item;
+   // this.paymentGap = ''
     //console.log(this.approveOrderObj)
    
   }

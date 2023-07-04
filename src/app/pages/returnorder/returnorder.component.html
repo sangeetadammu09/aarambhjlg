@@ -97,6 +97,7 @@
                                   <th scope="col" style="color: #fff;">Return Quantity</th>
                                   <th scope="col" style="color: #fff;">Sales Price</th>
                                   <th scope="col" style="color: #fff;">Total</th>
+                                  <th scope="col" style="color: #fff;">Return Total</th>
                                   <th scope="col" style="color: #fff;">Edit</th>
                                   <!-- <th scope="col" style="color: #fff;">Delete</th> -->
                                 </tr>
@@ -116,7 +117,10 @@
                                  </td>
                                   <td> {{item.salePrice | currency: 'INR'}}</td>
                                   <td>{{item.totalAmt | currency: 'INR'}}</td>
-                                  <td> <i class="fa fa-pencil" (click)="editRow(item)"></i> </td>
+                                  <td>{{item.totalReturnAmt | currency: 'INR'}}</td>
+                                  <td> <i class="fa fa-pencil" (click)="editRow(item)" *ngIf="!item.rowEdited"></i> 
+                                    <i class="fa fa-save" (click)="editRow(item)" *ngIf="item.rowEdited"></i></td>
+                                 
                                     <!-- <td  (click)="showdeleteCartModal(item)" data-toggle="modal"  data-target="#deleteCartModal">
                                         <svg enable-background="new 0 0 19 19" height="19px" id="Layer_1" version="1.1" viewBox="0 0 26 29" width="26px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                             <g><path d="M1.035,9l3.49,17.478C4.525,27.854,5.643,29,7.019,29H13h5.981c1.376,0,2.493-1.146,2.493-2.522L24.965,9   H13H1.035z" fill="#231F20"/>

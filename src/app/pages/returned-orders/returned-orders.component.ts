@@ -14,9 +14,9 @@ import { SalesRelationService } from 'src/app/sales-relation-officer/service/sal
 export class ReturnedOrdersComponent implements OnInit {
 
   
-  page = 1;
+  page = 10;
   total = 20;
-  pageSize = 10;
+  pageSize = 1;
   returnOrderListForApproval: any =[];
   selectedOrderList: any =[];
   installmentList :any =[];
@@ -74,12 +74,13 @@ export class ReturnedOrdersComponent implements OnInit {
 
 
   getreturnOrderListForApproval(){
-    this._saleService.getReturnedRequestedList(this.userId).subscribe((data:any) => {
+    this._saleService.getReturnedRequestedList(this.userId,this.page,this.pageSize).subscribe((data:any) => {
     //   //console.log(data,'all orders')
-       if(data.length > 0){
-        this.returnOrderListForApproval = data
+       if(data.returnRequested.length > 0){
+        this.returnOrderListForApproval = data.returnRequested;
         this.pageLoaded = true;
-        this.total = data[0].totalCount;
+        this.total = data.page.totalCount;
+        console.log(this.returnOrderListForApproval)
         }else{
           this.returnOrderListForApproval = [];
           this.pageLoaded = true;

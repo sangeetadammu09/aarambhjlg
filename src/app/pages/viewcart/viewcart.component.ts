@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -20,6 +21,7 @@ export class ViewcartComponent implements OnInit {
   cartList: any = [];
   @ViewChild('closeDeleteItemBtn') closeDeleteItemBtn:any;
   @ViewChild('closeMemberValidityBtn') closeMemberValidityBtn:any;
+  @ViewChild('openModal') openModal :any;
   cartItemId: any;
   serviceCharge: any =0;
   paymentInstallment :any;
@@ -32,6 +34,8 @@ export class ViewcartComponent implements OnInit {
   itemId: any;
   isMemberValidityExpired :boolean = false;
   notEligibleTxt: any;
+  serviceChargeErr = '';
+  paymentInstallmentErr = '';
 
   constructor(private _adminService:AdminService, private _salesService: SalesRelationService,
     private toastrService :ToastrService,private router: Router, private dataService:DataService) {
@@ -39,11 +43,11 @@ export class ViewcartComponent implements OnInit {
     }
 
   ngOnInit(): void {
-   
+    
     this.getAllInstallments();
     this.paymentInstallment = "";
     this.dataService.currentCatObj.subscribe((data:any) => {
-      console.log(data);
+     // console.log(data);
       this.newCart = data;
       this.showViewCartModal();
     })
@@ -179,20 +183,25 @@ export class ViewcartComponent implements OnInit {
     //console.log(this.cartDetailsObj)
     //console.log(this.newCart,'new cart')
     this._salesService.getOrderMemberValidity(this.cartDetailsObj.memberId).subscribe((data:any) => {
-      //console.log(data.isEligible == false)
-      if(data.isEligible == false){
-        document.getElementById("openModalButton")?.click();
-        this.isMemberValidityExpired = true;
-        this.notEligibleTxt = data.failureReasons;
-       }else{
+     //console.log(data.body)
+      if(data.status == 200){
         this.isMemberValidityExpired = false;  
-      var newOrder :any = {};
-      newOrder.cartId = this.updatedCartId,
-      newOrder.totalBill = this.cartDetailsObj.total ,
-      newOrder.serviceCharges = this.serviceCharge,
-      newOrder.totalBillWithServiceCharges = this.cartDetailsObj.finalAmount,
-      newOrder.requestedInstallmentId = this.paymentInstallmentId
-    
+        var newOrder :any = {};
+        newOrder.cartId = this.updatedCartId,
+        newOrder.totalBill = this.cartDetailsObj.total
+        if(this.serviceCharge == 0){
+           this.serviceChargeErr="Service Charge is required"
+        }else  if(this.paymentInstallmentId == undefined){
+          this.paymentInstallmentErr = "Payment Installment is required"
+        }else{
+        this.serviceChargeErr= '';
+        this.paymentInstallmentErr = '',
+        newOrder.serviceCharges = this.serviceCharge,
+        newOrder.totalBillWithServiceCharges = this.cartDetailsObj.finalAmount,
+        newOrder.requestedInstallmentId = this.paymentInstallmentId
+       // console.log(newOrder)
+        }
+        
       this._salesService.placeNewOrder(newOrder).subscribe((data:any) => {
         if(data.status == 200){
         this.toastrService.success('Order placed successfully')
@@ -206,11 +215,19 @@ export class ViewcartComponent implements OnInit {
         } 
       })
     } 
+  },(error:HttpErrorResponse) => {
+    if(error.status == 400 && error.error.isEligible == false){
+    //  document.getElementById("openModalButton")?.click();
+      this.openModal.nativeElement.click();
+      this.isMemberValidityExpired = true;
+     // console.log(error.error.failuresReasons[0])
+     this.notEligibleTxt = error.error.failuresReasons[0];
+     }
   })
   }
 
   showGoToCartModal(){
-   
+    
     if(this.newCart != null){
           this.dataService.sendOldCartData(this.cartDetailsObj)
           this.router.navigate(['/sales-relation-officer/new-order']) 

@@ -151,7 +151,7 @@ export class SalesRelationService {
    }
 
    getOrderMemberValidity(memberId:any){
-    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.GetOrderMemberValidity+`?memberId=${memberId}`)
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.GetOrderMemberValidity+`?memberId=${memberId}`,{observe: 'response'})
    }
 
    cancelOrder(cartId:any){
@@ -191,7 +191,7 @@ export class SalesRelationService {
    }
 
    makeInstallmentPayment(data:any){
-    return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.OrderInstallment.makeInstallmentPayment,data)
+    return this.http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.OrderInstallment.makeInstallmentPayment,data,{observe: 'response'})
    }
 
    getOrderInstallmentHistory(id:any, memberId:any){

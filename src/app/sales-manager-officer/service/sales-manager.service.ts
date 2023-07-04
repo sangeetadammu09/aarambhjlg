@@ -28,8 +28,8 @@ export class SalesManagerService {
      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Kyc.AddMemberKycVerification,data,{observe: 'response'})
    }
 
-   getReturnedRequestedList(userId:any){
-    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.OrderReturn.getReturnedRequestedList+`?userId=${userId}`)
+   getReturnedRequestedList(userId:any,pageno:any,pagesize:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.OrderReturn.getReturnedRequestedList+`?userId=${userId}&PageNumber=${pagesize}&PageSize=${pageno}`)
    }
 
    getReturnOrderDetails(orderId:any){
