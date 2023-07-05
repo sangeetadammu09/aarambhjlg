@@ -260,8 +260,9 @@
               </div>
               </div>
               <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary" (click)="showPayentModal()"
-                  data-toggle="modal" data-target="#paymentModal">Update</button>
+                  <button type="submit" class="btn btn-primary" (click)="showPayentModal()">Update</button>
+                   <button type="submit" class="btn btn-primary" #openPaymentModal 
+                   data-toggle="modal" data-target="#paymentModal" [hidden]="true"></button>
               </div>
           </form>
 

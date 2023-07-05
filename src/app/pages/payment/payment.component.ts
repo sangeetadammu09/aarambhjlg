@@ -36,6 +36,7 @@ export class PaymentComponent implements OnInit {
   selectedPayment: any;
   @ViewChild ("closededitCollectionBtn") closededitCollectionBtn : any;
   @ViewChild ("closePaymentBtn") closePaymentBtn :any;
+  @ViewChild ("openPaymentModal") openPaymentModal :any;
   pageLoaded : boolean= false;
   statusVal='';
   paymentModeList = [{id:1, name: "Cash"}, {id:2, name: "UPI"},{id:3, name: "Card"},{id:4, name: "Other"}]
@@ -147,6 +148,10 @@ handlePageChange(event: number){
 }
 
 showeditCollectionModal(item:any){
+  this.submitted = false;
+  this.updatePaymentForm.reset();
+  this.updatePaymentForm.markAsUntouched();
+  this.updatePaymentForm.markAsPristine();
    console.log(item)
    this.selectedPayment = item;
    this.updatePaymentForm.patchValue({
@@ -173,7 +178,13 @@ showeditCollectionModal(item:any){
 
 showPayentModal(){
   //console.log(this.updatePaymentForm.value)
+  this.submitted = true;
+  if(this.updatePaymentForm.valid){
+  this.openPaymentModal.nativeElement.click();
   this.paymentDetails =this.updatePaymentForm.value;
+  }else{
+    return;
+  }
 }
 
 cancelPayment(){
@@ -198,7 +209,7 @@ submitUpdatePayment(){
       this.closePaymentBtn.nativeElement.click();
       this.closededitCollectionBtn.nativeElement.click();
       this.getSalesOfficersCenterList();
-      this.updatePaymentForm.reset();
+      
       this.isItemAdded = false;
       this.toastrService.success("Installment paid successfully")
      }else{
