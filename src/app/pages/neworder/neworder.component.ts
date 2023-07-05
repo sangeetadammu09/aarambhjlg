@@ -129,6 +129,7 @@ export class NeworderComponent implements OnInit {
 
   getSearchedProducts(event: any){
     var searchProd = event;
+    if(searchProd.length>0){
     this._salesService.getProductAutocomplete(searchProd).subscribe((data:any) => {
    //   //console.log(data,'all productList')
       if(data.length > 0){
@@ -140,6 +141,9 @@ export class NeworderComponent implements OnInit {
          
        } 
      })
+    }else{
+      this.getRandomProductList();
+    }
     }
 
   listSearchedProduct(item:any){
