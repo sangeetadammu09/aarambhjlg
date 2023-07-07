@@ -17,6 +17,8 @@ import { ValidityExpiringMembersComponent } from 'src/app/pages/validity-expirin
 import { MembershipComponent } from 'src/app/pages/membership/membership.component';
 import { MembershipHistoryComponent } from 'src/app/pages/membership-history/membership-history.component';
 import { RenewMembershipComponent } from 'src/app/pages/renew-membership/renew-membership.component';
+import { CompletedOrdersComponent } from 'src/app/pages/completed-orders/completed-orders.component';
+import { DispatchedOrdersComponent } from 'src/app/pages/dispatched-orders/dispatched-orders.component';
 
 export const SalesRelationLayoutRoutes: Routes = [
 
@@ -38,5 +40,7 @@ export const SalesRelationLayoutRoutes: Routes = [
      {path: 'membership', component: MembershipComponent },
      {path: 'membership-history', component: MembershipHistoryComponent },
      {path: 'renew-membership', component: RenewMembershipComponent },
+     {path:'dispatched-orders', component: DispatchedOrdersComponent },
+     {path:'completed-orders', component: CompletedOrdersComponent },
   
 ];

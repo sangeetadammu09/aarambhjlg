@@ -100,8 +100,7 @@ export const SalesList = {
               isActive: true, 
             }
             ]
-          },
-          
+          },          
           {
             id: 1,
             parentMenu: 'Order',
@@ -117,12 +116,26 @@ export const SalesList = {
                     isActive: true, 
                 },
                 {
-                  id: 0,
+                  id: 1,
                   menu: 'Approved Order',
                   url: 'approved-order',
                   icon : 'fa-book',
                   isActive: true, 
-              }
+              },
+              {
+                id: 2,
+                menu: 'Dispatched Orders',
+                url: 'dispatched-orders',
+                icon : 'fa-book',
+                isActive: true, 
+            },
+            {
+              id: 3,
+              menu: 'Completed Orders',
+              url: 'completed-orders',
+              icon : 'fa-book',
+              isActive: true, 
+          }
             ]
           },
           {
@@ -257,12 +270,26 @@ export const SalesManagerList = {
                   isActive: true, 
               },
               {
-                id: 0,
+                id: 1,
                 menu: 'Approved Orders',
                 url: 'approved-order',
                 icon : 'fa-book',
                 isActive: true, 
-            }
+            },
+            {
+              id: 2,
+              menu: 'Dispatched Orders',
+              url: 'dispatched-orders',
+              icon : 'fa-book',
+              isActive: true, 
+          },
+          {
+            id: 3,
+            menu: 'Completed Orders',
+            url: 'completed-orders',
+            icon : 'fa-book',
+            isActive: true, 
+        }
 
           ]
         },

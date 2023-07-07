@@ -14,8 +14,8 @@
                     </div>
                     <div class="mt-3 mb-3 row">
                         <div class="form-row">
-                            <div class="form-group col-md-6">
-                              <label for="searchCenter">Select Center</label>
+                            <div class="form-group col-md-4">
+                              <label for="searchCenter">Select Center<span style="color: crimson; font-weight: bold; font-size: large;"> *</span></label>
                               <select class="custom-select" id="searchCenter" [(ngModel)]="searchCenter" (change)="getCenterVal(searchCenter)">
                                 <option value="" [selected]="''">Choose Center..</option>
                                 <option *ngFor="let item of centerDropdownList" [ngValue]="item.centerId">
@@ -23,12 +23,12 @@
                                 </select>
                             </div>
                        
-                          <div class="form-group col-md-6">
-                            <label for="searchMember">Select Date</label>
+                          <div class="form-group col-md-4">
+                            <label for="searchMember">Select Date<span style="color: crimson; font-weight: bold; font-size: large;"> *</span></label>
                             <input type="date" class="form-control" [(ngModel)]="installmentDate" 
                             (change)="getinstallmentDate(installmentDate)" placeholder="Search Installment Date">
                           </div>
-                          <div class="form-group col-md-6">
+                          <div class="form-group col-md-4">
                             <label for="searchMember">Select Member</label>
                             <select class="custom-select" id="searchMember" [(ngModel)]="searchMember" (change)="getMemberVal(searchMember)">
                               <option value="" [selected]="''">Choose Member..</option>
@@ -70,8 +70,8 @@
                             <th scope="col" style="color: #fff;">S No.</th>
                             <th scope="col" style="color: #fff;">Name</th>
                             <th scope="col" style="color: #fff;">Order No</th>
-                            <th scope="col" style="color: #fff;">Installment No</th>
-                            <th scope="col" style="color: #fff;">Installment Date</th>
+                            <th scope="col" style="color: #fff;">Inst. No</th>
+                            <th scope="col" style="color: #fff;">Inst. Date</th>
                             <th scope="col" style="color: #fff;">Installment Amount</th>
                             <th scope="col" style="color: #fff;">Payable Amount</th>
                             <th scope="col" style="color: #fff;">Address</th>
@@ -185,7 +185,7 @@
     <div class="modal-content">
       <div class="modal-header">
 
-        <h5 class="modal-title" id="exampleModalLabel">Edit Payment</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Take Payment</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closededitCollectionBtn>
           <span aria-hidden="true">&times;</span>
         </button>
@@ -224,8 +224,8 @@
               <div class="form-row">
 
                 <div class="form-group col-lg-6">
-                  <label class="form-control-label">Payment Amount<span>({{selectedPayment?.payableAmt}})</span></label>
-                  <input type="text" class="form-control" formControlName="payingAmt" name="payingAmt" 
+                  <label class="form-control-label">Payment Amount - <span class="file-format">Rs. {{selectedPayment?.payableAmt}}</span></label>
+                  <input type="text" class="form-control" placeholder="Payment Amount" formControlName="payingAmt" name="payingAmt" 
                   [ngClass]="{'is-invalid':(submitted && g['payingAmt'].errors) ||(g['payingAmt'].errors && g['payingAmt'].touched) }">  
                   <div *ngIf="(submitted && g['payingAmt'].errors) ||(g['payingAmt'].errors && g['payingAmt'].touched)" class="invalid-feedback">
                     <div *ngIf="g['payingAmt'].errors['required']">
@@ -250,7 +250,7 @@
               </div>
               <div class="form-group col-lg-6">
                 <label class="form-control-label">Payment Comment</label>
-                <input type="text" class="form-control" formControlName="paymentComment" name="paymentComment"
+                <input type="text" class="form-control" placeholder="Payment Comment" formControlName="paymentComment" name="paymentComment"
                 [ngClass]="{'is-invalid':(submitted && g['paymentComment'].errors) ||(g['paymentComment'].errors && g['paymentComment'].touched) }">  
                 <div *ngIf="(submitted && g['paymentComment'].errors) ||(g['paymentComment'].errors && g['paymentComment'].touched)" class="invalid-feedback">
                   <div *ngIf="g['paymentComment'].errors['required']">
@@ -260,7 +260,7 @@
               </div>
               </div>
               <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary" (click)="showPayentModal()">Update</button>
+                  <button type="submit" class="btn btn-primary" (click)="showPayentModal()">Submit Payment</button>
                    <button type="submit" class="btn btn-primary" #openPaymentModal 
                    data-toggle="modal" data-target="#paymentModal" [hidden]="true"></button>
               </div>
@@ -274,8 +274,8 @@
                     <th scope="col" style="color: #fff;">S No.</th>
                     <th scope="col" style="color: #fff;">Name</th>
                     <th scope="col" style="color: #fff;">Order No</th>
-                    <th scope="col" style="color: #fff;">Installment No</th>
-                    <th scope="col" style="color: #fff;">Installment Date</th>
+                    <th scope="col" style="color: #fff;">Inst. No</th>
+                    <th scope="col" style="color: #fff;">Inst. Date</th>
                     <th scope="col" style="color: #fff;">Installment Amount</th>
                     
                     
@@ -289,7 +289,7 @@
                     <td>{{item.orderId}}</td>
                     <td>{{item.installmentNo}}</td>
                     <td>{{item.installmentDate | date:"dd-MM-YYYY"}}</td>
-                    <td>{{item.installmentAmt}}</td>
+                    <td>Rs. {{item.installmentAmt}}</td>
                      
     
                   </tr>        
@@ -350,13 +350,11 @@
                                 <div class="card-title col-lg-6">Member Name :</div>
                                 <div class="col-lg-6">{{paymentDetails.memberName}}</div>
                                 <div class="card-title col-lg-6">Payment Date:</div>
-                                <div class="col-lg-6">{{paymentDetails.paidDate
-                                  | date : "dd-MM-YYYY"}}</div>
+                                <div class="col-lg-6">{{paymentDetails.paidDate| date : "dd-MM-YYYY"}}</div>
                                 <div class="card-title col-lg-6">Amount Payment:</div>
-                                <div class="col-lg-6">{{paymentDetails.payingAmt
-                                    | date : "dd-MM-YYYY"}}</div>
+                                <div class="col-lg-6">{{paymentDetails.payingAmt}}</div>
                                 <div class="card-title col-lg-6">Payment Mode :</div>
-                                    <div class="col-lg-6">{{paymentDetails.paymentMode}}</div>
+                                <div class="col-lg-6">{{paymentDetails.paymentMode}}</div>
                              </div>
                         </div>
                 </div>  

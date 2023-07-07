@@ -143,7 +143,7 @@
                       <td>{{10*(page-1)+i+1}}</td>
                       <td style="font-family:Tiro Devanagari Marathi; font-size: 16px;">{{item.productName}}</td> 
                       <td> {{item.qty}}</td>
-                      <td> {{item.salePrice | currency: 'INR'}}</td>
+                      <td class="text-end"> {{item.salePrice | currency: 'INR'}}</td>
                       <td>{{item.totalAmt | currency: 'INR'}}</td>
                     </tr>        
                   </tbody>
@@ -163,8 +163,9 @@
                       <i class="bx bxl-mailchimp"></i> </div>
                       <div class="ms-2 c-details">
                           <div class="row d-flex">
-                            <div class="card-title col-lg-6">Sub Total :</div>
-                               <div class="col-lg-6">{{orderDetailsObj?.subTotal | currency: 'INR'}}</div>
+                            
+                            <div colspan="4" class="strong text-end">Sub Total :</div>
+                               <div class="text-end">{{orderDetailsObj?.subTotal | currency: 'INR'}}</div>
 
                                <div class="card-title col-lg-6">Service Charge :</div>
                                <div class="col-lg-6">{{orderDetailsObj?.serviceCharges | currency: 'INR'}}</div>

@@ -39,6 +39,17 @@ export class SalesManagerService {
    approveReturnRequest(data:any){
     return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.OrderReturn.approveReturnRequest,data,{observe: 'response'})
    }
+
+   getDispatchedOrdersListForManager(userId:any, pageSize:any,pageNumber:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.GetDispatchedOrdersListForManager
+      +`?userId=${userId}&PageSize=${pageSize}&PageNo=${pageNumber}`)
+   }
+
+
+   getCompletedOrdersListForManager(userId:any, pageSize:any,pageNumber:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.GetCompletedOrdersListForManager
+      +`?userId=${userId}&PageSize=${pageSize}&PageNo=${pageNumber}`)
+   }
  
 
 }

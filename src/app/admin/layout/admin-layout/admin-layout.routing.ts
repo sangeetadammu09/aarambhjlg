@@ -23,6 +23,8 @@ import { UserContactsComponent } from 'src/app/pages/user-contacts/user-contacts
 import { UserKycComponent } from 'src/app/pages/user-kyc/user-kyc.component';
 import { UserComponent } from 'src/app/pages/user/user.component';
 import { UserroleComponent } from 'src/app/pages/userrole/userrole.component';
+import { DispatchedOrdersComponent } from 'src/app/pages/dispatched-orders/dispatched-orders.component';
+import { CompletedOrdersComponent } from 'src/app/pages/completed-orders/completed-orders.component';
 
 export const AdminLayoutRoutes: Routes = [
     
@@ -48,6 +50,8 @@ export const AdminLayoutRoutes: Routes = [
      { path:'member-contacts', component: MemberContactsComponent },
      { path:'my-profile', component: ProfileComponent },
      { path:'dashboard', component: DashboardComponent },
-     {path:'assign-leader', component:AssignLeaderComponent },
+     { path:'assign-leader', component:AssignLeaderComponent },
      { path:'kyc-failed-users', component: KycFailedUsersComponent },
+     {path:'dispatched-orders', component: DispatchedOrdersComponent },
+     {path:'completed-orders', component: CompletedOrdersComponent },
 ];

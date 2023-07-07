@@ -236,6 +236,19 @@ export class SalesRelationService {
     return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Membership.RenewMembership,data,{observe: 'response'})
    }
 
+   getDispatchedOrdersListForSoRoList(userId:any, pageSize:any,pageNumber:any){
+    console.log(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.GetDispatchedOrdersForSoRoList)
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.GetDispatchedOrdersForSoRoList
+      +`?userId=${userId}&PageSize=${pageSize}&PageNo=${pageNumber}`)
+
+   }
+
+
+   getCompletedOrdersListForSoRoList(userId:any, pageSize:any,pageNumber:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.GetCompletedOrdersForSoRoList
+      +`?userId=${userId}&PageSize=${pageSize}&PageNo=${pageNumber}`)
+   }
+
 
 
 

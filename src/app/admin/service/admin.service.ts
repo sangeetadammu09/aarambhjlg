@@ -386,10 +386,19 @@ export class AdminService {
    getOrderSummary(userId:any){
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Dashboard.getOrderSummary+`?userId=${userId}`,{observe: 'response'})
    }
+
+   getDispatchedOrdersListForAdmin(cityId:any, pageSize:any,pageNumber:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.GetDispatchedOrdersListForAdmin
+      +`?cityId=${cityId}&PageSize=${pageSize}&PageNo=${pageNumber}`)
+   }
+
+
+   getCompletedOrdersListForAdmin(cityId:any, pageSize:any,pageNumber:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.GetCompletedOrdersListForAdmin
+      +`?cityId=${cityId}&PageSize=${pageSize}&PageNo=${pageNumber}`)
+   }
  
   
-   
-    
 
 
 }

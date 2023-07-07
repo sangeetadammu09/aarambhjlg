@@ -7,7 +7,7 @@
             <div class="card">
               <div class="card-header">
                 <div class="col-lg-10 mb-3 mt-2">
-                    <h3 class="card-title">Center No</h3>
+                    <h3 class="card-title">Centers</h3>
                 </div>    
                 <div class="col-lg-2 mb-3 mt-2">
                     <button class="btn btn-primary btn-pill w-100" data-toggle="modal" data-target="#addeditCenterModal"
@@ -30,7 +30,7 @@
                     <th scope="col" style="color: #fff; font-family: sans-serif;">Sales Manager</th>
                   
                     <th scope="col" style="color: #fff; font-family: sans-serif;">Edit</th>
-                    <th scope="col" style="color: #fff; font-family: sans-serif;" *ngIf="showAddBtn">Delete</th>
+                    <!-- <th scope="col" style="color: #fff; font-family: sans-serif;" *ngIf="showAddBtn">Delete</th> -->
                   </tr>
                 
                 <tbody *ngFor="let item of CenterList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index ">
@@ -51,12 +51,12 @@
                             <path d="M18.183,1.568l-0.87-0.87c-0.641-0.641-1.637-0.684-2.225-0.097l-0.797,0.797l3.191,3.191l0.797-0.798   C18.867,3.205,18.824,2.209,18.183,1.568z" fill="#231F20"/><path d="M15,9.696V17H2V2h8.953l1.523-1.42c0.162-0.161,0.353-0.221,0.555-0.293   c0.043-0.119,0.104-0.18,0.176-0.287H0v19h17V7.928L15,9.696z" fill="#231F20"/>
                         </g></svg>
                     </td>     
-                    <td  (click)="showdeleteCenterModal(item)" data-toggle="modal"  data-target="#deleteCenterModal" *ngIf="showAddBtn">
+                    <!-- <td  (click)="showdeleteCenterModal(item)" data-toggle="modal"  data-target="#deleteCenterModal" *ngIf="showAddBtn">
                         <svg enable-background="new 0 0 19 19" height="19px" id="Layer_1" version="1.1" viewBox="0 0 26 29" width="26px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <g><path d="M1.035,9l3.49,17.478C4.525,27.854,5.643,29,7.019,29H13h5.981c1.376,0,2.493-1.146,2.493-2.522L24.965,9   H13H1.035z" fill="#231F20"/>
                             <path d="M23.524,3H21V2.824C21,1.264,19.736,0,18.176,0H7.824C6.264,0,5,1.264,5,2.824V3H2.476   C0.946,3,0,3.939,0,5.468V7h7.824h10.352H26V5.468C26,3.939,25.053,3,23.524,3z" fill="#231F20"/>
                         </g></svg>
-                    </td> 
+                    </td>  -->
                   </tr>        
                 </tbody>
                 

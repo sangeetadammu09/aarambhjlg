@@ -197,6 +197,29 @@ export const AdminList = {
           },
           {
             id: 1,
+            parentMenu: 'Order',
+            icon : 'fa-pencil',
+            isActive: true, 
+            url: 'order',
+            submenuList: [
+                {
+                    id: 0,
+                    menu: 'Dispatched Orders',
+                    url: 'dispatched-orders',
+                    icon : 'fa-book',
+                    isActive: true, 
+                },
+                {
+                  id: 1,
+                  menu: 'Completed Orders',
+                  url: 'completed-orders',
+                  icon : 'fa-book',
+                  isActive: true, 
+              }
+            ]
+          },
+          {
+            id: 1,
             parentMenu: 'Setting',
             icon : 'fa-cog',
             isActive: true, 

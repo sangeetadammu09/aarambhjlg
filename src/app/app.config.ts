@@ -160,6 +160,13 @@ export const APP_DI_CONFIG: any = {
         GetApprovedOrdersForManagerList : '/Order/GetApprovedOrdersForManagerList',
         GetApprovedOrderDetails : '/Order/GetApprovedOrderDetails',
         GetOrderMemberValidity : '/Order/GetOrderMemberValidity',
+        
+        GetDispatchedOrdersForSoRoList: '/Order/GetDispatchedOrdersForSoRoList',
+        GetDispatchedOrdersListForManager : '/Order/GetDispatchedOrdersListForManager',
+        GetDispatchedOrdersListForAdmin  : '/Order/GetDispatchedOrdersListForAdmin',
+        GetCompletedOrdersForSoRoList : '/Order/GetCompletedOrdersForSoRoList',
+        GetCompletedOrdersListForManager : '/Order/GetCompletedOrdersListForManager',
+        GetCompletedOrdersListForAdmin : '/Order/GetCompletedOrdersListForAdmin'
     },
     OrderInstallment:{
       getOrderInstallmentCollectionList: '/OrderInstallment/GetOrderInstallmentCollectionList',

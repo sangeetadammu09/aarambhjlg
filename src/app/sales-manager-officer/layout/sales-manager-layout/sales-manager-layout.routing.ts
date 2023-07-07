@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
 import { ApprovedOrderComponent } from 'src/app/pages/approved-order/approved-order.component';
 import { ChangePasswordComponent } from 'src/app/pages/change-password/change-password.component';
+import { CompletedOrdersComponent } from 'src/app/pages/completed-orders/completed-orders.component';
 import { DashboardComponent } from 'src/app/pages/dashboard/dashboard.component';
+import { DispatchedOrdersComponent } from 'src/app/pages/dispatched-orders/dispatched-orders.component';
 import { KycFailedUsersComponent } from 'src/app/pages/kyc-failed-users/kyc-failed-users.component';
 import { MemberKycComponent } from 'src/app/pages/member-kyc/member-kyc.component';
 import { OrderDetailsComponent } from 'src/app/pages/order-details/order-details.component';
@@ -22,6 +24,8 @@ export const SalesManagerLayoutRoutes: Routes = [
      { path:'dashboard', component: DashboardComponent },
      { path:'kyc-failed-users', component: KycFailedUsersComponent },
      {path: 'validity-expiring-members', component: ValidityExpiringMembersComponent },
+     {path:'dispatched-orders', component: DispatchedOrdersComponent },
+     {path:'completed-orders', component: CompletedOrdersComponent },
      
    
      
