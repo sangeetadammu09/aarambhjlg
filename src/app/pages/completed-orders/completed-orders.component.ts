@@ -43,7 +43,7 @@ export class CompletedOrdersComponent implements OnInit {
     }
 
     if(this.roleNo == '102'){
-      this.soRoService.getCompletedOrdersListForSoRoList(this.cityId, this.page,this.pageSize).subscribe((data) => {
+      this.soRoService.getCompletedOrdersListForSoRoList(this.userId, this.page,this.pageSize).subscribe((data) => {
         console.log(data,'all Completed orders')
           if(data.length > 0){
             this.pageLoaded = true;
@@ -57,7 +57,7 @@ export class CompletedOrdersComponent implements OnInit {
          })
       }
       if(this.roleNo == '103'){
-        this.salesManager.getCompletedOrdersListForManager(this.cityId, this.page,this.pageSize).subscribe((data) => {
+        this.salesManager.getCompletedOrdersListForManager(this.userId, this.page,this.pageSize).subscribe((data) => {
           console.log(data,'all Completed orders')
             if(data.length > 0){
               this.pageLoaded = true;
