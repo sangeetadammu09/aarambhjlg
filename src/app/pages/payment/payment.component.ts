@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
@@ -93,6 +94,10 @@ export class PaymentComponent implements OnInit {
   getCenterVal(event:any){
     var searchMemberId = event;
     this.centerId = event;
+    if(this.installmentDate !== undefined){
+      this.getinstallmentDate(this.installmentDate);
+    }
+   
     this._salesService.getMemberListByCenter(searchMemberId).subscribe((data:any) => {
      //console.log(data,'all memberDropdownList')
       if(data.length > 0){
@@ -123,7 +128,8 @@ export class PaymentComponent implements OnInit {
     paymentObj.memberId = this.memberId ? this.memberId : 0
  
     this._salesService.getOrderInstallmentCollectionList(paymentObj).subscribe((data:any) => {
-      if(data){
+      console.log(data)
+      if(data.installments.length > 0) {
         data.installments.forEach((item:any) => {
           item.installmentDate = moment(item.installmentDate).format('L');
           item.checked = false;
@@ -131,12 +137,16 @@ export class PaymentComponent implements OnInit {
         })
         this.collectableAmount = this.totalAmount;
         this.installmentCollectionList = data.installments;
-     //   console.log(this.installmentCollectionList)
+       console.log(this.installmentCollectionList)
         this.total = data.page.totalCount;
  
        }else{
          this.installmentCollectionList = [];
        } 
+     },(err:HttpErrorResponse)=>{
+        if(err){
+          this.installmentCollectionList = [];
+        }
      })
   }
 
@@ -167,7 +177,7 @@ showeditCollectionModal(item:any){
    this._salesService.getOrderInstallmentHistory(item.orderId, item.memberId).subscribe((data:any) => {
     if(data){
       this.installmentCollectionHistoryList = data;
-      //console.log(this.installmentCollectionHistoryList)
+      console.log(this.installmentCollectionHistoryList)
     //  this.total = data.page.totalCount;
 
      }else{
@@ -221,13 +231,15 @@ submitUpdatePayment(){
 getCheckBoxVal(event:any,status:any){
   let checkStatus = event.target.checked;
   let filterVal = status.name;
-
+ 
   if(filterVal == 'Select All' && checkStatus == true){
     this.getinstallmentDate(this.installmentDate)
   }
   
   if(filterVal == 'Pending' && checkStatus == true){
-  this.installmentCollectionList = this.installmentCollectionList.filter((x:any)=>x.status == "Pending");
+  debugger;
+  this.installmentCollectionList = this.installmentCollectionList.filter((x:any)=>x.status = "Pending");
+  console.log(this.installmentCollectionList)
   }else if(filterVal == 'Pending' && checkStatus == false){
   this.getinstallmentDate(this.installmentDate)
   }
@@ -249,10 +261,10 @@ getCheckBoxVal(event:any,status:any){
 
 sendCheckedCollection(){
   this.noFilterApplied = false;
-  // console.log(this.installmentCollectionList)
+  
   this.filterList.forEach((x:any) => {
      this.installmentCollectionList.forEach((y:any) => {
-       if(x.name == y.status && x.checked == true) {
+       if(y.status.includes(x.name) && x.checked == true) {
          y.checked = true;
        }else if(x.name == y.status && x.checked == false){
         y.checked = false;
@@ -260,11 +272,11 @@ sendCheckedCollection(){
      })
   })
   this.filteredData = this.installmentCollectionList.filter((x:any) => x.checked );
+  console.log(this.filteredData)
   this.totalAmount = 0;
    this.filteredData.forEach((item:any) => {
      this.totalAmount = this.totalAmount + item.payableAmt
   })
-  console.log(this.totalAmount)
   this.collectableAmount = this.totalAmount;
 
   this.masterSelected = this.installmentCollectionList.every((item:any) => item.checked == true);

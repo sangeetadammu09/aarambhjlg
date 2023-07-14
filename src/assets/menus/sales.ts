@@ -108,13 +108,21 @@ export const SalesList = {
           isActive: true, 
           url: 'order',
           submenuList: [
+              
               {
-                  id: 0,
-                  menu: 'New Order',
-                  url: 'new-order',
-                  icon : 'fa-book',
-                  isActive: true, 
-              },
+                id: 0,
+                menu: 'New Order',
+                url: 'new-order',
+                icon : 'fa-book',
+                isActive: true, 
+            },
+            {
+              id: 1,
+              menu: 'Approval Pending Orders',
+              url: 'pending-orders',
+              icon : 'fa-book',
+              isActive: true, 
+          },
               {
                 id: 1,
                 menu: 'Approved Order',

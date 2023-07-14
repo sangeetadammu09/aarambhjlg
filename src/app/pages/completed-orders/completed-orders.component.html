@@ -15,6 +15,7 @@
                         <th scope="col" style="color: #fff;">S No.</th>
                         <th scope="col" style="color: #fff;">Name</th>
                         <th scope="col" style="color: #fff;">Center</th>
+                        <th scope="col" style="color: #fff;">Order No</th>
                         <th scope="col" style="color: #fff;">Order Date</th>
                         <th scope="col" style="color: #fff;">Taken By</th> 
                         <th scope="col" style="color: #fff;">Total Bill</th>
@@ -24,6 +25,7 @@
                     <td>{{pageSize*(page-1)+i+1}}</td>
                     <td>{{item.memberName}}</td> 
                     <td>{{item.centerName}}</td>
+                    <td>{{tem.orderId}}</td>
                     <td>{{item.orderDate | date:'dd-MM-YYYY'}}</td>
                     <td>{{item.orderTakenBy}}</td>
                     <td>{{item.totalBillAmt}}</td>

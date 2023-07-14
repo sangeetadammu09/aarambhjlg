@@ -249,6 +249,11 @@ export class SalesRelationService {
       +`?userId=${userId}&PageSize=${pageSize}&PageNo=${pageNumber}`)
    }
 
+   getApprovalPendingOrdersForSoRo(userId:any, pageSize:any,pageNumber:any){
+    return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Order.GetApprovalPendingOrdersForSoRo
+      +`?userId=${userId}&PageSize=${pageSize}&PageNo=${pageNumber}`)
+   }
+
 
 
 

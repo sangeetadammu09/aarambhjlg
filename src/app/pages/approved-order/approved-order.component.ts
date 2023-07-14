@@ -52,7 +52,7 @@ export class ApprovedOrderComponent implements OnInit {
     }
     else if(this.roleNo == '103'){
       this._saleService.getApprovedOrdersForManagerList(this.userId,this.pageSize,this.page).subscribe((data) => {
-        //console.log(data,'all orders')
+        console.log(data,'all orders')
         if(data.length > 0){
           this.pageLoaded = true;
          this.approvedOrderList = data,

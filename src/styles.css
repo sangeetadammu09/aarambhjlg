@@ -89,7 +89,9 @@
     font-weight: bold !important;
 }
 
-
+.dropdown-menu-column {
+    min-width: 13rem !important;
+}
 
 .card-title {
     margin: 0 0 0rem !important;

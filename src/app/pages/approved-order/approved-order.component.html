@@ -15,6 +15,7 @@
                   <tr style="background-color:#1d4ed8;">
                     <th scope="col" style="color: #fff;">S No.</th>
                     <th scope="col" style="color: #fff;">Date</th>
+                    <th scope="col" style="color: #fff;">Order No</th>
                     <th scope="col" style="color: #fff;">Member Name</th>
                     <th scope="col" style="color: #fff;">Center Name</th>
                     <th scope="col" style="color: #fff;">Order Taken By</th>
@@ -27,6 +28,7 @@
                   <tr>
                     <td>{{10*(page-1)+i+1}}</td>
                     <td>{{item.orderDate | date : "dd-MM-YYYY"}}</td> 
+                    <td>{{item.orderId}}</td> 
                     <td>{{item.memberName}}</td>
                     <td> {{item.centerName}}</td>
                     <td> {{item.orderTakenBy}}</td>

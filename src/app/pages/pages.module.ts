@@ -44,6 +44,7 @@ import { RenewMembershipComponent } from './renew-membership/renew-membership.co
 import { TruncatePipe } from '../common/trim.pipe';
 import { DispatchedOrdersComponent } from './dispatched-orders/dispatched-orders.component';
 import { CompletedOrdersComponent } from './completed-orders/completed-orders.component';
+import { ApprovalpendingOrdersComponent } from './approvalpending-orders/approvalpending-orders.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -88,7 +89,7 @@ import { CompletedOrdersComponent } from './completed-orders/completed-orders.co
     ValidityExpiringMembersComponent,
     MembershipComponent,
     MembershipHistoryComponent,
-    RenewMembershipComponent,TruncatePipe, DispatchedOrdersComponent, CompletedOrdersComponent
+    RenewMembershipComponent,TruncatePipe, DispatchedOrdersComponent, CompletedOrdersComponent, ApprovalpendingOrdersComponent
   ]
 })
 

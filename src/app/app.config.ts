@@ -159,6 +159,7 @@ export const APP_DI_CONFIG: any = {
         GetApprovedOrdersForSoRoList : '/Order/GetApprovedOrdersForSoRoList',
         GetApprovedOrdersForManagerList : '/Order/GetApprovedOrdersForManagerList',
         GetApprovedOrderDetails : '/Order/GetApprovedOrderDetails',
+        GetApprovalPendingOrdersForSoRo : '/Order/GetApprovalPendingOrdersForSoRo',
         GetOrderMemberValidity : '/Order/GetOrderMemberValidity',
         
         GetDispatchedOrdersForSoRoList: '/Order/GetDispatchedOrdersForSoRoList',
