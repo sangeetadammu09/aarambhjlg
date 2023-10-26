@@ -20,6 +20,8 @@ import { RenewMembershipComponent } from 'src/app/pages/renew-membership/renew-m
 import { CompletedOrdersComponent } from 'src/app/pages/completed-orders/completed-orders.component';
 import { DispatchedOrdersComponent } from 'src/app/pages/dispatched-orders/dispatched-orders.component';
 import { ApprovalpendingOrdersComponent } from 'src/app/pages/approvalpending-orders/approvalpending-orders.component';
+import { CollectionHistoryComponent } from 'src/app/pages/collection-history/collection-history.component';
+import { CenterwiseCollectionComponent } from 'src/app/pages/centerwise-collection/centerwise-collection.component';
 
 export const SalesRelationLayoutRoutes: Routes = [
 
@@ -44,5 +46,7 @@ export const SalesRelationLayoutRoutes: Routes = [
      {path:'dispatched-orders', component: DispatchedOrdersComponent },
      {path:'completed-orders', component: CompletedOrdersComponent },
      {path:'pending-orders', component: ApprovalpendingOrdersComponent },
+     {path:'collection-history', component: CollectionHistoryComponent},
+     {path:'centerwise-collection',component: CenterwiseCollectionComponent},
   
 ];

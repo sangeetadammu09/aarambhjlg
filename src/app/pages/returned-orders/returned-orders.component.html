@@ -134,9 +134,9 @@
                       <th scope="col" style="color: #fff;">Return Total</th>
                     </tr>
                  
-                  <tbody *ngFor="let item of selectedOrderList | paginate: { itemsPerPage: 10, currentPage: page }; let i = index ">
+                  <tbody *ngFor="let item of selectedOrderList  let i = index ">
                     <tr>
-                      <td style="width: 60px;">{{10*(page-1)+i+1}}</td>
+                      <td style="width: 60px;">{{i+1}}</td>
                       <td>{{item.productName}}</td> 
                       <td> {{item.qty}}</td>
                       <td> {{item.returnQty}}</td>
@@ -147,7 +147,7 @@
                   </tbody>
                   
                 </table>
-                 
+                
             </div>
             <div class="row mb-3" *ngIf="selectedOrderList.length == 0">
               <p class="text-center">No Order found</p>
@@ -156,14 +156,17 @@
               <div class="flex-row align-items-center">
                       <div class="row ms-2 c-details">
                          
-                            <div class="card-title col-lg-3">Sub Total :</div>
-                               <div class="col-lg-3">{{orderDetailsObj?.subTotal | currency: 'INR'}}</div>
+                            <div class="card-title col-md-6">Sub Total :</div>
+                               <div class="col-md-6">{{orderDetailsObj?.subTotal | currency: 'INR'}}</div>
 
-                               <div class="card-title col-lg-3">Service Charge :</div>
-                               <div class="col-lg-3">{{orderDetailsObj?.serviceCharges | currency: 'INR'}}</div>
+                               <div class="card-title col-md-6">Service Charge :</div>
+                               <div class="col-md-6">{{orderDetailsObj?.serviceCharges | currency: 'INR'}}</div>
 
-                               <div class="card-title col-lg-3">Total Bill Amount :</div>
-                               <div class="col-lg-3">{{orderDetailsObj?.totalBillAmt | currency: 'INR'}}</div>
+                               <div class="card-title col-md-6">Total Bill Amount :</div>
+                               <div class="col-md-6">{{orderDetailsObj?.totalBillAmt | currency: 'INR'}}</div>
+
+                               <div class="card-title col-md-6">Total Return Amount :</div>
+                               <div class="col-md-6">{{getTotalReturn(selectedOrderList) | currency: 'INR'}}</div>
                          
                      </div>
               </div>  

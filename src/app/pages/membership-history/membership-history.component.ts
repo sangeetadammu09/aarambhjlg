@@ -18,8 +18,10 @@ export class MembershipHistoryComponent implements OnInit {
   cityId = localStorage.getItem('userCity');
   userId = localStorage.getItem('userId');
   roleNo = localStorage.getItem('roleNo');
+  centerDropdownList:any = [];
   memberDropdownList: any =[];
-  searchMember:any
+  searchMember:any;
+  searchCenter:any
   pageLoaded = true;
 
   
@@ -30,6 +32,7 @@ export class MembershipHistoryComponent implements OnInit {
   ngOnInit(): void {
     this.getOfficersCenterList();
     this.searchMember ="";
+    this.searchCenter = "";
   }
 
   getOfficersCenterList(){
@@ -40,10 +43,10 @@ export class MembershipHistoryComponent implements OnInit {
       this._adminService.getCenterDropdownByCityId(this.cityId).subscribe((data:any) =>{
         //console.log(data,'admin member')
         if(data.length > 0){
-          this.memberDropdownList = data;
+          this.centerDropdownList = data;
    
          }else{
-           this.memberDropdownList = [];
+           this.centerDropdownList = [];
          } 
        })
 
@@ -52,19 +55,36 @@ export class MembershipHistoryComponent implements OnInit {
     this._salesService.getOfficersCenterList(this.cityId,this.userId).subscribe((data:any) => {
       //console.log(data,'cco member')
         if(data.length > 0){
-          this.memberDropdownList = data;
+          this.centerDropdownList = data;
    
          }else{
-           this.memberDropdownList = [];
+           this.centerDropdownList = [];
          } 
        })
       }
    
   }
+
+  getCenterVal(event: any) {
+    var searchCenterId = event;
+    this._salesService.getMemberListByCenter(searchCenterId).subscribe((data: any) => {
+      // //console.log(data,'all memberDropdownList')
+      if (data.length > 0) {
+        this.memberDropdownList = data;
+
+        //  this.total = data.page.totalCount;
+
+      } else {
+        this.memberDropdownList = [];
+      }
+    })
+
+  }
+
   
   getMemberVal(event:any){
     this.pageLoaded = false
-    var searchMemberId =13;
+    var searchMemberId =event;
     this._salesService.getIndividualMembershipPendingFeesHistory(searchMemberId,this.page,this.pageSize).subscribe((data:any) => {
       if(data.membershipList.length > 0){
         this.pageLoaded = true

@@ -5,24 +5,27 @@
         <div class="col-12">
             <div class="card">
                 <div class="row card-header">
-                    <div class="col-lg-9 col-sm-12 mb-3 mt-2">
+                    <div class="col-lg-6 col-sm-12 mb-3 mt-2">
                         <h3 class="card-title">List of Membership History</h3>
                     </div>
-                    <div class="col-lg-3 col-sm-12 mt-2" *ngIf="roleNo == '102'">
-                        <select class="custom-select" id="searchMember" [(ngModel)]="searchMember" (change)="getMemberVal(searchMember)">
+                    <div class="col-lg-3 col-sm-12 mt-2">
+                        <label for="searchMember">Select Center<span style="color: crimson; font-weight: bold; font-size: large;"> *</span></label>
+                        <select class="custom-select" id="searchCenter" [(ngModel)]="searchCenter" (change)="getCenterVal(searchCenter)">
                         <option value="" [selected]="''">Choose Center..</option>
-                        <option *ngFor="let item of memberDropdownList" [ngValue]="item.centerId">
+                        <option *ngFor="let item of centerDropdownList" [ngValue]="item.centerId">
                             {{item.centerName}}</option>
                         </select>
                     </div>
-    
-                    <div class="col-lg-3 col-sm-12 mb-3 mt-2" *ngIf="roleNo == '101'">
-                        <select class="custom-select" id="searchMember" [(ngModel)]="searchMember" (change)="getMemberVal(searchMember)">
-                        <option value="" [selected]="''">Choose Center..</option>
-                        <option *ngFor="let item of memberDropdownList" [ngValue]="item.centerId">
-                            {{item.centerName}}</option>
+
+                    <div class="col-lg-3 col-sm-12 mt-2">
+                        <label for="searchMember">Select Member<span style="color: crimson; font-weight: bold; font-size: large;"> *</span></label>
+                        <select class="custom-select" id="searchMember" [(ngModel)]="searchMember" (change)="getMemberVal(searchCenter)">
+                          <option value="" [selected]="''">Choose Member..</option>
+                          <option *ngFor="let item of memberDropdownList" [ngValue]="item.memberId">
+                              {{item.fullName}}
+                          </option>
                         </select>
-                    </div>
+                      </div>
     
                 </div>
                 <div class="table-responsive" *ngIf="pageLoaded">

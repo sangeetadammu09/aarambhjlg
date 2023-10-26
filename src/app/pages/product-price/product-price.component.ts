@@ -145,8 +145,6 @@ export class ProductPriceComponent implements OnInit {
   submitNewProductPrice(product: any){
      if(product.productId == undefined){
       this._toastrService.error('Product Name is required');
-     }else if(product.reginalName == undefined){
-      this._toastrService.error('Regional Name is required');
      }else if(product.mrp == undefined){
       this._toastrService.error('MRP is required');
      }else if(product.jlgSalePrice == undefined){

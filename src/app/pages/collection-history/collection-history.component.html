@@ -1,0 +1,93 @@
+<!-- Page body -->
+<div class="page-body">
+    <div class="container-xl">
+        <div class="row row-cards">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="container d-block">
+                            <div class="mt-3 mb-3 row">
+                                <div class="col-lg-10 col-sm-6 mb-3 mt-2">
+                                    <h3 class="card-title">Collection History</h3>
+                                </div>
+                            </div>
+                            <div class="mt-3 mb-3 row">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="searchMember">From Date<span
+                                                style="color: crimson; font-weight: bold; font-size: large;">
+                                                *</span></label>
+                                        <input type="date" class="form-control" [(ngModel)]="fromDate"
+                                            placeholder="Search Installment Date">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="searchMember">To Date<span
+                                                style="color: crimson; font-weight: bold; font-size: large;">
+                                                *</span></label>
+                                        <input type="date" class="form-control" [(ngModel)]="toDate"
+                                            placeholder="Search Installment Date">
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="searchMember"> </label>
+                                        <button class="btn btn-primary w-100" (click)="loadView()">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="table-responsive mt-3">
+
+                        <div class="wrapper">
+                            <div class="d-flex justify-content-center">
+                                <div class="container-xl mt-3">
+                                    <div class="row row-deck row-cards mb-3">
+                                        <h2 class="text-center">Payment Collection Details</h2>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row" class="col-lg-3">Payment Collected By :</th>
+                                                    <td class="col-lg-3">{{paymentCollectionDetails.userName}}</td>
+
+                                                    <th scope="row" class="col-lg-3">Collection from Centers :</th>
+                                                    <td class="col-lg-3">{{paymentCollectionDetails.centers}}</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th scope="row" class="col-lg-3">Cash Collection :</th>
+                                                    <td class="col-lg-3">{{paymentCollectionDetails.cash}}</td>
+
+                                                    <th scope="row" class="col-lg-3">UPI Collection :</th>
+                                                    <td class="col-lg-3">{{paymentCollectionDetails.upi}}</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th scope="row" class="col-lg-3">Card Collection :</th>
+                                                    <td class="col-lg-3">{{paymentCollectionDetails.card}}</td>
+                                                    <th scope="row" class="col-lg-3">Other Collection :</th>
+                                                    <td class="col-lg-3">{{paymentCollectionDetails.other}}</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="col-lg-3">Total Collection :</th>
+                                                    <td class="col-lg-3">
+                                                        {{paymentCollectionDetails.totalCollectedAmount}}</td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>

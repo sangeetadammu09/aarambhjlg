@@ -8,7 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { SuperAdminService } from '../../service/super-admin.service';
 
 
-
+ 
 @Component({
     moduleId: module.id,
     selector: 'app-super-navbar',

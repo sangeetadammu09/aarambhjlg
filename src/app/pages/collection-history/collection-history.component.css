@@ -1,0 +1,24 @@
+.mt-order{
+    margin-top: 1.6rem!important;
+}
+
+.card-img-top{
+    cursor: pointer;
+}
+
+payment-table {
+    width: 100%;
+  }
+
+  payment-th, payment-td {
+    padding: 10px;
+    text-align: left;
+  }
+
+  payment-th {
+    background-color: #f2f2f2;
+  }
+
+  .card-title {
+    font-weight: bold;
+  }

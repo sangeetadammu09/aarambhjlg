@@ -28,7 +28,7 @@ export class CompletedOrdersComponent implements OnInit {
     paginationObj.pageNo =this.page;
     paginationObj.pageSize = this.pageSize;
     if(this.roleNo == '101'){
-    this._adminService.getCompletedOrdersListForAdmin(this.cityId, this.page,this.pageSize).subscribe((data) => {
+    this._adminService.getCompletedOrdersListForAdmin(this.cityId, this.pageSize,this.page).subscribe((data) => {
       console.log(data,'all Completed orders')
         if(data.length > 0){
           this.pageLoaded = true;
@@ -43,7 +43,7 @@ export class CompletedOrdersComponent implements OnInit {
     }
 
     if(this.roleNo == '102'){
-      this.soRoService.getCompletedOrdersListForSoRoList(this.userId, this.page,this.pageSize).subscribe((data) => {
+      this.soRoService.getCompletedOrdersListForSoRoList(this.userId, this.pageSize,this.page).subscribe((data) => {
         console.log(data,'all Completed orders')
           if(data.length > 0){
             this.pageLoaded = true;
@@ -57,7 +57,7 @@ export class CompletedOrdersComponent implements OnInit {
          })
       }
       if(this.roleNo == '103'){
-        this.salesManager.getCompletedOrdersListForManager(this.userId, this.page,this.pageSize).subscribe((data) => {
+        this.salesManager.getCompletedOrdersListForManager(this.userId, this.pageSize,this.page).subscribe((data) => {
           console.log(data,'all Completed orders')
             if(data.length > 0){
               this.pageLoaded = true;

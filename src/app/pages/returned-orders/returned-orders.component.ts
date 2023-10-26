@@ -13,59 +13,59 @@ import { SalesRelationService } from 'src/app/sales-relation-officer/service/sal
 })
 export class ReturnedOrdersComponent implements OnInit {
 
-  
+
   page = 10;
   total = 20;
   pageSize = 1;
-  returnOrderListForApproval: any =[];
-  selectedOrderList: any =[];
-  installmentList :any =[];
+  returnOrderListForApproval: any = [];
+  selectedOrderList: any = [];
+  installmentList: any = [];
   userId = localStorage.getItem('userId');
   roles = localStorage.getItem('roles');
-  orderDetailsObj: any ={};
+  orderDetailsObj: any = {};
   selectedOrderId: any;
   paymentInstallment = "";
-  paymentInstallmentObj:any;
-  @ViewChild('closeApproveOrderModal') closeApproveOrderModal:any;
-  @ViewChild('closeCancelOrderModal') closeCancelOrderModal:any;
-  selectedOrderInstallmentList: any= [];
+  paymentInstallmentObj: any;
+  @ViewChild('closeApproveOrderModal') closeApproveOrderModal: any;
+  @ViewChild('closeCancelOrderModal') closeCancelOrderModal: any;
+  selectedOrderInstallmentList: any = [];
   todayDate = moment();
   approveOrderObj: any;
   firstRole: any;
   paymentInstallmentNo: any;
-  gapList : any = [];
-  paymentGapValue:any
-  pageLoaded : boolean= false;
+  gapList: any = [];
+  paymentGapValue: any
+  pageLoaded: boolean = false;
 
-  constructor(private _saleService: SalesManagerService,private toastrService :ToastrService,
-    private _adminService:AdminService) { }
+  constructor(private _saleService: SalesManagerService, private toastrService: ToastrService,
+    private _adminService: AdminService) { }
 
   ngOnInit(): void {
     this.getreturnOrderListForApproval();
     this.getAllInstallments();
     this.paymentInstallment = "";
-   
 
-    this.gapList = [{"id" : 0,"value" : 0},{"id" : 1,"value" : 1},{"id" : 2,"value" : 2},{"id" : 3,"value" : 3},
-    {"id" : 4,"value" : 4},{"id" : 5,"value" : 5},{"id" : 6,"value" : 6},{"id" : 7,"value" : 7}]
-   
+
+    this.gapList = [{ "id": 0, "value": 0 }, { "id": 1, "value": 1 }, { "id": 2, "value": 2 }, { "id": 3, "value": 3 },
+    { "id": 4, "value": 4 }, { "id": 5, "value": 5 }, { "id": 6, "value": 6 }, { "id": 7, "value": 7 }]
+
 
   }
 
-  getAllInstallments(){
+  getAllInstallments() {
     this._adminService.getAllInstallment().subscribe((data) => {
-   //   //console.log(data,'all Installments')
-     if(data.length > 0){
-       this.installmentList = data;
-      }else{
+      //   //console.log(data,'all Installments')
+      if (data.length > 0) {
+        this.installmentList = data;
+      } else {
         this.installmentList = [];
       }
-    
+
     })
 
-    if(this.roles){
+    if (this.roles) {
       var temp = JSON.parse(this.roles);
-      const finalArray = temp.map((item:any, index:number) => ({ id: index,name: item }))
+      const finalArray = temp.map((item: any, index: number) => ({ id: index, name: item }))
       this.firstRole = finalArray[0].name;
       //console.log(this.firstRole);
     }
@@ -73,56 +73,57 @@ export class ReturnedOrdersComponent implements OnInit {
 
 
 
-  getreturnOrderListForApproval(){
-    this._saleService.getReturnedRequestedList(this.userId,this.page,this.pageSize).subscribe((data:any) => {
-    //   //console.log(data,'all orders')
-       if(data.returnRequested.length > 0){
+  getreturnOrderListForApproval() {
+    this._saleService.getReturnedRequestedList(this.userId, this.page, this.pageSize).subscribe((data: any) => {
+      //   //console.log(data,'all orders')
+      if (data.returnRequested.length > 0) {
         this.returnOrderListForApproval = data.returnRequested;
         this.pageLoaded = true;
         this.total = data.page.totalCount;
         console.log(this.returnOrderListForApproval)
-        }else{
-          this.returnOrderListForApproval = [];
-          this.pageLoaded = true;
-        }
-        
-      })
+      } else {
+        this.returnOrderListForApproval = [];
+        this.pageLoaded = true;
+      }
+
+    })
   }
 
-  handlePageChange(event: number){
+  handlePageChange(event: number) {
     ////console.log(event)
     this.page = event;
     this.getreturnOrderListForApproval();
-}
+  }
 
-  showOrderModal(item:any){
-    this._saleService.getReturnOrderDetails(item.orderId).subscribe((data:any) =>{
-    
-      if(data.status == 200){
+  showOrderModal(item: any) {
+    this._saleService.getReturnOrderDetails(item.orderId).subscribe((data: any) => {
+
+      if (data.status == 200) {
         this.orderDetailsObj = data.body;
         this.selectedOrderList = data.body.orderItems;
-        //console.log(this.orderDetailsObj)
+        console.log(this.orderDetailsObj)
+        console.log(data)
       }
-    },(err:HttpErrorResponse)=>{
-       if(err.status == 500){
+    }, (err: HttpErrorResponse) => {
+      if (err.status == 500) {
         this.orderDetailsObj = null;
-        this.selectedOrderList =[]
-       }
+        this.selectedOrderList = []
+      }
     })
 
   }
 
-  showApproveOrderModal(item:any){
+  showApproveOrderModal(item: any) {
     this.approveOrderObj = item;
     //console.log(this.approveOrderObj)
-   
+
   }
 
-  getGapVal(paymentGap:any){
-     this.paymentGapValue = paymentGap.value;
+  getGapVal(paymentGap: any) {
+    this.paymentGapValue = paymentGap.value;
   }
 
-  getInstallmentDetails(item:any,orderDetailsObj:any){
+  getInstallmentDetails(item: any, orderDetailsObj: any) {
     this.paymentInstallmentNo = item;
     // this._saleService.getInstallmentList(orderDetailsObj.totalBillAmt,item.installmentNo,this.paymentGapValue).subscribe((data) => {
     //   //console.log(data,'all installment table')
@@ -135,38 +136,46 @@ export class ReturnedOrdersComponent implements OnInit {
     //    }else{
     //      this.selectedOrderInstallmentList = [];
     //    }
-       
+
     //  })
   }
 
-  showCancelOrderModal(item:any){
+  showCancelOrderModal(item: any) {
     this.selectedOrderId = item.orderId;
   }
 
 
-  approveOrder(){
-     var approveObject :any ={};
-     approveObject.orderId=  this.approveOrderObj.orderId,
-     approveObject.memberId=  this.approveOrderObj.memberId,
-     approveObject.returnApprovedById=  Number(this.userId),
-     approveObject.returnApprovedByRole=  this.firstRole,
-     approveObject.rejectionComment=  '',
-     approveObject.isApproved=  true,
-    
-    this._saleService.approveReturnRequest(approveObject).subscribe((data) => {
-     if(data.status == 200){
-      this.toastrService.success('Order retrun approved successfully')
-      this.closeApproveOrderModal.nativeElement.click();
+  approveOrder() {
+    var approveObject: any = {};
+    approveObject.orderId = this.approveOrderObj.orderId,
+      approveObject.memberId = this.approveOrderObj.memberId,
+      approveObject.returnApprovedById = Number(this.userId),
+      approveObject.returnApprovedByRole = this.firstRole,
+      approveObject.rejectionComment = '',
+      approveObject.isApproved = true,
 
-      }else{
-        this.toastrService.success('Error approving the return order')
-      }
-      
-    })
+      this._saleService.approveReturnRequest(approveObject).subscribe((data) => {
+        if (data.status == 200) {
+          this.toastrService.success('Order retrun approved successfully')
+          this.closeApproveOrderModal.nativeElement.click();
+
+        } else {
+          this.toastrService.success('Error approving the return order')
+        }
+
+      })
   }
 
-  
-  cancelOrder(){
+  getTotalReturn(items: any[]) {
+    let sum = 0;
+    items.forEach(item => {
+      sum += item.totalReturnAmt;
+    })
+    return sum;
+  }
+
+
+  cancelOrder() {
     // this._saleService.cancelOrder(this.selectedOrderId).subscribe((data) => {
     //  if(data.status == 200){
     //   this.closeCancelOrderModal.nativeElement.click();
@@ -175,7 +184,7 @@ export class ReturnedOrdersComponent implements OnInit {
     //   }else{
     //     this.toastrService.success('Error cancelling the order')
     //   }
-      
+
     // })
   }
 

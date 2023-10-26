@@ -225,7 +225,7 @@ export class SalesRelationService {
 
    getIndividualMembershipPendingFeesHistory(memberId:any,PageNo:any,PageSize:any){
     return this.http.get<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Membership.GetIndividualMembershipPendingFeesHistory+
-      `?memberId=${memberId}&PageNo=${PageNo}&PageSize=${PageSize}`)
+      `?memberId=${memberId}&pageNo=${PageNo}&pageSize=${PageSize}`)
    }
 
    collectFees(data:any){

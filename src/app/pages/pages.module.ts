@@ -45,6 +45,9 @@ import { TruncatePipe } from '../common/trim.pipe';
 import { DispatchedOrdersComponent } from './dispatched-orders/dispatched-orders.component';
 import { CompletedOrdersComponent } from './completed-orders/completed-orders.component';
 import { ApprovalpendingOrdersComponent } from './approvalpending-orders/approvalpending-orders.component';
+import { CollectionHistoryComponent } from './collection-history/collection-history.component';
+import { CenterwiseCollectionComponent } from './centerwise-collection/centerwise-collection.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -89,8 +92,9 @@ import { ApprovalpendingOrdersComponent } from './approvalpending-orders/approva
     ValidityExpiringMembersComponent,
     MembershipComponent,
     MembershipHistoryComponent,
-    RenewMembershipComponent,TruncatePipe, DispatchedOrdersComponent, CompletedOrdersComponent, ApprovalpendingOrdersComponent
+    RenewMembershipComponent,TruncatePipe, DispatchedOrdersComponent, CompletedOrdersComponent, ApprovalpendingOrdersComponent, CollectionHistoryComponent, CenterwiseCollectionComponent
   ]
+  
 })
 
 export class PagesModule {}

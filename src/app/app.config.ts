@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 export const APP_DI_CONFIG: any = {
   // For api calls
- // parentDomain: 'https://localhost:7021/api',
+ // parentDomain: 'http://localhost:7021/api',
     parentDomain: 'https://jlg.examfirst.in/api',
   endPoints: {
     User:{
@@ -167,12 +167,14 @@ export const APP_DI_CONFIG: any = {
         GetDispatchedOrdersListForAdmin  : '/Order/GetDispatchedOrdersListForAdmin',
         GetCompletedOrdersForSoRoList : '/Order/GetCompletedOrdersForSoRoList',
         GetCompletedOrdersListForManager : '/Order/GetCompletedOrdersListForManager',
-        GetCompletedOrdersListForAdmin : '/Order/GetCompletedOrdersListForAdmin'
+        GetCompletedOrdersListForAdmin : '/Order/GetCompletedOrdersListForAdmin',
+        getTotalSale:'/Order/GetTodaysOrders'
     },
     OrderInstallment:{
       getOrderInstallmentCollectionList: '/OrderInstallment/GetOrderInstallmentCollectionList',
       makeInstallmentPayment: '/OrderInstallment/MakeInstallmentPayment',
-      getOrderInstallmentHistory: '/OrderInstallment/GetOrderInstallmentHistory'
+      getOrderInstallmentHistory: '/OrderInstallment/GetOrderInstallmentHistory',
+      getPaymentCollectionView : '/OrderInstallment/GetPaymentCollectionOverview'
     },
     OrderReturn:{
       addOrderReturnItems: '/OrderReturn/AddReturnItems',
@@ -184,13 +186,16 @@ export const APP_DI_CONFIG: any = {
     },
     Dashboard:{
       getCenterSummary: '/Dashboard/GetCenterSummary',
-      getOrderSummary: '/Dashboard/GetOrderSummary'
-    
+      getOrderSummary: '/Dashboard/GetOrderSummary',
+      getReceivableAmount:'/Dashboard/GetOrdersReceivableAmount',
+      getPendingAmount : '/Dashboard/GetOrdersPendingAmount',
+      getCollectedAmount :'/Dashboard/GetOrdersReceivedAmount',
+      getPendingCollectedAmount : '/Dashboard/GetOrdersPendingCollectedAmount',
     },
     Membership:{
       GetMembershipsOverview : "/Membership/GetMembershipsOverview",
       GetMembershipPendingFeesDetails : "/Membership/GetMembershipPendingFeesDetails",
-      GetIndividualMembershipPendingFeesHistory : "/Membership/GetIndividualMembershipPendingFeesHistory",
+      GetIndividualMembershipPendingFeesHistory : "/Membership/GetIndividualMembershipFeesHistory",
       CollectFees : "/Membership/CollectFees",
       RenewMembership : "/Membership/RenewMembership"
     },

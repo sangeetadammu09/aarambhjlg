@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { ApprovedOrderComponent } from 'src/app/pages/approved-order/approved-order.component';
+import { CenterwiseCollectionComponent } from 'src/app/pages/centerwise-collection/centerwise-collection.component';
 import { ChangePasswordComponent } from 'src/app/pages/change-password/change-password.component';
+import { CollectionHistoryComponent } from 'src/app/pages/collection-history/collection-history.component';
 import { CompletedOrdersComponent } from 'src/app/pages/completed-orders/completed-orders.component';
 import { DashboardComponent } from 'src/app/pages/dashboard/dashboard.component';
 import { DispatchedOrdersComponent } from 'src/app/pages/dispatched-orders/dispatched-orders.component';
@@ -26,7 +28,8 @@ export const SalesManagerLayoutRoutes: Routes = [
      {path: 'validity-expiring-members', component: ValidityExpiringMembersComponent },
      {path:'dispatched-orders', component: DispatchedOrdersComponent },
      {path:'completed-orders', component: CompletedOrdersComponent },
-     
+     {path:'collection-history', component: CollectionHistoryComponent},
+     {path:'centerwise-collection',component: CenterwiseCollectionComponent},
    
      
    

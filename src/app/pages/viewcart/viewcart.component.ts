@@ -172,6 +172,7 @@ export class ViewcartComponent implements OnInit {
 
   getInstallmentDetails(item:any){
       this.paymentInstallmentId = item;
+      this.paymentInstallmentErr = '';
   }
 
   closeMemberValidityModal(){
@@ -184,7 +185,7 @@ export class ViewcartComponent implements OnInit {
     //console.log(this.newCart,'new cart')
     this._salesService.getOrderMemberValidity(this.cartDetailsObj.memberId).subscribe((data:any) => {
      //console.log(data.body)
-      if(data.status == 200){
+      if(data.status == 200 && data.body.isEligible){
         this.isMemberValidityExpired = false;  
         var newOrder :any = {};
         newOrder.cartId = this.updatedCartId,
@@ -192,6 +193,7 @@ export class ViewcartComponent implements OnInit {
         if(this.serviceCharge == 0){
            this.serviceChargeErr="Service Charge is required"
         }else  if(this.paymentInstallmentId == undefined){
+          this.serviceChargeErr= '';
           this.paymentInstallmentErr = "Payment Installment is required"
         }else{
         this.serviceChargeErr= '';
@@ -199,10 +201,7 @@ export class ViewcartComponent implements OnInit {
         newOrder.serviceCharges = this.serviceCharge,
         newOrder.totalBillWithServiceCharges = this.cartDetailsObj.finalAmount,
         newOrder.requestedInstallmentId = this.paymentInstallmentId
-       // console.log(newOrder)
-        }
-        
-      this._salesService.placeNewOrder(newOrder).subscribe((data:any) => {
+        this._salesService.placeNewOrder(newOrder).subscribe((data:any) => {
         if(data.status == 200){
         this.toastrService.success('Order placed successfully')
         this.router.navigate(['/sales-relation-officer/new-order']);
@@ -214,15 +213,23 @@ export class ViewcartComponent implements OnInit {
           this.toastrService.error('Error placing the order. Please try again')
         } 
       })
+    }
     } 
-  },(error:HttpErrorResponse) => {
-    if(error.status == 400 && error.error.isEligible == false){
-    //  document.getElementById("openModalButton")?.click();
+    else
+    {
+      //  document.getElementById("openModalButton")?.click();
       this.openModal.nativeElement.click();
       this.isMemberValidityExpired = true;
-     // console.log(error.error.failuresReasons[0])
-     this.notEligibleTxt = error.error.failuresReasons[0];
-     }
+      
+      let reasons = '';
+      
+      data.body.failuresReasons.forEach((msg: string) => {
+        reasons += msg + '\n';
+      });
+     this.notEligibleTxt = reasons;
+    }
+  },(error:HttpErrorResponse) => {
+   
   })
   }
 

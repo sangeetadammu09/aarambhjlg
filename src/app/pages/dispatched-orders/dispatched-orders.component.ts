@@ -27,7 +27,7 @@ export class DispatchedOrdersComponent implements OnInit {
     paginationObj.pageNo =this.page;
     paginationObj.pageSize = this.pageSize;
     if(this.roleNo == '101'){
-    this._adminService.getDispatchedOrdersListForAdmin(this.cityId, this.page,this.pageSize).subscribe((data) => {
+    this._adminService.getDispatchedOrdersListForAdmin(this.cityId, this.pageSize,this.page).subscribe((data) => {
       console.log(data,'all dispatched orders')
         if(data.length > 0){
           this.pageLoaded = true;
@@ -42,7 +42,7 @@ export class DispatchedOrdersComponent implements OnInit {
     }
 
     if(this.roleNo == '102'){
-      this.soRoService.getDispatchedOrdersListForSoRoList(this.userId, this.page,this.pageSize).subscribe((data) => {
+      this.soRoService.getDispatchedOrdersListForSoRoList(this.userId, this.pageSize,this.page).subscribe((data) => {
         console.log(data,'all dispatched orders')
           if(data.length > 0){
             this.pageLoaded = true;
@@ -56,7 +56,7 @@ export class DispatchedOrdersComponent implements OnInit {
          })
       }
       if(this.roleNo == '103'){
-        this.salesManager.getDispatchedOrdersListForManager(this.userId, this.page,this.pageSize).subscribe((data) => {
+        this.salesManager.getDispatchedOrdersListForManager(this.userId, this.pageSize,this.page).subscribe((data) => {
           console.log(data,'all dispatched orders')
             if(data.length > 0){
               this.pageLoaded = true;

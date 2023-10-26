@@ -19,6 +19,9 @@
               </div>
             </div>
           </div>
+
+          
+
         <div class="col-sm-6 col-lg-3" *ngFor="let item of centerList">
           <div class="card">
             <div class="card-body">
@@ -30,6 +33,149 @@
             </div>
           </div>
         </div>
+        
+        <div class="col-12">
+          <div class="row row-cards">
+            <div class="col-sm-6 col-lg-4">
+              <div class="card card-sm">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <div class="row">
+                        <div class="col-sm-5"><label for="fromDate">From Date</label></div>
+                        <div class="col-md-7"><input type="date" class="form-control" [(ngModel)]="fromDate" 
+                          placeholder="Search from Date"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-4">
+              <div class="card card-sm">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <div class="row">
+                        <div class="col-sm-5"><label for="toDate">To Date</label></div>
+                        <div class="col-md-7">
+                          <input type="date" class="form-control" [(ngModel)]="toDate" 
+                          placeholder="Search End Date"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-4">
+              <div class="card card-sm">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <button class="btn btn-primary w-100" (click)="loadCollections()">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="row row-cards">
+            <div class="col-sm-6 col-lg-3">
+              <div class="card card-sm">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                        <span class="bg-yellow text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/shopping-cart -->
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-currency-rupee" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M18 5h-11h3a4 4 0 0 1 0 8h-3l6 6"></path>
+                            <path d="M7 9l11 0"></path>
+                         </svg>
+                        </span>
+                      </div>
+                    <div class="col">
+                      <div class="font-weight-medium">
+                         <span> Receivable Amount : </span><b>{{receivablePayments}}</b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+              <div class="card card-sm">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                        <span class="bg-blue text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/shopping-cart -->
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-currency-rupee" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M18 5h-11h3a4 4 0 0 1 0 8h-3l6 6"></path>
+                            <path d="M7 9l11 0"></path>
+                         </svg>
+                        </span>
+                      </div>
+                    <div class="col">
+                      <div class="font-weight-medium">
+                        <span> Pending Amount : </span><b>{{pendingPayments}}</b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+              <div class="card card-sm">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                        <span class="bg-red text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/shopping-cart -->
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-currency-rupee" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M18 5h-11h3a4 4 0 0 1 0 8h-3l6 6"></path>
+                            <path d="M7 9l11 0"></path>
+                         </svg>
+                        </span>
+                      </div>
+                    <div class="col">
+                      <div class="font-weight-medium">
+                        <span> Today Collected : </span><b>{{collectedPayments}}</b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+              <div class="card card-sm">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                        <span class="bg-orange text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/shopping-cart -->
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-currency-rupee" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M18 5h-11h3a4 4 0 0 1 0 8h-3l6 6"></path>
+                            <path d="M7 9l11 0"></path>
+                         </svg>
+                        </span>
+                      </div>
+                    <div class="col">
+                      <div class="font-weight-medium">
+                         <span>Pending Collected : </span><b>{{collectedPending}}</b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="col-12">
           <div class="row row-cards">
             <div class="col-sm-6 col-lg-3" *ngFor="let item of orderList">
@@ -50,8 +196,55 @@
                 </div>
               </div>
             </div>
+
+            <div class="col-sm-6 col-lg-3">
+              <div class="card card-sm">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                        <span class="bg-red text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/shopping-cart -->
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-currency-rupee" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M18 5h-11h3a4 4 0 0 1 0 8h-3l6 6"></path>
+                            <path d="M7 9l11 0"></path>
+                         </svg>
+                        </span>
+                      </div>
+                    <div class="col">
+                      <div class="font-weight-medium">
+                        <span> Total Sale : </span><b>{{totalSale}}</b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-3">
+              <div class="card card-sm">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                        <span class="bg-red text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/shopping-cart -->
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 17h-11v-14h-2" /><path d="M6 5l14 1l-1 7h-13" /></svg>
+                        </span>
+                      </div>
+                    <div class="col">
+                      <div class="font-weight-medium">
+                        <span> Total Orders : </span><b>{{ordersTotalCount}}</b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+             
           </div>
         </div>
+
+        
+        
+
       </div>
     </div>
   </div>
