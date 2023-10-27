@@ -174,7 +174,9 @@ export const APP_DI_CONFIG: any = {
       getOrderInstallmentCollectionList: '/OrderInstallment/GetOrderInstallmentCollectionList',
       makeInstallmentPayment: '/OrderInstallment/MakeInstallmentPayment',
       getOrderInstallmentHistory: '/OrderInstallment/GetOrderInstallmentHistory',
-      getPaymentCollectionView : '/OrderInstallment/GetPaymentCollectionOverview'
+      getPaymentCollectionView : '/OrderInstallment/GetPaymentCollectionOverview',
+      getCenterwisePaymentCollectionOverview : '/OrderInstallment/GetCenterwisePaymentCollectionOverview',
+      getCenterwisePaidMembersList : '/OrderInstallment/GetCenterwisePaidMembersList',
     },
     OrderReturn:{
       addOrderReturnItems: '/OrderReturn/AddReturnItems',
@@ -182,7 +184,8 @@ export const APP_DI_CONFIG: any = {
       submitReturnRequest: '/OrderReturn/SubmitReturnRequest',
       getReturnedRequestedList: '/OrderReturn/GetReturnedRequestedList',
       getReturnOrderDetails: '/OrderReturn/GetReturnOrderDetails',
-      approveReturnRequest: '/OrderReturn/ApproveReturnRequest'
+      approveReturnRequest: '/OrderReturn/ApproveReturnRequest',
+      getReturnedHistory : '/OrderReturn/GetReturnHistory'
     },
     Dashboard:{
       getCenterSummary: '/Dashboard/GetCenterSummary',

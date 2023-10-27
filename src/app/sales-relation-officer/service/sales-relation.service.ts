@@ -254,6 +254,13 @@ export class SalesRelationService {
       +`?userId=${userId}&PageSize=${pageSize}&PageNo=${pageNumber}`)
    }
 
+   getCenterwisePaidMembersList(data:any){
+    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.OrderInstallment.getCenterwisePaidMembersList, data)
+   }
+
+   getCenterwisePaymentCollectionOverview(data:any){
+    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.OrderInstallment.getCenterwisePaymentCollectionOverview, data)
+   }
 
 
 
