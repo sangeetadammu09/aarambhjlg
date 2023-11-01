@@ -47,6 +47,7 @@ import { CompletedOrdersComponent } from './completed-orders/completed-orders.co
 import { ApprovalpendingOrdersComponent } from './approvalpending-orders/approvalpending-orders.component';
 import { CollectionHistoryComponent } from './collection-history/collection-history.component';
 import { CenterwiseCollectionComponent } from './centerwise-collection/centerwise-collection.component';
+import { ReturnhistoryComponent } from './returnhistory/returnhistory.component';
 
 @NgModule({
   imports: [
@@ -92,7 +93,7 @@ import { CenterwiseCollectionComponent } from './centerwise-collection/centerwis
     ValidityExpiringMembersComponent,
     MembershipComponent,
     MembershipHistoryComponent,
-    RenewMembershipComponent,TruncatePipe, DispatchedOrdersComponent, CompletedOrdersComponent, ApprovalpendingOrdersComponent, CollectionHistoryComponent, CenterwiseCollectionComponent
+    RenewMembershipComponent,TruncatePipe, DispatchedOrdersComponent, CompletedOrdersComponent, ApprovalpendingOrdersComponent, CollectionHistoryComponent, CenterwiseCollectionComponent, ReturnhistoryComponent
   ]
   
 })

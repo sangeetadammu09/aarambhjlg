@@ -1,16 +1,15 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import * as moment from 'moment';
+import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { SalesRelationService } from 'src/app/sales-relation-officer/service/sales-relation.service';
 
 @Component({
-  selector: 'app-centerwise-collection',
-  templateUrl: './centerwise-collection.component.html',
-  styleUrls: ['./centerwise-collection.component.css']
+  selector: 'app-returnhistory',
+  templateUrl: './returnhistory.component.html',
+  styleUrls: ['./returnhistory.component.css']
 })
-export class CenterwiseCollectionComponent implements OnInit {
+export class ReturnhistoryComponent implements OnInit {
   installmentCollectionList: any =[];
   MembersFound: boolean = false;
   page = 1;
@@ -54,7 +53,7 @@ export class CenterwiseCollectionComponent implements OnInit {
   paymentDetails: any ={};
 
 
-  constructor(private _salesService: SalesRelationService, private fb :FormBuilder, private toastrService : ToastrService) { 
+  constructor(private _salesService: SalesRelationService, private fb :FormBuilder) { 
    
   }
 
@@ -85,10 +84,7 @@ export class CenterwiseCollectionComponent implements OnInit {
   
   }
 
-
- 
-
-  getCenterwisePaidMembersList(){
+  getReturnedHistoryList(){
     var paymentObj :any = {};
     // paymentObj.pageNumber = this.page,
     // paymentObj.pageSize = this.pageSize,
@@ -97,17 +93,10 @@ export class CenterwiseCollectionComponent implements OnInit {
     paymentObj.startDate = this.startDate,
     paymentObj.endDate = this.endDate,
 
-    this._salesService.getCenterwisePaidMembersList(paymentObj).subscribe((data:any) => {
+    this._salesService.getReturnedHistory(paymentObj).subscribe((data:any) => {
       console.log(data)
       if(data.installments.length > 0) {
-        // data.installments.forEach((item:any) => {
-        //   item.installmentDate = moment(item.installmentDate).format('L');
-        //   item.checked = false;
-        //    this.totalAmount = this.totalAmount + item.payableAmt
-        // })
-        // this.collectableAmount = this.totalAmount;
-        // this.installmentCollectionList = data.installments;
-       console.log(this.installmentCollectionList)
+      // console.log(this.installmentCollectionList)
         this.total = data.page.totalCount;
  
        }else{
@@ -124,31 +113,8 @@ export class CenterwiseCollectionComponent implements OnInit {
 handlePageChange(event: number){
     ////console.log(event)
     this.page = event;
-    this.getCenterwisePaidMembersList();
+    this.getReturnedHistoryList();
 }
-
-
-getCenterwisePaymentOverview(){
-  var paymentObj :any = {};
-    paymentObj.cityId = this.cityId,
-    paymentObj.centerId = this.centerId,
-    paymentObj.startDate = this.startDate,
-    paymentObj.endDate = this.endDate,
-  this._salesService.getCenterwisePaymentOverview(paymentObj).subscribe((data:any) =>{
-    //console.log(data)
-    if(data.status == 200){
-      this.centerwisePaymentOverviewObj = data.body;
-      //console.log(this.orderDetailsObj)
-    }
-  })
-
-
-}
-
-
-
-
-
 
 
 }

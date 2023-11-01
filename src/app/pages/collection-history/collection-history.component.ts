@@ -18,11 +18,12 @@ export class CollectionHistoryComponent implements OnInit {
   cardCollection : number = 0;
   totalCollection : number = 0;
   paymentCollectionDetails : any;
+  isCollectionHistory : boolean = false;
 
   constructor(private _orderInstalmentService: OrderInstalmentService) { }
 
   ngOnInit(): void {
-    this.loadView();
+    //this.loadView();
   }
 
  loadView() {
@@ -35,6 +36,9 @@ export class CollectionHistoryComponent implements OnInit {
     } ;
     this._orderInstalmentService.getPaymentColectionView(request).subscribe((data:any) => {
       this.paymentCollectionDetails = data;
+      if(data){
+        this.isCollectionHistory = true;
+      }
       
     });
   }
