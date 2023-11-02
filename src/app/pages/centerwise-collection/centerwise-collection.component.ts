@@ -89,6 +89,7 @@ export class CenterwiseCollectionComponent implements OnInit {
  
 
   getCenterwisePaidMembersList(){
+    this.getCenterwisePaymentOverview()
     var paymentObj :any = {};
     // paymentObj.pageNumber = this.page,
     // paymentObj.pageSize = this.pageSize,
@@ -99,16 +100,10 @@ export class CenterwiseCollectionComponent implements OnInit {
 
     this._salesService.getCenterwisePaidMembersList(paymentObj).subscribe((data:any) => {
       console.log(data)
-      if(data.installments.length > 0) {
-        // data.installments.forEach((item:any) => {
-        //   item.installmentDate = moment(item.installmentDate).format('L');
-        //   item.checked = false;
-        //    this.totalAmount = this.totalAmount + item.payableAmt
-        // })
-        // this.collectableAmount = this.totalAmount;
-        // this.installmentCollectionList = data.installments;
+      if(data.length > 0) {
+      this.installmentCollectionList = data;
        console.log(this.installmentCollectionList)
-        this.total = data.page.totalCount;
+      //  this.total = data.page.totalCount;
  
        }else{
          this.installmentCollectionList = [];
@@ -135,9 +130,9 @@ getCenterwisePaymentOverview(){
     paymentObj.startDate = this.startDate,
     paymentObj.endDate = this.endDate,
   this._salesService.getCenterwisePaymentOverview(paymentObj).subscribe((data:any) =>{
-    //console.log(data)
-    if(data.status == 200){
-      this.centerwisePaymentOverviewObj = data.body;
+    console.log(data)
+    if(data){
+      this.centerwisePaymentOverviewObj = data;
       //console.log(this.orderDetailsObj)
     }
   })

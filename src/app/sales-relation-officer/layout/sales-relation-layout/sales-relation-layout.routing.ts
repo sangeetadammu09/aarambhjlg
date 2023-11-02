@@ -22,6 +22,7 @@ import { DispatchedOrdersComponent } from 'src/app/pages/dispatched-orders/dispa
 import { ApprovalpendingOrdersComponent } from 'src/app/pages/approvalpending-orders/approvalpending-orders.component';
 import { CollectionHistoryComponent } from 'src/app/pages/collection-history/collection-history.component';
 import { CenterwiseCollectionComponent } from 'src/app/pages/centerwise-collection/centerwise-collection.component';
+import { ReturnhistoryComponent } from 'src/app/pages/returnhistory/returnhistory.component';
 
 export const SalesRelationLayoutRoutes: Routes = [
 
@@ -37,6 +38,7 @@ export const SalesRelationLayoutRoutes: Routes = [
      { path:'approved-order', component: ApprovedOrderComponent },
      { path:'collections', component: PaymentComponent },
      { path:'returnorder', component: ReturnorderComponent },
+     { path:'returnhistory', component: ReturnhistoryComponent },
      { path:'dashboard', component: DashboardComponent },
      { path:'kyc-failed-members', component: KycFailedMembersComponent },
      {path: 'validity-expiring-members', component: ValidityExpiringMembersComponent },

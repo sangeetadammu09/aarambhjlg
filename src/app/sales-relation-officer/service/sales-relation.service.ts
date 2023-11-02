@@ -263,7 +263,8 @@ export class SalesRelationService {
    }
 
    getCenterwisePaymentOverview(data:any){
-    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.OrderInstallment.getCenterwisePaymentOverview, data)
+   
+    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.OrderInstallment.getCenterwisePaymentCollectionOverview, data)
    }
 
    getReturnedHistory(data:any){

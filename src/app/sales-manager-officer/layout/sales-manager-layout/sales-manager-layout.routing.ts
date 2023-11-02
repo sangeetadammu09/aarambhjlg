@@ -12,6 +12,7 @@ import { OrderDetailsComponent } from 'src/app/pages/order-details/order-details
 import { ProductDetailComponent } from 'src/app/pages/product-detail/product-detail.component';
 import { ProfileComponent } from 'src/app/pages/profile/profile.component';
 import { ReturnedOrdersComponent } from 'src/app/pages/returned-orders/returned-orders.component';
+import { ReturnhistoryComponent } from 'src/app/pages/returnhistory/returnhistory.component';
 import { ValidityExpiringMembersComponent } from 'src/app/pages/validity-expiring-members/validity-expiring-members.component';
 
 export const SalesManagerLayoutRoutes: Routes = [
@@ -23,6 +24,7 @@ export const SalesManagerLayoutRoutes: Routes = [
      { path:'change-password', component: ChangePasswordComponent },
      { path:'product-details', component: ProductDetailComponent },
      { path:'returned-orders', component: ReturnedOrdersComponent },
+     { path:'returnhistory', component: ReturnhistoryComponent },
      { path:'dashboard', component: DashboardComponent },
      { path:'kyc-failed-users', component: KycFailedUsersComponent },
      {path: 'validity-expiring-members', component: ValidityExpiringMembersComponent },

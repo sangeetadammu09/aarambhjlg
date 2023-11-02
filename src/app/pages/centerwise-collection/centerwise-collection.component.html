@@ -70,7 +70,7 @@
                            <div class="card-title col-lg-3 mt-2 mb-2">Other :</div>
                            <div class="col-lg-3 mt-2 mb-2">{{centerwisePaymentOverviewObj?.other}}</div>
   
-                           <div class="card-title col-lg-6 mt-2 mb-2">Total Collected Amount :</div>
+                           <div class="card-title col-lg-4 mt-2 mb-2">Total Collected Amount :</div>
                            <div class="col-lg-3 mt-2 mb-2">{{centerwisePaymentOverviewObj?.totalCollectedAmount}}</div>
   
                           
@@ -97,8 +97,6 @@
                   <th scope="col" style="color: #fff;">Center</th>
                   <th scope="col" style="color: #fff;">Payment Taken</th>
 
-                  <th scope="col" style="color: #fff;">Details</th>
-
                 </tr>
 
 
@@ -117,7 +115,7 @@
                     <td>{{item.centerName}}</td>
                     <td>{{item.paymentTakenbyUser}}</td>
 
-                    <td (click)="showCollectionModal(item)" data-toggle="modal" data-target="#addeditProductBrandModal"
+                    <!-- <td (click)="showCollectionModal(item)" data-toggle="modal" data-target="#addeditProductBrandModal"
                       [hidden]="item.status == 'Future'">
                       <svg enable-background="new 0 0 19 19" height="19px" id="Layer_1" version="1.1"
                         viewBox="0 0 19 19" width="19px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
@@ -134,15 +132,15 @@
                             fill="#231F20" />
                         </g>
                       </svg>
-                    </td>
+                    </td> -->
 
                   </tr>
                 </tbody>
 
               </table>
-              <div class="row mt-3">
+              <!-- <div class="row mt-3">
                 <h2 class="text-center">Total Collectable Amount: {{collectableAmount | currency:'INR'}} </h2>
-              </div>
+              </div> -->
 
             </div>
             <div class="row mt-3" *ngIf="installmentCollectionList.length == 0">

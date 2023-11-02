@@ -189,6 +189,13 @@ export const SalesList = {
           icon: 'fa-undo',
           isActive: true,
         },
+        {
+          id: 0,
+          menu: 'Return History',
+          url: 'returnhistory',
+          icon: 'fa-undo',
+          isActive: true,
+        },
       ]
     },
     {
@@ -344,6 +351,13 @@ export const SalesManagerList = {
           id: 0,
           menu: 'Returned Orders',
           url: 'returned-orders',
+          icon: 'fa-undo',
+          isActive: true,
+        },
+        {
+          id: 0,
+          menu: 'Return History',
+          url: 'returnhistory',
           icon: 'fa-undo',
           isActive: true,
         },
